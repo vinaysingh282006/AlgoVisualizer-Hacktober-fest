@@ -16,39 +16,32 @@ export const GoogleAuthProvider = ({ children }) => {
     }
 
     const initializeGoogleAuth = () => {
-      if (window.google && window.google.accounts) {
-        window.google.accounts.id.initialize({
-          client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-          callback: handleCredentialResponse,
-        });
-        setIsInitialized(true);
-      }
+      // Mock Google Auth initialization for development
+      console.log("Mock: Google Auth initialized");
+      setIsInitialized(true);
     };
 
     const handleCredentialResponse = (response) => {
-      // Decode the JWT token to get user info
-      const decoded = JSON.parse(atob(response.credential.split('.')[1]));
-      setUser({
-        id: decoded.sub,
-        name: decoded.name,
-        email: decoded.email,
-        picture: decoded.picture,
-      });
+      // Mock credential response
+      const mockUser = {
+        id: "123456789",
+        name: "Test User",
+        email: "testuser@example.com",
+        picture: "https://ui-avatars.com/api/?name=Test+User&background=random"
+      };
+      
+      setUser(mockUser);
       // Store in localStorage for persistence
-      localStorage.setItem('googleUser', JSON.stringify(decoded));
-      alert(`Welcome, ${decoded.name}! You have successfully signed in.`);
-      // Optionally redirect to home
-      window.location.href = '/';
+      localStorage.setItem('googleUser', JSON.stringify(mockUser));
+      localStorage.setItem('isLoggedIn', 'true');
+      console.log(`Mock: Welcome, ${mockUser.name}! You have successfully signed in.`);
     };
 
-    if (window.google) {
-      initializeGoogleAuth();
-    } else {
-      window.addEventListener('load', initializeGoogleAuth);
-    }
+    // Just initialize directly for mock implementation
+    initializeGoogleAuth();
 
     return () => {
-      window.removeEventListener('load', initializeGoogleAuth);
+      // Cleanup
     };
   }, []);
 
