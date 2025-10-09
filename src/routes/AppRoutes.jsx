@@ -18,6 +18,7 @@ import Contact from "../pages/contact.jsx";
 import Privacy from "../pages/privacy.jsx";
 import Terms from "../pages/terms.jsx";
 import About from "../pages/about.jsx";
+import Settings from "../components/Settings.jsx";
 // Add other pages as needed
 
 const AppRoutes = () => {
@@ -40,6 +41,7 @@ const AppRoutes = () => {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/about" element={<About />} />
+        <Route path="/settings" element={<Settings />} />
 
         {/* Add more routes for other pages/components */}
       </Routes>
