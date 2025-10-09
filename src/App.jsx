@@ -35,6 +35,9 @@ import Settings from "./pages/Settings";
 import Blog from "./pages/Blog";
 import CommunityLanding from "./pages/CommunityLanding";
 
+// ✅ Bellman-Ford Algorithm Page
+import BellmanFordPage from "./pages/GraphBellmanFord.jsx";
+
 // Java Notes
 import Fundamentals from "./pages/Notes/Java/Fundamentals";
 import VariablesAndDataTypes from "./pages/Notes/Java/VariablesAndDataTypes";
@@ -51,7 +54,7 @@ import CppVariablesAndDataTypes from "./pages/Notes/Cpp/VariablesAndDataTypes";
 // C Notes
 import CFundamentals from "./pages/Notes/C/Fundamentals";
 
-//javascript Notes
+// JavaScript Notes
 import JavaScriptFundamentals from "./pages/Notes/JavaScript/Fundamentals.jsx";
 import JavaScriptVariablesAndDataTypes from "./pages/Notes/JavaScript/VariablesAndDataTypes.jsx";
 
@@ -117,17 +120,12 @@ import ContributorBoard from "./pages/ContributorBoard";
 import ContributorProfileModal from "./pages/ContributorProfileModal";
 import JavaOOPS from "./pages/JavaOOPS.jsx";
 
-
 import Playground from "./pages/Playground";
-
 import ProgressTracker from "./components/ProgressTracker";
 import LearnerLeaderboard from "./components/LearnerLeaderboard";
 import WeeklyChallenge from "./components/WeeklyChallenge";
 import GitLearning from "./pages/GitLearning.jsx";
 import GitBasicsQuiz from "./pages/GitBasicsQuiz";
-
-
-
 
 const App = () => {
   const location = useLocation();
@@ -213,13 +211,14 @@ const App = () => {
                       path="/graph/cycleDetection"
                       element={<GraphCycleDetection />}
                     />
-                    {/* Bellman-Ford Route */}
+                    {/* ✅ Bellman-Ford Route */}
                     <Route
                       path="/graph/bellman-ford"
                       element={<BellmanFordPage />}
                     />
 
                   {/* Algorithm Pages */}
+                    <Route path="/graph/comparison" element={<GraphComparison />} />
                     <Route path="/backtracking-overview" element={<BacktrackingOverview />} />
                     <Route path="/backtracking" element={<BacktrackingPage />} />
                     <Route path="/dp-overview" element={<DPOverview />} />
