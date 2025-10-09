@@ -301,3 +301,62 @@
     min-width: 320px;
   }
 }
+
+/* Pause/Resume Button Styles */
+.pause-btn {
+  background-color: #ffc107 !important;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.pause-btn:hover:not(:disabled) {
+  background-color: #e0a800 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 193, 7, 0.3);
+}
+
+.pause-btn.paused {
+  background-color: #28a745 !important;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.pause-btn.paused:hover:not(:disabled) {
+  background-color: #218838 !important;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(40, 167, 69, 0);
+  }
+}
+
+.pause-btn:disabled {
+  background-color: #ccc !important;
+  cursor: not-allowed;
+  animation: none;
+}
+
+/* Keyboard shortcut hint */
+.pause-btn::after {
+  content: attr(data-shortcut);
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.7rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+
+.pause-btn:hover::after {
+  opacity: 1;
+}
