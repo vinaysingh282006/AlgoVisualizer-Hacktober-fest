@@ -23,6 +23,7 @@ export const headerNavigationItems = [
 export const navbarNavigationItems = [
   { path: "/", label: "Home", icon: "Home" },
   { path: "/learn", label: "Learn", icon: "BookOpen" },
+  { path: "/cheatsheet", label: "Cheatsheet", icon: "BookOpen" },
   { path: "/quiz", label: "Quiz", icon: "Trophy" },
   {
     label: "Community",

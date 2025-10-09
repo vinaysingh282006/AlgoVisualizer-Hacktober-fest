@@ -92,6 +92,7 @@ import AlgorithmComparison from "./components/AlgorithmComparison";
 import GraphComparison from "./components/GraphComparison";
 import Contributors from "./components/Contributors";
 import Contribute from "./components/Contribute";
+import Cheatsheet from "./components/Cheatsheet";
 
 // Static / Info Pages
 import Login from "./pages/Login";
@@ -188,14 +189,8 @@ const App = () => {
                       path="/data-structures/linked-list"
                       element={<LinkedListPage />}
                     />
-                    <Route
-                      path="/data-structures/queue"
-                      element={<Queue />}
-                    />
-                    <Route
-                      path="/data-structures/stack"
-                      element={<Stack />}
-                    />
+                    <Route path="/data-structures/queue" element={<Queue />} />
+                    <Route path="/data-structures/stack" element={<Stack />} />
                     <Route
                       path="/data-structures/binary-tree"
                       element={<BinaryTreeVisualizer />}
@@ -211,6 +206,7 @@ const App = () => {
                     <Route path="/graph/dfs" element={<GraphDFS />} />
                     <Route path="/graph/dijkstra" element={<GraphDijkstra />} />
                     <Route path="/graph/astar" element={<GraphAStar />} />
+                    <Route path="/graph/comparison" element={<GraphComparison />} />
                     <Route
                       path="/graph/cycleDetection"
                       element={<GraphCycleDetection />}
@@ -220,9 +216,9 @@ const App = () => {
                       path="/graph/bellman-ford"
                       element={<BellmanFordPage />}
                     />
-                    <Route path="/graph/comparison" element={<GraphComparison />} />
 
-                    {/* Algorithm Pages */}
+                  {/* Algorithm Pages */}
+                    <Route path="/graph/comparison" element={<GraphComparison />} />
                     <Route path="/backtracking-overview" element={<BacktrackingOverview />} />
                     <Route path="/backtracking" element={<BacktrackingPage />} />
                     <Route path="/dp-overview" element={<DPOverview />} />
@@ -260,6 +256,7 @@ const App = () => {
                     <Route path="/terms" element={<TermsOfService />} />
                     <Route path="/privacy" element={<PrivacyPolicy />} />
                     <Route path="/cookies" element={<CookiePolicy />} />
+                    <Route path="/cheatsheet" element={<Cheatsheet />} />
                     <Route path="/documentation" element={<AlgorithmDocumentation />} />
                     <Route path="/faq" element={<FAQ />} />
                     <Route path="/contributor-leaderboard" element={<ContributorLeaderboard />} />
