@@ -89,6 +89,7 @@ import AlgorithmComparison from "./components/AlgorithmComparison";
 import GraphComparison from "./components/GraphComparison";
 import Contributors from "./components/Contributors";
 import Contribute from "./components/Contribute";
+import Cheatsheet from "./components/Cheatsheet";
 
 // Static / Info Pages
 import Login from "./pages/Login";
@@ -231,6 +232,7 @@ const App = () => {
                   <Route path="/terms" element={<TermsOfService />} />
                   <Route path="/privacy" element={<PrivacyPolicy />} />
                   <Route path="/cookies" element={<CookiePolicy />} />
+                  <Route path="/cheatsheet" element={<Cheatsheet />} />
                   <Route path="/documentation" element={<AlgorithmDocumentation />} />
                   <Route path="/faq" element={<FAQ />} />
                   <Route path="/contributor-leaderboard" element={<ContributorLeaderboard />} />
