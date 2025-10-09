@@ -22,6 +22,7 @@ import "../styles/home.css";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import ProblemOfTheDay from '../components/ProblemOfTheDay';
+import AuthModal from '../components/AuthModal';
 
 /** ---------- Theme helpers ---------- */
 function useColorScheme() {
@@ -125,6 +126,7 @@ const Home = () => {
   const T = getTheme(isLight);
 
   const [showProblemModal, setShowProblemModal] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   // Initialize AOS with proper cleanup
   useEffect(() => {
@@ -561,7 +563,7 @@ const Home = () => {
               </div>
 
               <div style={{ marginTop: "1.4rem", display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
-                <Link to="/sorting" className="btn-primary-new"><Play size={16} />Start Learning</Link>
+                <button onClick={() => setShowAuthModal(true)} className="btn-primary-new"><Play size={16} />Start Learning</button>
                 <Link to="/quiz" className="btn-secondary-new"><Trophy size={16} />Take a Quiz</Link>
                 <button onClick={() => setShowProblemModal(true)} className="btn-secondary-new" style={{ background: T.badgeBg, border: T.badgeBorder, color: T.textSecondary }}>
                   <Sparkles size={16} />Problem of the Day
