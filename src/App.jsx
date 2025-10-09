@@ -58,6 +58,9 @@ import CFundamentals from "./pages/Notes/C/Fundamentals";
 import JavaScriptFundamentals from "./pages/Notes/JavaScript/Fundamentals.jsx";
 import JavaScriptVariablesAndDataTypes from "./pages/Notes/JavaScript/VariablesAndDataTypes.jsx";
 
+// Rust Notes
+import RustFundamentals from "./pages/Notes/Rust/Fundamentals";
+
 // Algorithm Pages
 import DPOverview from "./pages/DPOverview";
 import DPPage from "./pages/DPPage";
@@ -285,6 +288,9 @@ const App = () => {
 
                     <Route path="/notes/c" element={<Navigate to="/notes/c/fundamentals" replace />} />
                     <Route path="/notes/c/fundamentals" element={<CFundamentals />} />
+
+                    <Route path="/notes/rust" element={<Navigate to="/notes/rust/fundamentals" replace />} />
+                    <Route path="/notes/rust/fundamentals" element={<RustFundamentals />} />
 
                     <Route path="/java-oops" element={<JavaOOPS />} />
 
