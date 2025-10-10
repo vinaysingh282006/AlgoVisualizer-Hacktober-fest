@@ -283,14 +283,15 @@
 
 .btn-outline {
   background: transparent;
-  color: var(--accent-primary, #0366d6);
-  border-color: var(--accent-primary, #0366d6);
+  color: purple; /* changed from var(--accent-primary) to purple */
+  border-color: purple; /* optional: make border match text */
 }
 
 .btn-outline:hover:not(:disabled) {
-  background: var(--accent-primary, #0366d6);
-  color: white;
+  background: purple; /* optional: hover background */
+  color: white;       /* text color on hover */
 }
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -391,4 +392,14 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+/* Input panel background for light/dark mode */
+.input-panel {
+  background: #f8f9fa; /* light mode */
+}
+
+@media (prefers-color-scheme: dark) {
+  .input-panel {
+    background: #21262d; /* dark mode */
+  }
 }
