@@ -50,6 +50,7 @@ export const headerNavigationStructure = [
   {
     group: 'help',
     items: [
+      { path: '/cheatsheet', label: 'Cheatsheet', icon: 'FaBook' },
       { path: '/documentation', label: 'Documentation', icon: 'FaBook' },
       { path: '/faq', label: 'FAQ', icon: 'FaQuestionCircle' },
     ]
