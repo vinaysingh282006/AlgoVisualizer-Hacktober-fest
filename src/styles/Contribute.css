@@ -68,16 +68,17 @@
 .section-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 3rem 2rem;
   position: relative;
   z-index: 1;
 }
 
 .section-title {
-  font-size: 3rem;
+  
+  font-size: 7rem;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 3rem;
+  margin: 3rem;
   background: linear-gradient(135deg, var(--accent-primary), #ec4899, var(--info));
   -webkit-background-clip: text;
   background-clip: text;
@@ -767,6 +768,7 @@
   }
   
   .section-title {
+   
     font-size: 2.5rem;
   }
   
@@ -798,6 +800,7 @@
   }
   
   .section-title {
+
     font-size: 2rem;
   }
   
@@ -871,6 +874,7 @@
   }
   
   .section-title {
+
     font-size: 1.8rem;
   }
   
