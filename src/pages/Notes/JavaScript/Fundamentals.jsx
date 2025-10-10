@@ -4,7 +4,7 @@ import DataTypesSection from "./sections/DataTypesSection";
 import FunctionsSection from "./sections/FunctionsSection";
 import ObjectsSection from "./sections/ObjectsSection";
 // import "../../../styles/fundamentals.css";
-
+import MongodbSection from "./sections/MongodbSection";
 const Fundamentals = () => {
   const [activeTab, setActiveTab] = useState("intro");
   const [copiedCode, setCopiedCode] = useState("");
@@ -20,18 +20,62 @@ const Fundamentals = () => {
   };
 
   const sections = [
-    { id: "intro", label: "Introduction", component: <IntroSection copyCode={copyCode} copiedCode={copiedCode} /> },
-    { id: "datatypes", label: "Data Types", component: <DataTypesSection copyCode={copyCode} copiedCode={copiedCode} /> },
-    { id: "functions", label: "Functions", component: <FunctionsSection copyCode={copyCode} copiedCode={copiedCode} /> },
-    { id: "objects", label: "Objects & Arrays", component: <ObjectsSection copyCode={copyCode} copiedCode={copiedCode} /> },
-    { id: "operators", label: "Operators", component: <div>Coming soon...</div> },
-    { id: "dom", label: "DOM Manipulation", component: <div>Coming soon...</div> },
-    { id: "async", label: "Async Programming", component: <div>Coming soon...</div> },
-    { id: "es6", label: "Modern JavaScript", component: <div>Coming soon...</div> },
+    {
+      id: "intro",
+      label: "Introduction",
+      component: <IntroSection copyCode={copyCode} copiedCode={copiedCode} />,
+    },
+    {
+      id: "datatypes",
+      label: "Data Types",
+      component: (
+        <DataTypesSection copyCode={copyCode} copiedCode={copiedCode} />
+      ),
+    },
+    {
+      id: "functions",
+      label: "Functions",
+      component: (
+        <FunctionsSection copyCode={copyCode} copiedCode={copiedCode} />
+      ),
+    },
+    {
+      id: "objects",
+      label: "Objects & Arrays",
+      component: <ObjectsSection copyCode={copyCode} copiedCode={copiedCode} />,
+    },
+    {
+      id: "operators",
+      label: "Operators",
+      component: <div>Coming soon...</div>,
+    },
+    {
+      id: "dom",
+      label: "DOM Manipulation",
+      component: <div>Coming soon...</div>,
+    },
+    {
+      id: "async",
+      label: "Async Programming",
+      component: <div>Coming soon...</div>,
+    },
+    {
+      id: "es6",
+      label: "Modern JavaScript",
+      component: <div>Coming soon...</div>,
+    },
+    {
+      id: "mongodb",
+      label: "MongoDB Basics",
+      component: <MongodbSection copyCode={copyCode} copiedCode={copiedCode} />,
+    },
   ];
 
   return (
-    <div className="notes-page" style={{ padding: "2rem", maxWidth: "1200px", margin: "0 auto" }}>
+    <div
+      className="notes-page"
+      style={{ padding: "2rem", maxWidth: "1200px", margin: "0 auto" }}
+    >
       {/* Header */}
       <header
         style={{
@@ -41,14 +85,22 @@ const Fundamentals = () => {
           background: "linear-gradient(135deg, #f59e0b, #eab308)",
           color: "white",
           borderRadius: "12px",
-          boxShadow: "0 10px 25px rgba(245, 158, 11, 0.3)"
+          boxShadow: "0 10px 25px rgba(245, 158, 11, 0.3)",
         }}
       >
         <h1 style={{ fontSize: "3rem", marginBottom: "1rem", fontWeight: 800 }}>
           JavaScript Fundamentals
         </h1>
-        <p style={{ fontSize: "1.2rem", maxWidth: "700px", margin: "0 auto", opacity: 0.9 }}>
-          Master the language of the web with comprehensive examples and interactive learning.
+        <p
+          style={{
+            fontSize: "1.2rem",
+            maxWidth: "700px",
+            margin: "0 auto",
+            opacity: 0.9,
+          }}
+        >
+          Master the language of the web with comprehensive examples and
+          interactive learning.
         </p>
       </header>
 
@@ -61,26 +113,30 @@ const Fundamentals = () => {
           borderRadius: "12px",
           padding: "1.5rem",
           boxShadow: "0 6px 18px rgba(16,24,40,0.04)",
-          marginBottom: "2rem"
+          marginBottom: "2rem",
         }}
       >
         <h3 style={{ marginTop: 0, color: "#0f172a" }}>
-          <i className="fas fa-bookmark" style={{ marginRight: "0.5rem", color: "#f59e0b" }}></i>
+          <i
+            className="fas fa-bookmark"
+            style={{ marginRight: "0.5rem", color: "#f59e0b" }}
+          ></i>
           Contents
         </h3>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
-          {sections.map(section => (
+          {sections.map((section) => (
             <button
               key={section.id}
               onClick={() => setActiveTab(section.id)}
               style={{
-                background: activeTab === section.id ? "#f59e0b" : "transparent",
+                background:
+                  activeTab === section.id ? "#f59e0b" : "transparent",
                 color: activeTab === section.id ? "white" : "#f59e0b",
                 border: "2px solid #f59e0b",
                 padding: "0.5rem 1rem",
                 borderRadius: "6px",
                 cursor: "pointer",
-                transition: "all 0.3s ease"
+                transition: "all 0.3s ease",
               }}
             >
               {section.label}
@@ -90,7 +146,7 @@ const Fundamentals = () => {
       </nav>
 
       {/* Content Sections */}
-      {sections.find(section => section.id === activeTab)?.component}
+      {sections.find((section) => section.id === activeTab)?.component}
     </div>
   );
 };
