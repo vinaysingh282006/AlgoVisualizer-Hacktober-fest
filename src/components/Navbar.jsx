@@ -240,8 +240,8 @@ const Navbar = () => {
             />
           ))}
 
-          <div className="flex items-center gap-1">
-            {/* Notes desktop */}
+          {/* <div className="flex items-center gap-1">
+
             <div className="navbar-item dropdown">
               <button
                 className={`dropdown-toggle ${
@@ -319,9 +319,9 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* User Dropdown */}
+            
             <UserDropdown />
-          </div>
+          </div> */}
         </div>
         <ThemeToggle />
         {/* Mobile Hamburger */}
