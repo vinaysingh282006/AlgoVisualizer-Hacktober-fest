@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Eye,
   EyeOff,
@@ -8,9 +8,11 @@ import {
   Lock,
   User,
   ArrowLeft,
+  AlertCircle,
 } from "lucide-react";
 import { useTheme } from "../ThemeContext";
 import { useGoogleAuth } from "../contexts/GoogleAuthContext";
+import authService from "../services/authService";
 import "../styles/Signup.css";
 import { GoogleLogin } from "@react-oauth/google";
 
@@ -19,6 +21,10 @@ const Signup = () => {
   const { renderGoogleButton } = useGoogleAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -28,16 +34,40 @@ const Signup = () => {
     agreeToTerms: false,
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setError("");
+    
     // Check if passwords match
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords don't match!");
+      setError("Passwords don't match!");
       return;
     }
-
-    console.log("Signup attempt:", formData);
+    
+    // Check if terms are agreed to
+    if (!formData.agreeToTerms) {
+      setError("Please agree to the terms and conditions");
+      return;
+    }
+    
+    setIsLoading(true);
+    
+    try {
+      // Combine first and last name for the name parameter
+      const name = `${formData.firstName} ${formData.lastName}`.trim();
+      const response = await authService.signup(name, formData.email, formData.password);
+      
+      // Store user data and token in localStorage
+      localStorage.setItem("user", JSON.stringify(response.user));
+      localStorage.setItem("token", response.token);
+      
+      // Redirect to home page
+      navigate("/");
+    } catch (error) {
+      setError(error.message || "Signup failed. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -301,9 +331,21 @@ const Signup = () => {
               )}
             </div>
 
-            {/* Submit Button */}
-            <button type="submit" className="submit-button">
-              Create Account
+            {/* Error Message */}
+            {error && (
+              <div className="error-message">
+                <AlertCircle size={16} />
+                <span>{error}</span>
+              </div>
+            )}
+
+            {/* Create Account Button */}
+            <button 
+              type="submit" 
+              className="submit-button"
+              disabled={isLoading}
+            >
+              {isLoading ? "Creating Account..." : "Create Account"}
             </button>
 
             {/* Login Link */}
