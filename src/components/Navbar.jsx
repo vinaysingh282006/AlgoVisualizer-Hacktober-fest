@@ -306,6 +306,7 @@ const Navbar = () => {
                   >
                     JavaScript
                   </Link>
+                  
                   <Link
                     to="https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/htmlview?gid=0#gid=0"
                     target="_blank"
@@ -315,7 +316,18 @@ const Navbar = () => {
                     }`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
-                    DSA Sheet
+                    DSA Sheet  by Shradha Khapra      
+                  </Link>
+                   <Link
+                    to="https://codolio.com/question-tracker/sheet/neetcode-150?category=popular"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`dropdown-item ${
+                      isActive("/notes/c") ? "active" : ""
+                    }`}
+                    onClick={() => setDesktopNotesOpen(false)}
+                  >
+                    DSA Sheet by NEETCODE
                   </Link>
                 </div>
               )}

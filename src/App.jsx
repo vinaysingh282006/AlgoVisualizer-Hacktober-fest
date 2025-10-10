@@ -55,6 +55,8 @@ import CFundamentals from "./pages/Notes/C/Fundamentals";
 import JavaScriptFundamentals from "./pages/Notes/JavaScript/Fundamentals.jsx";
 import JavaScriptVariablesAndDataTypes from "./pages/Notes/JavaScript/VariablesAndDataTypes.jsx";
 
+
+
 // Algorithm Pages
 import DPOverview from "./pages/DPOverview";
 import DPPage from "./pages/DPPage";
@@ -256,6 +258,9 @@ const App = () => {
                   <Route path="/notes/c/fundamentals" element={<CFundamentals />} />
 
                   <Route path="/java-oops" element={<JavaOOPS />} />
+
+                  <Route path="/notes/dsasheet" element={<Navigate to="/notes/dsasheet/sheet" replace />} />
+                  
 
                   {/* Dynamic Notes Routes */}
                   <Route path="/notes/:language/:topic" element={<NotesPage />} />
