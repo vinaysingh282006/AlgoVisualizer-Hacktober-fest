@@ -52,6 +52,7 @@ const SORTING_ALGORITHMS = new Set([
 const SEARCHING_ALGORITHMS = new Set([
   "Linear Search",
   "Binary Search",
+  "Fibonacci Search", 
 ]);
 
 // 🎯 Algorithm type detection
