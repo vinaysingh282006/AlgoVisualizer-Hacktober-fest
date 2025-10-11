@@ -7,6 +7,7 @@ import {
   timSort,
   introSort,
   shellSort,
+  cocktailShakerSort,      // ✅ Added Cocktail Shaker Sort
   linearSearchWrapper,
   binarySearchWrapper,
   sleepSort,
@@ -34,7 +35,9 @@ const SORTING_ALGORITHMS = new Set([
   "Tim Sort",
   "Intro Sort",
   "Shell Sort",
+
   "Sleep Sort",
+
 ]);
 
 const SEARCHING_ALGORITHMS = new Set([
@@ -118,6 +121,7 @@ async function adaptSleepSort(arr) {
   return { steps, finalArray: arr.slice() };
 }
 
+
 // 🎬 Sorting executor
 async function runSortingAlgorithm(name, inputArray) {
   const arr = inputArray.slice();
@@ -132,6 +136,7 @@ async function runSortingAlgorithm(name, inputArray) {
     case "Sleep Sort": return await adaptSleepSort(arr);
     case "Merge Sort": return await adaptMergeSort(arr);
     default: return { steps: [{ type: "done", array: arr.slice() }], finalArray: arr.slice() };
+
   }
 }
 
@@ -142,6 +147,7 @@ async function runSearchingAlgorithm(name, arr, target) {
     case "Linear Search": return await adaptColorArrayAlgorithm(linearSearchWrapper, workingArray, 0);
     case "Binary Search": return await adaptColorArrayAlgorithm(binarySearchWrapper, workingArray, 0);
     default: {
+
       const steps = [];
       for (let i = 0; i < workingArray.length; i++) steps.push({ type: "probe", index: i });
       steps.push({ type: "done", array: workingArray.slice() });
@@ -154,6 +160,7 @@ async function runSearchingAlgorithm(name, arr, target) {
 export async function runAlgorithmAsync(name, arr, target) {
   validateArrayInput(arr);
   if (getAlgorithmType(name) === "searching") validateSearchTarget(target);
+
 
   const type = getAlgorithmType(name);
   if (type === "sorting") return { type, ...(await runSortingAlgorithm(name, arr)) };
@@ -174,8 +181,10 @@ export const AlgorithmMetadata = {
       "Tim Sort": "O(n log n)",
       "Intro Sort": "O(n log n)",
       "Shell Sort": "O(n log n)",
+
       "Sleep Sort": "O(n + max(arr))",
     },
+
   },
   searching: {
     algorithms: Array.from(SEARCHING_ALGORITHMS),

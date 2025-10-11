@@ -240,8 +240,6 @@ const Navbar = () => {
             />
           ))}
 
-          <ThemeToggle />
-
           <div className="flex items-center gap-1">
             {/* Notes desktop */}
             <div className="navbar-item dropdown">
@@ -307,6 +305,16 @@ const Navbar = () => {
                     JavaScript
                   </Link>
                   <Link
+                    to="/notes/MERN/MERNFundamentals"
+                    className={`dropdown-item ${
+                      isActive("/notes/MERN/MERNFundamentals") ? "active" : ""
+                    }`}
+                    onClick={() => setDesktopNotesOpen(false)}
+                  >
+                    MERN
+                  </Link>
+
+                  <Link
                     to="https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/htmlview?gid=0#gid=0"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -325,7 +333,7 @@ const Navbar = () => {
             <UserDropdown />
           </div>
         </div>
-
+        <ThemeToggle />
         {/* Mobile Hamburger */}
         <button
           className="mobile-menu-button md:hidden"
@@ -427,7 +435,7 @@ const Navbar = () => {
               C
             </Link>
 
-             <Link
+            <Link
               to="/notes/javascript"
               className="mobile-menu-link"
               onClick={() => {
