@@ -239,16 +239,18 @@ const algorithmDatabase = {
         dataRequirement: "Sorted array",
         implemented: true,
       },
-       {
+
+      {
         name: "Fibonacci Search",
         id: "fibonacciSearch",
+        path: "/searching", // <--- THIS IS THE FINAL FIX
         description:
           "Uses Fibonacci numbers to narrow down search positions in a sorted array, which avoids costly division operations.",
         timeComplexity: {
           best: "O(1)",
           average: "O(log n)",
           worst: "O(log n)",
-          averaget: "O(log n)", 
+          averaget: "O(log n)",
         },
         spaceComplexity: "O(1)",
         dataRequirement: "Sorted array",

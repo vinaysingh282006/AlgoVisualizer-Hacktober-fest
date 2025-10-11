@@ -1,18 +1,15 @@
-
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff, LogIn, Mail, Lock, ArrowLeft, AlertCircle } from "lucide-react";
 import { useTheme } from "../ThemeContext";
-import { useGoogleAuth } from "../contexts/GoogleAuthContext";
+// import { useGoogleAuth } from "../contexts/GoogleAuthContext"; // Temporarily disabled
 import authService from "../services/authService";
 import "../styles/Login.css";
-import { GoogleLogin } from "@react-oauth/google";
-import jwt_decode from "jwt-decode"; // 🟢 ADD: to decode Google token
-import { loginUserWithGoogle } from "../services/authService"; // 🟢 ADD: backend API call for Google login
+// import { GoogleLogin } from "@react-oauth/google"; // Temporarily disabled
+// import { jwtDecode } from "jwt-decode"; // Temporarily disabled
+// import { loginUserWithGoogle } from "../services/authService"; // Temporarily disabled
 
-
-
-// 🔹 Helper function for password validation
+// Helper function for password validation
 const validatePassword = (password) => {
   const errors = [];
   if (password.length < 8) errors.push("At least 8 characters");
@@ -25,7 +22,7 @@ const validatePassword = (password) => {
 
 const Login = () => {
   const { theme } = useTheme();
-  const { renderGoogleButton } = useGoogleAuth();
+  // const { renderGoogleButton } = useGoogleAuth(); // Temporarily disabled
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -37,7 +34,6 @@ const Login = () => {
     rememberMe: false,
   });
 
-   // 🔹 New state for password validation messages
   const [passwordErrors, setPasswordErrors] = useState([]);
 
   const handleSubmit = async (e) => {
@@ -47,17 +43,11 @@ const Login = () => {
     
     try {
       const response = await authService.login(formData.email, formData.password);
-      
-      // Store user data and token in localStorage
       localStorage.setItem("user", JSON.stringify(response.user));
       localStorage.setItem("token", response.token);
-      
-      // If remember me is checked, set a longer expiration
       if (formData.rememberMe) {
         localStorage.setItem("rememberMe", "true");
       }
-      
-      // Redirect to home page or learning page
       navigate("/");
     } catch (error) {
       setError(error.message || "Login failed. Please check your credentials.");
@@ -72,49 +62,41 @@ const Login = () => {
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
-  };
-  
-   // 🔹 Real-time password validation
+
     if (name === "password") {
       setPasswordErrors(validatePassword(value));
     }
   };
+
   const isDark = theme === "dark";
 
-  
-  // 🟢 ADD: Handle Google login success
+  // Temporarily disable Google login handlers due to incomplete feature in master branch
+  /*
   const handleGoogleSuccess = async (credentialResponse) => {
     try {
-      const decoded = jwt_decode(credentialResponse.credential);
+      const decoded = jwtDecode(credentialResponse.credential);
       console.log("Decoded Google User:", decoded);
-
-      // Call backend API to register/login this Google user
       const res = await loginUserWithGoogle(credentialResponse.credential);
       console.log("Backend login success:", res);
-
-      // After successful login, redirect user to home/dashboard
       navigate("/");
-
     } catch (error) {
       console.error("Google login error:", error);
     }
   };
 
-  // 🟢 ADD: Handle Google login error
   const handleGoogleError = () => {
     console.log("Google login failed");
   };
+  */
 
   return (
     <div className={`login-container ${isDark ? "login-dark" : "login-light"}`}>
-      {/* Back Button */}
       <Link to="/" className="login-back-button">
         <ArrowLeft className="back-icon" />
         Back to home
       </Link>
 
       <div className="login-wrapper">
-        {/* Header */}
         <div className="login-header">
           <div className="login-icon-container">
             <LogIn className="login-icon" />
@@ -125,18 +107,12 @@ const Login = () => {
           </p>
         </div>
 
-        {/* Login Form */}
         <div className="login-card">
           <form className="login-form" onSubmit={handleSubmit}>
-            {/* Email Field */}
             <div className="form-group">
-              <label htmlFor="email" className="form-label">
-                Email
-              </label>
+              <label htmlFor="email" className="form-label">Email</label>
               <div className="input-container">
-                <div className="input-icon">
-                  <Mail className="icon" />
-                </div>
+                <div className="input-icon"><Mail className="icon" /></div>
                 <input
                   id="email"
                   name="email"
@@ -151,15 +127,10 @@ const Login = () => {
               </div>
             </div>
 
-            {/* Password Field */}
             <div className="form-group">
-              <label htmlFor="password" className="form-label">
-                Password
-              </label>
+              <label htmlFor="password" className="form-label">Password</label>
               <div className="input-container">
-                <div className="input-icon">
-                  <Lock className="icon" />
-                </div>
+                <div className="input-icon"><Lock className="icon" /></div>
                 <input
                   id="password"
                   name="password"
@@ -183,20 +154,15 @@ const Login = () => {
                   )}
                 </button>
               </div>
-
-               {/* 🔹 Real-time Password Validation Feedback */}
               {passwordErrors.length > 0 && (
                 <ul className="password-errors">
                   {passwordErrors.map((err, idx) => (
-                    <li key={idx} className="error-text">
-                      ❌ {err}
-                    </li>
+                    <li key={idx} className="error-text">❌ {err}</li>
                   ))}
                 </ul>
               )}
             </div>
 
-            {/* Remember Me & Forgot Password */}
             <div className="form-options">
               <div className="remember-me">
                 <input
@@ -207,18 +173,11 @@ const Login = () => {
                   onChange={handleChange}
                   className="checkbox"
                 />
-                <label htmlFor="rememberMe" className="checkbox-label">
-                  Remember me
-                </label>
+                <label htmlFor="rememberMe" className="checkbox-label">Remember me</label>
               </div>
-
-                {/* 🔹 Forgot Password Link Highlight */}
-              <Link to="/forgot-password" className="forgot-password">
-                Forgot password?
-              </Link>
+              <Link to="/forgot-password" className="forgot-password">Forgot password?</Link>
             </div>
 
-            {/* Error Message */}
             {error && (
               <div className="error-message">
                 <AlertCircle size={16} />
@@ -226,41 +185,30 @@ const Login = () => {
               </div>
             )}
             
-            {/* Submit Button */}
-            <button 
-              type="submit" 
-              className="submit-button"
-              disabled={isLoading}
-            >
+            <button type="submit" className="submit-button" disabled={isLoading}>
               {isLoading ? "Signing in..." : "Sign in"}
             </button>
 
-            {/* Sign Up Link */}
             <div className="signup-link">
               <p className="signup-text">
                 Don't have an account?{" "}
-                <Link to="/signup" className="signup-action">
-                  Sign up
-                </Link>
+                <Link to="/signup" className="signup-action">Sign up</Link>
               </p>
             </div>
           </form>
 
-          {/* Separator */}
-          <div className="separator">
-            <span className="separator-text">or</span>
-          </div>
+          {/* Temporarily disable Google login due to incomplete feature in master branch */}
+          {/*
+          <div className="separator"><span className="separator-text">or</span></div>
 
-          {/* 🟢 ADD: Google Sign-In Button */}
           <div className="google-login">
             <GoogleLogin
               onSuccess={handleGoogleSuccess}
               onError={handleGoogleError}
             />
           </div>
+          */}
 
-
-          {/* Demo Credentials */}
           <div className="demo-section">
             <p className="demo-text">
               <strong>Demo:</strong> demo@example.com / demo123
@@ -270,6 +218,7 @@ const Login = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Login;
+
