@@ -83,7 +83,7 @@ const Contribute = () => {
   }, []);
 
   const handleBackClick = () => {
-    navigate(-1); // Go back to previous page
+    navigate(-1);
   };
 
   const techStack = [
@@ -258,15 +258,6 @@ const Contribute = () => {
         },
       ],
     },
-    // {
-    //   category: "Cloud and DevOps",
-    //   technologies: [
-    //     { name: "Azure", icon: <div className="tech-logo" style={{color: '#0078D4'}}>☁️</div>, description: "Microsoft cloud platform" },
-    //     { name: "Docker", icon: <div className="tech-logo" style={{color: '#2496ED'}}>🐳</div>, description: "Containerization platform" },
-    //     { name: "Kubernetes", icon: <div className="tech-logo" style={{color: '#326CE5'}}>⚓</div>, description: "Container orchestration" },
-    //     { name: "GitHub Actions", icon: <div className="tech-logo" style={{color: '#2088FF'}}>⚡</div>, description: "CI/CD automation" }
-    //   ]
-    // }
   ];
 
   const contributionTypes = [
