@@ -104,6 +104,7 @@ const Login = () => {
   const handleGoogleError = () => {
     console.log("Google login failed");
   };
+
   return (
     <div className={`login-container ${isDark ? "login-dark" : "login-light"}`}>
       {/* Back Button */}
@@ -265,20 +266,10 @@ const Login = () => {
               <strong>Demo:</strong> demo@example.com / demo123
             </p>
           </div>
-          <div className="google-login">
-            <GoogleLogin
-              onSuccess={(credentialResponse) => {
-                console.log("Google login success:", credentialResponse);
-              }}
-              onError={() => {
-                console.log("Google login failed");
-              }}
-            />
-          </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default Login;
