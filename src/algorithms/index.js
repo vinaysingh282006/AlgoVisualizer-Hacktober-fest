@@ -27,7 +27,10 @@ import { quickSortWithStop } from "./quickSort.js";
 export async function quickSort(arr, setColorArray, delay) {
   return await quickSortWithStop(arr, noopSetArray, setColorArray, delay, makeStopRef(), noopUpdateStats);
 }
-
+import { sleepSortWithStop } from "./sleepSort.js";
+export async function sleepSort(arr, setColorArray, delay) {
+  return await sleepSortWithStop(arr, noopSetArray, setColorArray, delay, makeStopRef(), noopUpdateStats);
+}
 import { timSortWithStop } from "./timSort.js";
 export async function timSort(arr, setColorArray, delay) {
   return await timSortWithStop(arr, noopSetArray, setColorArray, delay, makeStopRef(), noopUpdateStats);

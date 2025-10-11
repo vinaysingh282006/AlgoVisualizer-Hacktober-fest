@@ -33,6 +33,15 @@ export const ALGORITHM_INFO = {
       bestCase: "O(n)",
       stable: "Yes",
     },
+    sleepSort: {
+  description:
+    "Sleep Sort works by creating a separate thread or timer for each element and 'sleeping' for a duration proportional to the element's value before outputting it. Smaller numbers wake up earlier, resulting in a sorted sequence.",
+  timeComplexity: "O(n + k)", // k depends on max element value
+  spaceComplexity: "O(n)",
+  bestCase: "O(n)",
+  stable: "No", // parallel execution doesn't guarantee stability
+},
+
     quickSort: {
       description:
         "Quick Sort is a divide-and-conquer algorithm that picks an element as a pivot and partitions the array around the pivot.",
