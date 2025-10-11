@@ -313,6 +313,7 @@ const Navbar = () => {
                   >
                     JavaScript
                   </Link>
+                  
                   <Link
                     to="/notes/MERN/MERNFundamentals"
                     className={`dropdown-item ${
@@ -332,7 +333,18 @@ const Navbar = () => {
                     }`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
-                    DSA Sheet
+                    DSA Sheet  by Shradha Khapra      
+                  </Link>
+                   <Link
+                    to="https://codolio.com/question-tracker/sheet/neetcode-150?category=popular"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`dropdown-item ${
+                      isActive("/notes/c") ? "active" : ""
+                    }`}
+                    onClick={() => setDesktopNotesOpen(false)}
+                  >
+                    DSA Sheet by NEETCODE
                   </Link>
                 </div>
               )}
