@@ -385,6 +385,10 @@ function AlgorithmCard({ algorithm }) {
         if (algorithm.id === "exponentialSearch") {
         navigate("/searching/exponentialSearch");
         }
+
+        if (algorithm.id === "fibonacciSearch") {
+        navigate("/searching/fibonacciSearch");
+        }
        
       } else if (algorithm.category === "dataStructures") {
         navigate(`/data-structures/${toKebab(algorithm.id)}`);
