@@ -836,7 +836,7 @@
             "O(n log n)",
             "O(n\u00b2)"
         ],
-        "correctAnswer": 1,
+        "correctAnswer": 0,
         "explanation": "In the best case, Binary Search can often achieve O(1), especially when data is already partially structured."
     },
     {
