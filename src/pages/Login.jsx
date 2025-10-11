@@ -11,6 +11,18 @@ import jwt_decode from "jwt-decode"; // 🟢 ADD: to decode Google token
 import { loginUserWithGoogle } from "../services/authService"; // 🟢 ADD: backend API call for Google login
 
 
+
+// 🔹 Helper function for password validation
+const validatePassword = (password) => {
+  const errors = [];
+  if (password.length < 8) errors.push("At least 8 characters");
+  if (!/[A-Z]/.test(password)) errors.push("Add at least one uppercase letter");
+  if (!/[a-z]/.test(password)) errors.push("Add at least one lowercase letter");
+  if (!/[0-9]/.test(password)) errors.push("Add at least one number");
+  if (!/[!@#$%^&*]/.test(password)) errors.push("Add at least one special symbol (!@#$%^&*)");
+  return errors;
+};
+
 const Login = () => {
   const { theme } = useTheme();
   const { renderGoogleButton } = useGoogleAuth();
@@ -24,6 +36,24 @@ const Login = () => {
     password: "",
     rememberMe: false,
   });
+
+   // 🔹 New state for password validation messages
+  const [passwordErrors, setPasswordErrors] = useState([]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // 🔹 Validate password on form submit
+    const errors = validatePassword(formData.password);
+    setPasswordErrors(errors);
+
+    if (errors.length === 0) {
+      console.log("Login attempt:", formData);
+      // proceed with login logic here
+    } else {
+      console.log("Password errors:", errors);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,7 +88,12 @@ const Login = () => {
       [name]: type === "checkbox" ? checked : value,
     }));
   };
-
+  
+   // 🔹 Real-time password validation
+    if (name === "password") {
+      setPasswordErrors(validatePassword(value));
+    }
+  };
   const isDark = theme === "dark";
 
   
@@ -162,6 +197,19 @@ const Login = () => {
                   )}
                 </button>
               </div>
+
+               {/* 🔹 Real-time Password Validation Feedback */}
+              {passwordErrors.length > 0 && (
+                <ul className="password-errors">
+                  {passwordErrors.map((err, idx) => (
+                    <li key={idx} className="error-text">
+                      ❌ {err}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+              
             </div>
 
             {/* Remember Me & Forgot Password */}
