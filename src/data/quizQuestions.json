@@ -1461,132 +1461,88 @@
         "correctAnswer": 3,
         "explanation": "Binary Tree is often less efficient due to multiple factors like higher time complexity, space usage, and lack of adaptability."
     },
+    
     {
         "id": 85,
         "topic": "Other Topics",
         "algorithm": "Hashing",
         "difficulty": "Easy",
-        "question": "What is the main purpose of hashing?",
+        "question": "What is the primary goal of a hash function?",
         "options": [
-            "Store data sequentially",
-            "Map data to fixed-size values for fast access",
-            "Sort data efficiently",
-            "Compress data to smaller size"
+            "To sort elements efficiently",
+            "To map keys to indices for fast lookup",
+            "To store data sequentially",
+            "To compress data"
         ],
         "correctAnswer": 1,
-        "explanation": "Hashing maps arbitrary-sized data to fixed-size values (hash codes) to allow fast insertion, deletion, and lookup."
+        "explanation": "A hash function converts a key into an index for quick insertion, deletion, and retrieval in a hash table."
     },
     {
         "id": 86,
         "topic": "Other Topics",
         "algorithm": "Hashing",
         "difficulty": "Easy",
-        "question": "Which data structure commonly uses hashing for fast access?",
+        "question": "Which data structure relies heavily on hashing for average O(1) access?",
         "options": [
-            "Array",
             "Linked List",
             "Hash Table",
-            "Stack"
+            "Stack",
+            "Queue"
         ],
-        "correctAnswer": 2,
-        "explanation": "Hash tables use hashing to map keys to indices, allowing O(1) average-time lookup."
+        "correctAnswer": 1,
+        "explanation": "Hash tables use hashing to map keys to indices, allowing constant-time access on average."
     },
     {
         "id": 87,
         "topic": "Other Topics",
         "algorithm": "Hashing",
         "difficulty": "Medium",
-        "question": "Which of the following is a collision resolution technique in hashing?",
+        "question": "Which of these is a common collision resolution method?",
         "options": [
-            "Binary Search",
             "Chaining",
-            "Heapify",
-            "Merge Sort"
+            "Merge Sort",
+            "Binary Search",
+            "Heapify"
         ],
-        "correctAnswer": 1,
-        "explanation": "Chaining is used to store multiple elements at the same index in case of a collision."
+        "correctAnswer": 0,
+        "explanation": "Chaining handles collisions by storing multiple items in a linked list at the same hash index."
     },
     {
         "id": 88,
         "topic": "Other Topics",
         "algorithm": "Hashing",
         "difficulty": "Medium",
-        "question": "What is a hash function?",
+        "question": "What is a characteristic of a good hash function?",
         "options": [
-            "A function that sorts elements",
-            "A function that maps keys to integer indices",
-            "A function that compares two arrays",
-            "A function that computes factorial"
+            "Minimizes collisions and distributes keys uniformly",
+            "Always returns 0",
+            "Sorts keys automatically",
+            "Uses a linked list internally"
         ],
-        "correctAnswer": 1,
-        "explanation": "A hash function converts a key into an integer index for storage in a hash table."
+        "correctAnswer": 0,
+        "explanation": "A good hash function reduces collisions and spreads keys evenly across the table."
     },
     {
         "id": 89,
         "topic": "Other Topics",
         "algorithm": "Hashing",
         "difficulty": "Hard",
-        "question": "Why is the choice of a good hash function important?",
+        "question": "What is the worst-case time complexity for search in a hash table with chaining?",
         "options": [
-            "To ensure fewer collisions and uniform distribution",
-            "To make the table smaller",
-            "To sort the keys automatically",
-            "To compress data efficiently"
+            "O(1)",
+            "O(log n)",
+            "O(n)",
+            "O(n log n)"
         ],
-        "correctAnswer": 0,
-        "explanation": "A good hash function reduces collisions and distributes keys uniformly, ensuring O(1) performance."
+        "correctAnswer": 2,
+        "explanation": "In the worst case, all keys may collide to the same index, creating a list of n elements and O(n) search."
     },
     {
         "id": 90,
         "topic": "Other Topics",
         "algorithm": "Hashing",
         "difficulty": "Hard",
-        "question": "What can happen if all keys hash to the same index?",
-        "options": [
-            "The hash table becomes empty",
-            "The hash table degenerates into a linked list",
-            "The hash table sorts automatically",
-            "Nothing significant"
-        ],
-        "correctAnswer": 1,
-        "explanation": "If all keys collide to the same index, chaining will make a long list, degrading performance to O(n)."
-    },
-    {
-        "id": 91,
-        "topic": "Other Topics",
-        "algorithm": "Hash Table",
-        "difficulty": "Easy",
-        "question": "What is stored at each index of a hash table?",
-        "options": [
-            "Elements or key-value pairs",
-            "Only keys",
-            "Only indices",
-            "Sorted arrays"
-        ],
-        "correctAnswer": 0,
-        "explanation": "Each index of a hash table stores elements, usually as key-value pairs."
-    },
-    {
-        "id": 92,
-        "topic": "Other Topics",
-        "algorithm": "Hash Table",
-        "difficulty": "Easy",
-        "question": "Hash tables provide which average time complexity for search operations?",
-        "options": [
-            "O(n)",
-            "O(log n)",
-            "O(1)",
-            "O(n log n)"
-        ],
-        "correctAnswer": 2,
-        "explanation": "Search in hash tables is O(1) on average due to direct mapping by hash codes."
-    },
-    {
-        "id": 93,
-        "topic": "Other Topics",
-        "algorithm": "Hash Table",
-        "difficulty": "Medium",
-        "question": "Which of the following affects hash table performance?",
+        "question": "Which factor affects hash table performance the most?",
         "options": [
             "Load factor",
             "Hash function quality",
@@ -1594,953 +1550,1002 @@
             "All of the above"
         ],
         "correctAnswer": 3,
-        "explanation": "Load factor, hash function, and collision resolution all impact hash table efficiency."
+        "explanation": "All of these factors influence how efficiently a hash table operates."
+    },
+    {
+        "id": 91,
+        "topic": "Other Topics",
+        "algorithm": "Tree",
+        "difficulty": "Easy",
+        "question": "What is the key property of a binary search tree (BST)?",
+        "options": [
+            "All nodes have two children",
+            "Left child < parent < right child",
+            "All leaves are at the same level",
+            "Tree is balanced automatically"
+        ],
+        "correctAnswer": 1,
+        "explanation": "In a BST, the left child is smaller than the parent, and the right child is larger, facilitating efficient search."
+    },
+    {
+        "id": 92,
+        "topic": "Other Topics",
+        "algorithm": "Tree",
+        "difficulty": "Easy",
+        "question": "Which traversal visits nodes in left-root-right order?",
+        "options": [
+            "Preorder",
+            "Inorder",
+            "Postorder",
+            "Level-order"
+        ],
+        "correctAnswer": 1,
+        "explanation": "Inorder traversal visits nodes in left, root, right order."
+    },
+    {
+        "id": 93,
+        "topic": "Other Topics",
+        "algorithm": "Tree",
+        "difficulty": "Medium",
+        "question": "What is the height of a perfectly balanced binary tree with n nodes?",
+        "options": [
+            "O(n)",
+            "O(log n)",
+            "O(n^2)",
+            "O(1)"
+        ],
+        "correctAnswer": 1,
+        "explanation": "A perfectly balanced binary tree has height proportional to log(n)."
     },
     {
         "id": 94,
         "topic": "Other Topics",
-        "algorithm": "Hash Table",
+        "algorithm": "Tree",
         "difficulty": "Medium",
-        "question": "What happens when the load factor exceeds a threshold in a hash table?",
+        "question": "Which tree is used for efficient priority queue operations?",
         "options": [
-            "The table resizes",
-            "Elements are deleted",
-            "The hash function changes",
-            "Nothing"
+            "Binary Search Tree",
+            "Heap",
+            "Trie",
+            "AVL Tree"
         ],
-        "correctAnswer": 0,
-        "explanation": "When the load factor is high, the table is resized to reduce collisions and maintain O(1) performance."
+        "correctAnswer": 1,
+        "explanation": "Heaps allow efficient insertions and extraction of the maximum or minimum element."
     },
     {
         "id": 95,
         "topic": "Other Topics",
-        "algorithm": "Hash Table",
+        "algorithm": "Tree",
         "difficulty": "Hard",
-        "question": "Worst-case time complexity of search in a hash table using chaining is?",
+        "question": "Which self-balancing tree guarantees O(log n) search, insert, and delete?",
         "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)"
+            "Binary Search Tree",
+            "AVL Tree",
+            "Heap",
+            "Trie"
         ],
-        "correctAnswer": 2,
-        "explanation": "In the worst case, all keys hash to the same index, forming a list of size n, giving O(n) search time."
+        "correctAnswer": 1,
+        "explanation": "AVL trees maintain height balance, ensuring logarithmic time complexity for basic operations."
     },
     {
         "id": 96,
         "topic": "Other Topics",
-        "algorithm": "Hash Table",
+        "algorithm": "Tree",
         "difficulty": "Hard",
-        "question": "Which of the following is NOT a valid collision resolution technique?",
+        "question": "What is the time complexity to find the lowest common ancestor in a BST?",
         "options": [
-            "Chaining",
-            "Linear probing",
-            "Heap sort",
-            "Double hashing"
+            "O(n)",
+            "O(log n)",
+            "O(n log n)",
+            "O(1)"
         ],
-        "correctAnswer": 2,
-        "explanation": "Heap sort is unrelated to collision resolution in hash tables."
+        "correctAnswer": 1,
+        "explanation": "In a balanced BST, LCA can be found in O(log n) by traversing from the root."
     },
     {
         "id": 97,
         "topic": "Other Topics",
-        "algorithm": "chainingHash",
+        "algorithm": "Branch & Bound: Knapsack 01",
         "difficulty": "Easy",
-        "question": "In chaining, where are colliding elements stored?",
+        "question": "In 0/1 Knapsack, what does each node in the decision tree represent?",
         "options": [
-            "In a separate hash table",
-            "In a linked list at the same index",
-            "In a stack",
-            "In an array sorted by key"
+            "A fraction of items chosen",
+            "A subset of items with binary choice",
+            "Sorted order of items",
+            "Maximum weight used"
         ],
         "correctAnswer": 1,
-        "explanation": "Chaining stores multiple colliding elements in a linked list at the same table index."
+        "explanation": "Each node represents including or excluding an item in the knapsack."
     },
     {
         "id": 98,
         "topic": "Other Topics",
-        "algorithm": "chainingHash",
+        "algorithm": "Branch & Bound: Knapsack 01",
         "difficulty": "Easy",
-        "question": "Which data structure is commonly used in chaining?",
+        "question": "What is the purpose of bounding in Branch & Bound?",
         "options": [
-            "Queue",
-            "Linked List",
-            "Binary Tree",
-            "Heap"
+            "To prune branches that cannot improve solution",
+            "To sort nodes",
+            "To calculate weight only",
+            "To list all subsets"
         ],
-        "correctAnswer": 1,
-        "explanation": "Linked lists are used at each index to store multiple colliding elements."
+        "correctAnswer": 0,
+        "explanation": "Bounding estimates the maximum possible value from a node to decide whether to explore it."
     },
     {
         "id": 99,
         "topic": "Other Topics",
-        "algorithm": "chainingHash",
+        "algorithm": "Branch & Bound: Knapsack 01",
         "difficulty": "Medium",
-        "question": "What is the average search complexity in chaining with a low load factor?",
+        "question": "Which method provides an upper bound for 0/1 Knapsack?",
         "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)"
+            "Fractional Knapsack solution",
+            "Binary search",
+            "DFS traversal",
+            "Random selection"
         ],
         "correctAnswer": 0,
-        "explanation": "With a low load factor, most indices have very few elements, giving O(1) average search time."
+        "explanation": "Fractional knapsack gives an optimistic estimate for remaining items."
     },
     {
         "id": 100,
         "topic": "Other Topics",
-        "algorithm": "chainingHash",
+        "algorithm": "Branch & Bound: Knapsack 01",
         "difficulty": "Medium",
-        "question": "If a hash table uses chaining and all keys hash to the same index, what is the worst-case search time?",
+        "question": "What is the worst-case complexity of Branch & Bound for Knapsack?",
         "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n^2)"
+            "O(n^2)",
+            "O(2^n)",
+            "O(n log n)",
+            "O(n)"
         ],
-        "correctAnswer": 2,
-        "explanation": "All keys in one linked list give O(n) search in the worst case."
+        "correctAnswer": 1,
+        "explanation": "In worst case, Branch & Bound explores all subsets, which is exponential."
     },
     {
         "id": 101,
         "topic": "Other Topics",
-        "algorithm": "chainingHash",
-        "difficulty": "Hard",
-        "question": "Which of the following improves search efficiency in chaining?",
+        "algorithm": "Branch & Bound: Traveling Salesman",
+        "difficulty": "Easy",
+        "question": "What is the main goal of TSP Branch & Bound?",
         "options": [
-            "Using balanced BSTs instead of linked lists",
-            "Increasing table size",
-            "Reducing load factor",
-            "All of the above"
+            "Shortest tour visiting all cities once",
+            "Longest tour",
+            "Random tour selection",
+            "Counting cities"
         ],
-        "correctAnswer": 3,
-        "explanation": "All options help: BSTs improve lookup, larger table reduces collisions, lower load factor reduces chain length."
+        "correctAnswer": 0,
+        "explanation": "Branch & Bound finds the minimum-cost tour covering all cities exactly once."
     },
     {
         "id": 102,
         "topic": "Other Topics",
-        "algorithm": "chainingHash",
-        "difficulty": "Hard",
-        "question": "Which is a disadvantage of chaining?",
+        "algorithm": "Branch & Bound: Traveling Salesman",
+        "difficulty": "Easy",
+        "question": "What does a lower bound represent in TSP Branch & Bound?",
         "options": [
-            "Wastes memory due to pointers",
-            "Cannot handle collisions",
-            "Always slower than open addressing",
-            "Does not allow deletion"
+            "Minimum possible cost to complete partial tour",
+            "Maximum cost tour",
+            "Number of cities visited",
+            "Average edge weight"
         ],
         "correctAnswer": 0,
-        "explanation": "Chaining requires extra memory for pointers in linked lists, which is a trade-off for simpler collision handling."
+        "explanation": "Lower bound helps prune paths that cannot yield a better solution."
     },
     {
         "id": 103,
         "topic": "Other Topics",
-        "algorithm": "Open Addressing",
-        "difficulty": "Easy",
-        "question": "In open addressing, where is a colliding element stored?",
+        "algorithm": "Branch & Bound: Traveling Salesman",
+        "difficulty": "Medium",
+        "question": "How does the reduced cost matrix help in TSP?",
         "options": [
-            "In a linked list",
-            "In another empty table slot",
-            "At the same index",
-            "In a separate array"
+            "Provides tighter lower bounds",
+            "Increases distances",
+            "Counts cities",
+            "Maximizes cost"
         ],
-        "correctAnswer": 1,
-        "explanation": "Open addressing finds another empty slot in the table to store the colliding element."
+        "correctAnswer": 0,
+        "explanation": "Reduced cost matrix improves pruning efficiency by giving better lower bounds."
     },
     {
         "id": 104,
-        "topic": "Other Topics",
-        "algorithm": "Open Addressing",
-        "difficulty": "Easy",
-        "question": "Which is NOT an open addressing method?",
-        "options": [
-            "Linear probing",
-            "Quadratic probing",
-            "Double hashing",
-            "Chaining"
-        ],
-        "correctAnswer": 3,
-        "explanation": "Chaining is a separate collision handling technique, not open addressing."
-    },
-    {
-        "id": 105,
-        "topic": "Other Topics",
-        "algorithm": "Open Addressing",
-        "difficulty": "Medium",
-        "question": "What is primary clustering in open addressing?",
-        "options": [
-            "When multiple elements hash to the same index",
-            "When clusters of occupied slots form, slowing insert/search",
-            "When the hash table resizes",
-            "When hash function fails"
-        ],
-        "correctAnswer": 1,
-        "explanation": "Primary clustering occurs when clusters of consecutive occupied slots form, increasing probe length."
-    },
-    {
-        "id": 106,
-        "topic": "Other Topics",
-        "algorithm": "Open Addressing",
-        "difficulty": "Medium",
-        "question": "What is the average search complexity of open addressing with low load factor?",
-        "options": [
-            "O(n)",
-            "O(log n)",
-            "O(1)",
-            "O(n log n)"
-        ],
-        "correctAnswer": 2,
-        "explanation": "With a low load factor, most searches find their element quickly, giving O(1) average complexity."
-    },
-    {
-        "id": 107,
-        "topic": "Other Topics",
-        "algorithm": "Open Addressing",
-        "difficulty": "Hard",
-        "question": "What is the worst-case search time in open addressing?",
-        "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)"
-        ],
-        "correctAnswer": 2,
-        "explanation": "If all elements form a cluster or table is nearly full, worst-case search can take O(n)."
-    },
-    {
-        "id": 108,
-        "topic": "Other Topics",
-        "algorithm": "Open Addressing",
-        "difficulty": "Hard",
-        "question": "Which of these helps reduce clustering in open addressing?",
-        "options": [
-            "Linear probing",
-            "Quadratic probing or double hashing",
-            "Always resizing table",
-            "Using linked lists"
-        ],
-        "correctAnswer": 1,
-        "explanation": "Quadratic probing and double hashing reduce clustering by spreading keys more uniformly."
-    },
-    {
-        "id": 109,
-        "topic": "Other Topics",
-        "algorithm": "Rolling Hash",
-        "difficulty": "Easy",
-        "question": "Rolling hash is used primarily in which type of algorithms?",
-        "options": [
-            "Sorting algorithms",
-            "Substring search algorithms",
-            "Graph traversal algorithms",
-            "Dynamic programming"
-        ],
-        "correctAnswer": 1,
-        "explanation": "Rolling hash allows fast substring search, used in algorithms like Rabin-Karp."
-    },
-    {
-        "id": 110,
-        "topic": "Other Topics",
-        "algorithm": "Rolling Hash",
-        "difficulty": "Easy",
-        "question": "What is the advantage of rolling hash over normal hash in string matching?",
-        "options": [
-            "Faster hash recomputation when sliding window",
-            "No collisions",
-            "Uses less memory",
-            "Automatically sorts substrings"
-        ],
-        "correctAnswer": 0,
-        "explanation": "Rolling hash lets you compute the next hash by updating the previous one, avoiding full recomputation."
-    },
-    {
-        "id": 111,
-        "topic": "Other Topics",
-        "algorithm": "Rolling Hash",
-        "difficulty": "Medium",
-        "question": "Which problem is solved efficiently using rolling hash?",
-        "options": [
-            "Merge Sort",
-            "Rabin-Karp string search",
-            "DFS on trees",
-            "Binary search"
-        ],
-        "correctAnswer": 1,
-        "explanation": "Rabin-Karp uses rolling hash for fast substring matching."
-    },
-    {
-        "id": 112,
-        "topic": "Other Topics",
-        "algorithm": "Rolling Hash",
-        "difficulty": "Medium",
-        "question": "What is the time complexity of substring search using Rabin-Karp with rolling hash?",
-        "options": [
-            "O(N × M)",
-            "O(N + M)",
-            "O(N log M)",
-            "O(1)"
-        ],
-        "correctAnswer": 1,
-        "explanation": "With rolling hash, Rabin-Karp runs in O(N + M) average time for pattern matching."
-    },
-    {
-        "id": 113,
-        "topic": "Other Topics",
-        "algorithm": "Rolling Hash",
-        "difficulty": "Hard",
-        "question": "Which property of rolling hash is critical for efficient substring matching?",
-        "options": [
-            "Incremental hash computation",
-            "No collisions",
-            "Sorting substrings",
-            "Dynamic memory allocation"
-        ],
-        "correctAnswer": 0,
-        "explanation": "Incremental update of hash values enables efficient sliding window substring search."
-    },
-    {
-        "id": 114,
-        "topic": "Other Topics",
-        "algorithm": "Rolling Hash",
-        "difficulty": "Hard",
-        "question": "Which problem arises if the rolling hash is not designed carefully?",
-        "options": [
-            "Increased memory usage",
-            "Hash collisions causing false positives",
-            "Slower sorting",
-            "Unable to store keys"
-        ],
-        "correctAnswer": 1,
-        "explanation": "Poor hash design can cause collisions, resulting in false matches during substring search."
-    },
-    {
-        "id": 115,
-        "topic": "Other Topics",
-        "algorithm": "Hash - Applications",
-        "difficulty": "Easy",
-        "question": "Which of the following is a common use of hashing?",
-        "options": [
-            "Sorting arrays",
-            "Finding duplicates",
-            "DFS traversal",
-            "Dynamic programming"
-        ],
-        "correctAnswer": 1,
-        "explanation": "Hashing is often used to find duplicates efficiently using sets or hash maps."
-    },
-    {
-        "id": 116,
-        "topic": "Other Topics",
-        "algorithm": "Hash - Applications",
-        "difficulty": "Easy",
-        "question": "Which data structure is typically implemented using hashing?",
-        "options": [
-            "Queue",
-            "Stack",
-            "Map or Dictionary",
-            "Binary Tree"
-        ],
-        "correctAnswer": 2,
-        "explanation": "Maps or dictionaries use hashing to map keys to values with O(1) access."
-    },
-    {
-        "id": 117,
-        "topic": "Other Topics",
-        "algorithm": "Hash - Applications",
-        "difficulty": "Medium",
-        "question": "Hashing is often used in which common algorithmic problem?",
-        "options": [
-            "Two-sum problem",
-            "Merge sort",
-            "Binary search",
-            "DFS traversal"
-        ],
-        "correctAnswer": 0,
-        "explanation": "Hashing allows checking complements efficiently, solving the two-sum problem in O(n) time."
-    },
-    {
-        "id": 118,
-        "topic": "Other Topics",
-        "algorithm": "Hash - Applications",
-        "difficulty": "Medium",
-        "question": "Which application benefits from counting frequencies using hashing?",
-        "options": [
-            "Finding duplicates",
-            "Word frequency in documents",
-            "Histogram generation",
-            "All of the above"
-        ],
-        "correctAnswer": 3,
-        "explanation": "Hashing can efficiently count frequencies for all these applications."
-    },
-    {
-        "id": 119,
-        "topic": "Other Topics",
-        "algorithm": "Hash - Applications",
-        "difficulty": "Hard",
-        "question": "Which problem requires careful hash function design to avoid collisions?",
-        "options": [
-            "Counting frequencies",
-            "Two-sum problem",
-            "Substring matching",
-            "All of the above"
-        ],
-        "correctAnswer": 3,
-        "explanation": "All listed problems can be impacted by hash collisions, requiring good hash functions."
-    },
-    {
-        "id": 120,
-        "topic": "Other Topics",
-        "algorithm": "Hash - Applications",
-        "difficulty": "Hard",
-        "question": "Which of these algorithms heavily rely on hashing?",
-        "options": [
-            "Rabin-Karp string search",
-            "Frequency counter in data streams",
-            "Hash-based caches and memoization",
-            "All of the above"
-        ],
-        "correctAnswer": 3,
-        "explanation": "Hashing is crucial in substring search, frequency counting, and cache/memoization implementations."
-    },
-    {
-    "id": 121,
-    "topic": "Other Topics",
-    "algorithm": "Branch & Bound: Knapsack 01",
-    "difficulty": "Easy",
-    "question": "What is the basic concept of the 0/1 Knapsack problem?",
-    "options": [
-      "Selecting items with binary choice (take or leave) to maximize value within weight limit",
-      "Sorting items by weight",
-      "Finding the shortest path in a graph",
-      "Minimizing the number of items"
-    ],
-    "correctAnswer": 0,
-    "explanation": "The 0/1 Knapsack problem involves making binary (yes/no) decisions for each item to maximize total value while respecting weight constraints."
-    },
-    {
-        "id": 122,
-        "topic": "Other Topics",
-        "algorithm": "Branch & Bound: Knapsack 01",
-        "difficulty": "Easy",
-        "question": "What is the role of bounding in the Knapsack problem?",
-        "options": [
-        "To estimate the best possible value achievable in a subtree",
-        "To sort items by weight",
-        "To count the number of items",
-        "To calculate the minimum weight"
-        ],
-        "correctAnswer": 0,
-        "explanation": "Bounding functions estimate the maximum possible value achievable in a branch, helping prune unpromising paths."
-    },
-    {
-        "id": 123,
-        "topic": "Other Topics",
-        "algorithm": "Branch & Bound: Knapsack 01",
-        "difficulty": "Medium",
-        "question": "How does Branch & Bound improve upon brute force for the Knapsack problem?",
-        "options": [
-        "By pruning branches that cannot lead to better solutions",
-        "By sorting items first",
-        "By using dynamic programming",
-        "By using greedy selection"
-        ],
-        "correctAnswer": 0,
-        "explanation": "Branch & Bound improves efficiency by eliminating branches that cannot produce better solutions than the current best."
-    },
-    {
-        "id": 124,
-        "topic": "Other Topics",
-        "algorithm": "Branch & Bound: Knapsack 01",
-        "difficulty": "Medium",
-        "question": "What is the most effective bounding function for the Knapsack problem?",
-        "options": [
-        "Fractional knapsack value",
-        "Total weight",
-        "Item count",
-        "Random estimation"
-        ],
-        "correctAnswer": 0,
-        "explanation": "The fractional knapsack solution provides an optimistic estimate of the best possible value achievable in a branch."
-    },
-    {
-        "id": 125,
-        "topic": "Other Topics",
-        "algorithm": "Branch & Bound: Knapsack 01",
-        "difficulty": "Hard",
-        "question": "What is the worst-case time complexity of Branch & Bound for Knapsack?",
-        "options": [
-        "O(2\u207f)",
-        "O(n log n)",
-        "O(n)",
-        "O(n\u00b2)"
-        ],
-        "correctAnswer": 0,
-        "explanation": "In the worst case, Branch & Bound might still need to explore all possible combinations, leading to O(2\u207f)."
-    },
-    {
-        "id": 126,
-        "topic": "Other Topics",
-        "algorithm": "Branch & Bound: Knapsack 01",
-        "difficulty": "Hard",
-        "question": "How does the ordering of items affect Knapsack Branch & Bound efficiency?",
-        "options": [
-        "Sorting by value/weight ratio can improve pruning effectiveness",
-        "Order doesn't matter",
-        "Random ordering is best",
-        "Sorting by weight only is optimal"
-        ],
-        "correctAnswer": 0,
-        "explanation": "Sorting items by value/weight ratio can help find good solutions early, enabling more effective pruning."
-    },
-    {
-        "id": 127,
-        "topic": "Other Topics",
-        "algorithm": "Branch & Bound: Traveling Salesman",
-        "difficulty": "Easy",
-        "question": "What is the basic idea of TSP Branch & Bound?",
-        "options": [
-        "Finding the shortest tour visiting all cities exactly once",
-        "Finding the longest path",
-        "Finding all possible paths",
-        "Finding multiple tours"
-        ],
-        "correctAnswer": 0,
-        "explanation": "TSP aims to find the minimum cost tour that visits each city exactly once and returns to the starting city."
-    },
-    {
-        "id": 128,
-        "topic": "Other Topics",
-        "algorithm": "Branch & Bound: Traveling Salesman",
-        "difficulty": "Easy",
-        "question": "What is a lower bound in TSP Branch & Bound?",
-        "options": [
-        "Minimum possible cost of completing a partial tour",
-        "Maximum possible tour length",
-        "Number of cities",
-        "Average distance between cities"
-        ],
-        "correctAnswer": 0,
-        "explanation": "A lower bound estimates the minimum possible cost to complete a partial tour, used for pruning unpromising branches."
-    },
-    {
-        "id": 129,
-        "topic": "Other Topics",
-        "algorithm": "Branch & Bound: Traveling Salesman",
-        "difficulty": "Medium",
-        "question": "What is the role of the reduced cost matrix in TSP?",
-        "options": [
-        "To provide better lower bounds for partial solutions",
-        "To increase the tour length",
-        "To count cities",
-        "To maximize distance"
-        ],
-        "correctAnswer": 0,
-        "explanation": "The reduced cost matrix helps calculate tighter lower bounds, making branch pruning more effective."
-    },
-    {
-        "id": 130,
         "topic": "Other Topics",
         "algorithm": "Branch & Bound: Traveling Salesman",
         "difficulty": "Medium",
         "question": "How are subtours eliminated in TSP Branch & Bound?",
         "options": [
-        "By maintaining a path and checking for cycles",
-        "By increasing distances",
-        "By removing cities",
-        "By adding random edges"
+            "Maintaining a valid path and checking cycles",
+            "Increasing edge costs",
+            "Removing cities",
+            "Random edge deletion"
         ],
         "correctAnswer": 0,
-        "explanation": "The algorithm maintains a valid path and ensures no cycles are formed until the final edge of the tour."
+        "explanation": "Algorithm ensures no cycles form prematurely in the partial tour."
     },
     {
-        "id": 131,
+        "id": 105,
         "topic": "Other Topics",
         "algorithm": "Branch & Bound: Traveling Salesman",
         "difficulty": "Hard",
-        "question": "What is the most effective branching strategy for TSP?",
+        "question": "Which strategy is most effective for branching in TSP?",
         "options": [
-        "Selecting cities based on minimum cost edges",
-        "Random selection",
-        "Maximum cost edges",
-        "Middle edges"
+            "Selecting minimum cost edges first",
+            "Random edges",
+            "Maximum cost edges",
+            "Middle edges"
         ],
         "correctAnswer": 0,
-        "explanation": "Choosing cities connected by minimum cost edges first often leads to better solutions earlier."
+        "explanation": "Choosing edges with minimum cost often leads to better solutions earlier."
     },
     {
-        "id": 132,
+        "id": 106,
         "topic": "Other Topics",
         "algorithm": "Branch & Bound: Traveling Salesman",
         "difficulty": "Hard",
-        "question": "What makes TSP particularly challenging for Branch & Bound?",
+        "question": "What makes TSP challenging for Branch & Bound?",
         "options": [
-        "The combination of tour constraints and optimization",
-        "The number of cities",
-        "The distance calculation",
-        "The path finding"
+            "Combination of constraints and optimization",
+            "Only number of cities",
+            "Distance calculation",
+            "Path finding"
         ],
         "correctAnswer": 0,
-        "explanation": "TSP combines the challenges of maintaining valid tours while optimizing the total cost, making effective pruning crucial."
+        "explanation": "TSP requires maintaining valid tours while optimizing total cost."
     },
+    
     {
-        "id": 133,
+        "id": 107,
         "topic": "Other Topics",
         "algorithm": "Game Search: Minimax",
         "difficulty": "Easy",
-        "question": "What is the fundamental principle of the Minimax algorithm?",
+        "question": "What is the main goal of the Minimax algorithm?",
         "options": [
-        "Alternating between maximizing and minimizing player moves",
-        "Always choosing random moves",
-        "Always selecting the first available move",
-        "Ignoring opponent moves"
+            "Maximize player's minimum gain",
+            "Minimize opponent's score",
+            "Randomly choose moves",
+            "Sort possible moves"
         ],
         "correctAnswer": 0,
-        "explanation": "Minimax alternates between maximizing the current player's position and minimizing the opponent's opportunities."
+        "explanation": "Minimax assumes both players play optimally and aims to maximize the minimum gain."
     },
     {
-        "id": 134,
+        "id": 108,
         "topic": "Other Topics",
         "algorithm": "Game Search: Minimax",
         "difficulty": "Easy",
-        "question": "What type of games is Minimax best suited for?",
+        "question": "In a two-player game tree, what do leaf nodes represent in Minimax?",
         "options": [
-        "Two-player, zero-sum games with perfect information",
-        "Single-player games",
-        "Games of chance",
-        "Multiplayer games"
+            "Current board state",
+            "Terminal game states with utility values",
+            "Parent moves",
+            "Next player’s moves"
         ],
-        "correctAnswer": 0,
-        "explanation": "Minimax works best for games like chess or tic-tac-toe where two players compete and all information is visible."
+        "correctAnswer": 1,
+        "explanation": "Leaf nodes represent terminal states with assigned utility values for evaluation."
     },
     {
-        "id": 135,
+        "id": 109,
         "topic": "Other Topics",
         "algorithm": "Game Search: Minimax",
         "difficulty": "Medium",
-        "question": "How does Minimax handle game tree depth limitations?",
+        "question": "What is the time complexity of Minimax with depth d and branching factor b?",
         "options": [
-        "Using evaluation functions at cutoff depth",
-        "Ignoring deeper nodes",
-        "Random selection",
-        "Continuing indefinitely"
+            "O(b + d)",
+            "O(b^d)",
+            "O(d^b)",
+            "O(b * d)"
         ],
-        "correctAnswer": 0,
-        "explanation": "When the search can't reach terminal positions, Minimax uses heuristic evaluation functions to estimate position value."
+        "correctAnswer": 1,
+        "explanation": "Minimax explores all nodes in the tree, leading to O(b^d) complexity."
     },
     {
-        "id": 136,
+        "id": 110,
         "topic": "Other Topics",
         "algorithm": "Game Search: Minimax",
         "difficulty": "Medium",
-        "question": "What determines the effectiveness of a Minimax evaluation function?",
+        "question": "Which strategy does Minimax assume for the opponent?",
         "options": [
-        "Its ability to accurately estimate position strength",
-        "The speed of calculation",
-        "The number of moves considered",
-        "The game tree depth"
+            "Optimal play to minimize our score",
+            "Random moves",
+            "Fixed moves",
+            "Maximize our score"
         ],
         "correctAnswer": 0,
-        "explanation": "A good evaluation function must provide reliable estimates of position strength to make effective decisions."
+        "explanation": "Minimax assumes the opponent always plays optimally to minimize the player's gain."
     },
     {
-        "id": 137,
+        "id": 111,
         "topic": "Other Topics",
         "algorithm": "Game Search: Minimax",
         "difficulty": "Hard",
-        "question": "What is the time complexity of Minimax without pruning?",
+        "question": "How does Minimax handle non-deterministic games?",
         "options": [
-        "O(b\u1d48) where b is branching factor and d is depth",
-        "O(n)",
-        "O(log n)",
-        "O(n\u00b2)"
+            "It cannot handle them directly",
+            "Uses probability for opponent moves",
+            "Ignores randomness",
+            "Assumes worst-case outcomes"
         ],
         "correctAnswer": 0,
-        "explanation": "Minimax must explore all possible moves to a given depth, leading to exponential time complexity."
+        "explanation": "Minimax works for deterministic games; stochastic elements require Expectimax or similar."
     },
     {
-        "id": 138,
-        "topic": "Other Topics",
-        "algorithm": "Game Search: Minimax",
-        "difficulty": "Hard",
-        "question": "How does Minimax handle transpositions in the game tree?",
-        "options": [
-        "Using a transposition table to cache results",
-        "Recalculating every position",
-        "Ignoring repeated positions",
-        "Random selection"
-        ],
-        "correctAnswer": 0,
-        "explanation": "Transposition tables store previously evaluated positions to avoid redundant calculations."
-    },
-    {
-        "id": 139,
+        "id": 112,
         "topic": "Other Topics",
         "algorithm": "Game Search: Alpha-Beta Pruning",
         "difficulty": "Easy",
-        "question": "What is the main purpose of Alpha-Beta pruning?",
+        "question": "What is the purpose of Alpha-Beta pruning?",
         "options": [
-        "To reduce the number of nodes evaluated by Minimax",
-        "To increase search depth",
-        "To evaluate more nodes",
-        "To randomize search"
+            "Reduce the number of nodes evaluated",
+            "Increase branching factor",
+            "Sort moves randomly",
+            "Compute all leaf nodes"
         ],
         "correctAnswer": 0,
-        "explanation": "Alpha-Beta pruning improves Minimax efficiency by skipping evaluation of irrelevant branches."
+        "explanation": "Alpha-Beta pruning eliminates branches that cannot influence the final decision, improving efficiency."
     },
     {
-        "id": 140,
+        "id": 113,
         "topic": "Other Topics",
         "algorithm": "Game Search: Alpha-Beta Pruning",
         "difficulty": "Easy",
-        "question": "What do Alpha and Beta values represent?",
+        "question": "What do alpha and beta represent?",
         "options": [
-        "Best already explored alternatives for both players",
-        "Random values",
-        "Node depths",
-        "Number of moves"
+            "Alpha: best max value, Beta: best min value",
+            "Alpha: random number, Beta: score",
+            "Alpha: min value, Beta: max value",
+            "Alpha: branch factor, Beta: depth"
         ],
         "correctAnswer": 0,
-        "explanation": "Alpha represents the best value for the maximizing player, Beta for the minimizing player."
+        "explanation": "Alpha is the best value the maximizer can guarantee; beta is the best value the minimizer can guarantee."
     },
     {
-        "id": 141,
+        "id": 114,
         "topic": "Other Topics",
         "algorithm": "Game Search: Alpha-Beta Pruning",
         "difficulty": "Medium",
-        "question": "How does move ordering affect Alpha-Beta efficiency?",
+        "question": "What is the best-case time complexity of Alpha-Beta pruning?",
         "options": [
-        "Good move ordering increases pruning opportunities",
-        "Move order doesn't matter",
-        "Random ordering is best",
-        "Worst moves should be first"
+            "O(b^d)",
+            "O(b^(d/2))",
+            "O(d^b)",
+            "O(b + d)"
         ],
-        "correctAnswer": 0,
-        "explanation": "Examining better moves first increases the likelihood of pruning subsequent branches."
+        "correctAnswer": 1,
+        "explanation": "With perfect move ordering, Alpha-Beta reduces nodes to O(b^(d/2)), roughly doubling depth capability."
     },
     {
-        "id": 142,
+        "id": 115,
         "topic": "Other Topics",
         "algorithm": "Game Search: Alpha-Beta Pruning",
         "difficulty": "Medium",
-        "question": "What is a null window search in Alpha-Beta?",
+        "question": "Which factor affects the efficiency of Alpha-Beta pruning the most?",
         "options": [
-        "A search with Alpha and Beta values very close together",
-        "A search with no pruning",
-        "A random search",
-        "A complete tree search"
+            "Move ordering",
+            "Branching factor",
+            "Board size",
+            "Number of leaf nodes"
         ],
         "correctAnswer": 0,
-        "explanation": "Null window searches are used to efficiently determine if a position is above or below a specific value."
+        "explanation": "Good move ordering maximizes pruning and significantly reduces nodes evaluated."
     },
     {
-        "id": 143,
+        "id": 116,
         "topic": "Other Topics",
         "algorithm": "Game Search: Alpha-Beta Pruning",
         "difficulty": "Hard",
-        "question": "What is the best-case time complexity of Alpha-Beta?",
+        "question": "Alpha-Beta pruning can prune a node if:",
         "options": [
-        "O(b\u1d48/\u00b2) where b is branching factor and d is depth",
-        "O(b\u1d48)",
-        "O(n)",
-        "O(log n)"
+            "Alpha >= Beta",
+            "Alpha < Beta",
+            "Node is a leaf",
+            "Node has no children"
         ],
         "correctAnswer": 0,
-        "explanation": "With perfect move ordering, Alpha-Beta can reduce the effective branching factor by roughly its square root."
+        "explanation": "Pruning occurs when the best option for maximizer exceeds the minimizer's guaranteed value, i.e., alpha >= beta."
     },
     {
-        "id": 144,
-        "topic": "Other Topics",
-        "algorithm": "Game Search: Alpha-Beta Pruning",
-        "difficulty": "Hard",
-        "question": "How can iterative deepening improve Alpha-Beta pruning?",
-        "options": [
-        "By providing move ordering information for deeper searches",
-        "By reducing search depth",
-        "By increasing branching factor",
-        "By randomizing search"
-        ],
-        "correctAnswer": 0,
-        "explanation": "Results from shallower searches can guide move ordering in deeper searches, improving pruning efficiency."
-    },
-    {
-        "id": 145,
-        "topic": "Other Topics",
-        "algorithm": "Game Search: Expectimax",
-        "difficulty": "Easy",
-        "question": "What type of games is Expectimax designed for?",
-        "options": [
-        "Games with chance elements or uncertainty",
-        "Perfect information games",
-        "Two-player games only",
-        "Single-player games"
-        ],
-        "correctAnswer": 0,
-        "explanation": "Expectimax handles games where some outcomes are determined by chance or probability."
-    },
-    {
-        "id": 146,
+        "id": 117,
         "topic": "Other Topics",
         "algorithm": "Game Search: Expectimax",
         "difficulty": "Easy",
         "question": "How does Expectimax differ from Minimax?",
         "options": [
-        "It uses probability-weighted averages instead of minimizing",
-        "It searches deeper",
-        "It uses no heuristics",
-        "It's always faster"
+            "It accounts for probabilistic outcomes",
+            "It ignores opponent",
+            "It only maximizes",
+            "It randomly selects moves"
         ],
         "correctAnswer": 0,
-        "explanation": "Expectimax accounts for chance events by calculating expected values rather than assuming optimal opponent play."
+        "explanation": "Expectimax handles stochastic games by using expected utility for chance nodes."
+    },
+    {
+        "id": 118,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Expectimax",
+        "difficulty": "Medium",
+        "question": "What do chance nodes represent in Expectimax?",
+        "options": [
+            "Random events with probabilities",
+            "Maximizer moves",
+            "Minimizer moves",
+            "Terminal states"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Chance nodes model randomness, and their values are weighted averages of children."
+    },
+    {
+        "id": 119,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Expectimax",
+        "difficulty": "Medium",
+        "question": "What is the main drawback of Expectimax compared to Minimax?",
+        "options": [
+            "Higher computation due to probabilistic nodes",
+            "Does not find optimal moves",
+            "Only works for deterministic games",
+            "Cannot handle trees"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Including chance nodes increases the number of evaluations, making Expectimax more expensive."
+    },
+    {
+        "id": 120,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Monte Carlo Tree Search",
+        "difficulty": "Easy",
+        "question": "What is the main idea behind Monte Carlo Tree Search (MCTS)?",
+        "options": [
+            "Use random simulations to evaluate moves",
+            "Prune branches like Alpha-Beta",
+            "Compute exact values for all nodes",
+            "Sort moves by heuristics only"
+        ],
+        "correctAnswer": 0,
+        "explanation": "MCTS uses random playouts to estimate the value of moves, improving decision-making without full search."
+    },
+    {
+        "id": 121,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Monte Carlo Tree Search",
+        "difficulty": "Medium",
+        "question": "Which phases are part of MCTS?",
+        "options": [
+            "Selection, Expansion, Simulation, Backpropagation",
+            "Minimize, Maximize",
+            "Random selection only",
+            "Prune and sort"
+        ],
+        "correctAnswer": 0,
+        "explanation": "MCTS follows four phases to select moves, simulate games, and update tree values."
+    },
+    {
+        "id": 122,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Monte Carlo Tree Search",
+        "difficulty": "Medium",
+        "question": "What is the UCT formula used for in MCTS?",
+        "options": [
+            "Balance exploration and exploitation",
+            "Sort moves alphabetically",
+            "Compute exact probabilities",
+            "Prune bad moves"
+        ],
+        "correctAnswer": 0,
+        "explanation": "UCT guides selection in the tree to explore uncertain nodes while exploiting promising moves."
+    },
+    {
+        "id": 123,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Monte Carlo Tree Search",
+        "difficulty": "Hard",
+        "question": "What is a major limitation of MCTS?",
+        "options": [
+            "May require many simulations for accurate estimates",
+            "Cannot handle randomness",
+            "Does not evaluate moves",
+            "Only works for two-player games"
+        ],
+        "correctAnswer": 0,
+        "explanation": "MCTS accuracy depends on the number of simulations; fewer simulations can lead to poor move choices."
+    },
+    {
+        "id": 124,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Monte Carlo Tree Search",
+        "difficulty": "Hard",
+        "question": "Which game famously uses MCTS for AI decisions?",
+        "options": [
+            "Go",
+            "Tic-Tac-Toe",
+            "Connect Four",
+            "Chess only"
+        ],
+        "correctAnswer": 0,
+        "explanation": "MCTS was instrumental in AlphaGo's success by efficiently handling a huge search space in Go."
+    },
+    {
+        "id": 125,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Minimax",
+        "difficulty": "Hard",
+        "question": "How can Minimax be optimized without pruning?",
+        "options": [
+            "Use depth-limited search",
+            "Evaluate all nodes",
+            "Randomize move order",
+            "Ignore terminal states"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Depth-limited search evaluates only up to a certain depth, reducing computation."
+    },
+    {
+        "id": 126,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Minimax",
+        "difficulty": "Hard",
+        "question": "In Minimax, what is the role of an evaluation function?",
+        "options": [
+            "Estimate utility at non-terminal nodes",
+            "Sort moves alphabetically",
+            "Select random moves",
+            "Ignore game state"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Evaluation functions approximate the value of a board when terminal states are too far to compute."
+    },
+    {
+        "id": 127,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Alpha-Beta Pruning",
+        "difficulty": "Medium",
+        "question": "What happens if move ordering is worst-case in Alpha-Beta?",
+        "options": [
+            "Pruning efficiency is reduced",
+            "Algorithm fails",
+            "Tree becomes smaller",
+            "Explores only half nodes"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Poor move ordering reduces pruning effectiveness; in worst-case, it evaluates nearly all nodes."
+    },
+    {
+        "id": 128,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Alpha-Beta Pruning",
+        "difficulty": "Hard",
+        "question": "Which node is pruned first in Alpha-Beta pruning?",
+        "options": [
+            "Node that cannot improve parent value",
+            "Leaf node with max value",
+            "Root node",
+            "Random node"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Nodes whose values cannot affect the outcome of parent nodes are pruned immediately."
+    },
+    {
+        "id": 129,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Expectimax",
+        "difficulty": "Hard",
+        "question": "In Expectimax, how are chance nodes calculated?",
+        "options": [
+            "Weighted average of child utilities",
+            "Max of child values",
+            "Min of child values",
+            "Random selection"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Chance nodes use probability-weighted averages to account for stochastic events."
+    },
+    {
+        "id": 130,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Expectimax",
+        "difficulty": "Medium",
+        "question": "Expectimax is most useful in which type of games?",
+        "options": [
+            "Stochastic games",
+            "Deterministic two-player games",
+            "Single-player puzzle games",
+            "Only board games"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Expectimax handles games with randomness, unlike deterministic Minimax."
+    },
+    {
+        "id": 131,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Monte Carlo Tree Search",
+        "difficulty": "Medium",
+        "question": "During MCTS, what does the backpropagation step do?",
+        "options": [
+            "Updates node values based on simulation",
+            "Expands child nodes",
+            "Selects next node randomly",
+            "Prunes bad moves"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Backpropagation updates the win/loss statistics of all nodes visited during the simulation."
+    },
+    {
+        "id": 132,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Monte Carlo Tree Search",
+        "difficulty": "Hard",
+        "question": "Which parameter affects MCTS exploration vs exploitation?",
+        "options": [
+            "UCT constant",
+            "Branching factor",
+            "Tree depth",
+            "Simulation count"
+        ],
+        "correctAnswer": 0,
+        "explanation": "The UCT constant balances exploring unknown moves and exploiting known good moves."
+    },
+    {
+        "id": 133,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Minimax",
+        "difficulty": "Medium",
+        "question": "Which of the following improves Minimax performance?",
+        "options": [
+            "Alpha-Beta pruning",
+            "Random selection",
+            "Depth increase",
+            "Ignoring terminal nodes"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Alpha-Beta pruning reduces the number of nodes Minimax evaluates."
+    },
+    {
+        "id": 134,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Alpha-Beta Pruning",
+        "difficulty": "Medium",
+        "question": "If alpha equals beta at a node, what does it mean?",
+        "options": [
+            "Further exploration is useless; prune",
+            "Continue searching children",
+            "Randomly select a node",
+            "Restart search"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Alpha >= Beta indicates no better value can be found; pruning is performed."
+    },
+    {
+        "id": 135,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Expectimax",
+        "difficulty": "Hard",
+        "question": "Which situation makes Expectimax more computationally expensive than Minimax?",
+        "options": [
+            "Presence of multiple chance nodes",
+            "Small branching factor",
+            "Shallow tree depth",
+            "Deterministic opponent"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Chance nodes require evaluating expected values, increasing computations."
+    },
+    {
+        "id": 136,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Monte Carlo Tree Search",
+        "difficulty": "Hard",
+        "question": "MCTS simulations help in games with:",
+        "options": [
+            "Huge branching factors and uncertain outcomes",
+            "Small deterministic games only",
+            "Chess only",
+            "No randomness"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Random simulations allow handling large search spaces where full search is infeasible."
+    },
+    {
+        "id": 137,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Minimax",
+        "difficulty": "Easy",
+        "question": "Who moves first in Minimax evaluation?",
+        "options": [
+            "Maximizer",
+            "Minimizer",
+            "Random player",
+            "Chance node"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Evaluation starts from the maximizer’s move, assuming optimal opponent play."
+    },
+    {
+        "id": 138,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Alpha-Beta Pruning",
+        "difficulty": "Easy",
+        "question": "Alpha-Beta pruning is a technique to:",
+        "options": [
+            "Optimize Minimax",
+            "Randomize moves",
+            "Increase tree depth",
+            "Compute exact probabilities"
+        ],
+        "correctAnswer": 0,
+        "explanation": "It reduces unnecessary node evaluations in Minimax without affecting correctness."
+    },
+    {
+        "id": 139,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Expectimax",
+        "difficulty": "Easy",
+        "question": "Expectimax evaluates which type of nodes besides max and min?",
+        "options": [
+            "Chance nodes",
+            "Random nodes",
+            "Terminal nodes only",
+            "Heuristic nodes"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Chance nodes handle randomness using expected values."
+    },
+    {
+        "id": 140,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Monte Carlo Tree Search",
+        "difficulty": "Easy",
+        "question": "Which step in MCTS is responsible for exploring promising nodes?",
+        "options": [
+            "Selection",
+            "Expansion",
+            "Simulation",
+            "Backpropagation"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Selection uses the tree policy to pick nodes that balance exploration and exploitation."
+    },
+    {
+        "id": 141,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Minimax",
+        "difficulty": "Medium",
+        "question": "Minimax with depth limit can cause:",
+        "options": [
+            "Suboptimal decisions due to horizon effect",
+            "Optimal decisions always",
+            "Infinite loops",
+            "Random moves"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Limited depth may miss consequences beyond the horizon, causing poor choices."
+    },
+    {
+        "id": 142,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Alpha-Beta Pruning",
+        "difficulty": "Hard",
+        "question": "Which scenario leads to maximum pruning?",
+        "options": [
+            "Perfect move ordering",
+            "Random ordering",
+            "Single-node tree",
+            "Shallow tree"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Visiting best moves first allows pruning large subtrees, reducing computation."
+    },
+    {
+        "id": 143,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Expectimax",
+        "difficulty": "Medium",
+        "question": "What does the Expectimax algorithm assume about the opponent?",
+        "options": [
+            "Random moves according to probabilities",
+            "Optimal moves like Minimax",
+            "Always loses",
+            "No moves"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Opponent moves are modeled probabilistically in stochastic games."
+    },
+    {
+        "id": 144,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Monte Carlo Tree Search",
+        "difficulty": "Medium",
+        "question": "What is the main advantage of MCTS over Minimax in large games?",
+        "options": [
+            "Handles huge search spaces with limited simulations",
+            "Always finds exact best move",
+            "Ignores chance nodes",
+            "Prunes more efficiently"
+        ],
+        "correctAnswer": 0,
+        "explanation": "MCTS can provide good move estimates without full tree search."
+    },
+    {
+        "id": 145,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Minimax",
+        "difficulty": "Hard",
+        "question": "Which data structure is commonly used to implement Minimax?",
+        "options": [
+            "Tree",
+            "Queue",
+            "Stack only",
+            "Graph"
+        ],
+        "correctAnswer": 0,
+        "explanation": "A tree structure represents game states and moves for Minimax traversal."
+    },
+    {
+        "id": 146,
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Alpha-Beta Pruning",
+        "difficulty": "Hard",
+        "question": "Which node order minimizes the number of evaluations in Alpha-Beta?",
+        "options": [
+            "Nodes with best moves first",
+            "Random order",
+            "Worst moves first",
+            "Leaf nodes only"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Evaluating best moves first maximizes pruning efficiency."
     },
     {
         "id": 147,
         "topic": "Other Topics",
         "algorithm": "Game Search: Expectimax",
         "difficulty": "Medium",
-        "question": "How are chance nodes handled in Expectimax?",
+        "question": "In Expectimax, what is the expected value used for?",
         "options": [
-        "By computing weighted averages of all possible outcomes",
-        "By choosing the highest value",
-        "By choosing the lowest value",
-        "By random selection"
+            "Choosing optimal move under uncertainty",
+            "Pruning nodes",
+            "Randomly selecting moves",
+            "Ignoring chance nodes"
         ],
         "correctAnswer": 0,
-        "explanation": "Chance nodes compute the expected value by weighing each possible outcome by its probability."
+        "explanation": "Expected values allow optimal decisions when outcomes are probabilistic."
     },
     {
         "id": 148,
         "topic": "Other Topics",
-        "algorithm": "Game Search: Expectimax",
-        "difficulty": "Medium",
-        "question": "What is the impact of depth on Expectimax computational cost?",
+        "algorithm": "Game Search: Monte Carlo Tree Search",
+        "difficulty": "Hard",
+        "question": "Which phase of MCTS is responsible for expanding the tree?",
         "options": [
-        "It grows exponentially with both branching factor and chance outcomes",
-        "It's constant",
-        "It grows linearly",
-        "It decreases with depth"
+            "Expansion",
+            "Selection",
+            "Simulation",
+            "Backpropagation"
         ],
         "correctAnswer": 0,
-        "explanation": "Each level of depth multiplies the computation by both the branching factor and number of chance outcomes."
+        "explanation": "Expansion adds new child nodes to the tree for further simulations."
     },
     {
         "id": 149,
         "topic": "Other Topics",
-        "algorithm": "Game Search: Expectimax",
-        "difficulty": "Hard",
-        "question": "Why can't alpha-beta pruning be fully applied to Expectimax?",
+        "algorithm": "Game Search: Minimax",
+        "difficulty": "Medium",
+        "question": "Minimax is guaranteed to find the optimal move if:",
         "options": [
-        "Because chance nodes must consider all outcomes",
-        "Because it's not needed",
-        "Because it makes it slower",
-        "Because it's too complex"
+            "The game is deterministic and fully observable",
+            "Moves are random",
+            "Opponent is weak",
+            "Tree depth is limited"
         ],
         "correctAnswer": 0,
-        "explanation": "Chance nodes must evaluate all possibilities to compute the correct expected value, preventing full pruning."
+        "explanation": "Deterministic games with full information allow Minimax to guarantee optimal moves."
     },
     {
         "id": 150,
         "topic": "Other Topics",
-        "algorithm": "Game Search: Expectimax",
-        "difficulty": "Hard",
-        "question": "How can Expectimax be optimized for practical use?",
+        "algorithm": "Game Search: Alpha-Beta Pruning",
+        "difficulty": "Medium",
+        "question": "What happens if alpha > beta accidentally in Alpha-Beta?",
         "options": [
-        "By pruning extremely unlikely or low-impact outcomes",
-        "By ignoring probabilities",
-        "By reducing depth",
-        "By increasing branching"
+            "Pruning occurs",
+            "Algorithm crashes",
+            "Search restarts",
+            "Nothing happens"
         ],
         "correctAnswer": 0,
-        "explanation": "Practical implementations often ignore outcomes with very low probability or minimal impact on the expected value."
+        "explanation": "Pruning occurs whenever alpha >= beta, even if inequality arises unexpectedly."
     },
     {
         "id": 151,
         "topic": "Other Topics",
-        "algorithm": "Game Search: Monte Carlo Tree Search",
-        "difficulty": "Easy",
-        "question": "What is the basic idea of Monte Carlo Tree Search (MCTS)?",
+        "algorithm": "Game Search: Expectimax",
+        "difficulty": "Hard",
+        "question": "Why is Expectimax not suitable for games with many chance nodes?",
         "options": [
-        "Using random simulations to evaluate positions",
-        "Calculating exact values",
-        "Following fixed strategies",
-        "Ignoring tree structure"
+            "Computationally expensive due to many expected value calculations",
+            "Cannot handle deterministic games",
+            "Always produces wrong moves",
+            "Does not model opponents"
         ],
         "correctAnswer": 0,
-        "explanation": "MCTS uses random playouts to estimate position value through statistical sampling."
+        "explanation": "Multiple chance nodes increase evaluations exponentially, making Expectimax costly."
     },
     {
         "id": 152,
         "topic": "Other Topics",
         "algorithm": "Game Search: Monte Carlo Tree Search",
-        "difficulty": "Easy",
-        "question": "What are the four main steps of MCTS?",
+        "difficulty": "Medium",
+        "question": "Which factor increases MCTS accuracy?",
         "options": [
-        "Selection, Expansion, Simulation, Backpropagation",
-        "Search, Evaluate, Update, Repeat",
-        "Choose, Play, Win, Lose",
-        "Start, Middle, End, Reset"
+            "Number of simulations",
+            "Branching factor",
+            "Tree depth",
+            "Alpha value"
         ],
         "correctAnswer": 0,
-        "explanation": "These four steps form the core MCTS algorithm cycle, balancing exploration and exploitation."
+        "explanation": "More simulations provide better statistical estimates for move evaluation."
     },
     {
         "id": 153,
         "topic": "Other Topics",
         "algorithm": "Game Search: Monte Carlo Tree Search",
-        "difficulty": "Medium",
-        "question": "What is the role of UCT in MCTS?",
+        "difficulty": "Hard",
+        "question": "Which of the following is a limitation of MCTS?",
         "options": [
-        "Balancing exploration and exploitation",
-        "Speeding up simulations",
-        "Reducing memory usage",
-        "Simplifying the tree"
+            "Slow convergence in very large games",
+            "Cannot handle randomness",
+            "Fails in deterministic games",
+            "Requires depth limit"
         ],
         "correctAnswer": 0,
-        "explanation": "Upper Confidence bounds for Trees (UCT) helps balance between exploring new nodes and exploiting known good moves."
+        "explanation": "MCTS can take many simulations to converge in huge search spaces."
     },
     {
         "id": 154,
         "topic": "Other Topics",
-        "algorithm": "Game Search: Monte Carlo Tree Search",
-        "difficulty": "Medium",
-        "question": "How does MCTS handle large branching factors?",
+        "algorithm": "Game Search: Minimax",
+        "difficulty": "Easy",
+        "question": "Minimax is used in AI for which type of games?",
         "options": [
-        "By gradually building the tree through sampling",
-        "By exploring all branches",
-        "By ignoring some moves",
-        "By random selection"
+            "Two-player zero-sum games",
+            "Single-player puzzles",
+            "Multi-player games",
+            "Random simulations"
         ],
         "correctAnswer": 0,
-        "explanation": "MCTS manages large branching factors by focusing resources on promising branches identified through sampling."
+        "explanation": "Minimax is designed for competitive, two-player zero-sum games."
     },
     {
         "id": 155,
-        "topic": "GOther Topics",
-        "algorithm": "Game Search: Monte Carlo Tree Search",
-        "difficulty": "Hard",
-        "question": "What determines the quality of MCTS playouts?",
+        "topic": "Other Topics",
+        "algorithm": "Game Search: Alpha-Beta Pruning",
+        "difficulty": "Easy",
+        "question": "Alpha-Beta pruning reduces computation by:",
         "options": [
-        "The balance between speed and simulation accuracy",
-        "The number of nodes",
-        "The tree depth",
-        "The branching factor"
+            "Eliminating unnecessary branches",
+            "Adding more nodes",
+            "Increasing depth",
+            "Random moves"
         ],
         "correctAnswer": 0,
-        "explanation": "Good playouts must balance quick execution with reasonable approximation of actual game play."
+        "explanation": "Pruning avoids evaluating nodes that cannot affect the final decision."
     },
     {
         "id": 156,
         "topic": "Other Topics",
-        "algorithm": "Game Search: Monte Carlo Tree Search",
-        "difficulty": "Hard",
-        "question": "How can MCTS be parallelized effectively?",
+        "algorithm": "Game Search: Expectimax",
+        "difficulty": "Medium",
+        "question": "Which type of games requires Expectimax instead of Minimax?",
         "options": [
-        "By running multiple independent trees or parallel playouts",
-        "It cannot be parallelized",
-        "By splitting the game board",
-        "By reducing search depth"
+            "Games with randomness",
+            "Deterministic board games",
+            "Single-player puzzles",
+            "Games with only one move"
         ],
         "correctAnswer": 0,
-        "explanation": "MCTS can be parallelized through root parallelization, tree parallelization, or leaf parallelization."
-    },    
+        "explanation": "Expectimax accounts for probabilistic outcomes, unlike deterministic Minimax."
+    },
+
+ 
+   
     {
         "id": 157,
         "topic": "Paradigms",
@@ -5173,93 +5178,93 @@
     {
         "id": 331,
         "topic": "Other Topics",
-        "algorithm": "A* Algorithm",
-        "difficulty": "Easy",
-        "question": "What is the main goal of the A* algorithm?",
-        "options": [
-            "Find the shortest path between two nodes",
-            "Sort a list of elements",
-            "Detect a cycle in a graph",
-            "Compress data efficiently"
-        ],
-        "correctAnswer": 0,
-        "explanation": "A* is used to find the shortest path between two points using cost and heuristic functions."
-    },
+    "algorithm": "Branch & Bound",
+    "difficulty": "Easy",
+    "question": "Which of the following is a key advantage of Branch & Bound over brute force?",
+    "options": [
+        "It guarantees sorting in linear time",
+        "It reduces the number of candidate solutions to examine",
+        "It always finds the exact solution without computation",
+        "It converts problems into trees automatically"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Branch & Bound prunes branches that cannot lead to optimal solutions, reducing the search space compared to brute force."
+},
     {
         "id": 332,
-        "topic": "Other Topics",
-        "algorithm": "A* Algorithm",
-        "difficulty": "Easy",
-        "question": "Which function guides A* towards the goal?",
-        "options": [
-            "Heuristic function (h)",
-            "Stack function",
-            "Compression ratio",
-            "Hash function"
-        ],
-        "correctAnswer": 0,
-        "explanation": "The heuristic function estimates the cost from the current node to the goal."
-    },
+         "topic": "Other Topics",
+    "algorithm": "Branch & Bound",
+    "difficulty": "Easy",
+    "question": "In Branch & Bound, what is the purpose of a 'bound' function?",
+    "options": [
+        "To count the total number of nodes in the tree",
+        "To estimate the best possible solution in a subtree",
+        "To sort candidate solutions by size",
+        "To generate random solutions quickly"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The bound function provides an estimate of the best achievable solution in a subtree, allowing the algorithm to prune unpromising branches."
+},
     {
         "id": 333,
         "topic": "Other Topics",
-        "algorithm": "A* Algorithm",
-        "difficulty": "Medium",
-        "question": "What is the evaluation function used by A*?",
-        "options": [
-            "f(n) = g(n) + h(n)",
-            "f(n) = g(n) - h(n)",
-            "f(n) = g(n) * h(n)",
-            "f(n) = g(n) / h(n)"
-        ],
-        "correctAnswer": 0,
-        "explanation": "A* uses f(n) = g(n) + h(n) where g(n) is path cost so far and h(n) is the heuristic estimate."
-    },
+    "algorithm": "Branch & Bound",
+    "difficulty": "Easy",
+    "question": "Which problem-solving approach is Branch & Bound most similar to?",
+    "options": [
+        "Greedy algorithm",
+        "Backtracking",
+        "Dynamic programming",
+        "Divide and conquer"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Branch & Bound explores solution space systematically like backtracking, but uses bounds to prune suboptimal branches."
+},
     {
         "id": 334,
         "topic": "Other Topics",
-        "algorithm": "A* Algorithm",
-        "difficulty": "Medium",
-        "question": "A* guarantees the shortest path if:",
-        "options": [
-            "The heuristic is admissible",
-            "The heuristic is random",
-            "The path has cycles",
-            "The graph is unweighted"
-        ],
-        "correctAnswer": 0,
-        "explanation": "An admissible heuristic never overestimates the true cost, ensuring optimality."
-    },
+    "algorithm": "Game Search",
+    "difficulty": "Medium",
+    "question": "In game tree search, what is the main purpose of a heuristic evaluation function?",
+    "options": [
+        "To estimate the value of non-terminal positions",
+        "To find the exact optimal move",
+        "To count the number of possible moves",
+        "To generate random moves"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Heuristic evaluation functions estimate the desirability of non-terminal positions when the full search to terminal nodes is impractical."
+},
     {
         "id": 335,
         "topic": "Other Topics",
-        "algorithm": "A* Algorithm",
-        "difficulty": "Hard",
-        "question": "Which data structure is typically used to select the next node in A*?",
-        "options": [
-            "Priority Queue (Min-Heap)",
-            "Stack",
-            "Linked List",
-            "Hash Table"
-        ],
-        "correctAnswer": 0,
-        "explanation": "A* uses a priority queue to always expand the node with the lowest f(n) value."
-    },
+    "algorithm": "Game Search",
+    "difficulty": "Hard",
+    "question": "In Monte Carlo Tree Search (MCTS), what is the primary challenge when the branching factor is extremely high?",
+    "options": [
+        "Balancing exploration and exploitation efficiently",
+        "Evaluating terminal nodes directly",
+        "Sorting the moves alphabetically",
+        "Avoiding hash collisions"
+    ],
+    "correctAnswer": 0,
+    "explanation": "When the branching factor is very high, MCTS must carefully balance exploration of new nodes and exploitation of promising moves to ensure meaningful search within limited simulations."
+},
     {
         "id": 336,
-        "topic": "Other Topics",
-        "algorithm": "A* Algorithm",
-        "difficulty": "Hard",
-        "question": "When does A* perform like Dijkstra’s algorithm?",
-        "options": [
-            "When the heuristic h(n) = 0",
-            "When h(n) > actual cost",
-            "When graph is cyclic",
-            "When g(n) is constant"
-        ],
-        "correctAnswer": 0,
-        "explanation": "If the heuristic is zero, A* becomes equivalent to Dijkstra’s algorithm."
-    },
+         "topic": "Other Topics",
+    "algorithm": "Game Search",
+    "difficulty": "Hard",
+    "question": "In adversarial games with imperfect information, which strategy helps handle uncertainty in game search algorithms?",
+    "options": [
+        "Using Expectimax with chance nodes",
+        "Applying standard Minimax only",
+        "Ignoring opponent moves",
+        "Using hash tables for memoization"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Expectimax incorporates chance nodes to account for uncertainty and probabilistic outcomes, making it suitable for games with imperfect information."
+},
     {
         "id": 337,
         "topic": "Other Topics",
