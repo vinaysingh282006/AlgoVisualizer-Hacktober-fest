@@ -96,6 +96,8 @@ import GraphComparison from "./components/GraphComparison";
 import Contributors from "./components/Contributors";
 import Contribute from "./components/Contribute";
 import Cheatsheet from "./components/Cheatsheet";
+import AlgorithmComparisonTable from './components/AlgorithmComparisonTable';
+
 
 // Static / Info Pages
 import Login from "./pages/Login";
@@ -309,6 +311,9 @@ const App = () => {
                       element={<ContributorLeaderboard />}
                     />
                     <Route path="/editor" element={<CodeEditor />} />
+
+                    {/* Add Algorithm Comparison Table Route */}
+<Route path="/algorithm-comparison-table" element={<AlgorithmComparisonTable />} />
 
                     {/* Notes Routes */}
                     <Route
