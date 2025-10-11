@@ -499,7 +499,7 @@ const Contribute = () => {
         viewport={{ once: true }}
       >
         <div className="section-content">
-          <h2 className="section-title" data-aos="fade-up">What is AlgoVisualizer?</h2>
+          <h2 className="section-title" data-aos="fade-up" style={{padding:"20px",size:"90px"}}>What is AlgoVisualizer?</h2>
           <div className="feature-grid">
             <div className="feature-card" data-aos="fade-up" data-aos-delay="100">
               <div className="feature-icon"><MousePointer2 size={32} /></div>

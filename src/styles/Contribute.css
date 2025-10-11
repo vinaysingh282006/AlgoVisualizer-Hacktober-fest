@@ -79,6 +79,7 @@
   margin: 0 auto 4rem auto;
   padding: 2rem 0;
   text-align: center;
+  margin: 3rem;
   background: linear-gradient(135deg, var(--accent-primary), #ec4899, var(--info));
   -webkit-background-clip: text;
   background-clip: text;
@@ -231,19 +232,22 @@
 
 .feature-card:hover::before {
   opacity: 1;
+  background: linear-gradient(130deg,transparent, rgba(99, 102, 241, 0.5), transparent);
 }
 
 .feature-card:hover {
-  transform: translateY(-10px) scale(1.03);
-  border-color: var(--accent-primary);
-  box-shadow: 0 30px 62px rgba(99,102,241,0.16);
-  background: linear-gradient(120deg, var(--accent-primary) 6%, var(--card-bg) 80%);
+  transform: translateY(-10px) scale(1.02);
+  border-color: var(--primary-color);
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+  background: linear-gradient(130deg,transparent, rgba(99, 102, 241, 0.5), transparent);
 }
 
 .feature-icon {
   font-size: 3.2rem;
   margin-bottom: 1.8rem;
   display: block;
+  display: flex;
+  justify-content: center;
 }
 
 .feature-card h3 {
@@ -762,8 +766,8 @@
 
 @media (max-width: 1024px) {
   .section-title {
-    font-size: 2.7rem;
-    padding: 1.3rem 0;
+   
+    font-size: 2.5rem;
   }
 
   .hero-title {
@@ -800,6 +804,12 @@
   .hero-title {
     font-size: 2.5rem;
     padding: 0.7rem 0;
+    font-size: 2.8rem;
+  }
+  
+  .section-title {
+
+    font-size: 2rem;
   }
 
   .hero-subtitle {
@@ -873,8 +883,7 @@
   }
 
   .section-title {
-    font-size: 1.3rem;
-    padding: 0.55rem 0;
+    font-size: 1.8rem;
   }
 
   .feature-card,

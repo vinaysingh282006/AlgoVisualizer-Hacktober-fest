@@ -31,6 +31,7 @@
     "react-graph-vis": "^1.0.7",
     "react-icons": "^5.5.0",
     "react-is": "^19.1.1",
+    "react-oauth": "^0.0.1",
     "react-responsive": "^10.0.1",
     "react-router-dom": "^6.30.1",
     "react-scripts": "^0.0.0",
