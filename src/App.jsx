@@ -42,7 +42,7 @@ import BellmanFordPage from "./pages/GraphBellmanFord.jsx";
 import Fundamentals from "./pages/Notes/Java/Fundamentals";
 import VariablesAndDataTypes from "./pages/Notes/Java/VariablesAndDataTypes";
 import JavaBasics from "./pages/Notes/Java/JavaBasics";
-
+import MERNFundamentals from "./pages/Notes/MERN/MERNFundamentals";
 // Python Notes
 import PythonFundamentals from "./pages/Notes/Python/Fundamentals";
 import PythonVariablesAndDataTypes from "./pages/Notes/Python/VariablesAndDataTypes";
@@ -167,7 +167,10 @@ const App = () => {
 
                     {/* Sorting */}
                     <Route path="/sorting" element={<Sorting />} />
-                    <Route path="/sorting/:algoId/docs" element={<SortingDoc />} />
+                    <Route
+                      path="/sorting/:algoId/docs"
+                      element={<SortingDoc />}
+                    />
                     <Route
                       path="/sorting/algorithm-comparison"
                       element={<AlgorithmComparison />}
@@ -186,7 +189,10 @@ const App = () => {
                     />
 
                     {/* Data Structures */}
-                    <Route path="/data-structures" element={<DataStructures />} />
+                    <Route
+                      path="/data-structures"
+                      element={<DataStructures />}
+                    />
                     <Route
                       path="/data-structures/linked-list"
                       element={<LinkedListPage />}
@@ -208,7 +214,10 @@ const App = () => {
                     <Route path="/graph/dfs" element={<GraphDFS />} />
                     <Route path="/graph/dijkstra" element={<GraphDijkstra />} />
                     <Route path="/graph/astar" element={<GraphAStar />} />
-                    <Route path="/graph/comparison" element={<GraphComparison />} />
+                    <Route
+                      path="/graph/comparison"
+                      element={<GraphComparison />}
+                    />
                     <Route
                       path="/graph/cycleDetection"
                       element={<GraphCycleDetection />}
@@ -218,6 +227,7 @@ const App = () => {
                       path="/graph/bellman-ford"
                       element={<BellmanFordPage />}
                     />
+
 
                   {/* Algorithm Pages */}
 
@@ -331,29 +341,65 @@ const App = () => {
                     <Route path="/graph/comparison" element={<GraphComparison />} />
                     <Route path="/backtracking-overview" element={<BacktrackingOverview />} />
                     <Route path="/backtracking" element={<BacktrackingPage />} />
+
+                    {/* Algorithm Pages */}
+                    <Route
+                      path="/graph/comparison"
+                      element={<GraphComparison />}
+                    />
+                    <Route
+                      path="/backtracking-overview"
+                      element={<BacktrackingOverview />}
+                    />
+                    <Route
+                      path="/backtracking"
+                      element={<BacktrackingPage />}
+                    />
+
                     <Route path="/dp-overview" element={<DPOverview />} />
                     <Route path="/dp" element={<DPPage />} />
-                    <Route path="/hashing-overview" element={<HashingOverview />} />
+                    <Route
+                      path="/hashing-overview"
+                      element={<HashingOverview />}
+                    />
                     <Route path="/hashing" element={<HashingPage />} />
-                    <Route path="/greedy-overview" element={<GreedyOverview />} />
+                    <Route
+                      path="/greedy-overview"
+                      element={<GreedyOverview />}
+                    />
                     <Route path="/greedy" element={<GreedyPage />} />
                     <Route path="/tree-overview" element={<TreeOverview />} />
                     <Route path="/tree" element={<TreePage />} />
                     <Route path="/dc-overview" element={<DCOverview />} />
                     <Route path="/dc" element={<DCPage />} />
-                    <Route path="/game-search-overview" element={<GameSearchOverview />} />
+                    <Route
+                      path="/game-search-overview"
+                      element={<GameSearchOverview />}
+                    />
                     <Route path="/game-search" element={<GameSearchPage />} />
-                    <Route path="/branchbound-overview" element={<BranchBoundOverview />} />
+                    <Route
+                      path="/branchbound-overview"
+                      element={<BranchBoundOverview />}
+                    />
                     <Route path="/branchbound" element={<BranchBoundPage />} />
-                    <Route path="/string-overview" element={<StringOverview />} />
+                    <Route
+                      path="/string-overview"
+                      element={<StringOverview />}
+                    />
                     <Route path="/string" element={<StringPage />} />
-                    <Route path="/string/rabin-karp" element={<StringRabinKarpPage />} />
+                    <Route
+                      path="/string/rabin-karp"
+                      element={<StringRabinKarpPage />}
+                    />
                     <Route path="/prims" element={<PrimPage />} />
                     <Route path="/kruskal" element={<KruskalPage />} />
                     <Route path="/huffman" element={<HuffmanPage />} />
 
                     {/* Data Structures Documentation */}
-                    <Route path="/data-structures-docs" element={<DSDocumentation />} />
+                    <Route
+                      path="/data-structures-docs"
+                      element={<DSDocumentation />}
+                    />
 
                     {/* Other Pages */}
                     <Route path="/quiz" element={<Quiz />} />
@@ -367,51 +413,138 @@ const App = () => {
                     <Route path="/privacy" element={<PrivacyPolicy />} />
                     <Route path="/cookies" element={<CookiePolicy />} />
                     <Route path="/cheatsheet" element={<Cheatsheet />} />
-                    <Route path="/documentation" element={<AlgorithmDocumentation />} />
+                    <Route
+                      path="/documentation"
+                      element={<AlgorithmDocumentation />}
+                    />
                     <Route path="/faq" element={<FAQ />} />
-                    <Route path="/contributor-leaderboard" element={<ContributorLeaderboard />} />
+                    <Route
+                      path="/contributor-leaderboard"
+                      element={<ContributorLeaderboard />}
+                    />
                     <Route path="/editor" element={<CodeEditor />} />
 
                     {/* Notes Routes */}
-                    <Route path="/notes/java" element={<Navigate to="/notes/java/fundamentals" replace />} />
-                    <Route path="/notes/java/fundamentals" element={<Fundamentals />} />
-                    <Route path="/notes/java/variables-and-data-types" element={<VariablesAndDataTypes />} />
+                    <Route
+                      path="/notes/java"
+                      element={
+                        <Navigate to="/notes/java/fundamentals" replace />
+                      }
+                    />
+                    <Route
+                      path="/notes/java/fundamentals"
+                      element={<Fundamentals />}
+                    />
+                    <Route
+                      path="/notes/java/variables-and-data-types"
+                      element={<VariablesAndDataTypes />}
+                    />
                     <Route path="/notes/java/basics" element={<JavaBasics />} />
+                    <Route
+                      path="/notes/MERN/MERNFundamentals"
+                      element={<MERNFundamentals />}
+                    />
+                    <Route
+                      path="/notes/python"
+                      element={
+                        <Navigate to="/notes/python/fundamentals" replace />
+                      }
+                    />
+                    <Route
+                      path="/notes/python/fundamentals"
+                      element={<PythonFundamentals />}
+                    />
+                    <Route
+                      path="/notes/python/variables-and-data-types"
+                      element={<PythonVariablesAndDataTypes />}
+                    />
 
-                    <Route path="/notes/python" element={<Navigate to="/notes/python/fundamentals" replace />} />
-                    <Route path="/notes/python/fundamentals" element={<PythonFundamentals />} />
-                    <Route path="/notes/python/variables-and-data-types" element={<PythonVariablesAndDataTypes />} />
+                    <Route
+                      path="/notes/cpp"
+                      element={
+                        <Navigate to="/notes/cpp/fundamentals" replace />
+                      }
+                    />
+                    <Route
+                      path="/notes/cpp/fundamentals"
+                      element={<CppFundamentals />}
+                    />
+                    <Route
+                      path="/notes/cpp/variables-and-data-types"
+                      element={<CppVariablesAndDataTypes />}
+                    />
 
-                    <Route path="/notes/cpp" element={<Navigate to="/notes/cpp/fundamentals" replace />} />
-                    <Route path="/notes/cpp/fundamentals" element={<CppFundamentals />} />
-                    <Route path="/notes/cpp/variables-and-data-types" element={<CppVariablesAndDataTypes />} />
+                    <Route
+                      path="/notes/javascript"
+                      element={
+                        <Navigate to="/notes/javascript/fundamentals" replace />
+                      }
+                    />
+                    <Route
+                      path="/notes/javascript/fundamentals"
+                      element={<JavaScriptFundamentals />}
+                    />
+                    <Route
+                      path="/notes/javascript/variables-and-data-types"
+                      element={<JavaScriptVariablesAndDataTypes />}
+                    />
 
-                    <Route path="/notes/javascript" element={<Navigate to="/notes/javascript/fundamentals" replace />} />
-                    <Route path="/notes/javascript/fundamentals" element={<JavaScriptFundamentals />} />
-                    <Route path="/notes/javascript/variables-and-data-types" element={<JavaScriptVariablesAndDataTypes />} />
-
-                    <Route path="/notes/c" element={<Navigate to="/notes/c/fundamentals" replace />} />
-                    <Route path="/notes/c/fundamentals" element={<CFundamentals />} />
+                    <Route
+                      path="/notes/c"
+                      element={<Navigate to="/notes/c/fundamentals" replace />}
+                    />
+                    <Route
+                      path="/notes/c/fundamentals"
+                      element={<CFundamentals />}
+                    />
 
                     <Route path="/java-oops" element={<JavaOOPS />} />
 
                     {/* Dynamic Notes Routes */}
-                    <Route path="/notes/:language/:topic" element={<NotesPage />} />
-                    <Route path="/notes/:language" element={<Navigate to="/notes/:language/fundamentals" replace />} />
+                    <Route
+                      path="/notes/:language/:topic"
+                      element={<NotesPage />}
+                    />
+                    <Route
+                      path="/notes/:language"
+                      element={
+                        <Navigate to="/notes/:language/fundamentals" replace />
+                      }
+                    />
 
-                    <Route path="/contributor-board" element={<ContributorBoard />} />
-                    <Route path="/contributor/:id" element={<ContributorProfileModal />} />
+                    <Route
+                      path="/contributor-board"
+                      element={<ContributorBoard />}
+                    />
+                    <Route
+                      path="/contributor/:id"
+                      element={<ContributorProfileModal />}
+                    />
 
                     <Route path="/playground" element={<Playground />} />
 
                     <Route path="/learn/git" element={<GitLearning />} />
-                    <Route path="/learn/git-basics-quiz" element={<GitBasicsQuiz />} />
+                    <Route
+                      path="/learn/git-basics-quiz"
+                      element={<GitBasicsQuiz />}
+                    />
 
                     {/* Learning & Settings */}
                     <Route path="/learn" element={<LearnLanding />} />
-                    <Route path="/progress" element={<ProgressTracker topics={["Sorting", "Graphs", "DP"]} />} />
-                    <Route path="/leaderboard" element={<LearnerLeaderboard />} />
-                    <Route path="/weekly-challenge" element={<WeeklyChallenge />} />
+                    <Route
+                      path="/progress"
+                      element={
+                        <ProgressTracker topics={["Sorting", "Graphs", "DP"]} />
+                      }
+                    />
+                    <Route
+                      path="/leaderboard"
+                      element={<LearnerLeaderboard />}
+                    />
+                    <Route
+                      path="/weekly-challenge"
+                      element={<WeeklyChallenge />}
+                    />
                     <Route path="/settings" element={<Settings />} />
                   </Routes>
 
