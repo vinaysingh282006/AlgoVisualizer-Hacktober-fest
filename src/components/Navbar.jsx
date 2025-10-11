@@ -240,6 +240,15 @@ const Navbar = () => {
             />
           ))}
 
+          {/* Algorithm Comparison Table Link */}
+          <Link
+            to="/algorithm-comparison-table"
+            className={`navbar-link ${isActive("/algorithm-comparison-table") ? "active" : ""}`}
+          >
+            <BarChart3 size={18} className="icon" />
+            <span>Compare</span>
+          </Link>
+
           <div className="flex items-center gap-1">
             {/* Notes desktop */}
             <div className="navbar-item dropdown">
@@ -365,6 +374,16 @@ const Navbar = () => {
             closeMenu={() => setIsMobileMenuOpen(false)}
           />
         ))}
+
+        {/* Algorithm Comparison Table Link - Mobile */}
+        <Link
+          to="/algorithm-comparison-table"
+          className={`mobile-menu-link ${isActive("/algorithm-comparison-table") ? "active" : ""}`}
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          <BarChart3 size={18} className="icon" />
+          <span>Compare Algorithms</span>
+        </Link>
 
         {/* Notes Section */}
         <div className="mobile-dropdown">
