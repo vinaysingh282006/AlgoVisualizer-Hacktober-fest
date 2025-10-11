@@ -338,9 +338,9 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* User Dropdown */}
+            
             <UserDropdown />
-          </div>
+          </div> */}
         </div>
         <ThemeToggle />
         {/* Mobile Hamburger */}

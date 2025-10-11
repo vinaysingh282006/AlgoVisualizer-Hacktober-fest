@@ -68,16 +68,17 @@
 .section-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 3rem 2rem;
   position: relative;
   z-index: 1;
 }
 
 .section-title {
-  font-size: 3rem;
+  
+  font-size: 7rem;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 3rem;
+  margin: 3rem;
   background: linear-gradient(135deg, var(--accent-primary), #ec4899, var(--info));
   -webkit-background-clip: text;
   background-clip: text;
@@ -219,25 +220,29 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.5), transparent);
+  background: linear-gradient(130deg,transparent, rgba(99, 102, 241, 0.5), transparent);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .feature-card:hover::before {
   opacity: 1;
+  background: linear-gradient(130deg,transparent, rgba(99, 102, 241, 0.5), transparent);
 }
 
 .feature-card:hover {
   transform: translateY(-10px) scale(1.02);
   border-color: var(--primary-color);
   box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+  background: linear-gradient(130deg,transparent, rgba(99, 102, 241, 0.5), transparent);
 }
 
 .feature-icon {
   font-size: 3rem;
   margin-bottom: 1.5rem;
   display: block;
+  display: flex;
+  justify-content: center;
 }
 
 .feature-card h3 {
@@ -763,6 +768,7 @@
   }
   
   .section-title {
+   
     font-size: 2.5rem;
   }
   
@@ -794,6 +800,7 @@
   }
   
   .section-title {
+
     font-size: 2rem;
   }
   
@@ -867,6 +874,7 @@
   }
   
   .section-title {
+
     font-size: 1.8rem;
   }
   

@@ -308,26 +308,42 @@ body.dark,
 
 .about-button {
   padding: 14px 36px;
-  background: linear-gradient(90deg, #6ea8fe 0%, #a7c7ff 100%);
-  color: #fff;
+  background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%); /* Vibrant blue gradient */
+  color: #ffffff;
   border-radius: 12px;
   text-decoration: none;
   font-weight: bold;
   font-size: 1.13rem;
   transition: all 0.25s cubic-bezier(.4,2,.6,1);
   display: inline-block;
-  box-shadow: 0 4px 24px rgba(79,140,255,0.13), 0 1.5px 8px rgba(79,140,255,0.10);
+  box-shadow: 0 4px 16px rgba(59,130,246,0.3);
   border: none;
   letter-spacing: 0.5px;
   position: relative;
   overflow: hidden;
 }
 
+/* Hover effect */
 .about-button:hover {
-  background: linear-gradient(90deg, #b3d1ff 0%, #e3eeff 100%);
-  color: #2563eb;
-  transform: translateY(-4px) scale(1.08);
-  box-shadow: 0 8px 32px 0 rgba(79,140,255,0.18), 0 0 0 6px #e3eeff80;
+  background: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%);
+  color: #ffffff;
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 6px 24px rgba(59,130,246,0.4);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .about-button {
+    background: linear-gradient(90deg, #60a5fa 0%, #93c5fd 100%);
+    color: #0f172a; /* near-black text for good contrast */
+    box-shadow: 0 4px 20px rgba(147,197,253,0.2);
+  }
+
+  .about-button:hover {
+    background: linear-gradient(90deg, #93c5fd 0%, #bfdbfe 100%);
+    color: #1e3a8a;
+    box-shadow: 0 8px 28px rgba(147,197,253,0.35);
+  }
 }
 
 /* Responsive Design */

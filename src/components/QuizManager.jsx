@@ -32,7 +32,13 @@ const TOPICS = [
     id: "otherTopics",
     name: "Other Topics",
     description: "Explore specialized areas including Hashing Algorithms, Tree Algorithms, Game Search Algorithms, and Branch & Bound."
-  }
+  },
+  {
+    "id": "graph",
+    "name": "Graph",
+    "description": "Explore graph algorithms including BFS, DFS, Dijkstra, Cycle Detection, Graph Comparisons, and Minimum Spanning Trees."
+}
+
 ];
 
 // Quiz step constants
@@ -125,6 +131,7 @@ const QuizHelpers = {
     'searching': 'Searching',
     'data-structures': 'Data Structures',
     'paradigms': 'Paradigms',
+    "graph": "Graph",
     'otherTopics': 'Other Topics',
     'all': 'all'
   }),
