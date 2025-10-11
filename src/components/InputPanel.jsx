@@ -153,9 +153,9 @@ const InputPanel = ({
           }
           return num;
         });
-        else if (dataType === 'password') {
+        return values;
+      } else if (dataType === 'password') {
         return trimmed; // 🔹 Password treated as string
-  
       } else {
         throw new Error('Invalid format. Please provide valid JSON or use the correct format for your data type.');
       }
