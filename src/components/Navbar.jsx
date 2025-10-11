@@ -240,6 +240,15 @@ const Navbar = () => {
             />
           ))}
 
+          {/* Algorithm Comparison Table Link */}
+          <Link
+            to="/algorithm-comparison-table"
+            className={`navbar-link ${isActive("/algorithm-comparison-table") ? "active" : ""}`}
+          >
+            <BarChart3 size={18} className="icon" />
+            <span>Compare</span>
+          </Link>
+
           <div className="flex items-center gap-1">
             {/* Notes desktop */}
             <div className="navbar-item dropdown">
@@ -304,6 +313,7 @@ const Navbar = () => {
                   >
                     JavaScript
                   </Link>
+                  
                   <Link
                     to="/notes/MERN/MERNFundamentals"
                     className={`dropdown-item ${
@@ -323,14 +333,26 @@ const Navbar = () => {
                     }`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
-                    DSA Sheet
+                    DSA Sheet  by Shradha Khapra      
+                  </Link>
+                   <Link
+                    to="https://codolio.com/question-tracker/sheet/neetcode-150?category=popular"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`dropdown-item ${
+                      isActive("/notes/c") ? "active" : ""
+                    }`}
+                    onClick={() => setDesktopNotesOpen(false)}
+                  >
+                    DSA Sheet by NEETCODE
                   </Link>
                 </div>
               )}
             </div>
 
-            {/* User Dropdown */}
+            {/* 
             <UserDropdown />
+            */}
           </div>
         </div>
         <ThemeToggle />
@@ -375,6 +397,16 @@ const Navbar = () => {
             closeMenu={() => setIsMobileMenuOpen(false)}
           />
         ))}
+
+        {/* Algorithm Comparison Table Link - Mobile */}
+        <Link
+          to="/algorithm-comparison-table"
+          className={`mobile-menu-link ${isActive("/algorithm-comparison-table") ? "active" : ""}`}
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          <BarChart3 size={18} className="icon" />
+          <span>Compare Algorithms</span>
+        </Link>
 
         {/* Notes Section */}
         <div className="mobile-dropdown">

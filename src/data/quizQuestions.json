@@ -836,7 +836,7 @@
             "O(n log n)",
             "O(n\u00b2)"
         ],
-        "correctAnswer": 1,
+        "correctAnswer": 0,
         "explanation": "In the best case, Binary Search can often achieve O(1), especially when data is already partially structured."
     },
     {
@@ -6161,6 +6161,458 @@
     "explanation": "When multiple edges have equal weights, Prim’s Algorithm may choose any of them, potentially resulting in different but equally valid minimum spanning trees since MSTs are not necessarily unique in such graphs."
 }
 
+,
+    {
+        "id": 397,
+        "topic": "Graph",
+        "algorithm": "BFS",
+        "difficulty": "Easy",
+        "question": "What does BFS stand for in graph algorithms?",
+        "options": [
+            "Breadth-First Search",
+            "Binary First Search",
+            "Best-Fit Search",
+            "Backtracking Forward Search"
+        ],
+        "correctAnswer": 0,
+        "explanation": "BFS stands for Breadth-First Search, which explores nodes level by level."
+    },
+    {
+        "id": 398,
+        "topic": "Graph",
+        "algorithm": "BFS",
+        "difficulty": "Easy",
+        "question": "Which data structure is commonly used to implement BFS?",
+        "options": [
+            "Queue",
+            "Stack",
+            "Heap",
+            "Disjoint Set"
+        ],
+        "correctAnswer": 0,
+        "explanation": "BFS uses a queue to explore nodes in level order."
+    },
+    {
+        "id": 399,
+        "topic": "Graph",
+        "algorithm": "DFS",
+        "difficulty": "Easy",
+        "question": "Which data structure is commonly used to implement DFS?",
+        "options": [
+            "Stack",
+            "Queue",
+            "Heap",
+            "Priority Queue"
+        ],
+        "correctAnswer": 0,
+        "explanation": "DFS uses a stack (explicit or via recursion) to explore nodes deeply before backtracking."
+    },
+    {
+        "id": 400,
+        "topic": "Graph",
+        "algorithm": "DFS",
+        "difficulty": "Easy",
+        "question": "DFS can be implemented recursively. True or False?",
+        "options": [
+            "True",
+            "False",
+            "Only for trees",
+            "Only for directed graphs"
+        ],
+        "correctAnswer": 0,
+        "explanation": "DFS can be implemented recursively using function call stack or iteratively with an explicit stack."
+    },
+    {
+        "id": 401,
+        "topic": "Graph",
+        "algorithm": "Dijkstra",
+        "difficulty": "Easy",
+        "question": "Dijkstra’s Algorithm is used to find:",
+        "options": [
+            "Shortest path from a source",
+            "Minimum spanning tree",
+            "All cycles in a graph",
+            "Maximum flow"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Dijkstra’s Algorithm computes the shortest distance from a source node to all other vertices."
+    },
+    {
+        "id": 402,
+        "topic": "Graph",
+        "algorithm": "Graph Comparison",
+        "difficulty": "Easy",
+        "question": "Which of the following correctly distinguishes a tree from a general graph?",
+        "options": [
+            "Tree has no cycles and is connected",
+            "Tree may have cycles",
+            "Tree can be disconnected",
+            "Tree always has weighted edges"
+        ],
+        "correctAnswer": 0,
+        "explanation": "A tree is an acyclic connected graph."
+    },
+    {
+        "id": 403,
+        "topic": "Graph",
+        "algorithm": "Cycle Detection",
+        "difficulty": "Easy",
+        "question": "Which of the following indicates a cycle in an undirected graph using DFS?",
+        "options": [
+            "Visiting an already visited node not parent",
+            "Visiting a node for the first time",
+            "Finding a leaf node",
+            "Counting number of edges"
+        ],
+        "correctAnswer": 0,
+        "explanation": "A back edge to a visited node other than the parent indicates a cycle."
+    },
+    {
+        "id": 404,
+        "topic": "Graph",
+        "algorithm": "BFS",
+        "difficulty": "Easy",
+        "question": "BFS is particularly suitable for finding:",
+        "options": [
+            "Shortest path in unweighted graphs",
+            "Maximum flow",
+            "Minimum spanning tree",
+            "Topological order"
+        ],
+        "correctAnswer": 0,
+        "explanation": "BFS finds the shortest path in graphs where all edges have equal weight."
+    },
+    {
+        "id": 405,
+        "topic": "Graph",
+        "algorithm": "DFS",
+        "difficulty": "Easy",
+        "question": "DFS traversal of a graph may produce:",
+        "options": [
+            "Depth-first tree",
+            "Breadth-first tree",
+            "Minimum spanning tree",
+            "Shortest path tree"
+        ],
+        "correctAnswer": 0,
+        "explanation": "DFS generates a depth-first tree showing the order of node discovery."
+    },
+    {
+        "id": 406,
+        "topic": "Graph",
+        "algorithm": "Dijkstra",
+        "difficulty": "Easy",
+        "question": "Dijkstra’s Algorithm does NOT work properly if:",
+        "options": [
+            "Graph has negative weight edges",
+            "Graph has cycles",
+            "Graph is disconnected",
+            "Graph has multiple paths"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Dijkstra’s cannot handle negative weight edges correctly."
+    },
+    
+    {
+        "id": 407,
+        "topic": "Graph",
+        "algorithm": "BFS",
+        "difficulty": "Medium",
+        "question": "What is the time complexity of BFS in a graph with V vertices and E edges?",
+        "options": [
+            "O(V + E)",
+            "O(V²)",
+            "O(E log V)",
+            "O(V E)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "BFS visits each vertex and edge once, giving O(V + E) complexity."
+    },
+    {
+        "id": 408,
+        "topic": "Graph",
+        "algorithm": "DFS",
+        "difficulty": "Medium",
+        "question": "Time complexity of DFS on a graph with V vertices and E edges is:",
+        "options": [
+            "O(V + E)",
+            "O(V²)",
+            "O(E²)",
+            "O(log V)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "DFS traverses all vertices and edges once, so time complexity is O(V + E)."
+    },
+    {
+        "id": 409,
+        "topic": "Graph",
+        "algorithm": "Dijkstra",
+        "difficulty": "Medium",
+        "question": "Which data structure optimizes Dijkstra’s Algorithm for sparse graphs?",
+        "options": [
+            "Min-Heap",
+            "Queue",
+            "Stack",
+            "Array"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Min-Heap helps efficiently pick the next vertex with minimum distance, reducing time on sparse graphs."
+    },
+    {
+        "id": 410,
+        "topic": "Graph",
+        "algorithm": "Graph Comparison",
+        "difficulty": "Medium",
+        "question": "Which is true about directed and undirected graphs?",
+        "options": [
+            "Directed graph edges have direction, undirected do not",
+            "Undirected graph edges have direction",
+            "Directed graphs cannot have cycles",
+            "Undirected graphs must be connected"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Directed graphs have edges with specific directions, while undirected graphs do not."
+    },
+    {
+        "id": 411,
+        "topic": "Graph",
+        "algorithm": "Cycle Detection",
+        "difficulty": "Medium",
+        "question": "Which algorithm detects cycles in a directed graph efficiently?",
+        "options": [
+            "DFS with recursion stack",
+            "BFS with queue",
+            "Kruskal’s Algorithm",
+            "Dijkstra’s Algorithm"
+        ],
+        "correctAnswer": 0,
+        "explanation": "DFS with recursion stack identifies back edges that form cycles in directed graphs."
+    },
+    {
+        "id": 412,
+        "topic": "Graph",
+        "algorithm": "BFS",
+        "difficulty": "Medium",
+        "question": "In BFS, the level of a node represents:",
+        "options": [
+            "Shortest distance from source in unweighted graph",
+            "Number of outgoing edges",
+            "Depth in DFS tree",
+            "Number of cycles containing node"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Level indicates how many edges are traversed from source to reach a node."
+    },
+    {
+        "id": 413,
+        "topic": "Graph",
+        "algorithm": "DFS",
+        "difficulty": "Medium",
+        "question": "Which of the following is a key property of DFS?",
+        "options": [
+            "Can be used for topological sorting",
+            "Always finds shortest paths",
+            "Requires weighted edges",
+            "Only works on trees"
+        ],
+        "correctAnswer": 0,
+        "explanation": "DFS helps in applications like topological sorting, cycle detection, and connectivity checks."
+    },
+    {
+        "id": 414,
+        "topic": "Graph",
+        "algorithm": "Dijkstra",
+        "difficulty": "Medium",
+        "question": "Dijkstra’s Algorithm produces a shortest path tree. What is true about this tree?",
+        "options": [
+            "Contains shortest paths from source to all vertices",
+            "Contains longest paths",
+            "Contains minimum spanning tree",
+            "Contains only edges with weight 1"
+        ],
+        "correctAnswer": 0,
+        "explanation": "The resulting tree gives shortest paths from the source to every reachable vertex."
+    },
+    {
+        "id": 415,
+        "topic": "Graph",
+        "algorithm": "Graph Comparison",
+        "difficulty": "Medium",
+        "question": "Which of the following is a weighted graph?",
+        "options": [
+            "Graph with numbers on edges indicating cost",
+            "Graph with only vertices",
+            "Graph with colors on nodes",
+            "Graph with direction on edges only"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Weighted graphs have numerical values (weights) assigned to edges."
+    },
+    {
+        "id": 416,
+        "topic": "Graph",
+        "algorithm": "Cycle Detection",
+        "difficulty": "Medium",
+        "question": "Union-Find is typically used for cycle detection in which graph type?",
+        "options": [
+            "Undirected graph",
+            "Directed graph",
+            "Weighted graph only",
+            "Tree only"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Union-Find efficiently checks for cycles in undirected graphs."
+    },
+    {
+        "id": 417,
+        "topic": "Graph",
+        "algorithm": "BFS",
+        "difficulty": "Hard",
+        "question": "What is the space complexity of BFS on a graph with V vertices and E edges?",
+        "options": [
+            "O(V + E)",
+            "O(V²)",
+            "O(log V)",
+            "O(E²)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "BFS requires space for the queue and visited set, giving O(V + E) space."
+    },
+    {
+        "id": 418,
+        "topic": "Graph",
+        "algorithm": "DFS",
+        "difficulty": "Hard",
+        "question": "DFS can detect connected components in an undirected graph. True or False?",
+        "options": [
+            "True",
+            "False",
+            "Only if graph is weighted",
+            "Only if graph is directed"
+        ],
+        "correctAnswer": 0,
+        "explanation": "DFS explores all reachable vertices, which helps in counting connected components."
+    },
+    {
+        "id": 419,
+        "topic": "Graph",
+        "algorithm": "Dijkstra",
+        "difficulty": "Hard",
+        "question": "Time complexity of Dijkstra’s Algorithm using min-heap is:",
+        "options": [
+            "O(E log V)",
+            "O(V²)",
+            "O(E + V)",
+            "O(V log E)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Using a min-heap, Dijkstra’s runs in O(E log V) time."
+    },
+    {
+        "id": 420,
+        "topic": "Graph",
+        "algorithm": "Graph Comparison",
+        "difficulty": "Hard",
+        "question": "Which graph representation is best for sparse graphs?",
+        "options": [
+            "Adjacency List",
+            "Adjacency Matrix",
+            "Edge List",
+            "Incidence Matrix"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Adjacency List uses less space for sparse graphs (O(V + E))."
+    },
+    {
+        "id": 421,
+        "topic": "Graph",
+        "algorithm": "Cycle Detection",
+        "difficulty": "Hard",
+        "question": "Kahn’s Algorithm can detect cycles in which type of graph?",
+        "options": [
+            "Directed graph",
+            "Undirected graph",
+            "Weighted graph",
+            "Tree"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Kahn’s Algorithm checks for cycles in directed graphs by attempting topological sort."
+    },
+    {
+        "id": 422,
+        "topic": "Graph",
+        "algorithm": "BFS",
+        "difficulty": "Hard",
+        "question": "In BFS, what can be used to reconstruct the shortest path from source to target?",
+        "options": [
+            "Parent array",
+            "Visited set only",
+            "Queue only",
+            "Stack"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Parent array stores the predecessor of each node to reconstruct the path."
+    },
+    {
+        "id": 423,
+        "topic": "Graph",
+        "algorithm": "DFS",
+        "difficulty": "Hard",
+        "question": "In DFS, discovery and finish times are useful for:",
+        "options": [
+            "Topological sorting and cycle detection",
+            "Finding shortest path",
+            "Calculating degree of vertices",
+            "Finding maximum flow"
+        ],
+        "correctAnswer": 0,
+        "explanation": "DFS timestamps are used in topological sort and identifying back edges for cycles."
+    },
+    {
+        "id": 424,
+        "topic": "Graph",
+        "algorithm": "Dijkstra",
+        "difficulty": "Hard",
+        "question": "Which property of Dijkstra’s Algorithm ensures correctness in non-negative weighted graphs?",
+        "options": [
+            "Greedy selection of minimum distance vertex",
+            "Using recursion",
+            "Using stack",
+            "Using BFS queue"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Dijkstra greedily selects the vertex with minimum distance at each step, ensuring correct shortest paths."
+    },
+    {
+        "id": 425,
+        "topic": "Graph",
+        "algorithm": "Graph Comparison",
+        "difficulty": "Hard",
+        "question": "Adjacency matrix representation is efficient for which graph type?",
+        "options": [
+            "Dense graphs",
+            "Sparse graphs",
+            "Directed acyclic graphs only",
+            "Trees only"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Adjacency matrices are efficient for dense graphs because all entries are used."
+    },
+    {
+        "id": 426,
+        "topic": "Graph",
+        "algorithm": "Cycle Detection",
+        "difficulty": "Hard",
+        "question": "Which algorithm detects cycles in undirected graphs using Union-Find?",
+        "options": [
+            "Kruskal’s Algorithm",
+            "Dijkstra’s Algorithm",
+            "DFS only",
+            "BFS only"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Kruskal’s Algorithm with Union-Find detects cycles by checking if vertices belong to the same set."
+    }
 
 
 ]

@@ -7,6 +7,21 @@ import { useGoogleAuth } from "../contexts/GoogleAuthContext";
 import authService from "../services/authService";
 import "../styles/Login.css";
 import { GoogleLogin } from "@react-oauth/google";
+import jwt_decode from "jwt-decode"; // 🟢 ADD: to decode Google token
+import { loginUserWithGoogle } from "../services/authService"; // 🟢 ADD: backend API call for Google login
+
+
+
+// 🔹 Helper function for password validation
+const validatePassword = (password) => {
+  const errors = [];
+  if (password.length < 8) errors.push("At least 8 characters");
+  if (!/[A-Z]/.test(password)) errors.push("Add at least one uppercase letter");
+  if (!/[a-z]/.test(password)) errors.push("Add at least one lowercase letter");
+  if (!/[0-9]/.test(password)) errors.push("Add at least one number");
+  if (!/[!@#$%^&*]/.test(password)) errors.push("Add at least one special symbol (!@#$%^&*)");
+  return errors;
+};
 
 const Login = () => {
   const { theme } = useTheme();
@@ -21,6 +36,9 @@ const Login = () => {
     password: "",
     rememberMe: false,
   });
+
+   // 🔹 New state for password validation messages
+  const [passwordErrors, setPasswordErrors] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,12 +73,37 @@ const Login = () => {
       [name]: type === "checkbox" ? checked : value,
     }));
   };
-
+  
+   // 🔹 Real-time password validation
+    if (name === "password") {
+      setPasswordErrors(validatePassword(value));
+    }
+  };
   const isDark = theme === "dark";
 
-  useEffect(() => {
-    renderGoogleButton('google-signin-button');
-  }, [renderGoogleButton]);
+  
+  // 🟢 ADD: Handle Google login success
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      const decoded = jwt_decode(credentialResponse.credential);
+      console.log("Decoded Google User:", decoded);
+
+      // Call backend API to register/login this Google user
+      const res = await loginUserWithGoogle(credentialResponse.credential);
+      console.log("Backend login success:", res);
+
+      // After successful login, redirect user to home/dashboard
+      navigate("/");
+
+    } catch (error) {
+      console.error("Google login error:", error);
+    }
+  };
+
+  // 🟢 ADD: Handle Google login error
+  const handleGoogleError = () => {
+    console.log("Google login failed");
+  };
 
   return (
     <div className={`login-container ${isDark ? "login-dark" : "login-light"}`}>
@@ -140,6 +183,17 @@ const Login = () => {
                   )}
                 </button>
               </div>
+
+               {/* 🔹 Real-time Password Validation Feedback */}
+              {passwordErrors.length > 0 && (
+                <ul className="password-errors">
+                  {passwordErrors.map((err, idx) => (
+                    <li key={idx} className="error-text">
+                      ❌ {err}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
 
             {/* Remember Me & Forgot Password */}
@@ -197,10 +251,14 @@ const Login = () => {
             <span className="separator-text">or</span>
           </div>
 
-          {/* Google Sign-In Button */}
-          <div className="google-signin-container">
-            <div id="google-signin-button"></div>
+          {/* 🟢 ADD: Google Sign-In Button */}
+          <div className="google-login">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={handleGoogleError}
+            />
           </div>
+
 
           {/* Demo Credentials */}
           <div className="demo-section">
@@ -208,20 +266,10 @@ const Login = () => {
               <strong>Demo:</strong> demo@example.com / demo123
             </p>
           </div>
-          <div className="google-login">
-            <GoogleLogin
-              onSuccess={(credentialResponse) => {
-                console.log("Google login success:", credentialResponse);
-              }}
-              onError={() => {
-                console.log("Google login failed");
-              }}
-            />
-          </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default Login;
