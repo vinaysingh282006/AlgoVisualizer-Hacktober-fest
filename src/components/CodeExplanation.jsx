@@ -732,6 +732,153 @@ vector<int> bucketSort(vector<int> a, int bucketCount=10){
         { explanation: "After final merge, the array is fully sorted." }
       ]
     },
+    cocktailShakerSort: {
+  title: "Cocktail Shaker Sort",
+  description: "A bidirectional variation of Bubble Sort. Instead of only moving large elements to the end, it alternates between forward and backward passes, moving both small and large elements toward their correct ends with each pass. This can lead to fewer passes on certain datasets compared to regular Bubble Sort.",
+  code: {
+    js: `function cocktailShakerSort(arr) {
+  let start = 0;
+  let end = arr.length - 1;
+  let swapped = true;
+
+  while (swapped) {
+    swapped = false;
+
+    // Forward pass
+    for (let i = start; i < end; i++) {
+      if (arr[i] > arr[i + 1]) {
+        [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
+        swapped = true;
+      }
+    }
+
+    // Mark last element sorted
+    end--;
+    if (!swapped) break;
+    swapped = false;
+
+    // Backward pass
+    for (let i = end; i > start; i--) {
+      if (arr[i - 1] > arr[i]) {
+        [arr[i - 1], arr[i]] = [arr[i], arr[i - 1]];
+        swapped = true;
+      }
+    }
+
+    // Mark first element sorted
+    start++;
+  }
+
+  return arr;
+}`,
+    java: `public static void cocktailShakerSort(int[] arr) {
+  int start = 0;
+  int end = arr.length - 1;
+  boolean swapped = true;
+
+  while (swapped) {
+    swapped = false;
+
+    // Forward pass
+    for (int i = start; i < end; i++) {
+      if (arr[i] > arr[i + 1]) {
+        int temp = arr[i];
+        arr[i] = arr[i + 1];
+        arr[i + 1] = temp;
+        swapped = true;
+      }
+    }
+
+    end--;
+    if (!swapped) break;
+    swapped = false;
+
+    // Backward pass
+    for (int i = end; i > start; i--) {
+      if (arr[i - 1] > arr[i]) {
+        int temp = arr[i - 1];
+        arr[i - 1] = arr[i];
+        arr[i] = temp;
+        swapped = true;
+      }
+    }
+
+    start++;
+  }
+}`,
+    cpp: `#include <vector>
+using namespace std;
+
+void cocktailShakerSort(vector<int>& arr) {
+  int start = 0;
+  int end = arr.size() - 1;
+  bool swapped = true;
+
+  while (swapped) {
+    swapped = false;
+
+    // Forward pass
+    for (int i = start; i < end; i++) {
+      if (arr[i] > arr[i + 1]) {
+        swap(arr[i], arr[i + 1]);
+        swapped = true;
+      }
+    }
+
+    end--;
+    if (!swapped) break;
+    swapped = false;
+
+    // Backward pass
+    for (int i = end; i > start; i--) {
+      if (arr[i - 1] > arr[i]) {
+        swap(arr[i - 1], arr[i]);
+        swapped = true;
+      }
+    }
+
+    start++;
+  }
+}`,
+    py: `def cocktail_shaker_sort(arr):
+  start = 0
+  end = len(arr) - 1
+  swapped = True
+
+  while swapped:
+    swapped = False
+
+    # Forward pass
+    for i in range(start, end):
+      if arr[i] > arr[i + 1]:
+        arr[i], arr[i + 1] = arr[i + 1], arr[i]
+        swapped = True
+
+    end -= 1
+    if not swapped:
+      break
+    swapped = False
+
+    # Backward pass
+    for i in range(end, start, -1):
+      if arr[i - 1] > arr[i]:
+        arr[i - 1], arr[i] = arr[i], arr[i - 1]
+        swapped = True
+
+    start += 1
+
+  return arr`
+  },
+  steps: [
+    { explanation: "Initialize two pointers, start (0) and end (n−1), and set swapped = true." },
+    { explanation: "Perform a forward pass: bubble the largest element to the end." },
+    { explanation: "Decrease the end pointer, as the last element is in place." },
+    { explanation: "If no swaps occurred, the array is sorted; otherwise, perform a backward pass." },
+    { explanation: "Backward pass: bubble the smallest element to the start." },
+    { explanation: "Increase the start pointer, repeat passes until no swaps occur." }
+  ]
+},
+
  shellSort: {
     title: "Shell Sort Algorithm",
     description: "An improvement over insertion sort that allows the exchange of elements that are far apart. Uses a gap sequence that starts large and reduces to 1, making the final insertion sort pass very efficient.",
@@ -1047,6 +1194,113 @@ def intro_sort(arr):
     ]
   },
 
+sleepSort: {
+  title: "Sleep Sort",
+  description: "Sleep Sort is a fun, visualization-based algorithm that sorts numbers by leveraging their values as delays. Each element 'sleeps' for a duration proportional to its value, then gets placed in the output in that order. While not practical for real-world use, it's often used to demonstrate concurrency and timing-based sorting.",
+  code: {
+    js: `function sleepSort(arr, delay = 1) {
+  const result = [];
+  const maxVal = Math.max(...arr);
+  return new Promise((resolve) => {
+    arr.forEach((num) => {
+      setTimeout(() => {
+        result.push(num);
+        if (result.length === arr.length) {
+          resolve(result);
+        }
+      }, num * delay);
+    });
+  });
+}
+
+// Usage example:
+(async () => {
+  const arr = [3, 1, 4, 2];
+  const sorted = await sleepSort(arr, 50);
+  console.log(sorted); // [1, 2, 3, 4]
+})();`,
+    java: `import java.util.*;
+
+class SleepSort {
+  public static void sleepSort(int[] arr) {
+    List<Integer> result = Collections.synchronizedList(new ArrayList<>());
+    int max = Arrays.stream(arr).max().orElse(0);
+    for (int num : arr) {
+      new Thread(() -> {
+        try {
+          Thread.sleep(num * 10);
+        } catch (InterruptedException e) {
+          Thread.currentThread().interrupt();
+        }
+        result.add(num);
+        if (result.size() == arr.length) {
+          synchronized (result) {
+            Collections.sort(result); // Optional for ensuring order in race
+            System.out.println(result);
+          }
+        }
+      }).start();
+    }
+  }
+
+  public static void main(String[] args) {
+    int[] arr = {3, 1, 4, 2};
+    sleepSort(arr);
+  }
+}`,
+    cpp: `#include <bits/stdc++.h>
+#include <thread>
+#include <chrono>
+using namespace std;
+
+void sleepSort(vector<int>& arr) {
+  vector<int> result;
+  mutex m;
+  vector<thread> threads;
+
+  for (int num : arr) {
+    threads.emplace_back([num, &result, &m]() {
+      this_thread::sleep_for(chrono::milliseconds(num * 10));
+      lock_guard<mutex> lock(m);
+      result.push_back(num);
+    });
+  }
+
+  for (auto& t : threads) t.join();
+  sort(result.begin(), result.end());
+  for (int x : result) cout << x << " ";
+  cout << endl;
+}
+
+int main() {
+  vector<int> arr = {3, 1, 4, 2};
+  sleepSort(arr);
+  return 0;
+}`,
+    py: `import threading, time
+
+def sleep_sort(arr, delay=0.01):
+  result = []
+  def sleeper(n):
+    time.sleep(n * delay)
+    result.append(n)
+
+  threads = [threading.Thread(target=sleeper, args=(n,)) for n in arr]
+  for t in threads: t.start()
+  for t in threads: t.join()
+  return result
+
+# Example
+print(sleep_sort([3, 1, 4, 2]))  # [1, 2, 3, 4]`
+  },
+  steps: [
+    { explanation: "For each number, create a 'timer' or 'thread' that waits for a duration proportional to the number's value." },
+    { explanation: "When the timer completes, the number is added to the output list." },
+    { explanation: "Since smaller numbers have shorter sleep times, they get added earlier, resulting in sorted order." },
+    { explanation: "This algorithm relies on concurrency and precise timing, making it impractical but visually interesting." },
+    { explanation: "Time complexity depends on the maximum value in the array, approximately O(max(arr) + n)." }
+  ]
+},
 
   binarySearch: {
     title: "Binary Search Algorithm",

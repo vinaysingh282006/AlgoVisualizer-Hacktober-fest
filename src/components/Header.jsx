@@ -1,25 +1,67 @@
 import React, { useState, useEffect } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import '../styles/header.css';
 import { useTheme } from '../ThemeContext';
-import { FaGithub, FaMoon, FaSun, FaCode, FaSearch, FaDatabase, FaBrain, FaUsers, FaBook, FaProjectDiagram, FaQuestionCircle, FaRocket, FaGraduationCap, FaEnvelope } from 'react-icons/fa';
+import { FaGithub, FaMoon, FaSun, FaCode, FaSearch, FaDatabase, FaBrain, FaUsers, FaBook, FaProjectDiagram, FaQuestionCircle, FaRocket, FaGraduationCap, FaEnvelope, FaUser, FaSignOutAlt } from 'react-icons/fa';
 import { headerNavigationItems } from '../utils/navigation';
 import { headerIconMap, headerNavigationStructure } from '../utils/headerData';
+import AuthModal from './AuthModal';
 
 const Header = () => {
+    const { theme, toggleTheme } = useTheme();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
-    const { theme, toggleTheme } = useTheme();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState(null);
+    const [showAuthModal, setShowAuthModal] = useState(false);
+    const [authMode, setAuthMode] = useState('login');
     const location = useLocation();
+    const navigate = useNavigate();
 
+    // Check if user is logged in
     useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20);
+        const checkLoginStatus = () => {
+            const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+            const userData = localStorage.getItem("user");
+            
+            setIsLoggedIn(isLoggedIn);
+            if (userData) {
+                setUser(JSON.parse(userData));
+            }
         };
         
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        checkLoginStatus();
+        
+        // Add event listener for storage changes
+        window.addEventListener('storage', checkLoginStatus);
+        
+        return () => {
+            window.removeEventListener('storage', checkLoginStatus);
+        };
     }, []);
+    
+    // Function to open auth modal
+    const openAuthModal = (mode) => {
+        setAuthMode(mode);
+        setShowAuthModal(true);
+    };
+
+    // Function to close auth modal
+    const closeAuthModal = () => {
+        setShowAuthModal(false);
+    };
+
+    // Handle logout
+    const handleLogout = () => {
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("rememberMe");
+        setIsLoggedIn(false);
+        setUser(null);
+        navigate("/");
+        setIsMobileMenuOpen(false);
+    };
 
     useEffect(() => {
         setIsMobileMenuOpen(false);
@@ -36,6 +78,16 @@ const Header = () => {
             document.body.style.overflow = '';
         };
     }, [isMobileMenuOpen]);
+
+    // Add scroll effect
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 20);
+        };
+        
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -153,6 +205,29 @@ const Header = () => {
 
                     {/* Action Buttons */}
                     <div className="nav-actions">
+                        {isLoggedIn ? (
+                            <>
+                                <div className="user-profile">
+                                    <button className="profile-button">
+                                        <FaUser className="profile-icon" />
+                                        <span>{user?.name || 'User'}</span>
+                                    </button>
+                                </div>
+                                <button onClick={handleLogout} className="auth-btn logout-btn">
+                                    <FaSignOutAlt className="logout-icon" />
+                                    Logout
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <button onClick={() => openAuthModal('login')} className="auth-btn login-btn">
+                                    Login
+                                </button>
+                                <button onClick={() => openAuthModal('signup')} className="auth-btn signup-btn">
+                                    Sign Up
+                                </button>
+                            </>
+                        )}
                         <a 
                             className="github-btn" 
                             href="https://github.com/RhythmPahwa14/AlgoVisualizer" 
@@ -200,6 +275,27 @@ const Header = () => {
                 <div className="mobile-nav-content">
                     <div className="mobile-nav-header">
                         <div className="mobile-nav-actions">
+                            {isLoggedIn ? (
+                                <>
+                                    <div className="mobile-user-profile">
+                                        <FaUser className="mobile-profile-icon" />
+                                        <span>{user?.name || 'User'}</span>
+                                    </div>
+                                    <button onClick={handleLogout} className="mobile-auth-btn mobile-logout-btn">
+                                        <FaSignOutAlt className="mobile-logout-icon" />
+                                        Logout
+                                    </button>
+                                </>
+                            ) : (
+                                <>
+                                    <Link to="/login" className="mobile-auth-btn mobile-login-btn" onClick={toggleMobileMenu}>
+                                        Login
+                                    </Link>
+                                    <Link to="/signup" className="mobile-auth-btn mobile-signup-btn" onClick={toggleMobileMenu}>
+                                        Sign Up
+                                    </Link>
+                                </>
+                            )}
                             <a 
                                 className="mobile-github-btn" 
                                 href="https://github.com/RhythmPahwa14/AlgoVisualizer" 

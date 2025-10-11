@@ -1,9 +1,10 @@
 
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Eye, EyeOff, LogIn, Mail, Lock, ArrowLeft } from "lucide-react";
+import { Eye, EyeOff, LogIn, Mail, Lock, ArrowLeft, AlertCircle } from "lucide-react";
 import { useTheme } from "../ThemeContext";
 import { useGoogleAuth } from "../contexts/GoogleAuthContext";
+import authService from "../services/authService";
 import "../styles/Login.css";
 import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode"; // 🟢 ADD: to decode Google token
@@ -14,8 +15,9 @@ const Login = () => {
   const { theme } = useTheme();
   const { renderGoogleButton } = useGoogleAuth();
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate(); // 🟢 ADD: for navigation
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -23,9 +25,30 @@ const Login = () => {
     rememberMe: false,
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login attempt:", formData);
+    setError("");
+    setIsLoading(true);
+    
+    try {
+      const response = await authService.login(formData.email, formData.password);
+      
+      // Store user data and token in localStorage
+      localStorage.setItem("user", JSON.stringify(response.user));
+      localStorage.setItem("token", response.token);
+      
+      // If remember me is checked, set a longer expiration
+      if (formData.rememberMe) {
+        localStorage.setItem("rememberMe", "true");
+      }
+      
+      // Redirect to home page or learning page
+      navigate("/");
+    } catch (error) {
+      setError(error.message || "Login failed. Please check your credentials.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -163,9 +186,21 @@ const Login = () => {
               </Link>
             </div>
 
+            {/* Error Message */}
+            {error && (
+              <div className="error-message">
+                <AlertCircle size={16} />
+                <span>{error}</span>
+              </div>
+            )}
+            
             {/* Submit Button */}
-            <button type="submit" className="submit-button">
-              Sign in
+            <button 
+              type="submit" 
+              className="submit-button"
+              disabled={isLoading}
+            >
+              {isLoading ? "Signing in..." : "Sign in"}
             </button>
 
             {/* Sign Up Link */}

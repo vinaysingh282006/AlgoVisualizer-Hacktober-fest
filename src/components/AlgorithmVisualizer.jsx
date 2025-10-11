@@ -49,11 +49,13 @@ export default function AlgorithmVisualizer({
     currentStep: 0,
     target: null,
     isAnimating: false,
+    isPaused: false,
     animationSpeedMs: DEFAULT_ANIMATION_SPEED,
     barMotion: true
   });
 
   const [error, setError] = useState(null);
+  const animationIntervalRef = useRef(null);
 
   // ✅ Responsive bar width calculation
 const containerRef = useRef(null);
@@ -165,12 +167,22 @@ useLayoutEffect(() => {
     })();
   }, [visualOnly, controlled, algorithmName, state.array, state.target]);
 
+  const handlePauseResume = useCallback(() => {
+    setState(prev => ({ ...prev, isPaused: !prev.isPaused }));
+  }, []);
+
   const handleReset = useCallback(() => {
+    // Clear the animation interval
+    if (animationIntervalRef.current) {
+      clearInterval(animationIntervalRef.current);
+    }
+    
     setState(prev => ({ 
       ...prev, 
       steps: [],
       currentStep: 0,
-      isAnimating: false
+      isAnimating: false,
+      isPaused: false
     }));
     
     // Reset array to original state
@@ -181,13 +193,24 @@ useLayoutEffect(() => {
     }
   }, [controlled, initialArray, generateArray]);
 
-  // Animate steps
+  // Animate steps with pause/resume support
   useEffect(() => {
     if (controlled) return;
     if (!state.isAnimating || state.steps.length === 0) return;
     
-    const interval = setInterval(() => {
+    // Clear any existing interval
+    if (animationIntervalRef.current) {
+      clearInterval(animationIntervalRef.current);
+    }
+    
+    // Don't start new interval if paused
+    if (state.isPaused) return;
+    
+    animationIntervalRef.current = setInterval(() => {
       setState(prev => {
+        // Don't advance if paused
+        if (prev.isPaused) return prev;
+        
         const next = prev.currentStep + 1;
         const step = prev.steps[next];
         
@@ -203,13 +226,19 @@ useLayoutEffect(() => {
         
         if (next < prev.steps.length - 1) return { ...prev, currentStep: next };
         
-        clearInterval(interval);
-        return { ...prev, isAnimating: false, currentStep: next };
+        if (animationIntervalRef.current) {
+          clearInterval(animationIntervalRef.current);
+        }
+        return { ...prev, isAnimating: false, isPaused: false, currentStep: next };
       });
     }, Math.max(MIN_ANIMATION_SPEED, state.animationSpeedMs));
     
-    return () => clearInterval(interval);
-  }, [state.isAnimating, state.steps, state.animationSpeedMs, controlled]);
+    return () => {
+      if (animationIntervalRef.current) {
+        clearInterval(animationIntervalRef.current);
+      }
+    };
+  }, [state.isAnimating, state.isPaused, state.steps, state.animationSpeedMs, controlled]);
 
   // Determine algorithm type using centralized runner
   const resolveAlgoType = useCallback((name) => getAlgorithmType(name), []);
@@ -233,10 +262,10 @@ useLayoutEffect(() => {
     updateState('barMotion', !state.barMotion);
   }, [state.barMotion, updateState]);
 
-  // Keyboard controls for speed adjustment
+  // Keyboard controls for speed adjustment and pause/resume
   useEffect(() => {
     const handleKeyPress = (e) => {
-      // Only handle if not animating or if in input field
+      // Only handle if not in input field
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
       
       if (e.key === '+' || e.key === '=') {
@@ -251,6 +280,16 @@ useLayoutEffect(() => {
           ...prev,
           animationSpeedMs: Math.min(MAX_ANIMATION_SPEED, prev.animationSpeedMs + 50)
         }));
+      } else if (e.key === ' ' || e.key === 'p' || e.key === 'P') {
+        // Spacebar or 'P' to pause/resume
+        e.preventDefault();
+        setState(prev => {
+          // Only toggle if animation is running
+          if (prev.isAnimating) {
+            return { ...prev, isPaused: !prev.isPaused };
+          }
+          return prev;
+        });
       }
     };
 
@@ -340,7 +379,22 @@ useLayoutEffect(() => {
             {state.isAnimating ? "Running..." : "Start"}
           </button>
           <button
-            onClick={() => updateState('isAnimating', false)}
+            onClick={handlePauseResume}
+            disabled={!state.isAnimating}
+            aria-label={state.isPaused ? "Resume algorithm" : "Pause algorithm"}
+            className={state.isPaused ? "pause-btn paused" : "pause-btn"}
+            title={state.isPaused ? "Resume (Space/P)" : "Pause (Space/P)"}
+          >
+            {state.isPaused ? "▶️ Resume" : "⏸️ Pause"}
+          </button>
+          <button
+            onClick={() => {
+              if (animationIntervalRef.current) {
+                clearInterval(animationIntervalRef.current);
+              }
+              updateState('isAnimating', false);
+              updateState('isPaused', false);
+            }}
             disabled={!state.isAnimating}
             aria-label="Stop algorithm"
           >

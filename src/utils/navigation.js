@@ -23,6 +23,7 @@ export const headerNavigationItems = [
 export const navbarNavigationItems = [
   { path: "/", label: "Home", icon: "Home" },
   { path: "/learn", label: "Learn", icon: "BookOpen" },
+  { path: "/cheatsheet", label: "Cheatsheet", icon: "BookOpen" },
   { path: "/quiz", label: "Quiz", icon: "Trophy" },
   {
     label: "Community",
@@ -42,6 +43,8 @@ export const navbarNavigationItems = [
       { path: "/notes/python", label: "Python" },
       { path: "/notes/cpp", label: "Cpp" },
       { path: "/notes/c", label: "C" },
+      { path: "/notes/javascript", label: "JavaScript" },
+      { path: "/notes/rust", label: "Rust" },
 
      ],
   },
