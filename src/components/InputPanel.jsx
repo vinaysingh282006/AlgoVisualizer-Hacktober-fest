@@ -350,9 +350,10 @@ const InputPanel = ({
             <div className="sample-data-header">
               <h4>Sample Data</h4>
               <div className="sample-actions">
-                <button onClick={loadSampleData} className="btn btn-outline">
-                  Load Sample
-                </button>
+                <button onClick={loadSampleData} className="btn btn-outline btn-purple">
+  Load Sample
+</button>
+
                 <button onClick={downloadSample} className="btn btn-outline">
                   <Download size={16} />
                   Download
