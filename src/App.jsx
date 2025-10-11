@@ -58,7 +58,8 @@ import CFundamentals from "./pages/Notes/C/Fundamentals";
 import JavaScriptFundamentals from "./pages/Notes/JavaScript/Fundamentals.jsx";
 import JavaScriptVariablesAndDataTypes from "./pages/Notes/JavaScript/VariablesAndDataTypes.jsx";
 
-
+// Rust Notes
+import RustFundamentals from "./pages/Notes/Rust/Fundamentals";
 
 // Algorithm Pages
 import DPOverview from "./pages/DPOverview";
@@ -95,6 +96,8 @@ import GraphComparison from "./components/GraphComparison";
 import Contributors from "./components/Contributors";
 import Contribute from "./components/Contribute";
 import Cheatsheet from "./components/Cheatsheet";
+import AlgorithmComparisonTable from './components/AlgorithmComparisonTable';
+
 
 // Static / Info Pages
 import Login from "./pages/Login";
@@ -424,6 +427,9 @@ const App = () => {
                     />
                     <Route path="/editor" element={<CodeEditor />} />
 
+                    {/* Add Algorithm Comparison Table Route */}
+<Route path="/algorithm-comparison-table" element={<AlgorithmComparisonTable />} />
+
                     {/* Notes Routes */}
                     <Route
                       path="/notes/java"
@@ -497,6 +503,9 @@ const App = () => {
                       path="/notes/c/fundamentals"
                       element={<CFundamentals />}
                     />
+
+                    <Route path="/notes/rust" element={<Navigate to="/notes/rust/fundamentals" replace />} />
+                    <Route path="/notes/rust/fundamentals" element={<RustFundamentals />} />
 
                     <Route path="/java-oops" element={<JavaOOPS />} />
 
