@@ -40,21 +40,6 @@ const Login = () => {
    // 🔹 New state for password validation messages
   const [passwordErrors, setPasswordErrors] = useState([]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // 🔹 Validate password on form submit
-    const errors = validatePassword(formData.password);
-    setPasswordErrors(errors);
-
-    if (errors.length === 0) {
-      console.log("Login attempt:", formData);
-      // proceed with login logic here
-    } else {
-      console.log("Password errors:", errors);
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -208,8 +193,6 @@ const Login = () => {
                   ))}
                 </ul>
               )}
-            </div>
-              
             </div>
 
             {/* Remember Me & Forgot Password */}

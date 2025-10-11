@@ -350,9 +350,10 @@ const Navbar = () => {
               )}
             </div>
 
-            
+            {/* 
             <UserDropdown />
-          </div> */}
+            */}
+          </div>
         </div>
         <ThemeToggle />
         {/* Mobile Hamburger */}

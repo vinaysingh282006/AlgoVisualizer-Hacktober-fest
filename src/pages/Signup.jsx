@@ -95,40 +95,7 @@ const Signup = () => {
     }));
   };
 
-  // 🔹 Submit Handler
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!isPasswordValid) {
-      alert(
-        "Password does not meet requirements!\nMinimum 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special symbol."
-      );
-      return;
-    }
-
-    if (!doPasswordsMatch) {
-      alert("Passwords don't match!");
-      return;
-    }
-
-    console.log("Signup attempt:", formData);
-    // 🔹 Add your API call here to submit form
-  };
-
   const isDark = theme === "dark";
-
-  const checkPasswordRules = (password) => ({
-    length: password.length >= 8,
-    uppercase: /[A-Z]/.test(password),
-    lowercase: /[a-z]/.test(password),
-    number: /[0-9]/.test(password),
-    specialChar: /[!@#$%^&*]/.test(password),
-  });
-
-  const passwordChecks = checkPasswordRules(formData.password);
-  const isPasswordValid = Object.values(passwordChecks).every(Boolean);
-  const doPasswordsMatch =
-    formData.confirmPassword && formData.password === formData.confirmPassword;
 
   const handlePasswordChange = (e) => {
     let input = e.target.value;
