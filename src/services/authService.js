@@ -43,6 +43,21 @@ export const googleLogin = async (googleToken) => {
   }
 };
 
+
+/**
+ * signup
+ */
+export const googleSignup = async (googleToken) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/google/signup`, { token: googleToken });
+    return response.data; 
+  } catch (error) {
+    console.error("Google signup error:", error.response?.data || error.message);
+    throw error.response?.data || { message: "Google signup failed" };
+  }
+};
+
+
 /**
  * Logout
  */
