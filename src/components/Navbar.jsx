@@ -305,6 +305,16 @@ const Navbar = () => {
                     JavaScript
                   </Link>
                   <Link
+                    to="/notes/MERN/MERNFundamentals"
+                    className={`dropdown-item ${
+                      isActive("/notes/MERN/MERNFundamentals") ? "active" : ""
+                    }`}
+                    onClick={() => setDesktopNotesOpen(false)}
+                  >
+                    MERN
+                  </Link>
+
+                  <Link
                     to="https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/htmlview?gid=0#gid=0"
                     target="_blank"
                     rel="noopener noreferrer"

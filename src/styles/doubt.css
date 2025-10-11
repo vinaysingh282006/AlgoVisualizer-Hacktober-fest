@@ -56,7 +56,7 @@
   padding: 100px 20px;
   background: var(--doubt-bg);
   isolation: isolate;
-  padding-bottom: 600px;
+  padding-bottom: 650px; /* extra space for spacing*/
 }
 
 /* subtle grid overlay */
@@ -253,7 +253,7 @@
 
 .helper {
   font-size: 12.5px;
-  color: #6c757d; /* subtle muted */
+  color: #6c757d; 
   text-align: center;
 }
 
@@ -343,8 +343,6 @@
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.26);
 }
-
-/* loading spinner - animation removed for consistency */
 
 /* Responsive Tweaks */
 @media (max-width: 768px) {
