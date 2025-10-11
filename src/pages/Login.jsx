@@ -1,11 +1,15 @@
 
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Eye, EyeOff, LogIn, Mail, Lock, ArrowLeft } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Eye, EyeOff, LogIn, Mail, Lock, ArrowLeft, AlertCircle } from "lucide-react";
 import { useTheme } from "../ThemeContext";
 import { useGoogleAuth } from "../contexts/GoogleAuthContext";
+import authService from "../services/authService";
 import "../styles/Login.css";
 import { GoogleLogin } from "@react-oauth/google";
+import jwt_decode from "jwt-decode"; // 🟢 ADD: to decode Google token
+import { loginUserWithGoogle } from "../services/authService"; // 🟢 ADD: backend API call for Google login
+
 
 
 // 🔹 Helper function for password validation
@@ -23,6 +27,9 @@ const Login = () => {
   const { theme } = useTheme();
   const { renderGoogleButton } = useGoogleAuth();
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -48,9 +55,30 @@ const Login = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login attempt:", formData);
+    setError("");
+    setIsLoading(true);
+    
+    try {
+      const response = await authService.login(formData.email, formData.password);
+      
+      // Store user data and token in localStorage
+      localStorage.setItem("user", JSON.stringify(response.user));
+      localStorage.setItem("token", response.token);
+      
+      // If remember me is checked, set a longer expiration
+      if (formData.rememberMe) {
+        localStorage.setItem("rememberMe", "true");
+      }
+      
+      // Redirect to home page or learning page
+      navigate("/");
+    } catch (error) {
+      setError(error.message || "Login failed. Please check your credentials.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -68,10 +96,29 @@ const Login = () => {
   };
   const isDark = theme === "dark";
 
-  useEffect(() => {
-    renderGoogleButton('google-signin-button');
-  }, [renderGoogleButton]);
+  
+  // 🟢 ADD: Handle Google login success
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      const decoded = jwt_decode(credentialResponse.credential);
+      console.log("Decoded Google User:", decoded);
 
+      // Call backend API to register/login this Google user
+      const res = await loginUserWithGoogle(credentialResponse.credential);
+      console.log("Backend login success:", res);
+
+      // After successful login, redirect user to home/dashboard
+      navigate("/");
+
+    } catch (error) {
+      console.error("Google login error:", error);
+    }
+  };
+
+  // 🟢 ADD: Handle Google login error
+  const handleGoogleError = () => {
+    console.log("Google login failed");
+  };
   return (
     <div className={`login-container ${isDark ? "login-dark" : "login-light"}`}>
       {/* Back Button */}
@@ -181,14 +228,27 @@ const Login = () => {
                 </label>
               </div>
 
+                {/* 🔹 Forgot Password Link Highlight */}
               <Link to="/forgot-password" className="forgot-password">
                 Forgot password?
               </Link>
             </div>
 
+            {/* Error Message */}
+            {error && (
+              <div className="error-message">
+                <AlertCircle size={16} />
+                <span>{error}</span>
+              </div>
+            )}
+            
             {/* Submit Button */}
-            <button type="submit" className="submit-button">
-              Sign in
+            <button 
+              type="submit" 
+              className="submit-button"
+              disabled={isLoading}
+            >
+              {isLoading ? "Signing in..." : "Sign in"}
             </button>
 
             {/* Sign Up Link */}
@@ -207,10 +267,14 @@ const Login = () => {
             <span className="separator-text">or</span>
           </div>
 
-          {/* Google Sign-In Button */}
-          <div className="google-signin-container">
-            <div id="google-signin-button"></div>
+          {/* 🟢 ADD: Google Sign-In Button */}
+          <div className="google-login">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={handleGoogleError}
+            />
           </div>
+
 
           {/* Demo Credentials */}
           <div className="demo-section">

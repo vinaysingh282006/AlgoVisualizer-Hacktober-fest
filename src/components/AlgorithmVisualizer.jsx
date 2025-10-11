@@ -49,11 +49,13 @@ export default function AlgorithmVisualizer({
     currentStep: 0,
     target: null,
     isAnimating: false,
+    isPaused: false,
     animationSpeedMs: DEFAULT_ANIMATION_SPEED,
     barMotion: true
   });
 
   const [error, setError] = useState(null);
+  const animationIntervalRef = useRef(null);
 
   // ✅ Responsive bar width calculation
 const containerRef = useRef(null);
@@ -165,12 +167,22 @@ useLayoutEffect(() => {
     })();
   }, [visualOnly, controlled, algorithmName, state.array, state.target]);
 
+  const handlePauseResume = useCallback(() => {
+    setState(prev => ({ ...prev, isPaused: !prev.isPaused }));
+  }, []);
+
   const handleReset = useCallback(() => {
+    // Clear the animation interval
+    if (animationIntervalRef.current) {
+      clearInterval(animationIntervalRef.current);
+    }
+    
     setState(prev => ({ 
       ...prev, 
       steps: [],
       currentStep: 0,
-      isAnimating: false
+      isAnimating: false,
+      isPaused: false
     }));
     
     // Reset array to original state
@@ -181,13 +193,24 @@ useLayoutEffect(() => {
     }
   }, [controlled, initialArray, generateArray]);
 
-  // Animate steps
+  // Animate steps with pause/resume support
   useEffect(() => {
     if (controlled) return;
     if (!state.isAnimating || state.steps.length === 0) return;
     
-    const interval = setInterval(() => {
+    // Clear any existing interval
+    if (animationIntervalRef.current) {
+      clearInterval(animationIntervalRef.current);
+    }
+    
+    // Don't start new interval if paused
+    if (state.isPaused) return;
+    
+    animationIntervalRef.current = setInterval(() => {
       setState(prev => {
+        // Don't advance if paused
+        if (prev.isPaused) return prev;
+        
         const next = prev.currentStep + 1;
         const step = prev.steps[next];
         
@@ -203,13 +226,19 @@ useLayoutEffect(() => {
         
         if (next < prev.steps.length - 1) return { ...prev, currentStep: next };
         
-        clearInterval(interval);
-        return { ...prev, isAnimating: false, currentStep: next };
+        if (animationIntervalRef.current) {
+          clearInterval(animationIntervalRef.current);
+        }
+        return { ...prev, isAnimating: false, isPaused: false, currentStep: next };
       });
     }, Math.max(MIN_ANIMATION_SPEED, state.animationSpeedMs));
     
-    return () => clearInterval(interval);
-  }, [state.isAnimating, state.steps, state.animationSpeedMs, controlled]);
+    return () => {
+      if (animationIntervalRef.current) {
+        clearInterval(animationIntervalRef.current);
+      }
+    };
+  }, [state.isAnimating, state.isPaused, state.steps, state.animationSpeedMs, controlled]);
 
   // Determine algorithm type using centralized runner
   const resolveAlgoType = useCallback((name) => getAlgorithmType(name), []);
@@ -232,6 +261,52 @@ useLayoutEffect(() => {
   const toggleBarMotion = useCallback(() => {
     updateState('barMotion', !state.barMotion);
   }, [state.barMotion, updateState]);
+
+  // Keyboard controls for speed adjustment and pause/resume
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      // Only handle if not in input field
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      
+      if (e.key === '+' || e.key === '=') {
+        e.preventDefault();
+        setState(prev => ({
+          ...prev,
+          animationSpeedMs: Math.max(MIN_ANIMATION_SPEED, prev.animationSpeedMs - 50)
+        }));
+      } else if (e.key === '-' || e.key === '_') {
+        e.preventDefault();
+        setState(prev => ({
+          ...prev,
+          animationSpeedMs: Math.min(MAX_ANIMATION_SPEED, prev.animationSpeedMs + 50)
+        }));
+      } else if (e.key === ' ' || e.key === 'p' || e.key === 'P') {
+        // Spacebar or 'P' to pause/resume
+        e.preventDefault();
+        setState(prev => {
+          // Only toggle if animation is running
+          if (prev.isAnimating) {
+            return { ...prev, isPaused: !prev.isPaused };
+          }
+          return prev;
+        });
+      }
+    };
+
+    if (!visualOnly && !controlled) {
+      window.addEventListener('keydown', handleKeyPress);
+      return () => window.removeEventListener('keydown', handleKeyPress);
+    }
+  }, [visualOnly, controlled]);
+
+  // Get speed label for better UX
+  const getSpeedLabel = useCallback((speed) => {
+    if (speed <= 100) return "Very Fast";
+    if (speed <= 250) return "Fast";
+    if (speed <= 500) return "Normal";
+    if (speed <= 800) return "Slow";
+    return "Very Slow";
+  }, []);
 
   // Memoize the bar rendering to prevent unnecessary re-renders
   const renderBars = useMemo(() => {
@@ -304,7 +379,22 @@ useLayoutEffect(() => {
             {state.isAnimating ? "Running..." : "Start"}
           </button>
           <button
-            onClick={() => updateState('isAnimating', false)}
+            onClick={handlePauseResume}
+            disabled={!state.isAnimating}
+            aria-label={state.isPaused ? "Resume algorithm" : "Pause algorithm"}
+            className={state.isPaused ? "pause-btn paused" : "pause-btn"}
+            title={state.isPaused ? "Resume (Space/P)" : "Pause (Space/P)"}
+          >
+            {state.isPaused ? "▶️ Resume" : "⏸️ Pause"}
+          </button>
+          <button
+            onClick={() => {
+              if (animationIntervalRef.current) {
+                clearInterval(animationIntervalRef.current);
+              }
+              updateState('isAnimating', false);
+              updateState('isPaused', false);
+            }}
             disabled={!state.isAnimating}
             aria-label="Stop algorithm"
           >
@@ -326,17 +416,46 @@ useLayoutEffect(() => {
               aria-label="Search target value"
             />
           )}
-          <div className="speed-control">
-            <label>Speed: {state.animationSpeedMs}ms</label>
-            <input
-              type="range"
-              min={MIN_ANIMATION_SPEED}
-              max={MAX_ANIMATION_SPEED}
-              step="20"
-              value={state.animationSpeedMs}
-              onChange={(e) => updateAnimationSpeed(e.target.value)}
-              aria-label="Animation speed control"
-            />
+          <div className="speed-control-wrapper">
+            <div className="speed-control-header">
+              <label className="speed-label">
+                Speed: <span className="speed-value">{state.animationSpeedMs}ms</span>
+              </label>
+              <span className="speed-badge">{getSpeedLabel(state.animationSpeedMs)}</span>
+            </div>
+            <div className="speed-slider-container">
+              <button
+                className="speed-adjust-btn"
+                onClick={() => updateAnimationSpeed(Math.min(MAX_ANIMATION_SPEED, state.animationSpeedMs + 50))}
+                aria-label="Decrease speed"
+                title="Decrease speed (or press -)"
+              >
+                −
+              </button>
+              <input
+                type="range"
+                className="speed-slider"
+                min={MIN_ANIMATION_SPEED}
+                max={MAX_ANIMATION_SPEED}
+                step="20"
+                value={state.animationSpeedMs}
+                onChange={(e) => updateAnimationSpeed(e.target.value)}
+                aria-label="Animation speed control"
+                aria-valuetext={`${state.animationSpeedMs} milliseconds, ${getSpeedLabel(state.animationSpeedMs)}`}
+              />
+              <button
+                className="speed-adjust-btn"
+                onClick={() => updateAnimationSpeed(Math.max(MIN_ANIMATION_SPEED, state.animationSpeedMs - 50))}
+                aria-label="Increase speed"
+                title="Increase speed (or press +)"
+              >
+                +
+              </button>
+            </div>
+            <div className="speed-indicators">
+              <span className="speed-indicator-label">Faster</span>
+              <span className="speed-indicator-label">Slower</span>
+            </div>
           </div>
           <label>
             <input

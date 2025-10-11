@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Eye,
   EyeOff,
@@ -8,17 +8,26 @@ import {
   Lock,
   User,
   ArrowLeft,
+  AlertCircle,
 } from "lucide-react";
 import { useTheme } from "../ThemeContext";
 import { useGoogleAuth } from "../contexts/GoogleAuthContext";
+import authService from "../services/authService";
 import "../styles/Signup.css";
+// 🟢 ADDED:
 import { GoogleLogin } from "@react-oauth/google";
+import jwt_decode from "jwt-decode"; // ✅ To decode Google user data
+import { googleSignup } from "../services/authService"; // ✅ ADDED backend API call
 
 const Signup = () => {
   const { theme } = useTheme();
   const { renderGoogleButton } = useGoogleAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -42,16 +51,40 @@ const Signup = () => {
   const doPasswordsMatch =
     formData.confirmPassword && formData.password === formData.confirmPassword;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setError("");
+    
     // Check if passwords match
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords don't match!");
+      setError("Passwords don't match!");
       return;
     }
-
-    console.log("Signup attempt:", formData);
+    
+    // Check if terms are agreed to
+    if (!formData.agreeToTerms) {
+      setError("Please agree to the terms and conditions");
+      return;
+    }
+    
+    setIsLoading(true);
+    
+    try {
+      // Combine first and last name for the name parameter
+      const name = `${formData.firstName} ${formData.lastName}`.trim();
+      const response = await authService.signup(name, formData.email, formData.password);
+      
+      // Store user data and token in localStorage
+      localStorage.setItem("user", JSON.stringify(response.user));
+      localStorage.setItem("token", response.token);
+      
+      // Redirect to home page
+      navigate("/");
+    } catch (error) {
+      setError(error.message || "Signup failed. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -84,11 +117,6 @@ const Signup = () => {
 
   const isDark = theme === "dark";
 
-
-  useEffect(() => {
-    renderGoogleButton('google-signup-button');
-  }, [renderGoogleButton]);
-
   const checkPasswordRules = (password) => ({
     length: password.length >= 8,
     uppercase: /[A-Z]/.test(password),
@@ -111,6 +139,33 @@ const Signup = () => {
 
   const handleConfirmPasswordChange = (e) => {
     setFormData((prev) => ({ ...prev, confirmPassword: e.target.value }));
+  };
+
+   // ✅ ADDED: Google Signup success handler
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      const decoded = jwt_decode(credentialResponse.credential);
+      console.log("Google user data:", decoded);
+
+      // send to backend for signup/login
+      const response = await googleSignup({
+        name: decoded.name,
+        email: decoded.email,
+        googleId: decoded.sub,
+        picture: decoded.picture,
+      });
+
+      console.log("Backend signup success:", response);
+      alert("Signed up successfully with Google!");
+    } catch (err) {
+      console.error("Google signup failed:", err);
+      alert("Google signup failed. Please try again.");
+    }
+  };
+
+  const handleGoogleError = () => {
+    console.error("Google Login Failed");
+    alert("Google login failed. Try again.");
   };
 
 
@@ -335,9 +390,21 @@ const Signup = () => {
               )}
             </div>
 
-            {/* Submit Button */}
-            <button type="submit" className="submit-button">
-              Create Account
+            {/* Error Message */}
+            {error && (
+              <div className="error-message">
+                <AlertCircle size={16} />
+                <span>{error}</span>
+              </div>
+            )}
+
+            {/* Create Account Button */}
+            <button 
+              type="submit" 
+              className="submit-button"
+              disabled={isLoading}
+            >
+              {isLoading ? "Creating Account..." : "Create Account"}
             </button>
 
             {/* Login Link */}
@@ -356,21 +423,17 @@ const Signup = () => {
             <span className="separator-text">or</span>
           </div>
 
-          {/* Google Sign-Up Button */}
-          <div className="google-signup-container">
-            <div id="google-signup-button"></div>
-          </div>
-        </div>
-        <div className="google-login">
-          <GoogleLogin
-            onSuccess={(credentialResponse) => {
-              console.log("Google login success:", credentialResponse);
-              // You can send credentialResponse.credential to your backend to verify & login
-            }}
-            onError={() => {
-              console.log("Google login failed");
-            }}
-          />
+         {/* ✅ ADDED: Google Sign-Up Button */}
+          <div className="google-login">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={handleGoogleError}
+              type="standard"
+              theme={isDark ? "filled_black" : "outline"}
+              text="signup_with"
+              shape="rectangular"
+            />
+            </div>
         </div>
       </div>
     </div>

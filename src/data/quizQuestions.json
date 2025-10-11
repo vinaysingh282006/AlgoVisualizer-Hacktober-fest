@@ -5709,6 +5709,913 @@
         ],
         "correctAnswer": 0,
         "explanation": "Union-Find efficiently detects cycles in undirected graphs by checking if two vertices belong to the same set."
-    }                                                          
+    } ,
+    {
+        "id": 367,
+        "topic": "Other Topics",
+        "algorithm": "Kadane’s Algorithm",
+        "difficulty": "Easy",
+        "question": "What problem does Kadane’s Algorithm solve?",
+        "options": [
+            "Finding maximum sum subarray",
+            "Finding minimum spanning tree",
+            "Detecting cycles in a graph",
+            "Sorting an array"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Kadane’s Algorithm finds the maximum sum of a contiguous subarray."
+    },
+    {
+        "id": 368,
+        "topic": "Other Topics",
+        "algorithm": "Kadane’s Algorithm",
+        "difficulty": "Easy",
+        "question": "What is the time complexity of Kadane’s Algorithm?",
+        "options": [
+            "O(n)",
+            "O(n²)",
+            "O(log n)",
+            "O(n log n)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Kadane’s Algorithm runs in linear time O(n)."
+    },
+    {
+        "id": 369,
+        "topic": "Other Topics",
+        "algorithm": "Prim’s Algorithm",
+        "difficulty": "Easy",
+        "question": "What type of graph problem does Prim’s Algorithm solve?",
+        "options": [
+            "Minimum Spanning Tree",
+            "Shortest Path",
+            "Cycle Detection",
+            "Maximum Flow"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Prim’s Algorithm is used to find a minimum spanning tree."
+    },
+    {
+        "id": 370,
+        "topic": "Other Topics",
+        "algorithm": "Prim’s Algorithm",
+        "difficulty": "Easy",
+        "question": "Prim’s Algorithm starts from:",
+        "options": [
+            "Any arbitrary vertex",
+            "The vertex with the smallest degree",
+            "The vertex with the largest degree",
+            "The first vertex in the input"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Prim’s Algorithm can start from any vertex in the graph."
+    },
+    {
+        "id": 371,
+        "topic": "Other Topics",
+        "algorithm": "Kruskal’s Algorithm",
+        "difficulty": "Easy",
+        "question": "What data structure is commonly used by Kruskal’s Algorithm to detect cycles?",
+        "options": [
+            "Disjoint Set (Union-Find)",
+            "Stack",
+            "Queue",
+            "Priority Queue"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Disjoint Set (Union-Find) is used to detect cycles in Kruskal’s Algorithm."
+    },
+    {
+        "id": 372,
+        "topic": "Other Topics",
+        "algorithm": "Kruskal’s Algorithm",
+        "difficulty": "Easy",
+        "question": "Which of the following best describes Kruskal’s Algorithm?",
+        "options": [
+            "Adds edges in increasing order of weight",
+            "Adds vertices in decreasing order of degree",
+            "Performs DFS to find cycles",
+            "Uses dynamic programming"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Kruskal’s Algorithm adds edges in non-decreasing order of weight."
+    },
+    {
+        "id": 373,
+        "topic": "Other Topics",
+        "algorithm": "Kadane’s Algorithm",
+        "difficulty": "Easy",
+        "question": "Which of these arrays would Kadane’s Algorithm process correctly?",
+        "options": [
+            "Array with both positive and negative numbers",
+            "Only positive numbers",
+            "Only negative numbers",
+            "Only zeros"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Kadane’s Algorithm works on arrays containing positive and negative numbers."
+    },
+    {
+        "id": 374,
+        "topic": "Other Topics",
+        "algorithm": "Prim’s Algorithm",
+        "difficulty": "Easy",
+        "question": "Prim’s Algorithm can be implemented efficiently using:",
+        "options": [
+            "Priority Queue",
+            "Stack",
+            "Queue",
+            "Linked List"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Priority Queue helps efficiently pick the next minimum edge in Prim’s Algorithm."
+    },
+    {
+        "id": 375,
+        "topic": "Other Topics",
+        "algorithm": "Kruskal’s Algorithm",
+        "difficulty": "Easy",
+        "question": "Kruskal’s Algorithm requires the edges to be:",
+        "options": [
+            "Sorted by weight",
+            "Sorted by vertex number",
+            "Unsorted",
+            "Sorted by color"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Edges are sorted by weight before processing in Kruskal’s Algorithm."
+    },
+    {
+        "id": 376,
+        "topic": "Other Topics",
+        "algorithm": "Kadane’s Algorithm",
+        "difficulty": "Easy",
+        "question": "Kadane’s Algorithm is an example of:",
+        "options": [
+            "Dynamic Programming",
+            "Greedy Algorithm",
+            "Divide and Conquer",
+            "Backtracking"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Kadane’s Algorithm is a classic dynamic programming approach."
+    },
+    {
+        "id": 377,
+        "topic": "Other Topics",
+        "algorithm": "Kadane’s Algorithm",
+        "difficulty": "Medium",
+        "question": "How does Kadane’s Algorithm handle negative sums when calculating maximum subarray?",
+        "options": [
+            "Resets current sum to zero when it becomes negative",
+            "Ignores negative numbers",
+            "Always adds negative numbers",
+            "Stops immediately"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Kadane’s resets the current sum when it drops below zero to maximize the sum."
+    },
+    {
+        "id": 378,
+        "topic": "Other Topics",
+        "algorithm": "Kadane’s Algorithm",
+        "difficulty": "Medium",
+        "question": "What is the space complexity of Kadane’s Algorithm?",
+        "options": [
+            "O(1)",
+            "O(n)",
+            "O(log n)",
+            "O(n²)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Kadane’s Algorithm uses constant extra space."
+    },
+    {
+        "id": 379,
+        "topic": "Other Topics",
+        "algorithm": "Prim’s Algorithm",
+        "difficulty": "Medium",
+        "question": "What data structure is typically used to implement Prim’s Algorithm efficiently?",
+        "options": [
+            "Min-Heap (Priority Queue)",
+            "Stack",
+            "Queue",
+            "Array"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Min-Heap is used to efficiently pick the minimum weight edge."
+    },
+    {
+        "id": 380,
+        "topic": "Other Topics",
+        "algorithm": "Prim’s Algorithm",
+        "difficulty": "Medium",
+        "question": "Prim’s Algorithm is guaranteed to work only on:",
+        "options": [
+            "Connected graphs",
+            "Disconnected graphs",
+            "Directed graphs",
+            "Weighted graphs without cycles"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Prim’s Algorithm requires the graph to be connected."
+    },
+    {
+        "id": 381,
+        "topic": "Other Topics",
+        "algorithm": "Kruskal’s Algorithm",
+        "difficulty": "Medium",
+        "question": "What is the overall time complexity of Kruskal’s Algorithm using a good Union-Find structure?",
+        "options": [
+            "O(E log E)",
+            "O(V²)",
+            "O(E²)",
+            "O(V + E)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Sorting edges dominates time complexity, O(E log E)."
+    },
+    {
+        "id": 382,
+        "topic": "Other Topics",
+        "algorithm": "Kruskal’s Algorithm",
+        "difficulty": "Medium",
+        "question": "When does Kruskal’s Algorithm reject an edge while building MST?",
+        "options": [
+            "If adding the edge creates a cycle",
+            "If the edge is the heaviest",
+            "If the edge connects two disconnected components",
+            "If the edge is not adjacent to the current tree"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Edges creating cycles are rejected to keep MST acyclic."
+    },
+    {
+        "id": 383,
+        "topic": "Other Topics",
+        "algorithm": "Kadane’s Algorithm",
+        "difficulty": "Medium",
+        "question": "If all numbers in the array are negative, Kadane’s Algorithm should return:",
+        "options": [
+            "The maximum (least negative) element",
+            "Zero",
+            "Sum of all elements",
+            "Minimum element"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Kadane’s returns the maximum single element if all are negative."
+    },
+    {
+        "id": 384,
+        "topic": "Other Topics",
+        "algorithm": "Prim’s Algorithm",
+        "difficulty": "Medium",
+        "question": "What happens if Prim’s Algorithm is applied to a disconnected graph?",
+        "options": [
+            "It finds MST for one connected component only",
+            "It finds MST for the entire graph",
+            "It fails with an error",
+            "It converts graph to connected"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Prim’s only builds MST for the connected part it starts from."
+    },
+    {
+        "id": 385,
+        "topic": "Other Topics",
+        "algorithm": "Kruskal’s Algorithm",
+        "difficulty": "Medium",
+        "question": "Which of the following edge selections is valid in Kruskal’s Algorithm?",
+        "options": [
+            "Edges that connect two different components",
+            "Edges that form cycles",
+            "Edges with maximum weight first",
+            "Edges with the same vertices as previously selected edges"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Kruskal’s selects edges that connect different components to avoid cycles."
+    },
+    {
+        "id": 386,
+        "topic": "Other Topics",
+        "algorithm": "Kadane’s Algorithm",
+        "difficulty": "Medium",
+        "question": "Which technique does Kadane’s Algorithm primarily use to solve the problem?",
+        "options": [
+            "Dynamic programming",
+            "Greedy approach",
+            "Divide and conquer",
+            "Backtracking"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Kadane’s Algorithm is based on dynamic programming principles."
+    },
+    {
+        "id": 387,
+        "topic": "Other Topics",
+        "algorithm": "Kadane’s Algorithm",
+        "difficulty": "Hard",
+        "question": "How can Kadane’s Algorithm be modified to find the maximum product subarray instead of sum?",
+        "options": [
+            "Keep track of both maximum and minimum products at each step",
+            "Use the sum instead of product",
+            "Ignore negative numbers",
+            "Sort the array before applying"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Tracking both max and min products handles negative values affecting the product."
+    },
+    {
+        "id": 388,
+        "topic": "Other Topics",
+        "algorithm": "Kadane’s Algorithm",
+        "difficulty": "Hard",
+        "question": "What is a key limitation of Kadane’s Algorithm when applied directly to 2D arrays?",
+        "options": [
+            "It only works for 1D arrays",
+            "It cannot handle negative numbers",
+            "It requires sorted arrays",
+            "It only works for positive numbers"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Kadane’s is for 1D arrays; 2D maximum subarray requires extensions like fixing left and right boundaries."
+    },
+    {
+        "id": 389,
+        "topic": "Other Topics",
+        "algorithm": "Prim’s Algorithm",
+        "difficulty": "Hard",
+        "question": "What is the worst-case time complexity of Prim’s Algorithm implemented with an adjacency matrix?",
+        "options": [
+            "O(V²)",
+            "O(E log V)",
+            "O(V + E)",
+            "O(V log V)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Using adjacency matrix results in O(V²) time complexity."
+    },
+    {
+        "id": 390,
+        "topic": "Other Topics",
+        "algorithm": "Prim’s Algorithm",
+        "difficulty": "Hard",
+        "question": "How does the choice of data structure impact Prim’s Algorithm’s performance on sparse graphs?",
+        "options": [
+            "Min-heap reduces time complexity significantly",
+            "Linked list improves performance",
+            "Stack reduces complexity",
+            "Queue is the best choice"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Using a min-heap with adjacency lists optimizes Prim’s to O(E log V) on sparse graphs."
+    },
+    {
+        "id": 391,
+        "topic": "Other Topics",
+        "algorithm": "Kruskal’s Algorithm",
+        "difficulty": "Hard",
+        "question": "In Kruskal’s Algorithm, what optimization improves the efficiency of the Union-Find data structure?",
+        "options": [
+            "Union by rank and path compression",
+            "Stack implementation",
+            "Breadth-first search",
+            "Sorting edges twice"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Union by rank and path compression optimize Union-Find operations to near O(1)."
+    },
+    {
+        "id": 392,
+        "topic": "Other Topics",
+        "algorithm": "Kruskal’s Algorithm",
+        "difficulty": "Hard",
+        "question": "How does Kruskal’s Algorithm behave with graphs having multiple edges of the same weight?",
+        "options": [
+            "It can choose any edge among equals, resulting in multiple MSTs",
+            "It always chooses the first edge",
+            "It fails to find MST",
+            "It sorts edges by vertex number"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Multiple MSTs can exist when edges have the same weight; Kruskal’s may produce any valid MST."
+    },
+    {
+        "id": 393,
+        "topic": "Other Topics",
+        "algorithm": "Kadane’s Algorithm",
+        "difficulty": "Hard",
+        "question": "Can Kadane’s Algorithm be adapted to find the maximum sum of non-contiguous subarray? If yes, how?",
+        "options": [
+            "No, Kadane’s is for contiguous subarrays only",
+            "Yes, by modifying the algorithm to skip some elements",
+            "Yes, by sorting the array first",
+            "No, it works only on sorted arrays"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Kadane’s Algorithm specifically solves the maximum sum contiguous subarray problem; non-contiguous requires different approach."
+    },
+    {
+        "id": 394,
+        "topic": "Other Topics",
+        "algorithm": "Prim’s Algorithm",
+        "difficulty": "Hard",
+        "question": "How is Prim’s Algorithm modified to work on disconnected graphs?",
+        "options": [
+            "Run Prim’s on each connected component separately",
+            "Add edges to connect components arbitrarily",
+            "Ignore disconnected parts",
+            "Use DFS before Prim’s"
+        ],
+        "correctAnswer": 0,
+        "explanation": "To handle disconnected graphs, run Prim’s MST algorithm on each connected component."
+    },
+    {
+        "id": 395,
+        "topic": "Other Topics",
+        "algorithm": "Kruskal’s Algorithm",
+        "difficulty": "Hard",
+        "question": "What is the impact on Kruskal’s Algorithm if the input graph is already a tree?",
+        "options": [
+            "The algorithm immediately returns the tree as MST",
+            "It will add extra edges",
+            "It will fail to complete",
+            "It needs re-sorting edges"
+        ],
+        "correctAnswer": 0,
+        "explanation": "If input is already a tree (no cycles, V-1 edges), Kruskal’s simply returns it as MST."
+    },
+    {
+    "id": 396,
+    "topic": "Other Topics",
+    "algorithm": "Prim’s Algorithm",
+    "difficulty": "Hard",
+    "question": "In Prim’s Algorithm, if two edges have the same minimum weight during selection, what could be the possible consequence in a graph with multiple equal-weight edges?",
+    "options": [
+        "It may produce different but valid MSTs depending on the chosen edge",
+        "The algorithm will enter an infinite loop",
+        "The resulting MST will always be the same regardless of edge selection",
+        "The algorithm will fail to find any MST"
+    ],
+    "correctAnswer": 0,
+    "explanation": "When multiple edges have equal weights, Prim’s Algorithm may choose any of them, potentially resulting in different but equally valid minimum spanning trees since MSTs are not necessarily unique in such graphs."
+}
+
+,
+    {
+        "id": 397,
+        "topic": "Graph",
+        "algorithm": "BFS",
+        "difficulty": "Easy",
+        "question": "What does BFS stand for in graph algorithms?",
+        "options": [
+            "Breadth-First Search",
+            "Binary First Search",
+            "Best-Fit Search",
+            "Backtracking Forward Search"
+        ],
+        "correctAnswer": 0,
+        "explanation": "BFS stands for Breadth-First Search, which explores nodes level by level."
+    },
+    {
+        "id": 398,
+        "topic": "Graph",
+        "algorithm": "BFS",
+        "difficulty": "Easy",
+        "question": "Which data structure is commonly used to implement BFS?",
+        "options": [
+            "Queue",
+            "Stack",
+            "Heap",
+            "Disjoint Set"
+        ],
+        "correctAnswer": 0,
+        "explanation": "BFS uses a queue to explore nodes in level order."
+    },
+    {
+        "id": 399,
+        "topic": "Graph",
+        "algorithm": "DFS",
+        "difficulty": "Easy",
+        "question": "Which data structure is commonly used to implement DFS?",
+        "options": [
+            "Stack",
+            "Queue",
+            "Heap",
+            "Priority Queue"
+        ],
+        "correctAnswer": 0,
+        "explanation": "DFS uses a stack (explicit or via recursion) to explore nodes deeply before backtracking."
+    },
+    {
+        "id": 400,
+        "topic": "Graph",
+        "algorithm": "DFS",
+        "difficulty": "Easy",
+        "question": "DFS can be implemented recursively. True or False?",
+        "options": [
+            "True",
+            "False",
+            "Only for trees",
+            "Only for directed graphs"
+        ],
+        "correctAnswer": 0,
+        "explanation": "DFS can be implemented recursively using function call stack or iteratively with an explicit stack."
+    },
+    {
+        "id": 401,
+        "topic": "Graph",
+        "algorithm": "Dijkstra",
+        "difficulty": "Easy",
+        "question": "Dijkstra’s Algorithm is used to find:",
+        "options": [
+            "Shortest path from a source",
+            "Minimum spanning tree",
+            "All cycles in a graph",
+            "Maximum flow"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Dijkstra’s Algorithm computes the shortest distance from a source node to all other vertices."
+    },
+    {
+        "id": 402,
+        "topic": "Graph",
+        "algorithm": "Graph Comparison",
+        "difficulty": "Easy",
+        "question": "Which of the following correctly distinguishes a tree from a general graph?",
+        "options": [
+            "Tree has no cycles and is connected",
+            "Tree may have cycles",
+            "Tree can be disconnected",
+            "Tree always has weighted edges"
+        ],
+        "correctAnswer": 0,
+        "explanation": "A tree is an acyclic connected graph."
+    },
+    {
+        "id": 403,
+        "topic": "Graph",
+        "algorithm": "Cycle Detection",
+        "difficulty": "Easy",
+        "question": "Which of the following indicates a cycle in an undirected graph using DFS?",
+        "options": [
+            "Visiting an already visited node not parent",
+            "Visiting a node for the first time",
+            "Finding a leaf node",
+            "Counting number of edges"
+        ],
+        "correctAnswer": 0,
+        "explanation": "A back edge to a visited node other than the parent indicates a cycle."
+    },
+    {
+        "id": 404,
+        "topic": "Graph",
+        "algorithm": "BFS",
+        "difficulty": "Easy",
+        "question": "BFS is particularly suitable for finding:",
+        "options": [
+            "Shortest path in unweighted graphs",
+            "Maximum flow",
+            "Minimum spanning tree",
+            "Topological order"
+        ],
+        "correctAnswer": 0,
+        "explanation": "BFS finds the shortest path in graphs where all edges have equal weight."
+    },
+    {
+        "id": 405,
+        "topic": "Graph",
+        "algorithm": "DFS",
+        "difficulty": "Easy",
+        "question": "DFS traversal of a graph may produce:",
+        "options": [
+            "Depth-first tree",
+            "Breadth-first tree",
+            "Minimum spanning tree",
+            "Shortest path tree"
+        ],
+        "correctAnswer": 0,
+        "explanation": "DFS generates a depth-first tree showing the order of node discovery."
+    },
+    {
+        "id": 406,
+        "topic": "Graph",
+        "algorithm": "Dijkstra",
+        "difficulty": "Easy",
+        "question": "Dijkstra’s Algorithm does NOT work properly if:",
+        "options": [
+            "Graph has negative weight edges",
+            "Graph has cycles",
+            "Graph is disconnected",
+            "Graph has multiple paths"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Dijkstra’s cannot handle negative weight edges correctly."
+    },
+    
+    {
+        "id": 407,
+        "topic": "Graph",
+        "algorithm": "BFS",
+        "difficulty": "Medium",
+        "question": "What is the time complexity of BFS in a graph with V vertices and E edges?",
+        "options": [
+            "O(V + E)",
+            "O(V²)",
+            "O(E log V)",
+            "O(V E)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "BFS visits each vertex and edge once, giving O(V + E) complexity."
+    },
+    {
+        "id": 408,
+        "topic": "Graph",
+        "algorithm": "DFS",
+        "difficulty": "Medium",
+        "question": "Time complexity of DFS on a graph with V vertices and E edges is:",
+        "options": [
+            "O(V + E)",
+            "O(V²)",
+            "O(E²)",
+            "O(log V)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "DFS traverses all vertices and edges once, so time complexity is O(V + E)."
+    },
+    {
+        "id": 409,
+        "topic": "Graph",
+        "algorithm": "Dijkstra",
+        "difficulty": "Medium",
+        "question": "Which data structure optimizes Dijkstra’s Algorithm for sparse graphs?",
+        "options": [
+            "Min-Heap",
+            "Queue",
+            "Stack",
+            "Array"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Min-Heap helps efficiently pick the next vertex with minimum distance, reducing time on sparse graphs."
+    },
+    {
+        "id": 410,
+        "topic": "Graph",
+        "algorithm": "Graph Comparison",
+        "difficulty": "Medium",
+        "question": "Which is true about directed and undirected graphs?",
+        "options": [
+            "Directed graph edges have direction, undirected do not",
+            "Undirected graph edges have direction",
+            "Directed graphs cannot have cycles",
+            "Undirected graphs must be connected"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Directed graphs have edges with specific directions, while undirected graphs do not."
+    },
+    {
+        "id": 411,
+        "topic": "Graph",
+        "algorithm": "Cycle Detection",
+        "difficulty": "Medium",
+        "question": "Which algorithm detects cycles in a directed graph efficiently?",
+        "options": [
+            "DFS with recursion stack",
+            "BFS with queue",
+            "Kruskal’s Algorithm",
+            "Dijkstra’s Algorithm"
+        ],
+        "correctAnswer": 0,
+        "explanation": "DFS with recursion stack identifies back edges that form cycles in directed graphs."
+    },
+    {
+        "id": 412,
+        "topic": "Graph",
+        "algorithm": "BFS",
+        "difficulty": "Medium",
+        "question": "In BFS, the level of a node represents:",
+        "options": [
+            "Shortest distance from source in unweighted graph",
+            "Number of outgoing edges",
+            "Depth in DFS tree",
+            "Number of cycles containing node"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Level indicates how many edges are traversed from source to reach a node."
+    },
+    {
+        "id": 413,
+        "topic": "Graph",
+        "algorithm": "DFS",
+        "difficulty": "Medium",
+        "question": "Which of the following is a key property of DFS?",
+        "options": [
+            "Can be used for topological sorting",
+            "Always finds shortest paths",
+            "Requires weighted edges",
+            "Only works on trees"
+        ],
+        "correctAnswer": 0,
+        "explanation": "DFS helps in applications like topological sorting, cycle detection, and connectivity checks."
+    },
+    {
+        "id": 414,
+        "topic": "Graph",
+        "algorithm": "Dijkstra",
+        "difficulty": "Medium",
+        "question": "Dijkstra’s Algorithm produces a shortest path tree. What is true about this tree?",
+        "options": [
+            "Contains shortest paths from source to all vertices",
+            "Contains longest paths",
+            "Contains minimum spanning tree",
+            "Contains only edges with weight 1"
+        ],
+        "correctAnswer": 0,
+        "explanation": "The resulting tree gives shortest paths from the source to every reachable vertex."
+    },
+    {
+        "id": 415,
+        "topic": "Graph",
+        "algorithm": "Graph Comparison",
+        "difficulty": "Medium",
+        "question": "Which of the following is a weighted graph?",
+        "options": [
+            "Graph with numbers on edges indicating cost",
+            "Graph with only vertices",
+            "Graph with colors on nodes",
+            "Graph with direction on edges only"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Weighted graphs have numerical values (weights) assigned to edges."
+    },
+    {
+        "id": 416,
+        "topic": "Graph",
+        "algorithm": "Cycle Detection",
+        "difficulty": "Medium",
+        "question": "Union-Find is typically used for cycle detection in which graph type?",
+        "options": [
+            "Undirected graph",
+            "Directed graph",
+            "Weighted graph only",
+            "Tree only"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Union-Find efficiently checks for cycles in undirected graphs."
+    },
+    {
+        "id": 417,
+        "topic": "Graph",
+        "algorithm": "BFS",
+        "difficulty": "Hard",
+        "question": "What is the space complexity of BFS on a graph with V vertices and E edges?",
+        "options": [
+            "O(V + E)",
+            "O(V²)",
+            "O(log V)",
+            "O(E²)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "BFS requires space for the queue and visited set, giving O(V + E) space."
+    },
+    {
+        "id": 418,
+        "topic": "Graph",
+        "algorithm": "DFS",
+        "difficulty": "Hard",
+        "question": "DFS can detect connected components in an undirected graph. True or False?",
+        "options": [
+            "True",
+            "False",
+            "Only if graph is weighted",
+            "Only if graph is directed"
+        ],
+        "correctAnswer": 0,
+        "explanation": "DFS explores all reachable vertices, which helps in counting connected components."
+    },
+    {
+        "id": 419,
+        "topic": "Graph",
+        "algorithm": "Dijkstra",
+        "difficulty": "Hard",
+        "question": "Time complexity of Dijkstra’s Algorithm using min-heap is:",
+        "options": [
+            "O(E log V)",
+            "O(V²)",
+            "O(E + V)",
+            "O(V log E)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Using a min-heap, Dijkstra’s runs in O(E log V) time."
+    },
+    {
+        "id": 420,
+        "topic": "Graph",
+        "algorithm": "Graph Comparison",
+        "difficulty": "Hard",
+        "question": "Which graph representation is best for sparse graphs?",
+        "options": [
+            "Adjacency List",
+            "Adjacency Matrix",
+            "Edge List",
+            "Incidence Matrix"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Adjacency List uses less space for sparse graphs (O(V + E))."
+    },
+    {
+        "id": 421,
+        "topic": "Graph",
+        "algorithm": "Cycle Detection",
+        "difficulty": "Hard",
+        "question": "Kahn’s Algorithm can detect cycles in which type of graph?",
+        "options": [
+            "Directed graph",
+            "Undirected graph",
+            "Weighted graph",
+            "Tree"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Kahn’s Algorithm checks for cycles in directed graphs by attempting topological sort."
+    },
+    {
+        "id": 422,
+        "topic": "Graph",
+        "algorithm": "BFS",
+        "difficulty": "Hard",
+        "question": "In BFS, what can be used to reconstruct the shortest path from source to target?",
+        "options": [
+            "Parent array",
+            "Visited set only",
+            "Queue only",
+            "Stack"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Parent array stores the predecessor of each node to reconstruct the path."
+    },
+    {
+        "id": 423,
+        "topic": "Graph",
+        "algorithm": "DFS",
+        "difficulty": "Hard",
+        "question": "In DFS, discovery and finish times are useful for:",
+        "options": [
+            "Topological sorting and cycle detection",
+            "Finding shortest path",
+            "Calculating degree of vertices",
+            "Finding maximum flow"
+        ],
+        "correctAnswer": 0,
+        "explanation": "DFS timestamps are used in topological sort and identifying back edges for cycles."
+    },
+    {
+        "id": 424,
+        "topic": "Graph",
+        "algorithm": "Dijkstra",
+        "difficulty": "Hard",
+        "question": "Which property of Dijkstra’s Algorithm ensures correctness in non-negative weighted graphs?",
+        "options": [
+            "Greedy selection of minimum distance vertex",
+            "Using recursion",
+            "Using stack",
+            "Using BFS queue"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Dijkstra greedily selects the vertex with minimum distance at each step, ensuring correct shortest paths."
+    },
+    {
+        "id": 425,
+        "topic": "Graph",
+        "algorithm": "Graph Comparison",
+        "difficulty": "Hard",
+        "question": "Adjacency matrix representation is efficient for which graph type?",
+        "options": [
+            "Dense graphs",
+            "Sparse graphs",
+            "Directed acyclic graphs only",
+            "Trees only"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Adjacency matrices are efficient for dense graphs because all entries are used."
+    },
+    {
+        "id": 426,
+        "topic": "Graph",
+        "algorithm": "Cycle Detection",
+        "difficulty": "Hard",
+        "question": "Which algorithm detects cycles in undirected graphs using Union-Find?",
+        "options": [
+            "Kruskal’s Algorithm",
+            "Dijkstra’s Algorithm",
+            "DFS only",
+            "BFS only"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Kruskal’s Algorithm with Union-Find detects cycles by checking if vertices belong to the same set."
+    }
+
+
 ]
+                                                        
+
 

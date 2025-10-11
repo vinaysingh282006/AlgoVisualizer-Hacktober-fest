@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Upload, FileText, Check, AlertCircle, Download, Eye } from 'lucide-react';
+import { Upload, FileText, Check, AlertCircle, Download, Eye, Shuffle } from 'lucide-react';
 import '../styles/InputPanel.css';
 
 const InputPanel = ({ 
@@ -247,6 +247,32 @@ const InputPanel = ({
     }
   }, [sampleData, validateData, onDataLoaded]);
 
+  const generateRandomArray = useCallback((size = 20, min = 1, max = 100) => {
+    const randomArray = Array.from({ length: size }, () => 
+      Math.floor(Math.random() * (max - min + 1)) + min
+    );
+    return randomArray;
+  }, []);
+
+  const handleRandomize = useCallback(() => {
+    if (dataType !== 'array') {
+      setError('Randomize feature is currently only available for array data');
+      return;
+    }
+
+    try {
+      const randomData = generateRandomArray(20, 1, 100);
+      if (validateData(randomData)) {
+        onDataLoaded(randomData);
+        setTextInput(randomData.join(', '));
+        setSuccess('Random data generated successfully!');
+        setTimeout(() => setSuccess(''), 3000);
+      }
+    } catch (err) {
+      setError(err.message);
+    }
+  }, [dataType, generateRandomArray, validateData, onDataLoaded]);
+
   return (
     <div className={`input-panel ${className}`}>
       <div className="input-panel-header">
@@ -288,6 +314,16 @@ const InputPanel = ({
                 <Check size={16} />
                 Load Data
               </button>
+              {dataType === 'array' && (
+                <button 
+                  onClick={handleRandomize}
+                  className="btn btn-secondary"
+                  title="Generate random array data"
+                >
+                  <Shuffle size={16} />
+                  Randomize
+                </button>
+              )}
               {sampleData && (
                 <button 
                   onClick={() => setIsPreviewOpen(!isPreviewOpen)}
@@ -330,9 +366,10 @@ const InputPanel = ({
             <div className="sample-data-header">
               <h4>Sample Data</h4>
               <div className="sample-actions">
-                <button onClick={loadSampleData} className="btn btn-outline">
-                  Load Sample
-                </button>
+                <button onClick={loadSampleData} className="btn btn-outline btn-purple">
+  Load Sample
+</button>
+
                 <button onClick={downloadSample} className="btn btn-outline">
                   <Download size={16} />
                   Download
