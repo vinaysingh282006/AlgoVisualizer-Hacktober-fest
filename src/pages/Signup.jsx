@@ -14,7 +14,10 @@ import { useTheme } from "../ThemeContext";
 import { useGoogleAuth } from "../contexts/GoogleAuthContext";
 import authService from "../services/authService";
 import "../styles/Signup.css";
+// 🟢 ADDED:
 import { GoogleLogin } from "@react-oauth/google";
+import jwt_decode from "jwt-decode"; // ✅ To decode Google user data
+import { googleSignup } from "../services/authService"; // ✅ ADDED backend API call
 
 const Signup = () => {
   const { theme } = useTheme();
@@ -80,11 +83,6 @@ const Signup = () => {
 
   const isDark = theme === "dark";
 
-
-  useEffect(() => {
-    renderGoogleButton('google-signup-button');
-  }, [renderGoogleButton]);
-
   const checkPasswordRules = (password) => ({
     length: password.length >= 8,
     uppercase: /[A-Z]/.test(password),
@@ -107,6 +105,33 @@ const Signup = () => {
 
   const handleConfirmPasswordChange = (e) => {
     setFormData((prev) => ({ ...prev, confirmPassword: e.target.value }));
+  };
+
+   // ✅ ADDED: Google Signup success handler
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      const decoded = jwt_decode(credentialResponse.credential);
+      console.log("Google user data:", decoded);
+
+      // send to backend for signup/login
+      const response = await googleSignup({
+        name: decoded.name,
+        email: decoded.email,
+        googleId: decoded.sub,
+        picture: decoded.picture,
+      });
+
+      console.log("Backend signup success:", response);
+      alert("Signed up successfully with Google!");
+    } catch (err) {
+      console.error("Google signup failed:", err);
+      alert("Google signup failed. Please try again.");
+    }
+  };
+
+  const handleGoogleError = () => {
+    console.error("Google Login Failed");
+    alert("Google login failed. Try again.");
   };
 
 
@@ -364,21 +389,17 @@ const Signup = () => {
             <span className="separator-text">or</span>
           </div>
 
-          {/* Google Sign-Up Button */}
-          <div className="google-signup-container">
-            <div id="google-signup-button"></div>
-          </div>
-        </div>
-        <div className="google-login">
-          <GoogleLogin
-            onSuccess={(credentialResponse) => {
-              console.log("Google login success:", credentialResponse);
-              // You can send credentialResponse.credential to your backend to verify & login
-            }}
-            onError={() => {
-              console.log("Google login failed");
-            }}
-          />
+         {/* ✅ ADDED: Google Sign-Up Button */}
+          <div className="google-login">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={handleGoogleError}
+              type="standard"
+              theme={isDark ? "filled_black" : "outline"}
+              text="signup_with"
+              shape="rectangular"
+            />
+            </div>
         </div>
       </div>
     </div>

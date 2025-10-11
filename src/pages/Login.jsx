@@ -7,6 +7,9 @@ import { useGoogleAuth } from "../contexts/GoogleAuthContext";
 import authService from "../services/authService";
 import "../styles/Login.css";
 import { GoogleLogin } from "@react-oauth/google";
+import jwt_decode from "jwt-decode"; // 🟢 ADD: to decode Google token
+import { loginUserWithGoogle } from "../services/authService"; // 🟢 ADD: backend API call for Google login
+
 
 const Login = () => {
   const { theme } = useTheme();
@@ -58,10 +61,29 @@ const Login = () => {
 
   const isDark = theme === "dark";
 
-  useEffect(() => {
-    renderGoogleButton('google-signin-button');
-  }, [renderGoogleButton]);
+  
+  // 🟢 ADD: Handle Google login success
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      const decoded = jwt_decode(credentialResponse.credential);
+      console.log("Decoded Google User:", decoded);
 
+      // Call backend API to register/login this Google user
+      const res = await loginUserWithGoogle(credentialResponse.credential);
+      console.log("Backend login success:", res);
+
+      // After successful login, redirect user to home/dashboard
+      navigate("/");
+
+    } catch (error) {
+      console.error("Google login error:", error);
+    }
+  };
+
+  // 🟢 ADD: Handle Google login error
+  const handleGoogleError = () => {
+    console.log("Google login failed");
+  };
   return (
     <div className={`login-container ${isDark ? "login-dark" : "login-light"}`}>
       {/* Back Button */}
@@ -197,10 +219,14 @@ const Login = () => {
             <span className="separator-text">or</span>
           </div>
 
-          {/* Google Sign-In Button */}
-          <div className="google-signin-container">
-            <div id="google-signin-button"></div>
+          {/* 🟢 ADD: Google Sign-In Button */}
+          <div className="google-login">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={handleGoogleError}
+            />
           </div>
+
 
           {/* Demo Credentials */}
           <div className="demo-section">
