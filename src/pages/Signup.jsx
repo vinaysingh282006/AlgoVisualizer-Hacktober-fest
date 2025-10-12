@@ -3,10 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff, UserPlus, Mail, Lock, ArrowLeft, AlertCircle } from "lucide-react";
 import { useTheme } from "../ThemeContext";
 import authService from "../services/authService";
-import "../styles/Signup.css"; // Assuming a similar stylesheet exists
-// import { GoogleLogin } from "@react-oauth/google"; // Temporarily disabled
-// import { jwtDecode } from "jwt-decode"; // Temporarily disabled
-// import { googleSignup } from "../services/authService"; // Temporarily disabled
+import "../styles/Signup.css";
+// 🟢 ADDED:
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";  // ✅ To decode Google user data
+import { googleSignup } from "../services/authService"; // ✅ ADDED backend API call
 
 const Signup = () => {
   const { theme } = useTheme();

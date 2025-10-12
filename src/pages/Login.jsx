@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff, LogIn, Mail, Lock, ArrowLeft, AlertCircle } from "lucide-react";
 import { useTheme } from "../ThemeContext";
-// import { useGoogleAuth } from "../contexts/GoogleAuthContext"; // Temporarily disabled
-import authService from "../services/authService";
+import { useGoogleAuth } from "../contexts/GoogleAuthContext";
+import authService, { googleLogin  } from "../services/authService";
 import "../styles/Login.css";
-// import { GoogleLogin } from "@react-oauth/google"; // Temporarily disabled
-// import { jwtDecode } from "jwt-decode"; // Temporarily disabled
-// import { loginUserWithGoogle } from "../services/authService"; // Temporarily disabled
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode"; 
 
-// Helper function for password validation
+// 🔹 Helper function for password validation
 const validatePassword = (password) => {
   const errors = [];
   if (password.length < 8) errors.push("At least 8 characters");
@@ -40,14 +39,17 @@ const Login = () => {
     e.preventDefault();
     setError("");
     setIsLoading(true);
-    
+
     try {
       const response = await authService.login(formData.email, formData.password);
+
       localStorage.setItem("user", JSON.stringify(response.user));
       localStorage.setItem("token", response.token);
+
       if (formData.rememberMe) {
         localStorage.setItem("rememberMe", "true");
       }
+
       navigate("/");
     } catch (error) {
       setError(error.message || "Login failed. Please check your credentials.");
@@ -63,6 +65,7 @@ const Login = () => {
       [name]: type === "checkbox" ? checked : value,
     }));
 
+    // 🔹 Real-time password validation
     if (name === "password") {
       setPasswordErrors(validatePassword(value));
     }
@@ -70,14 +73,15 @@ const Login = () => {
 
   const isDark = theme === "dark";
 
-  // Temporarily disable Google login handlers due to incomplete feature in master branch
-  /*
   const handleGoogleSuccess = async (credentialResponse) => {
     try {
+      // const decoded = jwt_decode(credentialResponse.credential);
       const decoded = jwtDecode(credentialResponse.credential);
       console.log("Decoded Google User:", decoded);
+
       const res = await loginUserWithGoogle(credentialResponse.credential);
       console.log("Backend login success:", res);
+
       navigate("/");
     } catch (error) {
       console.error("Google login error:", error);
@@ -147,13 +151,10 @@ const Login = () => {
                   className="password-toggle"
                   onClick={() => setShowPassword(!showPassword)}
                 >
-                  {showPassword ? (
-                    <EyeOff className="toggle-icon" />
-                  ) : (
-                    <Eye className="toggle-icon" />
-                  )}
+                  {showPassword ? <EyeOff className="toggle-icon" /> : <Eye className="toggle-icon" />}
                 </button>
               </div>
+
               {passwordErrors.length > 0 && (
                 <ul className="password-errors">
                   {passwordErrors.map((err, idx) => (
@@ -175,7 +176,9 @@ const Login = () => {
                 />
                 <label htmlFor="rememberMe" className="checkbox-label">Remember me</label>
               </div>
-              <Link to="/forgot-password" className="forgot-password">Forgot password?</Link>
+              <Link to="/forgot-password" className="forgot-password">
+                Forgot password?
+              </Link>
             </div>
 
             {error && (
@@ -184,7 +187,7 @@ const Login = () => {
                 <span>{error}</span>
               </div>
             )}
-            
+
             <button type="submit" className="submit-button" disabled={isLoading}>
               {isLoading ? "Signing in..." : "Sign in"}
             </button>
@@ -197,9 +200,9 @@ const Login = () => {
             </div>
           </form>
 
-          {/* Temporarily disable Google login due to incomplete feature in master branch */}
-          {/*
-          <div className="separator"><span className="separator-text">or</span></div>
+          <div className="separator">
+            <span className="separator-text">or</span>
+          </div>
 
           <div className="google-login">
             <GoogleLogin
@@ -221,4 +224,3 @@ const Login = () => {
 };
 
 export default Login;
-
