@@ -16,7 +16,7 @@ import authService from "../services/authService";
 import "../styles/Signup.css";
 // 🟢 ADDED:
 import { GoogleLogin } from "@react-oauth/google";
-import jwt_decode from "jwt-decode"; // ✅ To decode Google user data
+import { jwtDecode } from "jwt-decode";  // ✅ To decode Google user data
 import { googleSignup } from "../services/authService"; // ✅ ADDED backend API call
 
 const Signup = () => {
