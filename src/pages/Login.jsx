@@ -91,8 +91,7 @@ const Login = () => {
   const handleGoogleError = () => {
     console.log("Google login failed");
   };
-  */
-
+  
   return (
     <div className={`login-container ${isDark ? "login-dark" : "login-light"}`}>
       <Link to="/" className="login-back-button">
