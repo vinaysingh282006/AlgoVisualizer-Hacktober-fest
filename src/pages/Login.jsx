@@ -21,7 +21,7 @@ const validatePassword = (password) => {
 
 const Login = () => {
   const { theme } = useTheme();
-  const { renderGoogleButton } = useGoogleAuth();
+  // const { renderGoogleButton } = useGoogleAuth(); // Temporarily disabled
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -91,7 +91,7 @@ const Login = () => {
   const handleGoogleError = () => {
     console.log("Google login failed");
   };
-
+  
   return (
     <div className={`login-container ${isDark ? "login-dark" : "login-light"}`}>
       <Link to="/" className="login-back-button">
@@ -173,9 +173,7 @@ const Login = () => {
                   onChange={handleChange}
                   className="checkbox"
                 />
-                <label htmlFor="rememberMe" className="checkbox-label">
-                  Remember me
-                </label>
+                <label htmlFor="rememberMe" className="checkbox-label">Remember me</label>
               </div>
               <Link to="/forgot-password" className="forgot-password">
                 Forgot password?
@@ -211,6 +209,7 @@ const Login = () => {
               onError={handleGoogleError}
             />
           </div>
+          */}
 
           <div className="demo-section">
             <p className="demo-text">
