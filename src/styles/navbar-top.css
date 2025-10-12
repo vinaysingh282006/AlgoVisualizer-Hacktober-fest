@@ -564,6 +564,7 @@ body {
   background: linear-gradient(135deg, var(--primary-color-alpha), transparent);
   flex-shrink: 0; /* Prevent header compression */
   position: relative; /* For backdrop alignment */
+  /* height: 100vh; */
 }
 
 .mobile-menu-header-content {
@@ -571,7 +572,8 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.5rem;
-  width: 100%; /* Full width for alignment */
+  width: 100%;
+  
 }
 
 .mobile-menu-title {
