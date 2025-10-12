@@ -5448,93 +5448,91 @@
     {
         "id": 349,
         "topic": "Other Topics",
-        "algorithm": "Rabin-Karp Algorithm",
-        "difficulty": "Easy",
-        "question": "What is the Rabin-Karp algorithm mainly used for?",
-        "options": [
-            "Pattern searching in strings",
-            "Finding shortest paths",
-            "Sorting arrays",
-            "Building trees"
-        ],
-        "correctAnswer": 0,
-        "explanation": "Rabin-Karp is a string-searching algorithm that uses hashing to find a pattern in a text."
-    },
+    "algorithm": "Hashing",
+    "difficulty": "Easy",
+    "question": "What is the primary purpose of a hash function in a hash table?",
+    "options": [
+        "To map keys to specific indices in the table",
+        "To sort data in ascending order",
+        "To compress data efficiently",
+        "To encrypt data for security"
+    ],
+    "correctAnswer": 0,
+    "explanation": "A hash function maps keys to specific indices in a hash table, allowing for efficient data retrieval and storage."
+},
     {
         "id": 350,
-        "topic": "Other Topics",
-        "algorithm": "Rabin-Karp Algorithm",
-        "difficulty": "Easy",
-        "question": "What technique does Rabin-Karp use to compare substrings efficiently?",
-        "options": [
-            "Hashing",
-            "Dynamic programming",
-            "Binary search",
-            "Recursion"
-        ],
-        "correctAnswer": 0,
-        "explanation": "Rabin-Karp uses rolling hash functions to compare substring hashes instead of characters."
-    },
+         "topic": "Other Topics",
+    "algorithm": "Branch and Bound",
+    "difficulty": "Easy",
+    "question": "What is the main idea behind the Branch and Bound technique?",
+    "options": [
+        "Dividing the problem into smaller subproblems and pruning unpromising ones",
+        "Randomly selecting a branch to explore first",
+        "Storing all possible solutions before choosing the best one",
+        "Sorting data before solving the problem"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Branch and Bound systematically divides a problem into subproblems (branching) and eliminates those that cannot yield better solutions (bounding), reducing computation time."
+},
     {
-        "id": 351,
         "topic": "Other Topics",
-        "algorithm": "Rabin-Karp Algorithm",
-        "difficulty": "Medium",
-        "question": "What is the average time complexity of Rabin-Karp?",
-        "options": [
-            "O(n + m)",
-            "O(nm)",
-            "O(log n)",
-            "O(1)"
-        ],
-        "correctAnswer": 0,
-        "explanation": "On average, Rabin-Karp performs efficiently in O(n + m) time using rolling hashes."
-    },
+    "algorithm": "Branch and Bound",
+    "difficulty": "Easy",
+    "question": "In the Branch and Bound algorithm, what does the upper bound function represent?",
+    "options": [
+        "An estimate of the best possible solution from a node",
+        "The number of nodes explored so far",
+        "The smallest value of the objective function found",
+        "The total number of branches in the tree"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The upper bound function provides an estimate of the best possible (maximum or minimum) value that can be obtained from a given node, helping to prune less promising branches."
+},
     {
         "id": 352,
         "topic": "Other Topics",
-        "algorithm": "Rabin-Karp Algorithm",
-        "difficulty": "Medium",
-        "question": "What causes Rabin-Karp to perform poorly in the worst case?",
-        "options": [
-            "Hash collisions",
-            "Large input size",
-            "Recursion overhead",
-            "Pattern mismatch"
-        ],
-        "correctAnswer": 0,
-        "explanation": "When hash collisions occur frequently, extra character comparisons cause O(nm) time."
-    },
+    "algorithm": "Upper Bound Function",
+    "difficulty": "Medium",
+    "question": "Given a sorted array `arr = [2, 4, 4, 4, 6, 8]`, what is the index returned by the upper_bound function for the value `4`?",
+    "options": [
+        "1",
+        "3",
+        "4",
+        "5"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The upper_bound function returns the index of the first element greater than the given value. Here, the first element greater than 4 is 6 at index 4."
+},
     {
         "id": 353,
-        "topic": "Other Topics",
-        "algorithm": "Rabin-Karp Algorithm",
-        "difficulty": "Hard",
-        "question": "Rabin-Karp uses a rolling hash to:",
-        "options": [
-            "Compute next substring hash in O(1)",
-            "Recompute entire hash from scratch",
-            "Store previous substring only",
-            "Encrypt the pattern"
-        ],
-        "correctAnswer": 0,
-        "explanation": "Rolling hash updates the hash value in constant time as the window slides across text."
-    },
+         "topic": "Other Topics",
+    "algorithm": "Lower Bound Function",
+    "difficulty": "Hard",
+    "question": "Let `arr` be a sorted array. The lower_bound function returns the smallest index `i` such that `arr[i] >= x`. Which of the following mathematical conditions correctly represents this?",
+    "options": [
+        "arr[i] > x and arr[i-1] <= x",
+        "arr[i] >= x and arr[i-1] < x",
+        "arr[i] >= x and arr[i+1] > x",
+        "arr[i] > x and arr[i+1] >= x"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Lower bound finds the first position where the element is greater than or equal to `x`. The element just before it must be less than `x`."
+},
     {
         "id": 354,
-        "topic": "Other Topics",
-        "algorithm": "Rabin-Karp Algorithm",
-        "difficulty": "Hard",
-        "question": "Which of the following is an example of a good modulus for Rabin-Karp hashing?",
-        "options": [
-            "A large prime number",
-            "A power of two",
-            "A random integer",
-            "The ASCII value of a character"
-        ],
-        "correctAnswer": 0,
-        "explanation": "Using a large prime modulus minimizes collisions in the hash values."
-    },
+         "algorithm": "Asymptotic Notations",
+    "difficulty": "Hard",
+    "question": "Suppose a function `f(n) = 3n^2 + 5n log n + 20`. Which of the following statements is correct regarding its asymptotic bounds?",
+    "options": [
+        "f(n) = O(n^2), f(n) = Ω(n^2), f(n) = Θ(n^2)",
+        "f(n) = O(n^3), f(n) = Ω(n^2), f(n) = Θ(n^2)",
+        "f(n) = O(n^2 log n), f(n) = Ω(n^2), f(n) = Θ(n^2 log n)",
+        "f(n) = O(n^2), f(n) = Ω(n log n), f(n) = Θ(n^2 log n)"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The dominant term is 3n^2. Therefore, f(n) grows as n^2 asymptotically, making O(n^2), Ω(n^2), and Θ(n^2) all correct. Lower order terms like 5n log n do not affect the Θ notation."
+},
     {
         "id": 355,
         "topic": "Data Structures",
@@ -6617,7 +6615,475 @@
         ],
         "correctAnswer": 0,
         "explanation": "Kruskal’s Algorithm with Union-Find detects cycles by checking if vertices belong to the same set."
+    },
+    
+    {
+        "id": 427,
+        "topic": "String Algorithms",
+        "algorithm": "KMP Algorithm",
+        "difficulty": "Easy",
+        "question": "What is the primary goal of the KMP algorithm?",
+        "options": [
+            "To efficiently find a pattern in a text",
+            "To count unique substrings in a string",
+            "To compress large text files",
+            "To generate random text patterns"
+        ],
+        "correctAnswer": 0,
+        "explanation": "KMP efficiently finds occurrences of a pattern in a text by preprocessing the pattern to avoid redundant comparisons."
+    },
+    {
+        "id": 428,
+        "topic": "String Algorithms",
+        "algorithm": "KMP Algorithm",
+        "difficulty": "Easy",
+        "question": "Which preprocessing table is used in KMP?",
+        "options": [
+            "LPS (Longest Prefix Suffix)",
+            "Z Array",
+            "Hash Table",
+            "Prefix Sum Array"
+        ],
+        "correctAnswer": 0,
+        "explanation": "The LPS array stores the longest proper prefix which is also a suffix, helping skip unnecessary comparisons."
+    },
+    {
+        "id": 429,
+        "topic": "String Algorithms",
+        "algorithm": "Rabin-Karp Algorithm",
+        "difficulty": "Easy",
+        "question": "Which technique is the basis of the Rabin-Karp algorithm?",
+        "options": [
+            "Hashing",
+            "Divide and Conquer",
+            "Dynamic Programming",
+            "Greedy Method"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Rabin-Karp uses hashing to compare substring hashes efficiently instead of comparing character by character."
+    },
+    {
+        "id": 430,
+        "topic": "String Algorithms",
+        "algorithm": "Rabin-Karp Algorithm",
+        "difficulty": "Easy",
+        "question": "What is the average case time complexity of the Rabin-Karp algorithm?",
+        "options": [
+            "O(n + m)",
+            "O(n*m)",
+            "O(log n)",
+            "O(n^2)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Rabin–Karp performs in O(n + m) on average using efficient rolling hash updates."
+    },
+    {
+        "id": 431,
+        "topic": "String Algorithms",
+        "algorithm": "Z Algorithm",
+        "difficulty": "Easy",
+        "question": "What does the Z array represent in the Z algorithm?",
+        "options": [
+            "The length of the longest substring starting at each position that matches the prefix",
+            "Prefix sum values",
+            "Hash codes of prefixes",
+            "Number of unique substrings"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Each Z value represents how many characters from that position match the prefix of the string."
+    },
+    {
+        "id": 432,
+        "topic": "String Algorithms",
+        "algorithm": "Suffix Array",
+        "difficulty": "Easy",
+        "question": "A suffix array is a sorted array of:",
+        "options": [
+            "All suffix indices of a string",
+            "All prefixes of a string",
+            "All unique characters",
+            "All substrings of equal length"
+        ],
+        "correctAnswer": 0,
+        "explanation": "A suffix array stores sorted indices of all suffixes of a string for efficient searching."
+    },
+    {
+        "id": 433,
+        "topic": "String Algorithms",
+        "algorithm": "KMP Algorithm",
+        "difficulty": "Easy",
+        "question": "What is the time complexity of KMP in the worst case?",
+        "options": [
+            "O(n + m)",
+            "O(n*m)",
+            "O(log n)",
+            "O(n^2)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "KMP guarantees linear time complexity by skipping redundant comparisons using the LPS table."
+    },
+    {
+        "id": 434,
+        "topic": "String Algorithms",
+        "algorithm": "Rabin-Karp Algorithm",
+        "difficulty": "Easy",
+        "question": "Why might Rabin-Karp produce false positives?",
+        "options": [
+            "Due to hash collisions",
+            "Due to recursion errors",
+            "Due to wrong pattern length",
+            "Due to low memory"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Different substrings can yield the same hash value, leading to false positive matches."
+    },
+    {
+        "id": 435,
+        "topic": "String Algorithms",
+        "algorithm": "Z Algorithm",
+        "difficulty": "Easy",
+        "question": "What is the time complexity of the Z algorithm?",
+        "options": [
+            "O(n)",
+            "O(n log n)",
+            "O(n^2)",
+            "O(log n)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "The Z algorithm computes all Z values in O(n) time using an efficient window-based approach."
+    },
+    {
+        "id": 436,
+        "topic": "String Algorithms",
+        "algorithm": "Suffix Array",
+        "difficulty": "Easy",
+        "question": "Which data structure is commonly used with a suffix array to find the longest repeated substring?",
+        "options": [
+            "LCP (Longest Common Prefix) array",
+            "Z array",
+            "Stack",
+            "Binary Tree"
+        ],
+        "correctAnswer": 0,
+        "explanation": "The LCP array stores lengths of longest common prefixes between adjacent suffixes in the suffix array."
+    },
+    {
+        "id": 437,
+        "topic": "String Algorithms",
+        "algorithm": "KMP Algorithm",
+        "difficulty": "Medium",
+        "question": "How does the KMP algorithm handle mismatches efficiently?",
+        "options": [
+            "It uses the LPS array to skip comparisons",
+            "It restarts the match from the beginning",
+            "It hashes substrings again",
+            "It reverses the pattern"
+        ],
+        "correctAnswer": 0,
+        "explanation": "KMP uses the LPS array to determine how many characters can be skipped after a mismatch."
+    },
+    {
+        "id": 438,
+        "topic": "String Algorithms",
+        "algorithm": "Rabin-Karp Algorithm",
+        "difficulty": "Medium",
+        "question": "What type of hash function is typically used in Rabin-Karp?",
+        "options": [
+            "Rolling hash",
+            "Static hash",
+            "Cryptographic hash",
+            "Prefix hash"
+        ],
+        "correctAnswer": 0,
+        "explanation": "A rolling hash allows updating substring hashes in O(1) time as the window slides."
+    },
+    {
+        "id": 439,
+        "topic": "String Algorithms",
+        "algorithm": "Z Algorithm",
+        "difficulty": "Medium",
+        "question": "How can the Z algorithm be used for pattern searching?",
+        "options": [
+            "Concatenate pattern + '$' + text and compute Z array",
+            "Compute prefix sums of the text",
+            "Reverse the pattern and compare",
+            "Use recursion on substrings"
+        ],
+        "correctAnswer": 0,
+        "explanation": "By concatenating pattern + '$' + text and computing Z values, matches are found where Z equals the pattern length."
+    },
+    {
+        "id": 440,
+        "topic": "String Algorithms",
+        "algorithm": "Suffix Array",
+        "difficulty": "Medium",
+        "question": "Which sorting method helps build suffix arrays efficiently?",
+        "options": [
+            "Radix sort",
+            "Bubble sort",
+            "Heap sort",
+            "Selection sort"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Radix sort enables efficient suffix array construction by sorting based on prefix ranks."
+    },
+    {
+        "id": 441,
+        "topic": "String Algorithms",
+        "algorithm": "KMP Algorithm",
+        "difficulty": "Medium",
+        "question": "What is the space complexity of KMP?",
+        "options": [
+            "O(m)",
+            "O(n)",
+            "O(n + m)",
+            "O(1)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "KMP uses O(m) space for storing the LPS array of the pattern."
+    },
+    {
+        "id": 442,
+        "topic": "String Algorithms",
+        "algorithm": "Rabin-Karp Algorithm",
+        "difficulty": "Medium",
+        "question": "How can hash collisions be minimized in Rabin-Karp?",
+        "options": [
+            "By using a large prime modulus and proper base",
+            "By reversing the pattern",
+            "By reducing text size",
+            "By ignoring modulus operation"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Using a large prime modulus reduces hash collisions in rolling hash computations."
+    },
+    {
+        "id": 443,
+        "topic": "String Algorithms",
+        "algorithm": "Z Algorithm",
+        "difficulty": "Medium",
+        "question": "What property makes the Z algorithm faster than naive pattern matching?",
+        "options": [
+            "It avoids re-comparing matched characters",
+            "It hashes substrings",
+            "It uses recursion",
+            "It stores all substrings"
+        ],
+        "correctAnswer": 0,
+        "explanation": "By maintaining a Z-box, the algorithm skips re-evaluating overlapping parts of matches."
+    },
+    {
+        "id": 444,
+        "topic": "String Algorithms",
+        "algorithm": "Suffix Array",
+        "difficulty": "Medium",
+        "question": "Suffix arrays are often used as a space-efficient alternative to which structure?",
+        "options": [
+            "Suffix Trees",
+            "Tries",
+            "Stacks",
+            "Heaps"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Suffix arrays use less space than suffix trees while providing similar functionality for substring operations."
+    },
+    {
+        "id": 445,
+        "topic": "String Algorithms",
+        "algorithm": "KMP Algorithm",
+        "difficulty": "Medium",
+        "question": "In KMP, what does LPS[i] represent?",
+        "options": [
+            "Length of longest proper prefix which is also suffix for substring ending at i",
+            "Longest repeated substring",
+            "Length of palindrome centered at i",
+            "Count of unique substrings"
+        ],
+        "correctAnswer": 0,
+        "explanation": "LPS[i] stores the length of the longest proper prefix which is also a suffix up to index i."
+    },
+    {
+        "id": 446,
+        "topic": "String Algorithms",
+        "algorithm": "Suffix Array",
+        "difficulty": "Medium",
+        "question": "What is the typical time complexity of building a suffix array using doubling?",
+        "options": [
+            "O(n log n)",
+            "O(n^2)",
+            "O(n)",
+            "O(log n)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Suffix arrays can be built in O(n log n) using prefix doubling with sorting."
+    },
+    {
+        "id": 447,
+        "topic": "String Algorithms",
+        "algorithm": "Rabin-Karp Algorithm",
+        "difficulty": "Hard",
+        "question": "What is the worst-case complexity of Rabin-Karp due to hash collisions?",
+        "options": [
+            "O(n*m)",
+            "O(n + m)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "When hash collisions are frequent, Rabin-Karp may degrade to O(n*m) comparisons."
+    },
+    {
+        "id": 448,
+        "topic": "String Algorithms",
+        "algorithm": "KMP Algorithm",
+        "difficulty": "Hard",
+        "question": "How does KMP perform when all characters in the pattern and text are the same?",
+        "options": [
+            "It still runs in O(n + m)",
+            "It degrades to O(n*m)",
+            "It requires hashing",
+            "It terminates early"
+        ],
+        "correctAnswer": 0,
+        "explanation": "KMP maintains linear time performance even for uniform strings due to its LPS optimization."
+    },
+    {
+        "id": 449,
+        "topic": "String Algorithms",
+        "algorithm": "Z Algorithm",
+        "difficulty": "Hard",
+        "question": "How can Z algorithm help find the longest substring repeated twice?",
+        "options": [
+            "By taking maximum Z value with repetition",
+            "By sorting suffixes",
+            "By hashing substrings",
+            "By comparing LCP values"
+        ],
+        "correctAnswer": 0,
+        "explanation": "The maximum Z value represents the longest repeated prefix occurring elsewhere in the string."
+    },
+    {
+        "id": 450,
+        "topic": "String Algorithms",
+        "algorithm": "Suffix Array",
+        "difficulty": "Hard",
+        "question": "How can a suffix array and LCP array be used to find the longest repeated substring?",
+        "options": [
+            "By finding the maximum LCP value",
+            "By comparing first and last suffix",
+            "By hashing suffixes",
+            "By sorting LPS values"
+        ],
+        "correctAnswer": 0,
+        "explanation": "The maximum value in the LCP array gives the length of the longest repeated substring."
+    },
+    {
+        "id": 451,
+        "topic": "String Algorithms",
+        "algorithm": "Rabin-Karp Algorithm",
+        "difficulty": "Hard",
+        "question": "Why is Rabin-Karp suitable for multiple pattern matching?",
+        "options": [
+            "It allows comparing multiple hashes simultaneously",
+            "It skips hash computation",
+            "It uses recursion for all patterns",
+            "It sorts all substrings"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Rabin-Karp efficiently matches multiple patterns by storing and comparing multiple hash values."
+    },
+    {
+        "id": 452,
+        "topic": "String Algorithms",
+        "algorithm": "Suffix Array",
+        "difficulty": "Hard",
+        "question": "What makes suffix arrays efficient for substring search?",
+        "options": [
+            "Binary search on sorted suffix indices",
+            "Linear scan of suffixes",
+            "Random hashing",
+            "Prefix sums"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Since suffixes are lexicographically sorted, binary search can efficiently locate substring matches."
+    },
+    {
+        "id": 453,
+        "topic": "String Algorithms",
+        "algorithm": "Z Algorithm",
+        "difficulty": "Hard",
+        "question": "Which is the space complexity of the Z algorithm?",
+        "options": [
+            "O(n)",
+            "O(n^2)",
+            "O(log n)",
+            "O(1)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "The Z algorithm uses O(n) space to store the Z array for all positions."
+    },
+    {
+        "id": 454,
+        "topic": "String Algorithms",
+        "algorithm": "KMP Algorithm",
+        "difficulty": "Hard",
+        "question": "What preprocessing step is required before using KMP?",
+        "options": [
+            "Computing the LPS array",
+            "Building a suffix tree",
+            "Creating a Z array",
+            "Sorting prefixes"
+        ],
+        "correctAnswer": 0,
+        "explanation": "KMP requires computing the LPS array before matching to enable efficient skips on mismatches."
+    },
+    {
+        "id": 455,
+        "topic": "String Algorithms",
+        "algorithm": "Rabin-Karp Algorithm",
+        "difficulty": "Hard",
+        "question": "What happens if a small modulus is used in Rabin-Karp?",
+        "options": [
+            "More hash collisions occur",
+            "The algorithm runs faster",
+            "No effect on performance",
+            "Pattern matching fails"
+        ],
+        "correctAnswer": 0,
+        "explanation": "A small modulus leads to frequent hash collisions, reducing performance reliability."
+    },
+    {
+        "id": 456,
+        "topic": "String Algorithms",
+        "algorithm": "Suffix Array",
+        "difficulty": "Hard",
+        "question": "Which algorithm can construct a suffix array in O(n) time?",
+        "options": [
+            "SA-IS algorithm",
+            "KMP",
+            "Rabin-Karp",
+            "Merge Sort"
+        ],
+        "correctAnswer": 0,
+        "explanation": "The SA-IS algorithm constructs a suffix array in O(n) time using induced sorting."
+    },
+    {
+        "id": 457,
+        "topic": "String Algorithms",
+        "algorithm": "Z Algorithm",
+        "difficulty": "Hard",
+        "question": "In pattern matching using Z algorithm, what indicates a match?",
+        "options": [
+            "Z value equal to the pattern length",
+            "Z value equal to zero",
+            "Z value greater than text length",
+            "Z value less than prefix length"
+        ],
+        "correctAnswer": 0,
+        "explanation": "When Z value equals pattern length, it signifies a full match of the pattern at that position in the text."
     }
+
+
 
 
 ]

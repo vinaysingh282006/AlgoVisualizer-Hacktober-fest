@@ -18,7 +18,7 @@ const NotificationWidget = () => {
   }, []);
 
   return (
-    <div className={`absolute z-[2001] ${isMobile ? "top-20 left-2.5" : "top-[92px] left-5"}`}>
+    <div className={`absolute z-[900] ${isMobile ? "top-20 left-2.5" : "top-[92px] left-5"}`}>
       <button
         className={`px-${isMobile ? "2" : "3"} py-${isMobile ? "1.5" : "2"} text-${isMobile ? "xs" : "sm"} rounded-lg border border-gray-300 bg-white text-gray-800 shadow transition-all whitespace-nowrap`}
         onClick={() => setOpen(!open)}
