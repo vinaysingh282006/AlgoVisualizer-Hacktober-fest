@@ -2229,7 +2229,11 @@ body.dark-mode .step-duration-tag {
 .algorithm-buttons .clean-button-link:hover{
   transition:translateY(-20px);
   box-shadow: var(--ui-shadow-stacked);
-  background: black;
+  background: linear-gradient(
+    90deg,
+    var(--primary-color) 0%,
+    var(--accent-color) 100%
+  );
   color: white;
 }
 
