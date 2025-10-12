@@ -6,8 +6,8 @@ import { useGoogleAuth } from "../contexts/GoogleAuthContext";
 import authService from "../services/authService";
 import "../styles/Login.css";
 import { GoogleLogin } from "@react-oauth/google";
-import jwt_decode from "jwt-decode"; // 🟢 ADD: to decode Google token
-import { loginUserWithGoogle } from "../services/authService"; // 🟢 ADD: backend API call for Google login
+import { jwtDecode } from "jwt-decode"; // 🟢 FIXED: Use named import instead of default
+import { googleLogin } from "../services/authService"; // 🟢 FIXED: Import correct function name
 
 
 
@@ -71,24 +71,24 @@ const Login = () => {
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
-  };
-  
-   // 🔹 Real-time password validation
+    
+    // 🔹 Real-time password validation
     if (name === "password") {
       setPasswordErrors(validatePassword(value));
     }
   };
+  
   const isDark = theme === "dark";
 
   
   // 🟢 ADD: Handle Google login success
   const handleGoogleSuccess = async (credentialResponse) => {
     try {
-      const decoded = jwt_decode(credentialResponse.credential);
+      const decoded = jwtDecode(credentialResponse.credential);
       console.log("Decoded Google User:", decoded);
 
       // Call backend API to register/login this Google user
-      const res = await loginUserWithGoogle(credentialResponse.credential);
+      const res = await googleLogin(credentialResponse.credential);
       console.log("Backend login success:", res);
 
       // After successful login, redirect user to home/dashboard
@@ -270,5 +270,4 @@ const Login = () => {
     </div>
   );
 }
-
 export default Login;

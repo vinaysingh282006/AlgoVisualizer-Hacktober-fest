@@ -16,8 +16,8 @@ import authService from "../services/authService";
 import "../styles/Signup.css";
 // 🟢 ADDED:
 import { GoogleLogin } from "@react-oauth/google";
-import jwt_decode from "jwt-decode"; // ✅ To decode Google user data
-import { googleSignup } from "../services/authService"; // ✅ ADDED backend API call
+import { jwtDecode } from "jwt-decode"; // ✅ FIXED: Use named import
+import { googleLogin } from "../services/authService"; // ✅ FIXED: Use correct function name
 
 const Signup = () => {
   const { theme } = useTheme();
@@ -111,16 +111,11 @@ const Signup = () => {
    // ✅ ADDED: Google Signup success handler
   const handleGoogleSuccess = async (credentialResponse) => {
     try {
-      const decoded = jwt_decode(credentialResponse.credential);
+      const decoded = jwtDecode(credentialResponse.credential);
       console.log("Google user data:", decoded);
 
       // send to backend for signup/login
-      const response = await googleSignup({
-        name: decoded.name,
-        email: decoded.email,
-        googleId: decoded.sub,
-        picture: decoded.picture,
-      });
+      const response = await googleLogin(credentialResponse.credential);
 
       console.log("Backend signup success:", response);
       alert("Signed up successfully with Google!");
