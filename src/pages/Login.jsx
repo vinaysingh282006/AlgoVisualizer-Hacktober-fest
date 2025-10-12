@@ -3,11 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff, LogIn, Mail, Lock, ArrowLeft, AlertCircle } from "lucide-react";
 import { useTheme } from "../ThemeContext";
 import { useGoogleAuth } from "../contexts/GoogleAuthContext";
-import authService, { googleLogin  } from "../services/authService";
+// import authService, { googleLogin  } from "../services/authService";
 import "../styles/Login.css";
 import { GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode"; // 🟢 FIXED: Use named import instead of default
-import { googleLogin } from "../services/authService"; // 🟢 FIXED: Import correct function name
+import { jwtDecode } from "jwt-decode"; 
+import { googleLogin } from "../services/authService";
 
 
 // 🔹 Helper function for password validation
