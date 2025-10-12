@@ -201,6 +201,7 @@ const App = () => {
                       path="/data-structures"
                       element={<DataStructures />}
                     />
+                    <Route path="/data-structures/array" element={<ArrayVisualizer />} />
                     <Route
                       path="/data-structures/linked-list"
                       element={<LinkedListPage />}
