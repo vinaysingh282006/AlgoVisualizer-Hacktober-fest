@@ -1033,7 +1033,7 @@
   }
 }
 
-/* Landscape mobile improvements */
+/* Landscape mobile improvements change here */
 @media (max-width: 812px) and (orientation: landscape) {
   .footer-container {
     padding: 20px 0 10px;
