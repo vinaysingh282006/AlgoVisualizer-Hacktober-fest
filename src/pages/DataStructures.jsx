@@ -263,6 +263,24 @@ const algorithmDatabase = {
     icon: "🏗️",
     color: "#ffd93d",
     algorithms: [
+
+        {
+        name:"Array",
+        id: "array",
+        description: "An array is a collection of elements of the same data type stored in contiguous memory locations.",
+         timeComplexity:{
+          Access : "O(1)",
+          SearchLinear: " O(n)",
+          SearchBinary: "O(log n)",
+          Insertion:"O(1) (amortized)",
+          Deletion:"O(1)",
+          Traversal:"O(n)",
+          
+         },
+         spaceComplexity: "O(n)",
+        implemented: true,
+        
+      },
       {
         name: "Linked List",
         id: "linkedList",
@@ -278,6 +296,9 @@ const algorithmDatabase = {
         spaceComplexity: "O(n)",
         implemented: true,
       },
+
+    
+      
       {
         name: "Stack",
         id: "stack",
@@ -364,10 +385,11 @@ function AlgorithmCard({ algorithm }) {
     if (algorithm.implemented) {
       if (
         algorithm.category === "dataStructures" &&
-        algorithm.id === "linkedList"
+        algorithm.id === "linkedList" 
       ) {
         navigate("/data-structures/linked-list");
-      } else if (algorithm.category === "sorting") {
+      } 
+      else if (algorithm.category === "sorting") {
         navigate(`/sorting/${algorithm.id}/docs`);
       } else if (algorithm.category === "searching") {
         if (algorithm.id === "ternarySearch") {
@@ -395,6 +417,8 @@ function AlgorithmCard({ algorithm }) {
       }
     }
   };
+
+  
 
  return (
   <div
