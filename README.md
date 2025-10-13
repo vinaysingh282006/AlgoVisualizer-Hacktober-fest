@@ -38,6 +38,7 @@
 - <a href="#learning-journey-flowchart">Learning Journey</a>
 - <a href="#troubleshooting">Troubleshooting</a>
 - <a href="#getting-started">Getting Started</a>
+- <a href="#sync-fork">Sync Your Fork with Upstream</a>
 - <a href="#analytics-performance">Analytics & Performance</a>
 - <a href="#educational-impact">Educational Impact</a>
 - <a href="#contributors">Contributors</a>
@@ -566,6 +567,57 @@ git commit -m "feature: add awesome feature"
 git push origin feature/your-feature-name
 ``` 
 Then go to AlgoVisualizer Pull Requests and create a PR with a clear description of your changes.
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+
+<h2 id="sync-fork">🔄 Sync Your Fork with Upstream</h2>
+
+To keep your fork up-to-date with the latest changes from the original repository, follow these steps:
+
+### Initial Setup (One-time only)
+```bash
+# Add the original repository as upstream (if not already done)
+git remote add upstream https://github.com/RhythmPahwa14/AlgoVisualizer.git
+
+# Verify your remotes
+git remote -v
+```
+
+### Regular Sync Process
+```bash
+# Fetch the latest changes from upstream
+git fetch upstream
+
+# Switch to your main branch
+git checkout main
+
+# Merge upstream changes into your local main branch
+git merge upstream/main
+
+# Push the updated main branch to your fork
+git push origin main
+```
+
+### Before Creating a New Feature Branch
+```bash
+# Always sync first, then create your feature branch
+git fetch upstream
+git checkout main
+git merge upstream/main
+git checkout -b feature/your-new-feature
+```
+
+### Handling Conflicts
+If you encounter merge conflicts:
+```bash
+# Resolve conflicts in your editor
+# After resolving, stage the changes
+git add .
+git commit -m "resolve merge conflicts"
+git push origin main
+```
+
+> **💡 Pro Tip**: Always sync your fork before starting work on a new feature to avoid conflicts and ensure you're working with the latest codebase.
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
