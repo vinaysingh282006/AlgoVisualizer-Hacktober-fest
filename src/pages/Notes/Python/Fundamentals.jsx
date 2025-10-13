@@ -74,7 +74,9 @@ const PythonFundamentals = () => {
   { id: "modules", label: "Modules & Packages" },
   { id: "dsa", label: "Python for DSA" },
   { id: "numpy", label: "NumPy & Pandas" },
-  { id: "multithreading", label: "Multithreading & Multiprocessing"}
+  { id: "multithreading", label: "Multithreading & Multiprocessing"},
+  { id: "async", label: "Async Programming" },
+
 ]
 .map(item => (
             <button
@@ -164,6 +166,7 @@ const PythonFundamentals = () => {
           </div>
         </section>
       )} 
+      
       {activeTab === "multithreading" && (
   <section style={{ marginBottom: "2rem" }}>
     <div className="card">
@@ -284,6 +287,111 @@ if __name__ == "__main__":
     </div>
   </section>
 )}
+{activeTab === "async" && (
+  <section style={{ marginBottom: "2rem" }}>
+    <div className="card">
+      <h2><i className="fas fa-bolt"></i> 16. Async Programming (async / await) using asyncio</h2>
+      <p>
+        <strong>Async programming</strong> provides a modern way to handle <strong>concurrent I/O-bound</strong> operations
+        without blocking the main thread. This is ideal for API calls, database queries, and real-time applications.
+      </p>
+
+      <h3>Basic Example</h3>
+      <p>Use <code>async def</code> to define asynchronous functions and <code>await</code> to pause execution until a coroutine completes.</p>
+      <div className="code-container">
+        <button
+          className={`copy-btn ${copiedCode === "async-basic" ? "copied" : ""}`}
+          onClick={() =>
+            copyCode(`import asyncio
+
+async def greet(name):
+    await asyncio.sleep(1)  # Simulate I/O operation
+    print(f"Hello, {name}!")
+
+async def main():
+    await greet("Python")
+
+asyncio.run(main())`, "async-basic")
+          }
+        >
+          {copiedCode === "async-basic" ? "Copied!" : "Copy"}
+        </button>
+        <pre>{`import asyncio
+
+async def greet(name):
+    await asyncio.sleep(1)  # Simulate I/O operation
+    print(f"Hello, {name}!")
+
+async def main():
+    await greet("Python")
+
+asyncio.run(main())`}</pre>
+      </div>
+
+      <h3>Running Multiple Tasks Concurrently</h3>
+      <p>You can use <code>asyncio.gather()</code> to run multiple coroutines at the same time efficiently.</p>
+      <div className="code-container">
+        <button
+          className={`copy-btn ${copiedCode === "async-concurrent" ? "copied" : ""}`}
+          onClick={() =>
+            copyCode(`import asyncio
+
+async def fetch_data(source):
+    print(f"Fetching from {source}...")
+    await asyncio.sleep(2)
+    print(f"Done: {source}")
+
+async def main():
+    await asyncio.gather(
+        fetch_data("API 1"),
+        fetch_data("API 2"),
+        fetch_data("Database")
+    )
+
+asyncio.run(main())`, "async-concurrent")
+          }
+        >
+          {copiedCode === "async-concurrent" ? "Copied!" : "Copy"}
+        </button>
+        <pre>{`import asyncio
+
+async def fetch_data(source):
+    print(f"Fetching from {source}...")
+    await asyncio.sleep(2)
+    print(f"Done: {source}")
+
+async def main():
+    await asyncio.gather(
+        fetch_data("API 1"),
+        fetch_data("API 2"),
+        fetch_data("Database")
+    )
+
+asyncio.run(main())`}</pre>
+      </div>
+
+      <h3>Concurrency vs Parallelism</h3>
+      <ul>
+        <li><strong>Concurrency:</strong> Tasks take turns on a single thread (async I/O).</li>
+        <li><strong>Parallelism:</strong> Tasks run simultaneously on multiple CPU cores (multiprocessing).</li>
+      </ul>
+
+      <div
+        style={{
+          background: "#ecfdf5",
+          borderLeft: "4px solid #10b981",
+          padding: "1rem 1.5rem",
+          margin: "1.5rem 0",
+          borderRadius: "0 12px 12px 0",
+        }}
+      >
+        <strong>Tip:</strong> Use <code>asyncio</code> for I/O-bound tasks like API requests, DB calls, or network operations.
+        Use multiprocessing for CPU-intensive tasks like ML model training or heavy computations.
+      </div>
+    </div>
+  </section>
+)}
+
      
 
       {/* Data Types */}
