@@ -210,7 +210,7 @@ const Login = () => {
               onError={handleGoogleError}
             />
           </div>
-          */}
+          
 
           <div className="demo-section">
             <p className="demo-text">
