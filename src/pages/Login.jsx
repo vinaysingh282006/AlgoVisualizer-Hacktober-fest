@@ -3,10 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff, LogIn, Mail, Lock, ArrowLeft, AlertCircle } from "lucide-react";
 import { useTheme } from "../ThemeContext";
 import { useGoogleAuth } from "../contexts/GoogleAuthContext";
-import authService, { googleLogin  } from "../services/authService";
+// import authService, { googleLogin  } from "../services/authService";
 import "../styles/Login.css";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode"; 
+import { googleLogin } from "../services/authService";
+
 
 // 🔹 Helper function for password validation
 const validatePassword = (password) => {
@@ -64,22 +66,21 @@ const Login = () => {
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
-
+    
     // 🔹 Real-time password validation
     if (name === "password") {
       setPasswordErrors(validatePassword(value));
     }
   };
-
   const isDark = theme === "dark";
 
   const handleGoogleSuccess = async (credentialResponse) => {
     try {
-      // const decoded = jwt_decode(credentialResponse.credential);
       const decoded = jwtDecode(credentialResponse.credential);
       console.log("Decoded Google User:", decoded);
 
-      const res = await loginUserWithGoogle(credentialResponse.credential);
+      // Call backend API to register/login this Google user
+      const res = await googleLogin(credentialResponse.credential);
       console.log("Backend login success:", res);
 
       navigate("/");
@@ -209,7 +210,7 @@ const Login = () => {
               onError={handleGoogleError}
             />
           </div>
-          */}
+          
 
           <div className="demo-section">
             <p className="demo-text">
@@ -220,6 +221,5 @@ const Login = () => {
       </div>
     </div>
   );
-};
-
+}
 export default Login;
