@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+// ✅ 1. Re-enable the import for the background component
+import ThreeBackground from './components/ThreeBackground';
 import { Route, Routes, useLocation, Navigate } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -86,7 +88,6 @@ import KruskalPage from "./pages/KruskalPage";
 import HuffmanPage from "./pages/HuffmanPage";
 import FloydWarshallPage from "./pages/GraphFloydWarshall";
 
-
 // Components
 import ArrayVisualizer from "./pages/Array.jsx";
 import KadaneVisualizer from "./pages/Kadane.jsx";
@@ -102,10 +103,10 @@ import Contribute from "./components/Contribute";
 import Cheatsheet from "./components/Cheatsheet";
 import AlgorithmComparisonTable from './components/AlgorithmComparisonTable';
 
-
 // Static / Info Pages
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import ForgotPassword from "./pages/ForgotPassword";
 import About from "./components/about";
 import Contact from "./components/contact";
 import PrivacyPolicy from "./components/Privacy";
@@ -171,6 +172,7 @@ const App = () => {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
 
                     {/* Sorting */}
                     <Route path="/sorting" element={<Sorting />} />
@@ -200,8 +202,10 @@ const App = () => {
                       path="/data-structures"
                       element={<DataStructures />}
                     />
+
                     <Route path="/data-structures/array" element={<ArrayVisualizer />} />
                     <Route path="/data-structures/kadane" element={<KadaneVisualizer />} />
+
                     <Route
                       path="/data-structures/linked-list"
                       element={<LinkedListPage />}
