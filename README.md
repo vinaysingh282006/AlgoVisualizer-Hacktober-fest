@@ -65,7 +65,7 @@
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
-🚀 **Live Demo**: [https://algo-visualizer-amber.vercel.app](https://algo-visualizer-amber.vercel.app/)
+**Live Link**: [https://algo-visualizer-amber.vercel.app](https://algo-visualizer-amber.vercel.app/)
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
@@ -631,6 +631,24 @@ Meet our amazing project admins:
 </a><br>
 <sub><b>Sandeep Vashishtha</b><br>
 <a href="https://www.linkedin.com/in/sandeepvashishtha/" target="_blank">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="20" height="20" alt="LinkedIn"/>
+</a>
+</sub>
+</td>
+</tr>
+</table>
+
+<h2 id="project-admins">Project Maintainer</h2>
+
+Meet our amazing project maintainer:
+<table>
+<tr>
+<td align="center">
+<a href="https://github.com/aleenaharoldpeter">
+  <img src="https://avatars.githubusercontent.com/u/177343414?v=4" height="140px" width="140px" alt="Aleena Harold Peter">
+</a><br>
+<sub><b>Aleena Harold Peter</b><br>
+<a href="https://www.linkedin.com/in/aleena-harold-peter/" target="_blank">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="20" height="20" alt="LinkedIn"/>
 </a>
 </sub>
