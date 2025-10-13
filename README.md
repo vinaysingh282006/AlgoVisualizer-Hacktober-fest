@@ -415,8 +415,6 @@ Performance Issues:
 1. **Clone the repository:**
 
     ```bash
-   git clone https://github.com/<your-username>/AlgoVisualizer.git 
-   Example:
    git clone https://github.com/RhythmPahwa14/AlgoVisualizer.git
    cd AlgoVisualizer
    ```
@@ -540,7 +538,7 @@ AlgoVisualizer/
 1. Fork the repository
 ```bash
 # Fork the repository on GitHub, then clone your fork:
-git clone https://github.com/your-username/AlgoVisualizer.git
+git clone https://github.com/rhythmpahwa14/AlgoVisualizer.git
 cd AlgoVisualizer
 ``` 
 2. Set Up Upstream
