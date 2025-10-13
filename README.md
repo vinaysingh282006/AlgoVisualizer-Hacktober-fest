@@ -5,7 +5,7 @@
     <br />
     <br />
 
-[Report Bug](https://github.com/RhythmPahwa14/AlgoVisualizer/issues) • [Request Feature](https://github.com/RhythmPahwa14/AlgoVisualizer/issues)
+[Report Bug](https://github.com/RhythmPahwa14/AlgoVisualizer/issues/new?template=bug_report.yml) • [Request Feature](https://github.com/RhythmPahwa14/AlgoVisualizer/issues/new?template=feature_request.yml)
  
 </div>
 
