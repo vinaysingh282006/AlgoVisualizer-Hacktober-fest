@@ -3,7 +3,7 @@ import Graph from "react-vis-network-graph";
 import "../styles/graphEuler.css";
 import "aos/dist/aos.css";
 
-const EulerGraphVisualizer = ({ graphData }) => {
+const EulerGraphVisualizer = ({ customGraph }) => {
   //   const containerRef = useRef(null);
   //   const networkRef = useRef(null);
 
@@ -22,8 +22,7 @@ const EulerGraphVisualizer = ({ graphData }) => {
     ]
   };
 
-    graphData = graphData === null ? defaultGraph : graphData;
-  const [graph, setGraph] = useState(graphData);
+  const [graph, setGraph] = useState(customGraph || defaultGraph); 
   const [status, setStatus] = useState("");
 
   //   check for eulerian
@@ -42,62 +41,61 @@ const EulerGraphVisualizer = ({ graphData }) => {
   };
 
   const animatePath = async () => {
-  const edges = [...graph.edges];
+    const edges = [...graph.edges];
 
-  // Reset node labels to original (no degree)
-  setGraph((prev) => ({
-    ...prev,
-    nodes: prev.nodes.map((n) => ({
-      ...n,
-      label: n.label.split(" ")[0],
-      color: "#64748b"
-    })),
-    edges: prev.edges.map((e) => ({
-      ...e,
-      color: { color: "#aaa" },
-      width: 2
-    }))
-  }));
-
-  await new Promise((res) => setTimeout(res, 400)); // brief pause before start
-
-  for (let i = 0; i < edges.length; i++) {
-    // Take active edges up to index i
-    const activeEdges = edges.slice(0, i + 1);
-
-    // Compute degrees from active edges
-    const degree = {};
-    activeEdges.forEach(({ from, to }) => {
-      degree[from] = (degree[from] || 0) + 1;
-      degree[to] = (degree[to] || 0) + 1;
-    });
-
-    // Update nodes with degree
-    const updatedNodes = graph.nodes.map((node) => ({
-      ...node,
-      label: `${node.label.split(" ")[0]} (${degree[node.id] || 0})`,
-      color: degree[node.id] ? "#7c3aed" : "#64748b" // purple if touched
-    }));
-
-    // Update edges with current highlight
-    const updatedEdges = edges.map((edge, idx) => ({
-      ...edge,
-      color: { color: idx <= i ? "#f59e0b" : "#aaa" },
-      width: idx <= i ? 3 : 2
-    }));
-
-    // Single synchronized update 🔄
+    // Reset node labels to original (no degree)
     setGraph((prev) => ({
       ...prev,
-      nodes: updatedNodes,
-      edges: updatedEdges
+      nodes: prev.nodes.map((n) => ({
+        ...n,
+        label: n.label.split(" ")[0],
+        color: "#64748b"
+      })),
+      edges: prev.edges.map((e) => ({
+        ...e,
+        color: { color: "#aaa" },
+        width: 2
+      }))
     }));
 
-    // Delay between steps
-    await new Promise((res) => setTimeout(res, 800));
-  }
-};
+    await new Promise((res) => setTimeout(res, 400)); // brief pause before start
 
+    for (let i = 0; i < edges.length; i++) {
+      // Take active edges up to index i
+      const activeEdges = edges.slice(0, i + 1);
+
+      // Compute degrees from active edges
+      const degree = {};
+      activeEdges.forEach(({ from, to }) => {
+        degree[from] = (degree[from] || 0) + 1;
+        degree[to] = (degree[to] || 0) + 1;
+      });
+
+      // Update nodes with degree
+      const updatedNodes = graph.nodes.map((node) => ({
+        ...node,
+        label: `${node.label.split(" ")[0]} (${degree[node.id] || 0})`,
+        color: degree[node.id] ? "#7c3aed" : "#64748b" // purple if touched
+      }));
+
+      // Update edges with current highlight
+      const updatedEdges = edges.map((edge, idx) => ({
+        ...edge,
+        color: { color: idx <= i ? "#f59e0b" : "#aaa" },
+        width: idx <= i ? 3 : 2
+      }));
+
+      // Single synchronized update 🔄
+      setGraph((prev) => ({
+        ...prev,
+        nodes: updatedNodes,
+        edges: updatedEdges
+      }));
+
+      // Delay between steps
+      await new Promise((res) => setTimeout(res, 800));
+    }
+  };
 
   const handleCheck = async () => {
     const result = checkEulerian();
@@ -162,7 +160,7 @@ const GraphEulerian = () => {
       if (!parsed.nodes || !parsed.edges) {
         alert("Invalid graph format. Must contain 'nodes' and 'edges'.");
         return;
-      }
+      } 
       setCustomGraph(parsed);
     } catch (err) {
       alert("Invalid JSON format.");
@@ -281,7 +279,7 @@ const GraphEulerian = () => {
 
       {/* euler visulization component */}
       <div data-aos="fade-up" data-aos-delay="300">
-        <EulerGraphVisualizer graphData={customGraph} />
+        <EulerGraphVisualizer customGraph={customGraph} />
       </div>
     </div>
   );
