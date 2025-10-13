@@ -580,6 +580,15 @@ Then go to AlgoVisualizer Pull Requests and create a PR with a clear description
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
+# ScreenShots
+<img width="1888" height="829" alt="Screenshot 2025-10-13 210440" src="https://github.com/user-attachments/assets/0cdad087-7975-4a8a-8664-7e849243c088" />
+
+<img width="1898" height="786" alt="Screenshot 2025-10-13 210501" src="https://github.com/user-attachments/assets/8cb76638-0c6e-4ddc-81b1-e2aaa25ec5db" />
+
+<img width="1896" height="831" alt="Screenshot 2025-10-13 210521" src="https://github.com/user-attachments/assets/02bcba5e-754d-40f4-adb4-068a2ba0f958" />
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+
 <h2 id="analytics-performance">📈 Analytics & Performance</h2>
 
 This application uses **Vercel Analytics** to track:
