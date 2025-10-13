@@ -313,15 +313,7 @@ const Navbar = () => {
                   >
                     MERN
                   </Link>
-                  <Link
-                    to="/notes/Rust"
-                    className={`dropdown-item ${
-                      isActive("/notes/Rust") ? "active" : ""
-                    }`}
-                    onClick={() => setDesktopNotesOpen(false)}                    
-                  >
-                    Rust
-                  </Link>
+
                   <Link
                     to="https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/htmlview?gid=0#gid=0"
                     target="_blank"

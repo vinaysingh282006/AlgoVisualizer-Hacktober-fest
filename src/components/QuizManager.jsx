@@ -29,15 +29,23 @@ const TOPICS = [
     description: "Dive into problem-solving approaches including  Backtracking Algorithms, Dynamic Programming, Greedy Algorithms, and Divide & Conquer."
   },
   {
-    id: "otherTopics",
-    name: "Other Topics",
-    description: "Explore specialized areas including Hashing Algorithms, Tree Algorithms, Game Search Algorithms, and Branch & Bound."
-  },
-  {
+  id: "string-algorithms",
+  name: "String Algorithms",
+  description: "Explore techniques used to efficiently process and analyze textual data, including key pattern-matching algorithms such as the KMP Algorithm and Rabin-Karp Algorithm."
+},
+    {
     "id": "graph",
     "name": "Graph",
     "description": "Explore graph algorithms including BFS, DFS, Dijkstra, Cycle Detection, Graph Comparisons, and Minimum Spanning Trees."
-}
+},
+
+
+  {
+    id: "otherTopics",
+    name: "Other Topics",
+    description: "Explore specialized areas including Hashing Algorithms, Tree Algorithms, Game Search Algorithms, and Branch & Bound."
+  }
+
 
 ];
 
@@ -132,6 +140,7 @@ const QuizHelpers = {
     'data-structures': 'Data Structures',
     'paradigms': 'Paradigms',
     "graph": "Graph",
+    "string-algorithms": "String Algorithms",
     'otherTopics': 'Other Topics',
     'all': 'all'
   }),

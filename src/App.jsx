@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+// ✅ 1. Re-enable the import for the background component
+import ThreeBackground from './components/ThreeBackground';
 import { Route, Routes, useLocation, Navigate } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -86,8 +88,8 @@ import KruskalPage from "./pages/KruskalPage";
 import HuffmanPage from "./pages/HuffmanPage";
 import FloydWarshallPage from "./pages/GraphFloydWarshall";
 
-
 // Components
+import ArrayVisualizer from "./pages/Array.jsx";
 import LinkedListPage from "./components/pages/LinkedListPage";
 import Queue from "./components/Queue/Queue";
 import Stack from "./components/Stack/Stack";
@@ -99,7 +101,6 @@ import Contributors from "./components/Contributors";
 import Contribute from "./components/Contribute";
 import Cheatsheet from "./components/Cheatsheet";
 import AlgorithmComparisonTable from './components/AlgorithmComparisonTable';
-
 
 // Static / Info Pages
 import Login from "./pages/Login";
