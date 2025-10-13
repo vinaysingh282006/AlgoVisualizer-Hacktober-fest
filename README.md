@@ -1,4 +1,13 @@
 <h1 align="center">🎯 AlgoVisualizer</h1> 
+<div align="center">
+<br />
+    <a href="https://algovisualizer.rhythmpahwa.tech/"><strong>Explore the Live Demo »</strong></a>
+    <br />
+    <br />
+
+[Report Bug](https://github.com/RhythmPahwa14/AlgoVisualizer/issues) • [Request Feature](https://github.com/RhythmPahwa14/AlgoVisualizer/issues)
+ 
+</div>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
@@ -14,14 +23,20 @@
 <h2>📖 Table of Contents</h2> 
 
 - <a href="#overview"> Overview </a>
+- <a href="#vision"> Vision</a>
+- <a href="#mission"> Mission</a>
 - <a href="#project-insights"> Project Insights </a>
-- <a href="#features">Features</a>
+- <a href="#features"> Features</a>
+- <a href="#why-algovisualizer"> Why AlgoVisualizer</a>
 - <a href="#supported-algorithms">Supported Algorithms</a>
 - <a href="#code-implementations">Code Implementations</a>
 - <a href="#technologies-used">Technologies Used</a>
+- <a href="#prerequisites">Prerequisites</a>
 - <a href="#quick-start">Quick Start</a>
 - <a href="#usage-guide">Usage Guide</a>
 - <a href="#project-structure">Project Structure</a>
+- <a href="#learning-journey-flowchart">Learning Journey</a>
+- <a href="#troubleshooting">Troubleshooting</a>
 - <a href="#getting-started">Getting Started</a>
 - <a href="#analytics-performance">Analytics & Performance</a>
 - <a href="#educational-impact">Educational Impact</a>
@@ -57,6 +72,19 @@
 <div align="center">
   <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=24&duration=3000&pause=1000&color=00C853&center=true&vCenter=true&width=900&lines=Thanks+for+visiting+AlgoVisualizer!+🙌;Start+the+repo+✅;Share+it+with+others+🌍;Contribute+and+grow+🛠️;Happy+Coding+✨!" alt="Thanks Banner Typing SVG" />
 </div>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+
+<h2 id="vision">✨ Vision</h2>
+Transform algorithmic learning through interactive visualizations—empowering students and developers to master data structures and algorithms with hands-on exploration and real-time feedback.
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+
+<h2 id="mission">🎯 Mission</h2>
+Build the most comprehensive interactive algorithm visualization platform
+Provide step-by-step visual learning with multi-language code implementations
+Support educators with exportable content for classrooms and presentations
+Foster algorithmic thinking through interactive learning and community contributions
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
@@ -128,6 +156,17 @@
 - **Algorithm Documentation**: Comprehensive guides and explanations
 - **Contributors Section**: Meet the amazing people behind the project
 - **About & Contact Pages**: Learn more about the project and get in touch
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+
+<h2 id="why-algovisualizer">💡 Why AlgoVisualizer</h2>
+
+- Learn by seeing: Watch algorithms execute step-by-step with clear visual feedback
+- Multi-language support: Production-ready code in Java, Python, and C++
+- Educational-first: Export recordings and screenshots for presentations
+- Interview prep: Perfect for coding interviews with complexity analysis
+- Modern stack: React 18, Vite, and Framer Motion for smooth experiences
+- Open-source: Community-driven with contributions from developers worldwide
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
@@ -312,19 +351,57 @@ The code implementations are ideal for:
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
+<h2 id="prerequisites">🧩 Prerequisites</h2>
+
+Required:
+- Node.js 20.11.1 or higher (LTS recommended)
+- npm or yarn package manager
+- Git (for cloning and contributing)
+- Modern web browser
+
+Optional:
+- VS Code or preferred code editor
+- React Developer Tools browser extension
+- GitHub account (for contributions)
+
+Windows users:
+- Use Windows Terminal or PowerShell
+- Ensure Node.js is in PATH
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+
 <h2 id="visualization-logic-explained"> Visualization Logic Explained</h2>
 
 ### The heart of this project is **AlgorithmVisualizer.jsx.** Here’s how it works:
-
 - State Management: Handles the array of numbers to be sorted and updates the UI as the algorithm progresses.
-
 - Dynamic Bar Width: Bar size is now calculated dynamically based on screen size and the number of elements — so the visualizer is fully responsive.
-
 - Sorting Algorithms: The algorithms (Bubble Sort, Merge Sort, Quick Sort, etc.) are imported from the  **src/algorithms/** folder. Each runs step-by-step with animated transitions.
-
 - Styling: The visualization container and bars are styled in **UnifiedVisualizer.css** for a clean, responsive layout.
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+
+<h2 id="troubleshooting"> 🛠️ Troubleshooting</h2>
+
+Installation Issues:
+
+```
+# Clear cache and reinstall
+npm cache clean --force
+Remove-Item -Recurse -Force node_modules
+npm install --legacy-peer-deps
+```
+Development Server Issues:
+```
+# Check port conflicts
+netstat -ano | findstr :5173
+# Start with different port
+npm run dev -- --port 3000
+```
+Performance Issues:
+- Reduce array size for testing
+- Close other browser tabs
+- Use Chrome/Firefox for better performance
+- Clear browser cache if visualizations aren't displaying
 
 <h2 id="quick-start"> Quick Start</h2>
 
@@ -454,6 +531,10 @@ AlgoVisualizer/
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
+<h2 id="learning-journey-flowchart"> 🗺️ Project Flowchart</h2>
+<img width="1081" height="847" alt="Untitled diagram-2025-10-13-150407" src="https://github.com/user-attachments/assets/e947afc3-6316-4967-8e6f-21d1f9204180" />
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 <h2 id="getting-started">Getting Started With Contributions</h2>
 
 1. Fork the repository
