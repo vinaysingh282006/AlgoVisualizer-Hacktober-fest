@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  FaEnvelope,
-  FaHeart,
-  FaArrowRight,
-} from "react-icons/fa";
+import { FaEnvelope, FaHeart, FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -26,25 +22,14 @@ const FooterLink = ({ to, icon: Icon, children }) => (
 
 // Sub-component for rendering social links
 const SocialLink = ({ href, icon: Icon, title }) => (
-  <a
-    href={href}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="social-link"
-    title={title}
-  >
+  <a href={href} target="_blank" rel="noopener noreferrer" className="social-link" title={title}>
     <Icon />
   </a>
 );
 
 // Sub-component for rendering tech pills
 const TechPill = ({ href, children }) => (
-  <a
-    href={href}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="tech-pill"
-  >
+  <a href={href} target="_blank" rel="noopener noreferrer" className="tech-pill">
     {children}
   </a>
 );
@@ -168,11 +153,7 @@ const Footer = () => {
   return (
     <>
       <footer className={`footer-container ${isVisible ? "visible" : ""}`}>
-        <div
-          className="footer-wave"
-          data-aos="fade-up"
-          data-aos-duration="1000"
-        >
+        <div className="footer-wave" data-aos="fade-up" data-aos-duration="1000">
           <svg
             data-name="Layer 1"
             xmlns="http://www.w3.org/2000/svg"
@@ -206,9 +187,13 @@ const Footer = () => {
                 />
                 <span className="logo-text">AlgoVisualizer</span>
               </div>
-              <p className="brand-tagline">
-                Visualize algorithms. Master coding. Elevate skills.
-              </p>
+              <p className="brand-tagline">Visualize algorithms. Master coding. Elevate skills.</p>
+              {/* moved social links inside brand-header so they align with the tagline */}
+              <div className="social-links brand-social-links">
+                {socialLinks.map((link, index) => (
+                  <SocialLink key={index} href={link.href} icon={link.icon} title={link.title} />
+                ))}
+              </div>
             </div>
 
             <div className="tech-pills">
@@ -216,17 +201,6 @@ const Footer = () => {
                 <TechPill key={index} href={pill.href}>
                   {pill.label}
                 </TechPill>
-              ))}
-            </div>
-
-            <div className="social-links brand-social-links">
-              {socialLinks.map((link, index) => (
-                <SocialLink
-                  key={index}
-                  href={link.href}
-                  icon={link.icon}
-                  title={link.title}
-                />
               ))}
             </div>
           </div>
@@ -241,18 +215,13 @@ const Footer = () => {
             <h3 className="column-title">Navigate</h3>
             <ul className="footer-links">
               {navigationLinks.map((link, index) => (
-                <FooterLink 
-                  key={index} 
-                  to={link.to} 
-                  icon={link.icon}
-                >
-              
+                <FooterLink key={index} to={link.to} icon={link.icon}>
                   {link.label}
                 </FooterLink>
               ))}
             </ul>
           </div>
-             
+
           {/* Resources */}
           <div
             className="footer-column resources-column"
@@ -263,11 +232,7 @@ const Footer = () => {
             <h3 className="column-title">Resources</h3>
             <ul className="footer-links">
               {resourceLinks.map((link, index) => (
-                <FooterLink 
-                  key={index} 
-                  to={link.to} 
-                  icon={link.icon}
-                >
+                <FooterLink key={index} to={link.to} icon={link.icon}>
                   {link.label}
                 </FooterLink>
               ))}
@@ -283,8 +248,7 @@ const Footer = () => {
           >
             <h3 className="column-title">Stay Updated</h3>
             <p className="newsletter-description !text-center">
-              Get the latest algorithm visualizations and coding insights
-              delivered to your inbox.
+              Get the latest algorithm visualizations and coding insights delivered to your inbox.
             </p>
 
             <NewsletterForm
@@ -302,10 +266,7 @@ const Footer = () => {
           <div className="bottom-content">
             <div className="footer-main-row">
               <div className="copyright">
-                <p>
-                  &copy; {new Date().getFullYear()} AlgoVisualizer. All rights
-                  reserved.
-                </p>
+                <p>&copy; {new Date().getFullYear()} AlgoVisualizer. All rights reserved.</p>
               </div>
               <div className="footer-separator">•</div>
               <div className="footer-credits">
