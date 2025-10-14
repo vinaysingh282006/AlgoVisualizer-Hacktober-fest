@@ -96,11 +96,22 @@
   gap: clamp(12px, 2vw, 15px);
   margin-top: clamp(15px, 3vw, 20px);
   flex-wrap: wrap;
+  /* Align with the brand text/logo on larger screens */
+  justify-content: flex-start;
+  align-items: center;
 }
 
 /* Brand Section */
 .brand-header {
   margin-bottom: clamp(20px, 4vw, 25px);
+}
+
+/* Ensure brand header content (tagline + socials) align to the left on larger screens
+   but keep centered behavior on smaller viewports via existing media queries. */
+.brand-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .logo-wrapper {
@@ -621,6 +632,13 @@
   box-shadow: 0 5px 15px var(--shadow-md);
 }
 
+/* Override: ensure brand column social icons align with brand text/logo on larger screens.
+   This rule comes after the generic .social-links rule so it wins the cascade on desktop. */
+.brand-column .brand-social-links {
+  justify-content: flex-start;
+  align-items: center;
+}
+
 /* Footer Bottom */
 .footer-bottom {
   margin-top: auto;
@@ -746,6 +764,17 @@
     grid-column: span 2;
     text-align: center;
     padding-right: 0;
+  }
+
+  /* On tablet widths the brand column becomes centered, so center the social links too */
+  .brand-column .brand-social-links {
+    justify-content: center;
+  }
+
+  /* On tablet, center the brand header contents as well */
+  .brand-header {
+    align-items: center;
+    text-align: center;
   }
   
   .newsletter-column {
@@ -1031,6 +1060,21 @@
   
   .brand-column {
     padding-right: 30px;
+  }
+}
+
+/* Strong override: ensure brand header contents (tagline + socials) are left-aligned on desktop
+   This uses a desktop-only media query with specific selectors and !important to defeat other stylesheet rules. */
+@media (min-width: 1025px) {
+  .footer-column.brand-column .brand-header {
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+
+  .footer-column.brand-column .brand-social-links {
+    justify-content: flex-start !important;
+    align-self: flex-start !important;
+    margin-left: 0 !important;
   }
 }
 
