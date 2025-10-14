@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { FaSearch, FaClock, FaMemory, FaCheck, FaTimes, FaChevronDown, FaChevronUp, FaLightbulb, FaBook } from 'react-icons/fa';
 import { cheatsheetData, bigOReference, algorithmTips } from '../data/cheatsheetData';
 import '../styles/cheatsheet.css';
 import AOS from 'aos';
+import Fuse from 'fuse.js';
 
 const Cheatsheet = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [q, setQ] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [expandedItems, setExpandedItems] = useState({});
   const [showBigO, setShowBigO] = useState(false);
@@ -15,14 +16,48 @@ const Cheatsheet = () => {
     AOS.init({ duration: 600, once: true });
   }, []);
 
-  const categories = [
-    { id: 'all', label: 'All', icon: '📚' },
-    { id: 'sorting', label: 'Sorting', icon: cheatsheetData.sorting.icon },
-    { id: 'searching', label: 'Searching', icon: cheatsheetData.searching.icon },
-    { id: 'dataStructures', label: 'Data Structures', icon: cheatsheetData.dataStructures.icon },
-    { id: 'graph', label: 'Graph', icon: cheatsheetData.graph.icon },
-    { id: 'advanced', label: 'Advanced', icon: cheatsheetData.advancedAlgorithms.icon }
-  ];
+  const categories = useMemo(() => [
+      { id: 'all', label: 'All', icon: '📚' },
+      ...Object.entries(cheatsheetData).map(([key, value]) => ({
+        id: key,
+        label: value.title,
+        icon: value.icon,
+      })),
+    ], []);
+
+  const fuse = useMemo(() => {
+    const allItems = Object.entries(cheatsheetData).flatMap(([key, section]) => {
+      const items = section.algorithms || section.structures || section.techniques;
+      return items.map(item => ({
+        ...item,
+        sectionId: key,
+        sectionHeading: section.title,
+      }));
+    });
+
+    return new Fuse(allItems, {
+      keys: ["name", "keywords", "description", "sectionHeading"],
+      includeScore: true,
+      threshold: 0.4,
+    });
+  }, []);
+
+  const filteredSections = useMemo(() => {
+    if (!q.trim()) {
+      return cheatsheetData;
+    }
+
+    const results = fuse.search(q);
+    const sections = {};
+
+    for (const { item } of results) {
+      if (!sections[item.sectionId]) {
+        sections[item.sectionId] = { ...cheatsheetData[item.sectionId], items: [] };
+      }
+      sections[item.sectionId].items.push(item);
+    }
+    return sections;
+  }, [q]);
 
   const toggleExpand = (category, index) => {
     const key = `${category}-${index}`;
@@ -34,17 +69,6 @@ const Cheatsheet = () => {
 
   const isExpanded = (category, index) => {
     return expandedItems[`${category}-${index}`] || false;
-  };
-
-  const filterContent = (items, category) => {
-    if (!items) return [];
-    
-    return items.filter(item => {
-      const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (item.description && item.description.toLowerCase().includes(searchTerm.toLowerCase()));
-      const matchesCategory = selectedCategory === 'all' || selectedCategory === category;
-      return matchesSearch && matchesCategory;
-    });
   };
 
   const getComplexityColor = (complexity) => {
@@ -362,8 +386,8 @@ const Cheatsheet = () => {
           <input
             type="text"
             placeholder="Search algorithms, data structures..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
             className="search-input"
           />
         </div>
@@ -446,112 +470,45 @@ const Cheatsheet = () => {
 
       {/* Main Content Sections */}
       <div className="cheatsheet-content">
-        {/* Sorting Algorithms */}
-        {(selectedCategory === 'all' || selectedCategory === 'sorting') && (
-          <section className="content-section" data-aos="fade-up">
-            <div className="section-header" style={{ borderLeftColor: cheatsheetData.sorting.color }}>
-              <h2>
-                <span className="section-icon">{cheatsheetData.sorting.icon}</span>
-                {cheatsheetData.sorting.title}
-              </h2>
-            </div>
-            <div className="cards-grid">
-              {filterContent(cheatsheetData.sorting.algorithms, 'sorting').map((algo, idx) =>
-                renderAlgorithmCard(algo, 'sorting', idx)
-              )}
-            </div>
-          </section>
-        )}
+        {Object.entries(filteredSections)
+          .filter(([key]) => selectedCategory === 'all' || selectedCategory === key)
+          .map(([key, section]) => {
+            const items = q.trim() ? section.items : (section.algorithms || section.structures || section.techniques);
+            if (!items || items.length === 0) return null;
 
-        {/* Searching Algorithms */}
-        {(selectedCategory === 'all' || selectedCategory === 'searching') && (
-          <section className="content-section" data-aos="fade-up">
-            <div className="section-header" style={{ borderLeftColor: cheatsheetData.searching.color }}>
-              <h2>
-                <span className="section-icon">{cheatsheetData.searching.icon}</span>
-                {cheatsheetData.searching.title}
-              </h2>
-            </div>
-            <div className="cards-grid">
-              {filterContent(cheatsheetData.searching.algorithms, 'searching').map((algo, idx) =>
-                renderAlgorithmCard(algo, 'searching', idx)
-              )}
-            </div>
-          </section>
-        )}
+            let renderFunction;
+            if (key === 'dataStructures') {
+              renderFunction = renderDataStructureCard;
+            } else if (key === 'advancedAlgorithms') {
+              renderFunction = renderAdvancedTechnique;
+            } else {
+              renderFunction = renderAlgorithmCard;
+            }
 
-        {/* Data Structures */}
-        {(selectedCategory === 'all' || selectedCategory === 'dataStructures') && (
-          <section className="content-section" data-aos="fade-up">
-            <div className="section-header" style={{ borderLeftColor: cheatsheetData.dataStructures.color }}>
-              <h2>
-                <span className="section-icon">{cheatsheetData.dataStructures.icon}</span>
-                {cheatsheetData.dataStructures.title}
-              </h2>
-            </div>
-            <div className="cards-grid">
-              {filterContent(cheatsheetData.dataStructures.structures, 'dataStructures').map((structure, idx) =>
-                renderDataStructureCard(structure, 'dataStructures', idx)
-              )}
-            </div>
-          </section>
-        )}
-
-        {/* Graph Algorithms */}
-        {(selectedCategory === 'all' || selectedCategory === 'graph') && (
-          <section className="content-section" data-aos="fade-up">
-            <div className="section-header" style={{ borderLeftColor: cheatsheetData.graph.color }}>
-              <h2>
-                <span className="section-icon">{cheatsheetData.graph.icon}</span>
-                {cheatsheetData.graph.title}
-              </h2>
-            </div>
-            <div className="cards-grid">
-              {filterContent(cheatsheetData.graph.algorithms, 'graph').map((algo, idx) =>
-                renderAlgorithmCard(algo, 'graph', idx)
-              )}
-            </div>
-          </section>
-        )}
-
-        {/* Advanced Techniques */}
-        {(selectedCategory === 'all' || selectedCategory === 'advanced') && (
-          <section className="content-section" data-aos="fade-up">
-            <div className="section-header" style={{ borderLeftColor: cheatsheetData.advancedAlgorithms.color }}>
-              <h2>
-                <span className="section-icon">{cheatsheetData.advancedAlgorithms.icon}</span>
-                {cheatsheetData.advancedAlgorithms.title}
-              </h2>
-            </div>
-            <div className="cards-grid">
-              {filterContent(cheatsheetData.advancedAlgorithms.techniques, 'advanced').map((technique, idx) =>
-                renderAdvancedTechnique(technique, idx)
-              )}
-            </div>
-          </section>
-        )}
+            return (
+              <section key={key} className="content-section" data-aos="fade-up">
+                <div className="section-header" style={{ borderLeftColor: section.color }}>
+                  <h2>
+                    <span className="section-icon">{section.icon}</span>
+                    {section.title}
+                  </h2>
+                </div>
+                <div className="cards-grid">
+                  {items.map((item, idx) => renderFunction(item, key, idx))}
+                </div>
+              </section>
+            );
+        })}
       </div>
 
       {/* No Results Message */}
-      {searchTerm && (
-        (() => {
-          const sortingResults = filterContent(cheatsheetData.sorting.algorithms, 'sorting').length;
-          const searchingResults = filterContent(cheatsheetData.searching.algorithms, 'searching').length;
-          const dsResults = filterContent(cheatsheetData.dataStructures.structures, 'dataStructures').length;
-          const graphResults = filterContent(cheatsheetData.graph.algorithms, 'graph').length;
-          const advancedResults = filterContent(cheatsheetData.advancedAlgorithms.techniques, 'advanced').length;
-          
-          const totalResults = sortingResults + searchingResults + dsResults + graphResults + advancedResults;
-          
-          return totalResults === 0 ? (
-            <div className="no-results" data-aos="fade-in">
-              <p>No results found for "{searchTerm}"</p>
-              <button onClick={() => setSearchTerm('')} className="clear-search-btn">
-                Clear Search
-              </button>
-            </div>
-          ) : null;
-        })()
+      {q && Object.keys(filteredSections).length === 0 && (
+        <div className="no-results" data-aos="fade-in">
+          <p>No results found for "{q}"</p>
+          <button onClick={() => setQ('')} className="clear-search-btn">
+            Clear Search
+          </button>
+        </div>
       )}
     </div>
   );
