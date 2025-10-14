@@ -29,6 +29,8 @@ import DataStructures from "./pages/DataStructures";
 import Graph from "./pages/Graph";
 import GraphBFS from "./pages/GraphBFS";
 import GraphCycleDetection from "./pages/GraphCycleDetection";
+// graph Eulerian 
+import GraphEulerian from "./pages/GraphEulerian.jsx";
 import GraphDFS from "./pages/GraphDFS";
 import GraphDijkstra from "./pages/GraphDijkstra";
 import GraphAStar from "./pages/GraphAStar";
@@ -216,25 +218,26 @@ const App = () => {
                       element={<TrieVisualizer />}
                     />
 
-                    {/* Graph */}
-                    <Route path="/graph" element={<Graph />} />
-                    <Route path="/graph/bfs" element={<GraphBFS />} />
-                    <Route path="/graph/dfs" element={<GraphDFS />} />
-                    <Route path="/graph/dijkstra" element={<GraphDijkstra />} />
-                    <Route path="/graph/astar" element={<GraphAStar />} />
-                    <Route
-                      path="/graph/comparison"
-                      element={<GraphComparison />}
-                    />
-                    <Route
-                      path="/graph/cycleDetection"
-                      element={<GraphCycleDetection />}
-                    />
-                    {/* ✅ Bellman-Ford Route */}
-                    <Route
-                      path="/graph/bellman-ford"
-                      element={<BellmanFordPage />}
-                    />
+                      {/* Graph */}
+                      <Route path="/graph" element={<Graph />} />
+                      <Route path="/graph/bfs" element={<GraphBFS />} />
+                      <Route path="/graph/dfs" element={<GraphDFS />} />
+                      <Route path="/graph/dijkstra" element={<GraphDijkstra />} />
+                      <Route path="/graph/astar" element={<GraphAStar />} />
+                      <Route
+                        path="/graph/comparison"
+                        element={<GraphComparison />}
+                      />
+                      <Route
+                        path="/graph/cycleDetection"
+                        element={<GraphCycleDetection />}
+                      />
+                      <Route path="/graph/eulerianGraphs" element={<GraphEulerian/>} />
+                      {/* ✅ Bellman-Ford Route */}
+                      <Route
+                        path="/graph/bellman-ford"
+                        element={<BellmanFordPage />}
+                      />
 
 
                   {/* Algorithm Pages */}
