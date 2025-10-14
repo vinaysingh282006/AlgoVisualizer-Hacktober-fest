@@ -776,10 +776,39 @@ function AlgorithmDocumentation() {
       <h1 className="theme-title">Algorithm Documentation</h1>
 
       <div className="theme-card filters-section">
-        <div className="search-bar">
-          <Search size={20} className="search-icon" />
-          <input type="text" placeholder="Search algorithms..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="form-control" />
+        <div className="search-bar documentation-search">
+          <div className="search-input-wrapper" style={{ position: 'relative' }}>
+            <Search size={18} className="search-icon" />
+            <input
+              type="text"
+              placeholder="Search algorithms..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="form-control"
+              style={{ paddingLeft: '38px' }}
+            />
+          </div>
         </div>
+
+        <style>
+          {`
+            /* Documentation search: place icon inside input */
+            .documentation-search .search-icon {
+              position: absolute !important;
+              left: 10px !important;
+              top: 50% !important;
+              transform: translateY(-50%) !important;
+              color: var(--text-muted, #9aa4b2) !important;
+              pointer-events: none !important;
+              opacity: 0.9 !important;
+            }
+            .documentation-search .form-control {
+              width: 100% !important;
+              box-sizing: border-box !important;
+              padding-left: 40px !important;
+            }
+          `}
+        </style>
 
         <div className="category-filters overflow-x-auto whitespace-nowrap mt-2">
           {categories.map((category) => {
