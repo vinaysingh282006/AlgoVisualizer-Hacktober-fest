@@ -132,11 +132,57 @@
     text-align: center;
 }
 
+.topic-carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+}
+
+.topic-nav-btn {
+    background: #21262d;
+    border: 2px solid #30363d;
+    color: #8b949e;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.topic-nav-btn:hover:not(:disabled) {
+    background: #30363d;
+    color: #58a6ff;
+    border-color: #58a6ff;
+}
+
+.topic-nav-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+[data-theme="light"] .topic-nav-btn {
+    background: #f6f8fa;
+    border-color: #d1d9e0;
+    color: #656d76;
+}
+[data-theme="light"] .topic-nav-btn:hover:not(:disabled) {
+    background: #e1e7ed;
+    color: #0969da;
+    border-color: #0969da;
+}
+
 .topic-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* Changed to a fixed number of columns based on JS constant */
+    grid-template-columns: repeat(var(--cards-per-page, 4), 1fr);
     gap: 1rem;
     margin-bottom: 2rem;
+    width: 100%; /* Ensure grid takes available space */
 }
 
 .topic-card {
