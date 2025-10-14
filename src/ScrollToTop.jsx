@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 
 export default function ScrollToTop() {
   const [showButton, setShowButton] = useState(false);
+  const [nearBottom, setNearBottom] = useState(false);
+  const [atTop, setAtTop] = useState(true);
   const { pathname } = useLocation();
   const ticking = useRef(false);
 
@@ -29,6 +31,29 @@ export default function ScrollToTop() {
     }
   }, []);
 
+  const forceScrollBottom = useCallback((smooth = true) => {
+    const behavior = smooth ? "smooth" : "auto";
+
+    // Window scroll to bottom
+    if (typeof window.scrollTo === "function") {
+      window.scrollTo({ top: document.documentElement.scrollHeight || document.body.scrollHeight, behavior });
+    }
+
+    // Document fallbacks
+    document.documentElement.scrollTop = document.documentElement.scrollHeight || document.body.scrollHeight;
+    document.body.scrollTop = document.body.scrollHeight || document.documentElement.scrollHeight;
+
+    // Inner container fallback
+    const main = document.querySelector(".main-content");
+    if (main) {
+      if (typeof main.scrollTo === "function") {
+        main.scrollTo({ top: main.scrollHeight, behavior });
+      } else {
+        main.scrollTop = main.scrollHeight;
+      }
+    }
+  }, []);
+
   // Prevent browser auto-restore
   useEffect(() => {
     if ("scrollRestoration" in window.history) {
@@ -46,7 +71,12 @@ export default function ScrollToTop() {
             document.documentElement.scrollTop ||
             document.body.scrollTop ||
             0;
-          setShowButton(y > 200); // Reduced threshold for better UX
+          const atBottom = (window.innerHeight + y) >= (document.documentElement.scrollHeight - 100);
+          const isAtTop = y <= 200;
+          // Show button when scrolled down OR when at top (so user can discover the "go to bottom" action)
+          setShowButton(y > 200 || isAtTop);
+          setNearBottom(atBottom);
+          setAtTop(isAtTop);
           ticking.current = false;
         });
         ticking.current = true;
@@ -72,12 +102,24 @@ export default function ScrollToTop() {
     <>
       <button
         type="button"
-        onClick={() => forceScrollTop(true)}
-        aria-label="Scroll to top"
-        title="Back to top"
+        onClick={() => {
+            // Toggle behavior: when at page top, clicking goes to bottom; otherwise go to top
+            if (atTop) {
+              forceScrollBottom(true);
+            } else {
+              forceScrollTop(true);
+            }
+          }}
+          aria-label={atTop ? "Scroll to bottom" : "Scroll to top"}
+          title={atTop ? "Go to bottom" : "Back to top"}
         className={`floating-btn scroll-to-top-btn ${showButton ? 'show' : ''}`}
       >
-        <i className="fa-solid fa-arrow-up" aria-hidden="true" />
+          {/* Show down arrow when atTop (suggest go-to-bottom), otherwise up arrow */}
+          {atTop ? (
+            <i className="fa-solid fa-arrow-down" aria-hidden="true" />
+          ) : (
+            <i className="fa-solid fa-arrow-up" aria-hidden="true" />
+          )}
         <span className="sr-only">Back to top</span>
       </button>
 
@@ -120,7 +162,7 @@ export default function ScrollToTop() {
 
           /* Light theme styles */
           .scroll-to-top-btn {
-            bottom: 80px; /* Positioned above FAQ chatbot to avoid overlap */
+            bottom: 30px; /* Positioned above FAQ chatbot to avoid overlap */
             right: 24px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;

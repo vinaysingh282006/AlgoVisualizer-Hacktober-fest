@@ -2,11 +2,10 @@
 
 .feedback-fab {
   position: fixed;
-  right: 20px;
-  top: 41%;
-  transform: translateY(-41%);
-  width: 66px;
-  height: 66px;
+  left: 20px; /* moved to left bottom */
+  bottom: 30px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
   border: none;
   background: var(--user-accent-primary);
@@ -48,7 +47,7 @@
 /* Slide-in panel at bottom-right */
 .feedback-panel {
   position: fixed;
-  right: 20px;
+  left: 20px; /* align panel with FAB on the left */
   bottom: 90px; /* sit above the button */
   width: 340px;
   max-width: calc(100vw - 40px);

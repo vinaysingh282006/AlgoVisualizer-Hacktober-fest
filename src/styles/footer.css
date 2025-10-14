@@ -4,6 +4,7 @@
   background: var(--card-bg, #f8fafc);
   color: var(--text-primary, #1f2937);
   padding: clamp(40px, 8vw, 60px) 0 clamp(15px, 4vw, 20px);
+  border-top: 1px solid var(--footer-border, rgba(0,0,0,0.10));
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
@@ -95,11 +96,22 @@
   gap: clamp(12px, 2vw, 15px);
   margin-top: clamp(15px, 3vw, 20px);
   flex-wrap: wrap;
+  /* Align with the brand text/logo on larger screens */
+  justify-content: flex-start;
+  align-items: center;
 }
 
 /* Brand Section */
 .brand-header {
   margin-bottom: clamp(20px, 4vw, 25px);
+}
+
+/* Ensure brand header content (tagline + socials) align to the left on larger screens
+   but keep centered behavior on smaller viewports via existing media queries. */
+.brand-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .logo-wrapper {
@@ -620,6 +632,13 @@
   box-shadow: 0 5px 15px var(--shadow-md);
 }
 
+/* Override: ensure brand column social icons align with brand text/logo on larger screens.
+   This rule comes after the generic .social-links rule so it wins the cascade on desktop. */
+.brand-column .brand-social-links {
+  justify-content: flex-start;
+  align-items: center;
+}
+
 /* Footer Bottom */
 .footer-bottom {
   margin-top: auto;
@@ -745,6 +764,17 @@
     grid-column: span 2;
     text-align: center;
     padding-right: 0;
+  }
+
+  /* On tablet widths the brand column becomes centered, so center the social links too */
+  .brand-column .brand-social-links {
+    justify-content: center;
+  }
+
+  /* On tablet, center the brand header contents as well */
+  .brand-header {
+    align-items: center;
+    text-align: center;
   }
   
   .newsletter-column {
@@ -1033,6 +1063,21 @@
   }
 }
 
+/* Strong override: ensure brand header contents (tagline + socials) are left-aligned on desktop
+   This uses a desktop-only media query with specific selectors and !important to defeat other stylesheet rules. */
+@media (min-width: 1025px) {
+  .footer-column.brand-column .brand-header {
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+
+  .footer-column.brand-column .brand-social-links {
+    justify-content: flex-start !important;
+    align-self: flex-start !important;
+    margin-left: 0 !important;
+  }
+}
+
 /* Landscape mobile improvements change here */
 @media (max-width: 812px) and (orientation: landscape) {
   .footer-container {
@@ -1079,4 +1124,13 @@
   .heart-icon {
     animation: none;
   }
+}
+
+/* Theme-aware border for footer when footer.css takes precedence */
+[data-theme="light"] .footer-container {
+  border-top: 1px solid rgba(0,0,0,0.10);
+}
+
+[data-theme="dark"] .footer-container {
+  border-top: 1px solid rgba(255,255,255,0.10);
 }
