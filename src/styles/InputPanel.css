@@ -260,7 +260,7 @@
 }
 
 .btn-primary {
-  background: var(--accent-primary, #0366d6);
+  background: var(--accent-primary, #0366d6) !important;
   color: white;
   border-color: var(--accent-primary, #0366d6);
 }
