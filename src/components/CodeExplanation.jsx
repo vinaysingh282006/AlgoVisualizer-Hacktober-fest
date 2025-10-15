@@ -8,6 +8,7 @@ const LANGS = [
   { key: "java", label: "Java" },
   { key: "cpp", label: "C++" },
   { key: "py", label: "Python" },
+  { key: "go", label: "Go" },
 ];
 
 // highlight helper: find first line index that contains the snippet
@@ -28,16 +29,30 @@ const ALGO = {
     description:
       "Nodes hold a value and a pointer to the next node. Common operations: insert at head/tail, delete, search, traverse.",
     code: {
+      go: `package main
+
+type ListNode struct {
+	Data int
+	Next *ListNode
+}
+
+type LinkedList struct {
+	Head *ListNode
+}
+
+func (ll *LinkedList) InsertHead(data int) {
+	ll.Head = &ListNode{Data: data, Next: ll.Head}
+}`,
       js: `class ListNode {\n  constructor(data, next = null) {\n    this.data = data;\n    this.next = next;\n  }\n}\nclass LinkedList {\n  constructor() { this.head = null; }\n  insertHead(x) { this.head = new ListNode(x, this.head); }\n  insertTail(x) {\n    const n = new ListNode(x);\n    if (!this.head) { this.head = n; return; }\n    let cur = this.head;\n    while (cur.next) cur = cur.next;\n    cur.next = n;\n  }\n  deleteHead() { if (this.head) this.head = this.head.next; }\n  search(x) { let i=0, cur=this.head; while (cur) { if (cur.data===x) return i; cur=cur.next; i++; } return -1; }\n}`,
       java: `class ListNode { int data; ListNode next; ListNode(int d){ data=d; } }\nclass LinkedList {\n  ListNode head;\n  void insertHead(int x){ ListNode n = new ListNode(x); n.next = head; head = n; }\n  void insertTail(int x){\n    ListNode n = new ListNode(x);\n    if (head==null){ head=n; return; }\n    ListNode cur=head; while(cur.next!=null) cur=cur.next; cur.next=n;\n  }\n  void deleteHead(){ if (head!=null) head=head.next; }\n  int search(int x){ int i=0; ListNode cur=head; while(cur!=null){ if (cur.data==x) return i; cur=cur.next; i++; } return -1; }\n}`,
       cpp: `struct ListNode { int data; ListNode* next; ListNode(int d):data(d),next(nullptr){} };\nstruct LinkedList {\n  ListNode* head=nullptr;\n  void insertHead(int x){ ListNode* n = new ListNode(x); n->next = head; head = n; }\n  void insertTail(int x){\n    ListNode* n=new ListNode(x);\n    if(!head){ head=n; return; }\n    ListNode* cur=head; while(cur->next) cur=cur->next; cur->next=n;\n  }\n  void deleteHead(){ if(head) head=head->next; }\n  int search(int x){ int i=0; for(ListNode* cur=head; cur; cur=cur->next,++i) if(cur->data==x) return i; return -1; }\n};`,
       py: `class ListNode:\n  def __init__(self, data, next=None):\n    self.data=data; self.next=next\n\nclass LinkedList:\n  def __init__(self):\n    self.head=None\n  def insert_head(self, x):\n    self.head = ListNode(x, self.head)\n  def insert_tail(self, x):\n    n = ListNode(x)\n    if not self.head: self.head = n; return\n    cur=self.head\n    while cur.next: cur=cur.next\n    cur.next=n\n  def delete_head(self):\n    if self.head: self.head=self.head.next\n  def search(self, x):\n    i=0; cur=self.head\n    while cur:\n      if cur.data==x: return i\n      cur=cur.next; i+=1\n    return -1`
     },
     steps: [
-      { explanation: "Insert at head links new node before current head.", highlight: { js: "insertHead(x)", java: "insertHead(int x)", cpp: "insertHead(int x)", py: "insert_head(self, x)" } },
-      { explanation: "Insert at tail walks to the end and appends.", highlight: { js: "while (cur.next)", java: "while(cur.next!=null)", cpp: "while(cur->next)", py: "while cur.next" } },
-      { explanation: "Delete head moves head pointer to next.", highlight: { js: "deleteHead()", java: "deleteHead()", cpp: "deleteHead()", py: "delete_head(self)" } },
-      { explanation: "Search traverses nodes comparing data.", highlight: { js: "search(x)", java: "search(int x)", cpp: "search(int x)", py: "search(self, x)" } }
+      { explanation: "Insert at head links new node before current head.", highlight: { go: "InsertHead", js: "insertHead(x)", java: "insertHead(int x)", cpp: "insertHead(int x)", py: "insert_head(self, x)" } },
+      { explanation: "Insert at tail walks to the end and appends.", highlight: { go: "InsertTail", js: "while (cur.next)", java: "while(cur.next!=null)", cpp: "while(cur->next)", py: "while cur.next" } },
+      { explanation: "Delete head moves head pointer to next.", highlight: { go: "DeleteHead", js: "deleteHead()", java: "deleteHead()", cpp: "deleteHead()", py: "delete_head(self)" } },
+      { explanation: "Search traverses nodes comparing data.", highlight: { go: "Search", js: "search(x)", java: "search(int x)", cpp: "search(int x)", py: "search(self, x)" } }
     ]
   },
 
@@ -45,15 +60,28 @@ const ALGO = {
     title: "Stack (LIFO)",
     description: "Push adds to the top; pop removes from the top. Peek reads top without removal.",
     code: {
+      go: `package main
+
+type Stack []int
+
+func (s *Stack) IsEmpty() bool { return len(*s) == 0 }
+func (s *Stack) Push(v int)    { *s = append(*s, v) }
+func (s *Stack) Pop() (int, bool) {
+	if s.IsEmpty() { return 0, false }
+	i := len(*s) - 1
+	v := (*s)[i]
+	*s = (*s)[:i]
+	return v, true
+}`,
       js: `class Node { constructor(data,next=null){ this.data=data; this.next=next; } }\nclass Stack {\n  constructor(){ this.top=null; }\n  push(x){ this.top = new Node(x, this.top); }\n  pop(){ if(!this.top) return null; const v=this.top.data; this.top=this.top.next; return v; }\n  peek(){ return this.top? this.top.data : null; }\n}`,
       java: `class Node { int data; Node next; Node(int d){ data=d; } }\nclass Stack {\n  Node top;\n  void push(int x){ Node n=new Node(x); n.next=top; top=n; }\n  Integer pop(){ if(top==null) return null; int v=top.data; top=top.next; return v; }\n  Integer peek(){ return top==null? null : top.data; }\n}`,
       cpp: `struct Node { int data; Node* next; Node(int d):data(d),next(nullptr){} };\nstruct Stack {\n  Node* top=nullptr;\n  void push(int x){ Node* n=new Node(x); n->next=top; top=n; }\n  int pop(){ if(!top) return INT_MIN; int v=top->data; top=top->next; return v; }\n  int peek(){ return top? top->data : INT_MIN; }\n};`,
       py: `class Node:\n  def __init__(self, data, next=None):\n    self.data=data; self.next=next\nclass Stack:\n  def __init__(self): self.top=None\n  def push(self, x): self.top = Node(x, self.top)\n  def pop(self):\n    if not self.top: return None\n    v=self.top.data; self.top=self.top.next; return v\n  def peek(self): return None if not self.top else self.top.data`
     },
     steps: [
-      { explanation: "Push sets new node's next to current top and updates top.", highlight: { js: "push(x)", java: "push(int x)", cpp: "push(int x)", py: "push(self, x)" } },
-      { explanation: "Pop reads top and advances top to next.", highlight: { js: "pop(){", java: "pop(){", cpp: "int pop()", py: "def pop(self):" } },
-      { explanation: "Peek returns the top value without removal.", highlight: { js: "peek(){", java: "peek(){", cpp: "int peek()", py: "def peek(self):" } }
+      { explanation: "Push sets new node's next to current top and updates top.", highlight: { go: "Push", js: "push(x)", java: "push(int x)", cpp: "push(int x)", py: "push(self, x)" } },
+      { explanation: "Pop reads top and advances top to next.", highlight: { go: "Pop", js: "pop(){", java: "pop(){", cpp: "int pop()", py: "def pop(self):" } },
+      { explanation: "Peek returns the top value without removal.", highlight: { go: "Peek", js: "peek(){", java: "peek(){", cpp: "int peek()", py: "def peek(self):" } }
     ]
   },
 
@@ -61,14 +89,29 @@ const ALGO = {
     title: "Queue (FIFO)",
     description: "Enqueue adds at the back; dequeue removes from the front. Maintains front and back pointers.",
     code: {
+      go: `package main
+
+import "container/list"
+
+type Queue struct {
+	v *list.List
+}
+
+func NewQueue() *Queue { return &Queue{list.New()} }
+func (q *Queue) Enqueue(v interface{}) { q.v.PushBack(v) }
+func (q *Queue) Dequeue() interface{} {
+	front := q.v.Front()
+	if front == nil { return nil }
+	return q.v.Remove(front)
+}`,
       js: `class Node { constructor(data,next=null){ this.data=data; this.next=next; } }\nclass Queue {\n  constructor(){ this.front=null; this.back=null; }\n  enqueue(x){ const n=new Node(x); if(!this.back){ this.front=this.back=n; } else { this.back.next=n; this.back=n; } }\n  dequeue(){ if(!this.front) return null; const v=this.front.data; this.front=this.front.next; if(!this.front) this.back=null; return v; }\n}`,
       java: `class Node { int data; Node next; Node(int d){ data=d; } }\nclass Queue {\n  Node front, back;\n  void enqueue(int x){ Node n=new Node(x); if(back==null){ front=back=n; } else { back.next=n; back=n; } }\n  Integer dequeue(){ if(front==null) return null; int v=front.data; front=front.next; if(front==null) back=null; return v; }\n}`,
       cpp: `struct Node { int data; Node* next; Node(int d):data(d),next(nullptr){} };\nstruct Queue {\n  Node* front=nullptr; Node* back=nullptr;\n  void enqueue(int x){ Node* n=new Node(x); if(!back){ front=back=n; } else { back->next=n; back=n; } }\n  int dequeue(){ if(!front) return INT_MIN; int v=front->data; front=front->next; if(!front) back=nullptr; return v; }\n};`,
       py: `class Node:\n  def __init__(self,data,next=None): self.data=data; self.next=next\nclass Queue:\n  def __init__(self): self.front=None; self.back=None\n  def enqueue(self, x):\n    n=Node(x)\n    if not self.back: self.front=self.back=n\n    else: self.back.next=n; self.back=n\n  def dequeue(self):\n    if not self.front: return None\n    v=self.front.data; self.front=self.front.next\n    if not self.front: self.back=None\n    return v`
     },
     steps: [
-      { explanation: "Enqueue: link new node after back; update back (or both when empty).", highlight: { js: "enqueue(x)", java: "enqueue(int x)", cpp: "enqueue(int x)", py: "enqueue(self, x)" } },
-      { explanation: "Dequeue: read front, move front to next; if empty, back becomes null.", highlight: { js: "dequeue(){", java: "dequeue(){", cpp: "int dequeue()", py: "def dequeue(self):" } }
+      { explanation: "Enqueue: link new node after back; update back (or both when empty).", highlight: { go: "Enqueue", js: "enqueue(x)", java: "enqueue(int x)", cpp: "enqueue(int x)", py: "enqueue(self, x)" } },
+      { explanation: "Dequeue: read front, move front to next; if empty, back becomes null.", highlight: { go: "Dequeue", js: "dequeue(){", java: "dequeue(){", cpp: "int dequeue()", py: "def dequeue(self):" } }
     ]
   },
 
@@ -76,14 +119,29 @@ const ALGO = {
     title: "Binary Search Tree (BST)",
     description: "Each node has up to two children. For BST, left subtree values are smaller; right are larger. Common operations: insert, search, delete, traversals.",
     code: {
+      go: `package main
+
+type Node struct {
+	Key   int
+	Left  *Node
+	Right *Node
+}
+
+func (n *Node) Insert(key int) {
+	if key < n.Key {
+		if n.Left == nil { n.Left = &Node{Key: key} } else { n.Left.Insert(key) }
+	} else if key > n.Key {
+		if n.Right == nil { n.Right = &Node{Key: key} } else { n.Right.Insert(key) }
+	}
+}`,
       js: `class Node { constructor(data){ this.data=data; this.left=null; this.right=null; } }\nclass BST {\n  constructor(){ this.root=null; }\n  insert(x){ this.root = this._insert(this.root, x); }\n  _insert(n,x){ if(!n) return new Node(x); if(x<n.data) n.left=this._insert(n.left,x); else n.right=this._insert(n.right,x); return n; }\n  search(x){ let n=this.root; while(n){ if(n.data===x) return true; n = x<n.data? n.left : n.right; } return false; }\n}`,
       java: `class Node { int data; Node left,right; Node(int d){ data=d; } }\nclass BST {\n  Node root;\n  void insert(int x){ root = _insert(root,x); }\n  Node _insert(Node n,int x){ if(n==null) return new Node(x); if(x<n.data) n.left=_insert(n.left,x); else n.right=_insert(n.right,x); return n; }\n  boolean search(int x){ Node n=root; while(n!=null){ if(n.data==x) return true; n = x<n.data? n.left : n.right; } return false; }\n}`,
       cpp: `struct Node { int data; Node* left; Node* right; Node(int d):data(d),left(nullptr),right(nullptr){} };\nstruct BST {\n  Node* root=nullptr;\n  Node* _insert(Node* n,int x){ if(!n) return new Node(x); if(x<n->data) n->left=_insert(n->left,x); else n->right=_insert(n->right,x); return n; }\n  void insert(int x){ root=_insert(root,x); }\n  bool search(int x){ Node* n=root; while(n){ if(n->data==x) return true; n = x<n->data? n->left : n->right; } return false; }\n};`,
       py: `class Node:\n  def __init__(self, data): self.data=data; self.left=None; self.right=None\nclass BST:\n  def __init__(self): self.root=None\n  def _insert(self, n, x):\n    if not n: return Node(x)\n    if x < n.data: n.left = self._insert(n.left, x)\n    else: n.right = self._insert(n.right, x)\n    return n\n  def insert(self, x): self.root = self._insert(self.root, x)\n  def search(self, x):\n    n=self.root\n    while n:\n      if n.data==x: return True\n      n = n.left if x < n.data else n.right\n    return False`
     },
     steps: [
-      { explanation: "Insert: compare down the tree and attach new node at null child.", highlight: { js: "_insert(n,x)", java: "_insert(Node n,int x)", cpp: "_insert(Node* n,int x)", py: "_insert(self, n, x)" } },
-      { explanation: "Search: walk left or right based on comparison.", highlight: { js: "search(x){", java: "boolean search(int x)", cpp: "bool search(int x)", py: "def search(self, x):" } }
+      { explanation: "Insert: compare down the tree and attach new node at null child.", highlight: { go: "Insert", js: "_insert(n,x)", java: "_insert(Node n,int x)", cpp: "_insert(Node* n,int x)", py: "_insert(self, n, x)" } },
+      { explanation: "Search: walk left or right based on comparison.", highlight: { go: "Search", js: "search(x){", java: "boolean search(int x)", cpp: "bool search(int x)", py: "def search(self, x):" } }
     ]
   },
 
@@ -92,6 +150,18 @@ const ALGO = {
     title: "Bubble Sort Algorithm",
     description: "Repeatedly compares adjacent elements and swaps them if out of order. Largest items bubble to the end each pass.",
     code: {
+      go: `package main
+
+func BubbleSort(arr []int) {
+	n := len(arr)
+	for i := 0; i < n-1; i++ {
+		for j := 0; j < n-i-1; j++ {
+			if arr[j] > arr[j+1] {
+				arr[j], arr[j+1] = arr[j+1], arr[j]
+			}
+		}
+	}
+}`,
       js: `function bubbleSort(arr) {\n  const n = arr.length;\n  for (let i = 0; i < n - 1; i++) {\n    for (let j = 0; j < n - i - 1; j++) {\n      if (arr[j] > arr[j + 1]) {\n        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];\n      }\n    }\n  }\n  return arr;\n}`,
       java: `public static int[] bubbleSort(int[] arr) {\n  int n = arr.length;\n  for (int i = 0; i < n - 1; i++) {\n    for (int j = 0; j < n - i - 1; j++) {\n      if (arr[j] > arr[j + 1]) {\n        int tmp = arr[j];\n        arr[j] = arr[j + 1];\n        arr[j + 1] = tmp;\n      }\n    }\n  }\n  return arr;\n}`,
       cpp: `#include <vector>\nusing namespace std;\n\nvector<int> bubbleSort(vector<int> arr) {\n  int n = (int)arr.size();\n  for (int i = 0; i < n - 1; i++) {\n    for (int j = 0; j < n - i - 1; j++) {\n      if (arr[j] > arr[j + 1]) {\n        swap(arr[j], arr[j + 1]);\n      }\n    }\n  }\n  return arr;\n}`,
@@ -109,6 +179,20 @@ const ALGO = {
     title: "Selection Sort Algorithm",
     description: "Select the minimum from the unsorted part and place it at the beginning each iteration.",
     code: {
+      go: `package main
+
+func SelectionSort(arr []int) {
+	n := len(arr)
+	for i := 0; i < n-1; i++ {
+		minIdx := i
+		for j := i + 1; j < n; j++ {
+			if arr[j] < arr[minIdx] {
+				minIdx = j
+			}
+		}
+		arr[i], arr[minIdx] = arr[minIdx], arr[i]
+	}
+}`,
       js: `function selectionSort(arr) {\n  const n = arr.length;\n  for (let i = 0; i < n - 1; i++) {\n    let minIdx = i;\n    for (let j = i + 1; j < n; j++) {\n      if (arr[j] < arr[minIdx]) minIdx = j;\n    }\n    if (minIdx !== i) [arr[i], arr[minIdx]] = [arr[minIdx], arr[i]];\n  }\n  return arr;\n}`,
       java: `public static int[] selectionSort(int[] arr) {\n  int n = arr.length;\n  for (int i = 0; i < n - 1; i++) {\n    int minIdx = i;\n    for (int j = i + 1; j < n; j++) {\n      if (arr[j] < arr[minIdx]) minIdx = j;\n    }\n    if (minIdx != i) { int t = arr[i]; arr[i] = arr[minIdx]; arr[minIdx] = t; }\n  }\n  return arr;\n}`,
       cpp: `#include <vector>\nusing namespace std;\n\nvector<int> selectionSort(vector<int> arr) {\n  int n = (int)arr.size();\n  for (int i = 0; i < n - 1; i++) {\n    int minIdx = i;\n    for (int j = i + 1; j < n; j++)\n      if (arr[j] < arr[minIdx]) minIdx = j;\n    if (minIdx != i) swap(arr[i], arr[minIdx]);\n  }\n  return arr;\n}`,
@@ -125,6 +209,20 @@ const ALGO = {
     title: "Insertion Sort Algorithm",
     description: "Builds the sorted array one item at a time by inserting the current element into the already-sorted left part.",
     code: {
+      go: `package main
+
+func InsertionSort(arr []int) {
+	n := len(arr)
+	for i := 1; i < n; i++ {
+		key := arr[i]
+		j := i - 1
+		for j >= 0 && arr[j] > key {
+			arr[j+1] = arr[j]
+			j--
+		}
+		arr[j+1] = key
+	}
+}`,
       js: `function insertionSort(arr) {\n  const n = arr.length;\n  for (let i = 1; i < n; i++) {\n    const key = arr[i];\n    let j = i - 1;\n    while (j >= 0 && arr[j] > key) {\n      arr[j + 1] = arr[j];\n      j--;\n    }\n    arr[j + 1] = key;\n  }\n  return arr;\n}`,
       java: `public static int[] insertionSort(int[] arr) {\n  int n = arr.length;\n  for (int i = 1; i < n; i++) {\n    int key = arr[i], j = i - 1;\n    while (j >= 0 && arr[j] > key) { arr[j + 1] = arr[j]; j--; }\n    arr[j + 1] = key;\n  }\n  return arr;\n}`,
       cpp: `#include <vector>\nusing namespace std;\n\nvector<int> insertionSort(vector<int> arr) {\n  int n = (int)arr.size();\n  for (int i = 1; i < n; i++) {\n    int key = arr[i], j = i - 1;\n    while (j >= 0 && arr[j] > key) { arr[j + 1] = arr[j]; j--; }\n    arr[j + 1] = key;\n  }\n  return arr;\n}`,
@@ -141,6 +239,24 @@ const ALGO = {
     title: "Merge Sort Algorithm",
     description: "Divide the array, sort each half, then merge the two sorted halves.",
     code: {
+      go: `package main
+
+func MergeSort(arr []int) []int {
+	if len(arr) <= 1 { return arr }
+	mid := len(arr) / 2
+	left := MergeSort(arr[:mid])
+	right := MergeSort(arr[mid:])
+	return merge(left, right)
+}
+
+func merge(left, right []int) []int {
+	res := make([]int, 0, len(left)+len(right))
+	i, j := 0, 0
+	for i < len(left) && j < len(right) {
+		if left[i] <= right[j] { res = append(res, left[i]); i++ } else { res = append(res, right[j]); j++ }
+	}
+	return append(append(res, left[i:]...), right[j:]...)
+}`,
       js: `function mergeSort(arr) {\n  if (arr.length <= 1) return arr;\n  const mid = Math.floor(arr.length / 2);\n  const left = mergeSort(arr.slice(0, mid));\n  const right = mergeSort(arr.slice(mid));\n  return merge(left, right);\n}\nfunction merge(left, right) {\n  const res = [];\n  let i = 0, j = 0;\n  while (i < left.length && j < right.length) {\n    if (left[i] <= right[j]) res.push(left[i++]);\n    else res.push(right[j++]);\n  }\n  return res.concat(left.slice(i)).concat(right.slice(j));\n}`,
       java: `import java.util.*;\npublic static int[] mergeSort(int[] arr) {\n  if (arr.length <= 1) return arr;\n  int mid = arr.length / 2;\n  int[] left = Arrays.copyOfRange(arr, 0, mid);\n  int[] right = Arrays.copyOfRange(arr, mid, arr.length);\n  left = mergeSort(left);\n  right = mergeSort(right);\n  return merge(left, right);\n}\nprivate static int[] merge(int[] L, int[] R) {\n  int[] res = new int[L.length + R.length];\n  int i = 0, j = 0, k = 0;\n  while (i < L.length && j < R.length)\n    res[k++] = (L[i] <= R[j]) ? L[i++] : R[j++];\n  while (i < L.length) res[k++] = L[i++];\n  while (j < R.length) res[k++] = R[j++];\n  return res;\n}`,
       cpp: `#include <vector>\nusing namespace std;\n\nstatic vector<int> mergeVec(const vector<int>& L, const vector<int>& R) {\n  vector<int> res; res.reserve(L.size()+R.size());\n  size_t i=0, j=0;\n  while (i<L.size() && j<R.size()) {\n    if (L[i] <= R[j]) res.push_back(L[i++]);\n    else res.push_back(R[j++]);\n  }\n  while (i<L.size()) res.push_back(L[i++]);\n  while (j<R.size()) res.push_back(R[j++]);\n  return res;\n}\nvector<int> mergeSort(vector<int> a) {\n  if (a.size() <= 1) return a;\n  size_t mid = a.size()/2;\n  vector<int> left(a.begin(), a.begin()+mid);\n  vector<int> right(a.begin()+mid, a.end());\n  left = mergeSort(left);\n  right = mergeSort(right);\n  return mergeVec(left, right);\n}`,
@@ -157,6 +273,21 @@ const ALGO = {
     title: "Quick Sort Algorithm",
     description: "Pick a pivot, partition the array into smaller and larger elements, then recursively sort the partitions.",
     code: {
+      go: `package main
+
+func QuickSort(arr []int) []int {
+	if len(arr) <= 1 { return arr }
+	pivot := arr[len(arr)-1]
+	left, right := []int{}, []int{}
+	for i := 0; i < len(arr)-1; i++ {
+		if arr[i] < pivot {
+			left = append(left, arr[i])
+		} else {
+			right = append(right, arr[i])
+		}
+	}
+	return append(append(QuickSort(left), pivot), QuickSort(right)...)
+}`,
       js: `function quickSort(arr) {
   if (arr.length <= 1) return arr;
   const pivot = arr[arr.length - 1];
@@ -228,6 +359,26 @@ strandSort: {
   title: "Strand Sort",
   description: "Repeatedly extract sorted subsequences (strands) from input and merge them into result until input is empty.",
   code: {
+    go: `package main
+
+func StrandSort(arr []int) []int {
+	if len(arr) == 0 { return arr }
+	result := []int{}
+	input := make([]int, len(arr)); copy(input, arr)
+
+	for len(input) > 0 {
+		strand := []int{input[0]}; input = input[1:]
+		i := 0
+		for i < len(input) {
+			if input[i] >= strand[len(strand)-1] {
+				strand = append(strand, input[i])
+				input = append(input[:i], input[i+1:]...)
+			} else { i++ }
+		}
+		result = merge(result, strand)
+	}
+	return result
+}`,
     js: `function strandSort(arr){
   if (!arr.length) return arr;
   const result = [];
@@ -366,6 +517,24 @@ def _merge(l1, l2):
     title: "Radix Sort (LSD, base 10)",
     description: "Sort integers by processing digits from least significant to most, using a stable counting per digit.",
     code: {
+      go: `package main
+
+func countingByDigit(arr []int, exp int) {
+	n := len(arr)
+	out := make([]int, n)
+	cnt := make([]int, 10)
+	for i := 0; i < n; i++ { cnt[(arr[i]/exp)%10]++ }
+	for i := 1; i < 10; i++ { cnt[i] += cnt[i-1] }
+	for i := n - 1; i >= 0; i-- {
+		d := (arr[i] / exp) % 10
+		cnt[d]--
+		out[cnt[d]] = arr[i]
+	}
+	copy(arr, out)
+}
+func RadixSort(arr []int) {
+	// ... (full implementation requires finding max and looping)
+}`,
       js: `function countingByDigit(arr, exp){
   const out = new Array(arr.length).fill(0);
   const cnt = new Array(10).fill(0);
@@ -448,6 +617,22 @@ def radix_sort(a):
     title: "Bucket Sort (uniform [0,1) or range partition)",
     description: "Distribute elements into buckets, sort each bucket, then concatenate.",
     code: {
+      go: `package main
+
+import "sort"
+
+func BucketSort(arr []int, bucketCount int) []int {
+	if len(arr) == 0 { return arr }
+	// ... (full implementation requires finding min/max and range)
+	buckets := make([][]int, bucketCount)
+	for _, x := range arr {
+		// ... (calculate bucket index)
+		// buckets[idx] = append(buckets[idx], x)
+	}
+	sorted := []int{}
+	for _, b := range buckets { sort.Ints(b); sorted = append(sorted, b...) }
+	return sorted
+}`,
       js: `function bucketSort(arr, bucketCount=10){
   if (!arr.length) return arr;
   const min = Math.min(...arr), max = Math.max(...arr);
@@ -519,6 +704,11 @@ vector<int> bucketSort(vector<int> a, int bucketCount=10){
       title: "TimSort",
       description: "Hybrid stable sorting algorithm combining Insertion Sort and Merge Sort. It detects natural runs in the array, sorts them using insertion sort, and then merges them efficiently.",
       code: {
+        go: `package main
+
+import "sort"
+
+func TimSort(arr []int) { sort.SliceStable(arr, func(i, j int) bool { return arr[i] < arr[j] }) }`,
         js: `const MIN_MERGE = 32;
 
     function minRunLength(n){
@@ -736,6 +926,20 @@ vector<int> bucketSort(vector<int> a, int bucketCount=10){
   title: "Cocktail Shaker Sort",
   description: "A bidirectional variation of Bubble Sort. Instead of only moving large elements to the end, it alternates between forward and backward passes, moving both small and large elements toward their correct ends with each pass. This can lead to fewer passes on certain datasets compared to regular Bubble Sort.",
   code: {
+    go: `package main
+
+func CocktailShakerSort(arr []int) {
+	start, end := 0, len(arr)-1
+	swapped := true
+	for swapped {
+		swapped = false
+		for i := start; i < end; i++ { if arr[i] > arr[i+1] { arr[i], arr[i+1] = arr[i+1], arr[i]; swapped = true } }
+		if !swapped { break }
+		end--
+		for i := end - 1; i >= start; i-- { if arr[i] > arr[i+1] { arr[i], arr[i+1] = arr[i+1], arr[i]; swapped = true } }
+		start++
+	}
+}`,
     js: `function cocktailShakerSort(arr) {
   let start = 0;
   let end = arr.length - 1;
@@ -883,6 +1087,19 @@ void cocktailShakerSort(vector<int>& arr) {
     title: "Shell Sort Algorithm",
     description: "An improvement over insertion sort that allows the exchange of elements that are far apart. Uses a gap sequence that starts large and reduces to 1, making the final insertion sort pass very efficient.",
     code: {
+      go: `package main
+
+func ShellSort(arr []int) {
+	n := len(arr)
+	for gap := n / 2; gap > 0; gap /= 2 {
+		for i := gap; i < n; i++ {
+			temp := arr[i]
+			j := i
+			for ; j >= gap && arr[j-gap] > temp; j -= gap { arr[j] = arr[j-gap] }
+			arr[j] = temp
+		}
+	}
+}`,
       js: `function shellSort(arr) {
   const n = arr.length;
   // Start with a big gap, then reduce the gap
@@ -959,12 +1176,12 @@ vector<int> shellSort(vector<int> arr) {
   return arr`
     },
     steps: [
-      { explanation: "Start with gap = n/2 and reduce by half each iteration.", highlight: { js: "gap = Math.floor(n / 2)", java: "gap = n / 2", cpp: "gap = n / 2", py: "gap = n // 2" } },
-      { explanation: "For each gap, perform gapped insertion sort on subarrays.", highlight: { js: "for (let i = gap; i < n; i++)", java: "for (int i = gap; i < n; i++)", cpp: "for (int i = gap; i < n; i++)", py: "for i in range(gap, n):" } },
-      { explanation: "Store current element and find its correct position within gap-sorted elements.", highlight: { js: "const temp = arr[i];", java: "int temp = arr[i];", cpp: "int temp = arr[i];", py: "temp = arr[i]" } },
-      { explanation: "Shift larger elements gap positions ahead until insertion point found.", highlight: { js: "arr[j - gap] > temp", java: "arr[j - gap] > temp", cpp: "arr[j - gap] > temp", py: "arr[j - gap] > temp" } },
-      { explanation: "Insert the stored element at its correct position.", highlight: { js: "arr[j] = temp;", java: "arr[j] = temp;", cpp: "arr[j] = temp;", py: "arr[j] = temp" } },
-      { explanation: "Reduce gap and repeat until gap becomes 1 (regular insertion sort).", highlight: { js: "gap = Math.floor(gap / 2)", java: "gap /= 2", cpp: "gap /= 2", py: "gap //= 2" } }
+      { explanation: "Start with gap = n/2 and reduce by half each iteration.", highlight: { go: "// Go implementation coming soon!", js: "gap = Math.floor(n / 2)", java: "gap = n / 2", cpp: "gap = n / 2", py: "gap = n // 2" } },
+      { explanation: "For each gap, perform gapped insertion sort on subarrays.", highlight: { go: "// Go implementation coming soon!", js: "for (let i = gap; i < n; i++)", java: "for (int i = gap; i < n; i++)", cpp: "for (int i = gap; i < n; i++)", py: "for i in range(gap, n):" } },
+      { explanation: "Store current element and find its correct position within gap-sorted elements.", highlight: { go: "// Go implementation coming soon!", js: "const temp = arr[i];", java: "int temp = arr[i];", cpp: "int temp = arr[i];", py: "temp = arr[i]" } },
+      { explanation: "Shift larger elements gap positions ahead until insertion point found.", highlight: { go: "// Go implementation coming soon!", js: "arr[j - gap] > temp", java: "arr[j - gap] > temp", cpp: "arr[j - gap] > temp", py: "arr[j - gap] > temp" } },
+      { explanation: "Insert the stored element at its correct position.", highlight: { go: "// Go implementation coming soon!", js: "arr[j] = temp;", java: "arr[j] = temp;", cpp: "arr[j] = temp;", py: "arr[j] = temp" } },
+      { explanation: "Reduce gap and repeat until gap becomes 1 (regular insertion sort).", highlight: { go: "// Go implementation coming soon!", js: "gap = Math.floor(gap / 2)", java: "gap /= 2", cpp: "gap /= 2", py: "gap //= 2" } }
     ]
   },
 
@@ -972,6 +1189,13 @@ vector<int> shellSort(vector<int> arr) {
     title: "IntroSort",
     description: "Hybrid sorting algorithm that starts with Quick Sort, switches to Heap Sort when recursion depth exceeds a limit, and uses Insertion Sort for small partitions. Ensures O(n log n) worst-case time while keeping fast average case.",
     code: {
+      go: `package main
+
+import "sort"
+
+func IntroSort(arr []int) {
+	sort.Ints(arr) // Go's standard sort is an introspective sort
+}`,
       js: `function insertionSort(arr, left, right){
   for (let i=left+1;i<=right;i++){
     let key=arr[i], j=i-1;
@@ -1198,6 +1422,22 @@ sleepSort: {
   title: "Sleep Sort",
   description: "Sleep Sort is a fun, visualization-based algorithm that sorts numbers by leveraging their values as delays. Each element 'sleeps' for a duration proportional to its value, then gets placed in the output in that order. While not practical for real-world use, it's often used to demonstrate concurrency and timing-based sorting.",
   code: {
+    go: `package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+func SleepSort(arr []int) {
+	var wg sync.WaitGroup
+	for _, num := range arr {
+		wg.Add(1)
+		go func(n int) { defer wg.Done(); time.Sleep(time.Duration(n) * 10 * time.Millisecond); fmt.Print(n, " ") }(num)
+	}
+	wg.Wait()
+}`,
     js: `function sleepSort(arr, delay = 1) {
   const result = [];
   const maxVal = Math.max(...arr);
@@ -1307,6 +1547,20 @@ print(sleep_sort([3, 1, 4, 2]))  # [1, 2, 3, 4]`
     description:
       "Search in a sorted array by repeatedly halving the search space.",
     code: {
+      go: `package main
+
+func BinarySearch(arr []int, target int) int {
+	low, high := 0, len(arr)-1
+	for low <= high {
+		mid := low + (high-low)/2
+		if arr[mid] == target {
+			return mid
+		} else if arr[mid] < target {
+			low = mid + 1
+		} else { high = mid - 1 }
+	}
+	return -1
+}`,
       js: `function binarySearch(arr, target) {
   let l = 0, r = arr.length - 1;
   while (l <= r) {
@@ -1359,6 +1613,16 @@ int binarySearch(const vector<int>& arr, int target) {
     description:
       "Scan each element from left to right until you find the target.",
     code: {
+      go: `package main
+
+func LinearSearch(arr []int, target int) int {
+	for i, v := range arr {
+		if v == target {
+			return i
+		}
+	}
+	return -1
+}`,
       js: `function linearSearch(arr, target) {
   for (let i = 0; i < arr.length; i++)
     if (arr[i] === target) return i;
@@ -1388,6 +1652,23 @@ int linearSearch(const vector<int>& arr, int target) {
   description:
     "Search in a sorted array by dividing the search space into three parts and discarding two-thirds at each step.",
   code: {
+    go: `package main
+
+func TernarySearch(arr []int, target int) int {
+	l, r := 0, len(arr)-1
+	for l <= r {
+		mid1 := l + (r-l)/3
+		mid2 := r - (r-l)/3
+		if arr[mid1] == target { return mid1 }
+		if arr[mid2] == target { return mid2 }
+		if target < arr[mid1] {
+			r = mid1 - 1
+		} else if target > arr[mid2] {
+			l = mid2 + 1
+		} else { l = mid1 + 1; r = mid2 - 1 }
+	}
+	return -1
+}`,
     js: `function ternarySearch(arr, target) {
   let l = 0, r = arr.length - 1;
   while (l <= r) {
@@ -1467,6 +1748,23 @@ int ternarySearch(const vector<int>& arr, int target) {
     description:
       "Jump by √n blocks to find a candidate range, then linearly scan within it.",
     code: {
+      go: `package main
+
+import "math"
+
+func JumpSearch(arr []int, target int) int {
+	n := len(arr)
+	step := int(math.Sqrt(float64(n)))
+	prev := 0
+	for prev < n && arr[min(step, n)-1] < target {
+		prev = step
+		step += int(math.Sqrt(float64(n)))
+	}
+	for i := prev; i < min(step, n); i++ {
+		if arr[i] == target { return i }
+	}
+	return -1
+}`,
       js: `function jumpSearch(arr, target) {
   const n = arr.length;
   let step = Math.floor(Math.sqrt(n));
@@ -1526,6 +1824,19 @@ def jump_search(arr, target):
     description:
       "Find a range by growing the index exponentially, then binary-search within that range.",
     code: {
+      go: `package main
+func ExponentialSearch(arr []int, target int) int {
+	if len(arr) == 0 { return -1 }
+	if arr[0] == target { return 0 }
+	i := 1
+	for i < len(arr) && arr[i] <= target {
+		i *= 2
+	}
+	// Call binarySearch on the range [i/2, min(i, len(arr)-1)]
+	// binarySearch implementation not shown here for brevity.
+	// return binarySearch(arr, target, i/2, min(i, len(arr)-1))
+	return -1
+}`,
       js: `function exponentialSearch(arr, target) {
   if (arr.length === 0) return -1;
   if (arr[0] === target) return 0;

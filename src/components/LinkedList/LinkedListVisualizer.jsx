@@ -805,6 +805,14 @@ const LinkedListVisualizer = () => {
               >
                 C++
               </button>
+              <button
+                className={`btn ${selectedLanguage === 'go' ? 'btn-primary' : 'btn-secondary'}`}
+                onClick={() => setSelectedLanguage('go')}
+                style={{ fontSize: '0.9rem', padding: '0.5rem 1rem' }}
+                aria-label="Switch to Go code"
+              >
+                Go
+              </button>
             </div>
             <select
               value={selectedOperation}

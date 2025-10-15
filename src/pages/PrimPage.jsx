@@ -133,8 +133,8 @@ const PrimPage = () => {
       <div className="theme-card" style={{ marginTop: '2rem' }}>
         <div className="theme-card-header">
           <h3>Prim's Algorithm - Code Implementation</h3>
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            {["java", "python", "cpp", "javascript"].map((lang) => (
+          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>_
+            {["java", "python", "cpp", "javascript", "go"].map((lang) => (
               <button
                 key={lang}
                 className={`btn ${selectedLanguage === lang ? 'btn-primary' : 'btn-secondary'}`}

@@ -115,7 +115,7 @@ const DPPage = () => {
         <div className="theme-card-header">
           <h3>Dynamic Programming - Code Implementation</h3>
           <div className="language-buttons">
-            {["java", "python", "cpp", "javascript"].map((lang) => (
+            {["java", "python", "cpp", "javascript", "go"].map((lang) => (
               <button
                 key={lang}
                 className={`btn ${selectedLanguage === lang ? "btn-primary" : "btn-secondary"}`}
