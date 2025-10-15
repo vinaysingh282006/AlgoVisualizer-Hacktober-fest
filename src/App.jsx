@@ -31,6 +31,8 @@ import GraphBFS from "./pages/GraphBFS";
 import GraphCycleDetection from "./pages/GraphCycleDetection";
 // graph Eulerian 
 import GraphEulerian from "./pages/GraphEulerian.jsx";
+// scc graph
+import GraphSCC from "./pages/GraphSCC.jsx";
 import GraphDFS from "./pages/GraphDFS";
 import GraphDijkstra from "./pages/GraphDijkstra";
 import GraphAStar from "./pages/GraphAStar";
@@ -243,6 +245,7 @@ const App = () => {
                         path="/graph/bellman-ford"
                         element={<BellmanFordPage />}
                       />
+                      <Route path='/graph/sccGraphs' element={<GraphSCC/>} />
 
 
                   {/* Algorithm Pages */}

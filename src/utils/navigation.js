@@ -141,6 +141,7 @@ export const learnSections = [
       { path: "/graph/comparison", label: "Graph Comparison", category: "Graphs", tags: ["comparison", "graph algorithms"] },
       { path: "/graph/cycleDetection", label: "Cycle Detection", category: "Graphs", tags: ["graph", "cycle", "DFS"] },
       { path: "/graph/eulerianGraphs", label: "Eulerian graphs", category: "Graphs", tags: ["graph", "euler", "eulerianCircuit" , "eulerianPath"] },
+      { path: "/graph/sccGraphs", label: "Strongly Connected Components", category: "Graphs", tags: ["graph", "SCC", "strongly connected components" , "kosarajusAlgo" , "component"] },
     ],
   },
 
