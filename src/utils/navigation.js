@@ -35,7 +35,15 @@ export const navbarNavigationItems = [
     ],
   },
   { path: "/data-structures", label: "Documentation", icon: "BookOpen" },
-    {
+  {
+    label: "Tools",
+    icon: "Cpu",
+    dropdown: [
+      { path: "/performance", label: "Performance Analyzer" },
+      { path: "/performance/docs", label: "Performance Docs" },
+    ],
+  },
+  {
     label: "Notes",
     icon: "BookOpen",
     dropdown: [
@@ -43,10 +51,7 @@ export const navbarNavigationItems = [
       { path: "/notes/python", label: "Python" },
       { path: "/notes/cpp", label: "Cpp" },
       { path: "/notes/c", label: "C" },
-      { path: "/notes/javascript", label: "JavaScript" },
-      { path: "/notes/rust", label: "Rust" },
-
-     ],
+    ],
   },
   { path: "/settings", label: "Settings", icon: "Settings" },
 ];
@@ -108,7 +113,7 @@ export const learnSections = [
   ],
 },
 
-  
+
 
   // Searching algorithms section
   {
