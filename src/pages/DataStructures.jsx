@@ -357,6 +357,14 @@ const algorithmDatabase = {
         spaceComplexity: "O(N)",
         implemented: true,
       },
+      {
+        name:"KadanesAlgorithm",
+        id:"kadane",
+        description:"Kadane’s Algorithm is used to find the maximum sum of a contiguous subarray in an array (which may contain negative numbers).",
+         timeComplexity:"O(n)",
+         spaceComplexity: "O(1)",
+        implemented: true,
+      },
     ],
   },
 };
