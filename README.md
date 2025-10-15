@@ -441,197 +441,88 @@ Below is the complete folder structure of the **AlgoVisualizer** project:
 
 ```bash
 AlgoVisualizer/
-├── .github/
-│   ├── ISSUE_TEMPLATE/               # GitHub Issue templates
-│   ├── workflows/                    # GitHub Actions CI/CD workflows
-│   └── pull_request_template.md      # PR template for contributors
+├── .github/                            # GitHub-related configurations
+│   ├── ISSUE_TEMPLATE/                 # Templates for creating new issues
+│   ├── workflows/                      # GitHub Actions CI/CD workflows
+│   └── pull_request_template.md        # Template for pull requests
 │
-├── .idea/                            # JetBrains IDE configuration files
-├── docs/                             # Documentation files
-│   ├── AUTO_UNASSIGN_GUIDE.md
-│   └── ...
+├── .idea/                              # JetBrains IDE (WebStorm/IntelliJ) project settings
+│   ├── inspectionProfiles/             # Code inspection rules
+│   ├── misc.xml
+│   ├── modules.xml
+│   └── vcs.xml
 │
-├── public/                           # Static files served publicly
+├── Backend/                            # Backend code (Node.js + Express)
+│   └── src/
+│       └── routes/
+│           ├── auth.js                 # Authentication routes
+│           ├── authController.js       # Handles authentication logic
+│           └── emailService.js         # Email sending service
+│
+├── docs/                               # Documentation files
+│   └── AUTO_UNASSIGN_GUIDE.md          # Guide for auto-unassignment workflow
+│
+├── public/                             # Static assets served directly
+│   ├── sample-data/                    # Example/sample dataset
 │   ├── Favicon.png
-│   ├── _redirects
+│   ├── _redirects                      # Netlify redirects configuration
 │   ├── favicon.ico
 │   ├── logo.jpg
-│   ├── manifest.json
-│   ├── robots.txt
-│   ├── gssoc logo.png
-│   └── statistics.gif
+│   ├── manifest.json                   # Web app manifest
+│   └── robots.txt                      # SEO and crawling rules
 │
-├── sample-data/                      # Example data for algorithms
+├── src/                                # Main frontend (React + Vite) source folder
+│   ├── algorithms/                     # All algorithm visualizations (sorting, searching, etc.)
+│   ├── assets/                         # Static assets like images and GIFs
+│   │   ├── blog/                       # Blog-related assets
+│   │   ├── gssoc logo.png
+│   │   └── statistics.gif
+│   ├── components/                     # Reusable React UI components
+│   ├── contexts/                       # React Context (Theme, Auth, etc.)
+│   ├── data/                           # Static/dynamic JSON or mock data
+│   ├── docs/                           # Frontend documentation files
+│   ├── hooks/                          # Custom React hooks
+│   ├── pages/                          # Page-level components (Home, About, etc.)
+│   ├── routes/                         # Route definitions for navigation
+│   ├── searching/                      # Searching algorithms visualization
+│   ├── services/                       # API and helper service files
+│   ├── styles/                         # CSS/Tailwind styling files
+│   ├── utils/                          # Utility/helper functions
+│   ├── App.jsx                         # Root React component
+│   ├── IntroSection.jsx                # Homepage intro component
+│   ├── ScrollToTop.jsx                 # Scroll to top behavior
+│   ├── TAILWIND_DOCS.md                # Documentation for Tailwind usage
+│   ├── ThemeContext.jsx                # Context for light/dark mode
+│   ├── main.css                        # Global stylesheet
+│   ├── main.jsx                        # Application entry file
+│   ├── navigatetotop.js                # Script for navigation top behavior
+│   ├── reportWebVitals.js              # Performance metrics
+│   └── setupTests.js                   # Test setup configuration
 │
-├── src/                              # Main source code folder
-│   ├── algorithms/                   # Core algorithm implementations
-│   ├── assets/                       # Static assets (images, icons, etc.)
-│   ├── blog/                         # Blog-related components
-│   ├── components/                   # Reusable UI components
-│   │   ├── BinaryTree/
-│   │   ├── LinkedList/
-│   │   ├── Queue/
-│   │   ├── Stack/
-│   │   ├── Trie/
-│   │   ├── AStarVisualizer.jsx
-│   │   ├── AlgorithmComparison.jsx
-│   │   ├── AlgorithmVisualizer.jsx
-│   │   ├── BacktrackingVisualizer.jsx
-│   │   ├── BranchBoundVisualizer.jsx
-│   │   ├── CodeExplanation.jsx
-│   │   ├── CodeRunnerJava.jsx
-│   │   ├── CodeRunnerPython.jsx
-│   │   ├── ComplexityBox.jsx
-│   │   ├── Contribute.jsx
-│   │   ├── Contributors.jsx
-│   │   ├── DCVisualizer.jsx
-│   │   ├── DFSCycleVisualizer.jsx
-│   │   ├── DPVisualizer.jsx
-│   │   ├── Doubt.jsx
-│   │   ├── EnhancedScrollToTop.jsx
-│   │   ├── ExportControls.js
-│   │   ├── ExportDemo.jsx
-│   │   ├── FaqBotService.js
-│   │   ├── FaqChatbot.jsx
-│   │   ├── FeedbackWidget.jsx
-│   │   ├── Footer.jsx
-│   │   ├── GameSearchVisualizer.jsx
-│   │   ├── GraphComparison.jsx
-│   │   ├── GraphVisualizer.jsx
-│   │   ├── GreedyVisualizer.jsx
-│   │   ├── HashingVisualizer.jsx
-│   │   ├── Header.jsx
-│   │   ├── HuffmanVisualizer.jsx
-│   │   ├── InputPanel.jsx
-│   │   ├── KruskalVisualizer.jsx
-│   │   ├── LearnerLeaderboard.jsx
-│   │   ├── MathVisualizer.jsx
-│   │   ├── Navbar.jsx
-│   │   ├── NotificationWidget.jsx
-│   │   ├── PrimVisualizer.jsx
-│   │   ├── Privacy.jsx
-│   │   ├── ProblemOfTheDay.jsx
-│   │   ├── ProgressTracker.jsx
-│   │   ├── QuestionCard.jsx
-│   │   ├── QuizManager.jsx
-│   │   ├── QuizStart.jsx
-│   │   ├── QuizTest.js
-│   │   ├── QuizTopicSelection.jsx
-│   │   ├── RabinKarpVisualizer.jsx
-│   │   ├── ResultPage.jsx
-│   │   ├── Sidebar.jsx
-│   │   ├── SimpleExportControls.jsx
-│   │   ├── Sorting.jsx
-│   │   ├── StringVisualizer.jsx
-│   │   ├── SubscribeButton.jsx
-│   │   ├── ThemeToggle.jsx
-│   │   ├── TreeVisualizer.jsx
-│   │   ├── UnifiedStats.jsx
-│   │   ├── UnifiedVisualizer.jsx
-│   │   ├── UserDropdown.jsx
-│   │   ├── WeeklyChallenge.jsx
-│   │   ├── about.css
-│   │   ├── about.jsx
-│   │   ├── complexityBox.css
-│   │   ├── contact.jsx
-│   │   ├── cookie-policy.jsx
-│   │   └── terms.jsx
-│   │
-│   ├── contexts/                     # React Context APIs (e.g., theme, user)
-│   ├── data/                         # Static data files
-│   ├── docs/                         # Component-specific documentation
-│   ├── hooks/                        # Custom React hooks
-│   ├── pages/                        # Page-level React components
-│   │   ├── Notes/
-│   │   ├── BacktrackingOverview.jsx
-│   │   ├── BacktrackingPage.jsx
-│   │   ├── Blog.jsx
-│   │   ├── BranchBoundOverview.jsx
-│   │   ├── BranchBoundPage.jsx
-│   │   ├── CodeEditor.jsx
-│   │   ├── CommunityLanding.jsx
-│   │   ├── ContributorBoard.jsx
-│   │   ├── ContributorLeaderboard.jsx
-│   │   ├── ContributorProfileModal.jsx
-│   │   ├── DCOverview.jsx
-│   │   ├── DCPage.jsx
-│   │   ├── DPOverview.jsx
-│   │   ├── DPPage.jsx
-│   │   ├── DSDocumentation.jsx
-│   │   ├── DataStructures.jsx
-│   │   ├── Documentation.jsx
-│   │   ├── FAQ.jsx
-│   │   ├── GameSearchOverview.jsx
-│   │   ├── GameSearchPage.jsx
-│   │   ├── GitLearning.jsx
-│   │   ├── Graph.jsx
-│   │   ├── GraphAStar.jsx
-│   │   ├── GraphBFS.jsx
-│   │   ├── GraphCycleDetection.jsx
-│   │   ├── GraphDFS.jsx
-│   │   ├── GraphDijkstra.jsx
-│   │   ├── GreedyOverview.jsx
-│   │   ├── GreedyPage.jsx
-│   │   ├── HashingOverview.jsx
-│   │   ├── HashingPage.jsx
-│   │   ├── Home.jsx
-│   │   ├── HuffmanPage.jsx
-│   │   ├── JavaOOPS.jsx
-│   │   ├── KruskalPage.jsx
-│   │   ├── LearnLanding.jsx
-│   │   ├── Login.jsx
-│   │   ├── MathOverview.jsx
-│   │   ├── MathPage.jsx
-│   │   ├── Playground.jsx
-│   │   ├── PrimPage.jsx
-│   │   ├── Quiz.jsx
-│   │   ├── Searching.jsx
-│   │   ├── SearchingOverview.jsx
-│   │   ├── Settings.jsx
-│   │   ├── Signup.jsx
-│   │   ├── Sorting.jsx
-│   │   ├── SortingDoc.jsx
-│   │   ├── StringOverview.jsx
-│   │   ├── StringPage.jsx
-│   │   ├── StringRabinKarpPage.jsx
-│   │   ├── TreeOverview.jsx
-│   │   └── TreePage.jsx
-│   │
-│   ├── searching/                    # Searching algorithm implementations
-│   ├── styles/                       # Global CSS / Tailwind styles
-│   ├── utils/                        # Helper utilities and logic
-│   │
-│   ├── App.jsx                       # Root React component
-│   ├── ScrollToTop.jsx
-│   ├── TAILWIND_DOCS.md
-│   ├── ThemeContext.jsx
-│   ├── main.css
-│   ├── main.jsx
-│   ├── navigatetotop.js
-│   ├── reportWebVitals.js
-│   └── setupTests.js
+├── .env.example                        # Example environment configuration
+├── .env.production                     # Production environment configuration
+├── .gitignore                          # Files/folders ignored by Git
+├── .prettierrc                         # Prettier code formatting configuration
+├── .vercelignore                       # Ignore files for Vercel deployment
 │
-├── .env.example                      # Example environment variables
-├── .env.production                   # Production environment config
-├── .gitignore                        # Git ignore rules
-├── .vercelignore                     # Vercel deployment ignore rules
-├── BACK_TO_TOP_DOCUMENTATION.md
-├── CODE_OF_CONDUCT.md
-├── CONTRIBUTING.md
-├── EXPORT_FEATURES.md
-├── LICENSE
-├── README.md                         # Main documentation (this file)
-├── SECURITY.md
-├── USER_INPUT_DOCUMENTATION.md
-├── desktop.ini
-├── index.html
-├── package-lock.json
-├── package.json
-├── sorting-refactor-issue.md
-├── sorting-refactor-pr.md
-├── ter/
-├── vercel.json
-└── vite.config.js                    # Vite configuration file
+├── BACK_TO_TOP_DOCUMENTATION.md        # Documentation for back-to-top feature
+├── CODE_OF_CONDUCT.md                  # Contributor code of conduct
+├── CONTRIBUTING.md                     # Guidelines for contributing
+├── EXPORT_FEATURES.md                  # Documentation of export features
+├── LICENSE                             # Project license
+├── README.md                           # Main project documentation
+├── SECURITY.md                         # Security guidelines
+├── USER_INPUT_DOCUMENTATION.md         # Documentation on user inputs
+│
+├── desktop.ini                         # System file (can be ignored)
+├── index.html                          # Main HTML file for React app
+├── package-lock.json                   # Auto-generated dependency lock file
+├── package.json                        # Project dependencies and scripts
+├── sorting-refactor-issue.md           # Issue template for sorting refactor
+├── sorting-refactor-pr.md              # PR template for sorting refactor
+├── ter                                 # (Possibly temp/test folder)
+├── vercel.json                         # Vercel deployment configuration
+└── vite.config.js                      # Vite configuration file for React build
 ```
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
