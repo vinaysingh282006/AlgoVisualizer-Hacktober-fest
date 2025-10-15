@@ -29,6 +29,10 @@ const notesMap = {
     { name: "Variables & Data Types", path: "/notes/javascript/variables-and-data-types" },
     // Add more JavaScript topics here
   ],
+  react: [
+    { name: "Fundamentals", path: "/notes/react/fundamentals" },
+    // Add more React topics here
+  ],
   rust: [
     { name: "Fundamentals", path: "/notes/rust/fundamentals" },
     // Add more Rust topics here

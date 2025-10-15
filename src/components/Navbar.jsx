@@ -79,9 +79,8 @@ const DesktopNavItem = ({
               <Link
                 key={subIndex}
                 to={sub.path}
-                className={`dropdown-item ${
-                  isActive(sub.path) ? "active" : ""
-                }`}
+                className={`dropdown-item ${isActive(sub.path) ? "active" : ""
+                  }`}
                 onClick={() => toggleDropdown(null)}
               >
                 {sub.label}
@@ -123,9 +122,8 @@ const MobileNavItem = ({
     return (
       <div className="mobile-dropdown" key={index}>
         <button
-          className={`mobile-dropdown-toggle ${
-            isOpen === index ? "active" : ""
-          }`}
+          className={`mobile-dropdown-toggle ${isOpen === index ? "active" : ""
+            }`}
           onClick={() => toggleDropdown(index)}
         >
           {item.icon &&
@@ -147,9 +145,8 @@ const MobileNavItem = ({
             <Link
               key={subIndex}
               to={sub.path}
-              className={`mobile-menu-link ${
-                isActive(sub.path) ? "active" : ""
-              }`}
+              className={`mobile-menu-link ${isActive(sub.path) ? "active" : ""
+                }`}
               onClick={() => {
                 toggleDropdown(null);
                 closeMenu();
@@ -261,54 +258,64 @@ const Navbar = () => {
                 <div className="dropdown-menu">
                   <Link
                     to="/notes/java"
-                    className={`dropdown-item ${
-                      isActive("/notes/java") ? "active" : ""
-                    }`}
+                    className={`dropdown-item ${isActive("/notes/java") ? "active" : ""
+                      }`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     Java
                   </Link>
                   <Link
                     to="/notes/python"
-                    className={`dropdown-item ${
-                      isActive("/notes/python") ? "active" : ""
-                    }`}
+                    className={`dropdown-item ${isActive("/notes/python") ? "active" : ""
+                      }`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     Python
                   </Link>
                   <Link
                     to="/notes/cpp"
-                    className={`dropdown-item ${
-                      isActive("/notes/cpp") ? "active" : ""
-                    }`}
+                    className={`dropdown-item ${isActive("/notes/cpp") ? "active" : ""
+                      }`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     C++
                   </Link>
                   <Link
                     to="/notes/c"
-                    className={`dropdown-item ${
-                      isActive("/notes/c") ? "active" : ""
-                    }`}
+                    className={`dropdown-item ${isActive("/notes/c") ? "active" : ""
+                      }`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     C
                   </Link>
                   <Link
                     to="/notes/javascript"
-                    className={`dropdown-item ${
-                      isActive("/notes/javascript") ? "active" : ""
-                    }`}
+                    className={`dropdown-item ${isActive("/notes/javascript") ? "active" : ""
+                      }`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     JavaScript
                   </Link>
                   <Link
+                    to="/notes/react"
+                    className={`dropdown-item ${isActive("/notes/react") ? "active" : ""
+                      }`}
+                    onClick={() => setDesktopNotesOpen(false)}
+                  >
+                    React
+                  </Link>
+                  <Link
+                    to="/notes/rust"
+                    className={`dropdown-item ${isActive("/notes/rust") ? "active" : ""
+                      }`}
+                    onClick={() => setDesktopNotesOpen(false)}
+                  >
+                    Rust
+                  </Link>
+                  <Link
                     to="/notes/MERN/MERNFundamentals"
-                    className={`dropdown-item ${
-                      isActive("/notes/MERN/MERNFundamentals") ? "active" : ""
-                    }`}
+                    className={`dropdown-item ${isActive("/notes/MERN/MERNFundamentals") ? "active" : ""
+                      }`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     MERN
@@ -321,7 +328,7 @@ const Navbar = () => {
                     className="dropdown-item"
                     onClick={() => setDesktopNotesOpen(false)}
                   >
-                    DSA Sheet  by Shradha Khapra      
+                    DSA Sheet  by Shradha Khapra
                   </Link>
                   <Link
                     to="https://codolio.com/question-tracker/sheet/neetcode-150?category=popular"
@@ -340,9 +347,8 @@ const Navbar = () => {
           {/* Algorithm Comparison Table Link */}
           <Link
             to="/algorithm-comparison-table"
-            className={`navbar-link ${
-              isActive("/algorithm-comparison-table") ? "active" : ""
-            }`}
+            className={`navbar-link ${isActive("/algorithm-comparison-table") ? "active" : ""
+              }`}
           >
             <BarChart3 size={18} className="icon" />
             <span>Compare</span>
@@ -397,9 +403,8 @@ const Navbar = () => {
         {/* Algorithm Comparison Table Link - Mobile */}
         <Link
           to="/algorithm-comparison-table"
-          className={`mobile-menu-link ${
-            isActive("/algorithm-comparison-table") ? "active" : ""
-          }`}
+          className={`mobile-menu-link ${isActive("/algorithm-comparison-table") ? "active" : ""
+            }`}
           onClick={() => setIsMobileMenuOpen(false)}
         >
           <BarChart3 size={18} className="icon" />
@@ -409,9 +414,8 @@ const Navbar = () => {
         {/* Notes Section */}
         <div className="mobile-dropdown">
           <button
-            className={`mobile-dropdown-toggle ${
-              mobileNotesOpen ? "active" : ""
-            }`}
+            className={`mobile-dropdown-toggle ${mobileNotesOpen ? "active" : ""
+              }`}
             onClick={() => setMobileNotesOpen(!mobileNotesOpen)}
           >
             <BookOpen size={18} className="icon" />
