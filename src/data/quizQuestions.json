@@ -7083,10 +7083,414 @@
         "explanation": "When Z value equals pattern length, it signifies a full match of the pattern at that position in the text."
     }
 
+,
+    {
+        "id": 458,
+        "topic": "Git",
+        "algorithm": "Core Concepts",
+        "difficulty": "Easy",
+        "question": "Which command is used to initialize a new Git repository?",
+        "options": [
+            "git start",
+            "git new",
+            "git init",
+            "git create"
+        ],
+        "correctAnswer": 2,
+        "explanation": "`git init` creates a new Git repository in the current directory, setting up the necessary .git subdirectory."
+    },
+    {
+        "id": 459,
+        "topic": "Git",
+        "algorithm": "Staging",
+        "difficulty": "Easy",
+        "question": "What command is used to stage a file for the next commit?",
+        "options": [
+            "git stage <file>",
+            "git add <file>",
+            "git track <file>",
+            "git include <file>"
+        ],
+        "correctAnswer": 1,
+        "explanation": "`git add <file>` adds the specified file's current content to the staging area (index), preparing it for the next commit."
+    },
+    {
+        "id": 460,
+        "topic": "Git",
+        "algorithm": "Committing",
+        "difficulty": "Easy",
+        "question": "Which command saves your staged changes to the local repository history?",
+        "options": [
+            "git save",
+            "git push",
+            "git commit -m 'message'",
+            "git store"
+        ],
+        "correctAnswer": 2,
+        "explanation": "`git commit` takes the staged snapshot and permanently saves it to the project's history with a descriptive message."
+    },
+    {
+        "id": 461,
+        "topic": "Git",
+        "algorithm": "Branching",
+        "difficulty": "Medium",
+        "question": "What is the command to create a new branch and switch to it immediately?",
+        "options": [
+            "git branch <name> && git checkout <name>",
+            "git checkout -b <name>",
+            "git new-branch <name>",
+            "Both A and B are correct ways to do it"
+        ],
+        "correctAnswer": 3,
+        "explanation": "`git checkout -b <name>` is a convenient shortcut that creates a new branch and switches to it in one step. The two separate commands also achieve the same result."
+    },
+    {
+        "id": 462,
+        "topic": "Git",
+        "algorithm": "Remote",
+        "difficulty": "Medium",
+        "question": "What is the difference between `git fetch` and `git pull`?",
+        "options": [
+            "They are identical commands.",
+            "`git pull` downloads remote changes but does not merge them.",
+            "`git fetch` downloads remote changes but does not merge; `git pull` does both.",
+            "`git fetch` pushes local changes to the remote."
+        ],
+        "correctAnswer": 2,
+        "explanation": "`git fetch` retrieves the latest metadata from the remote but doesn't change your local working branch. `git pull` is equivalent to `git fetch` followed by `git merge`."
+    },
+    {
+        "id": 463,
+        "topic": "Git",
+        "algorithm": "Merging",
+        "difficulty": "Medium",
+        "question": "What does `git rebase` do?",
+        "options": [
+            "It merges another branch into your current branch.",
+            "It creates a new commit that combines the history of two branches.",
+            "It moves or combines a sequence of commits to a new base commit.",
+            "It deletes a branch."
+        ],
+        "correctAnswer": 2,
+        "explanation": "Rebasing re-writes the project history by replaying commits from your current branch on top of another branch, creating a linear history."
+    },
+    {
+        "id": 464,
+        "topic": "Git",
+        "algorithm": "History",
+        "difficulty": "Hard",
+        "question": "What is `git bisect` primarily used for?",
+        "options": [
+            "Splitting a large commit into smaller ones.",
+            "Finding the specific commit that introduced a bug.",
+            "Creating a backup of the repository.",
+            "Merging two branches together."
+        ],
+        "correctAnswer": 1,
+        "explanation": "`git bisect` uses a binary search algorithm to efficiently find the commit in your project's history that introduced a regression."
+    },
+    {
+        "id": 465,
+        "topic": "Git",
+        "algorithm": "History",
+        "difficulty": "Hard",
+        "question": "What is the purpose of the `git reflog` command?",
+        "options": [
+            "To list all remote references.",
+            "To log all changes to the repository's configuration.",
+            "To show a log of where the HEAD and branch references have been.",
+            "To format the `git log` output."
+        ],
+        "correctAnswer": 2,
+        "explanation": "The reflog tracks every change to the tips of branches and other references in the repository. It's a safety net for recovering lost commits or undoing mistakes."
+    },
+    {
+        "id": 466,
+        "topic": "Git",
+        "algorithm": "Core Concepts",
+        "difficulty": "Hard",
+        "question": "What does it mean to be in a 'detached HEAD' state in Git?",
+        "options": [
+            "The .git directory is corrupted.",
+            "You have uncommitted changes in your working directory.",
+            "HEAD is pointing directly to a commit instead of a branch.",
+            "You are not connected to a remote repository."
+        ],
+        "correctAnswer": 2,
+        "explanation": "A detached HEAD means HEAD refers to a specific commit, not a symbolic reference like a branch. This can happen when you check out a commit hash or a tag directly."
+    },
+    {
+        "id": 467,
+        "topic": "Git",
+        "algorithm": "Staging",
+        "difficulty": "Medium",
+        "question": "Which command allows you to interactively stage parts of a changed file?",
+        "options": [
+            "git add -i",
+            "git add -p",
+            "git stage --interactive",
+            "git commit --patch"
+        ],
+        "correctAnswer": 1,
+        "explanation": "`git add -p` or `git add --patch` allows you to review and stage changes hunk by hunk within a file, giving you fine-grained control over your commits."
+    },
+    {
+        "id": 468,
+        "topic": "Git",
+        "algorithm": "Committing",
+        "difficulty": "Medium",
+        "question": "How can you modify the most recent commit message?",
+        "options": [
+            "git commit --edit",
+            "git rebase -i HEAD~1",
+            "git commit --amend",
+            "git log --edit"
+        ],
+        "correctAnswer": 2,
+        "explanation": "`git commit --amend` opens your editor to let you change the commit message of the most recent commit. It can also be used to add forgotten files to the commit."
+    },
+    {
+        "id": 469,
+        "topic": "Git",
+        "algorithm": "Staging",
+        "difficulty": "Medium",
+        "question": "Which command unstages a file (`file.txt`) but leaves the changes in the working directory?",
+        "options": [
+            "git reset HEAD file.txt",
+            "git checkout -- file.txt",
+            "git rm --cached file.txt",
+            "git restore file.txt"
+        ],
+        "correctAnswer": 0,
+        "explanation": "`git reset HEAD <file>` is the classic command to unstage a file. The more modern `git restore --staged <file>` also achieves this."
+    },
+    {
+        "id": 470,
+        "topic": "Git",
+        "algorithm": "Branching",
+        "difficulty": "Easy",
+        "question": "How do you delete a local branch named 'feature-xyz'?",
+        "options": [
+            "git branch --delete feature-xyz",
+            "git delete branch feature-xyz",
+            "git branch -d feature-xyz",
+            "git rm branch feature-xyz"
+        ],
+        "correctAnswer": 2,
+        "explanation": "`git branch -d <branch-name>` deletes a local branch. Use `-D` to force delete if it has unmerged changes."
+    },
+    {
+        "id": 471,
+        "topic": "Git",
+        "algorithm": "Branching",
+        "difficulty": "Medium",
+        "question": "What is the command to rename the current branch to 'new-name'?",
+        "options": [
+            "git rename branch new-name",
+            "git branch -r new-name",
+            "git branch -m new-name",
+            "git checkout -r new-name"
+        ],
+        "correctAnswer": 2,
+        "explanation": "`git branch -m <new-name>` renames the current branch. To rename a different branch, you can use `git branch -m <old-name> <new-name>`."
+    },
+    {
+        "id": 472,
+        "topic": "Git",
+        "algorithm": "Branching",
+        "difficulty": "Easy",
+        "question": "Which command lists all local and remote branches?",
+        "options": [
+            "git branch --all",
+            "git show-branches",
+            "git list --branches",
+            "git branch -lr"
+        ],
+        "correctAnswer": 0,
+        "explanation": "`git branch -a` or `git branch --all` shows all local branches and remote-tracking branches."
+    },
+    {
+        "id": 473,
+        "topic": "Git",
+        "algorithm": "Merging",
+        "difficulty": "Medium",
+        "question": "What is a 'merge conflict' in Git?",
+        "options": [
+            "When two branches have the same name.",
+            "When Git cannot automatically resolve differences in code between two commits.",
+            "An error that occurs when pushing to a remote repository.",
+            "When a commit message is too long."
+        ],
+        "correctAnswer": 1,
+        "explanation": "A merge conflict occurs when two branches have made competing changes to the same line of a file, and Git needs manual intervention to decide which change to keep."
+    },
+    {
+        "id": 474,
+        "topic": "Git",
+        "algorithm": "Merging",
+        "difficulty": "Hard",
+        "question": "What does `git merge --squash feature-branch` do?",
+        "options": [
+            "Merges 'feature-branch' and creates a single commit on the current branch.",
+            "Deletes 'feature-branch' after merging.",
+            "Aborts the merge if there are conflicts.",
+            "Performs a rebase instead of a merge."
+        ],
+        "correctAnswer": 0,
+        "explanation": "`git merge --squash` takes all commits from the feature branch and 'squashes' them into a single set of changes in the staging area, allowing you to make a single new commit."
+    },
+    {
+        "id": 475,
+        "topic": "Git",
+        "algorithm": "Rebasing",
+        "difficulty": "Hard",
+        "question": "What is the primary purpose of an interactive rebase (`git rebase -i`)?",
+        "options": [
+            "To merge two branches together.",
+            "To view the history of a remote branch.",
+            "To modify a sequence of commits (e.g., reword, squash, edit, reorder).",
+            "To automatically resolve merge conflicts."
+        ],
+        "correctAnswer": 2,
+        "explanation": "Interactive rebase is a powerful tool that allows you to clean up your commit history by rewording messages, squashing commits, editing files, or reordering commits before sharing them."
+    },
+    {
+        "id": 476,
+        "topic": "Git",
+        "algorithm": "History",
+        "difficulty": "Medium",
+        "question": "Which `git log` command displays the history as a graph with commit hashes and messages on one line?",
+        "options": [
+            "git log --graph --pretty=oneline --abbrev-commit",
+            "git log --chart",
+            "git history --visual",
+            "git log --tree"
+        ],
+        "correctAnswer": 0,
+        "explanation": "This combination of flags provides a compact, graphical representation of the commit history, which is great for visualizing branches and merges."
+    },
+    {
+        "id": 477,
+        "topic": "Git",
+        "algorithm": "History",
+        "difficulty": "Easy",
+        "question": "What does `git show <commit-hash>` display?",
+        "options": [
+            "Only the commit message.",
+            "A list of all files in the repository at that commit.",
+            "The metadata and content changes of the specified commit.",
+            "The parent of the specified commit."
+        ],
+        "correctAnswer": 2,
+        "explanation": "`git show` provides detailed information about a commit object, including the author, date, full commit message, and the diff of the changes introduced."
+    },
+    {
+        "id": 478,
+        "topic": "Git",
+        "algorithm": "History",
+        "difficulty": "Medium",
+        "question": "How can you see the difference between your staged changes and the most recent commit?",
+        "options": [
+            "git diff",
+            "git diff --staged",
+            "git diff HEAD",
+            "git status -v"
+        ],
+        "correctAnswer": 1,
+        "explanation": "`git diff --staged` (or `git diff --cached`) shows the changes that are in the staging area, ready to be committed, compared to the `HEAD` commit."
+    },
+    {
+        "id": 479,
+        "topic": "Git",
+        "algorithm": "Remote",
+        "difficulty": "Hard",
+        "question": "When is it generally acceptable to use `git push --force`?",
+        "options": [
+            "Whenever you have a merge conflict.",
+            "Only on a personal feature branch that no one else is using.",
+            "On shared branches like 'main' or 'develop' to fix mistakes.",
+            "To upload large files."
+        ],
+        "correctAnswer": 1,
+        "explanation": "Force pushing overwrites remote history and should be avoided on shared branches. It's acceptable on your own feature branches to clean up history before creating a pull request."
+    },
+    {
+        "id": 480,
+        "topic": "Git",
+        "algorithm": "Remote",
+        "difficulty": "Easy",
+        "question": "Which command shows the URLs of your remote repositories?",
+        "options": [
+            "git remote -v",
+            "git config --get remote.url",
+            "git show remotes",
+            "git remote url"
+        ],
+        "correctAnswer": 0,
+        "explanation": "`git remote -v` (verbose) lists all your remote connections along with their fetch and push URLs."
+    },
+    {
+        "id": 481,
+        "topic": "Git",
+        "algorithm": "Remote",
+        "difficulty": "Medium",
+        "question": "What is the main advantage of using `git pull --rebase` over a regular `git pull`?",
+        "options": [
+            "It is faster.",
+            "It avoids creating a merge commit, maintaining a linear project history.",
+            "It automatically resolves all conflicts.",
+            "It pushes your changes to the remote immediately."
+        ],
+        "correctAnswer": 1,
+        "explanation": "`git pull --rebase` fetches remote changes and replays your local commits on top of them, which helps avoid the extra merge commits that a standard `git pull` (fetch + merge) creates."
+    },
+    {
+        "id": 482,
+        "topic": "Git",
+        "algorithm": "Stashing",
+        "difficulty": "Medium",
+        "question": "What is `git stash` used for?",
+        "options": [
+            "To permanently delete uncommitted changes.",
+            "To temporarily save uncommitted changes so you can switch branches.",
+            "To create a new commit with all current changes.",
+            "To push changes directly to the remote."
+        ],
+        "correctAnswer": 1,
+        "explanation": "`git stash` saves your modified tracked files and staged changes, then reverts the working directory to match the `HEAD` commit, allowing you to work on something else."
+    },
+    {
+        "id": 483,
+        "topic": "Git",
+        "algorithm": "History",
+        "difficulty": "Hard",
+        "question": "Which command is used to apply a specific commit from one branch onto another?",
+        "options": [
+            "git apply <commit-hash>",
+            "git rebase <commit-hash>",
+            "git cherry-pick <commit-hash>",
+            "git merge <commit-hash>"
+        ],
+        "correctAnswer": 2,
+        "explanation": "`git cherry-pick` is used to take a single commit from one branch and apply it as a new commit on the current branch. It's useful for bringing a specific bug fix or feature to another branch."
+    },
+    {
+        "id": 484,
+        "topic": "Git",
+        "algorithm": "Configuration",
+        "difficulty": "Easy",
+        "question": "How do you make Git ignore certain files or directories in your project?",
+        "options": [
+            "By adding them to a `.git/ignore` file.",
+            "By using the `git ignore <file>` command.",
+            "By listing them in a `.gitignore` file in the project's root directory.",
+            "By deleting them from the repository."
+        ],
+        "correctAnswer": 2,
+        "explanation": "The `.gitignore` file specifies intentionally untracked files that Git should ignore, such as build artifacts, log files, or environment-specific configuration."
+    }
 
 
 
 ]
                                                         
-
-
