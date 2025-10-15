@@ -347,7 +347,7 @@ const GraphSCC = () => {
               </ol>
             </div>
             <div className="bg-blue-800 border border-blue-400 rounded-xl !p-2 text-center shadow-lg shadow-blue-500/50 transition-transform duration-300 hover:scale-105 hover:bg-blue-900 flex-1 min-w-[150px]">
-              <h3 style = {{color:'white !important'}}>🔸 Steps</h3>
+              <h3 className=" !text-white">🔸 Steps</h3>
               <ol className="list-decimal list-inside space-y-1 mb-3 !px-2 flex flex-col justify-center items-start !text-white">
                 <li className=" !text-gray-200">Perform a DFS traversal.</li>
                 <li className=" !text-gray-200">Update low[v] for each vertex.</li>

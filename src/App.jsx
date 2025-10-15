@@ -107,6 +107,10 @@ import Contribute from "./components/Contribute";
 import Cheatsheet from "./components/Cheatsheet";
 import AlgorithmComparisonTable from './components/AlgorithmComparisonTable';
 
+// Performance Dashboard
+import PerformanceDashboard from "./components/PerformanceDashboard";
+import PerformanceDocs from "./pages/PerformanceDocs";
+
 // Static / Info Pages
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -277,6 +281,10 @@ const App = () => {
 
                   {/* Data Structures Documentation */}
                   <Route path="/data-structures-docs" element={<DSDocumentation />} />
+
+                  {/* Performance Dashboard */}
+                  <Route path="/performance" element={<PerformanceDashboard />} />
+                  <Route path="/performance/docs" element={<PerformanceDocs />} />
 
                   {/* Other Pages */}
                   <Route path="/quiz" element={<Quiz />} />

@@ -8,15 +8,15 @@ export const headerNavigationItems = [
     path: "/documentation",
     label: "Documentation",
     icon: "FaBook",
-    group: "help",
+    group: "help"
   },
   {
     path: "/ContributorLeaderboard",
     label: "Contributors",
     icon: "FaUsers",
-    group: "community",
+    group: "community"
   },
-  { path: "/quiz", label: "Quiz", icon: "FaBrain", group: "test" },
+  { path: "/quiz", label: "Quiz", icon: "FaBrain", group: "test" }
 ];
 
 // Main navbar navigation items (used in Navbar component)
@@ -31,11 +31,19 @@ export const navbarNavigationItems = [
     dropdown: [
       { path: "/community", label: "Community" },
       { path: "/contributor-leaderboard", label: "Contributors" },
-      { path: "/contributor-leaderboard", label: "Leaderboard" },
-    ],
+      { path: "/contributor-leaderboard", label: "Leaderboard" }
+    ]
   },
   { path: "/data-structures", label: "Documentation", icon: "BookOpen" },
-    {
+  {
+    label: "Tools",
+    icon: "Cpu",
+    dropdown: [
+      { path: "/performance", label: "Performance Analyzer" },
+      { path: "/performance/docs", label: "Performance Docs" },
+    ],
+  },
+  {
     label: "Notes",
     icon: "BookOpen",
     dropdown: [
@@ -44,11 +52,10 @@ export const navbarNavigationItems = [
       { path: "/notes/cpp", label: "Cpp" },
       { path: "/notes/c", label: "C" },
       { path: "/notes/javascript", label: "JavaScript" },
-      { path: "/notes/rust", label: "Rust" },
-
-     ],
+      { path: "/notes/rust", label: "Rust" }
+    ]
   },
-  { path: "/settings", label: "Settings", icon: "Settings" },
+  { path: "/settings", label: "Settings", icon: "Settings" }
 ];
 
 // Learn page sections organized by topic areas with tags
@@ -61,33 +68,33 @@ export const learnSections = [
         path: "/data-structures",
         label: "Overview",
         category: "Data Structures",
-        tags: ["overview"],
+        tags: ["overview"]
       },
       {
         path: "/data-structures/linked-list",
         label: "Linked List",
         category: "Data Structures",
-        tags: ["linked list", "nodes", "pointers"],
+        tags: ["linked list", "nodes", "pointers"]
       },
       {
         path: "/data-structures/queue",
         label: "Queue visualization",
         category: "Data Structures",
-        tags: ["queue", "FIFO"],
+        tags: ["queue", "FIFO"]
       },
       {
         path: "/data-structures/stack",
         label: "Stack visualization",
         category: "Data Structures",
-        tags: ["stack", "LIFO"],
+        tags: ["stack", "LIFO"]
       },
       {
         path: "/data-structures/binary-tree",
         label: "Binary Tree visualization",
         category: "Data Structures",
-        tags: ["tree", "binary tree", "nodes"],
-      },
-    ],
+        tags: ["tree", "binary tree", "nodes"]
+      }
+    ]
   },
 
   {
@@ -108,7 +115,7 @@ export const learnSections = [
   ],
 },
 
-  
+
 
   // Searching algorithms section
   {
@@ -118,15 +125,15 @@ export const learnSections = [
         path: "/searchingOverview",
         label: "Overview",
         category: "Searching",
-        tags: ["overview", "algorithms"],
+        tags: ["overview", "algorithms"]
       },
       {
         path: "/searching",
         label: "Searching Algorithm",
         category: "Searching",
-        tags: ["linear search", "binary search", "algorithms"],
-      },
-    ],
+        tags: ["linear search", "binary search", "algorithms"]
+      }
+    ]
   },
 
   // Graph algorithms section
@@ -153,82 +160,112 @@ export const learnSections = [
         path: "/backtracking-overview",
         label: "Backtracking (Overview)",
         category: "Paradigms",
-        tags: ["backtracking", "overview"],
+        tags: ["backtracking", "overview"]
       },
       {
         path: "/backtracking",
         label: "Backtracking Algorithms",
         category: "Paradigms",
-        tags: ["backtracking", "algorithms", "recursion"],
+        tags: ["backtracking", "algorithms", "recursion"]
       },
       {
         path: "/dp-overview",
         label: "Dynamic Programming (Overview)",
         category: "Paradigms",
-        tags: ["dp", "overview"],
+        tags: ["dp", "overview"]
       },
       {
         path: "/dp",
         label: "Dynamic Programming",
         category: "Paradigms",
-        tags: ["dp", "algorithms", "optimization"],
+        tags: ["dp", "algorithms", "optimization"]
       },
       {
         path: "/greedy-overview",
         label: "Greedy (Overview)",
         category: "Paradigms",
-        tags: ["greedy", "overview"],
+        tags: ["greedy", "overview"]
       },
       {
         path: "/greedy",
         label: "Greedy Algorithms",
         category: "Paradigms",
-        tags: ["greedy", "algorithms"],
+        tags: ["greedy", "algorithms"]
       },
       {
         path: "/dc-overview",
         label: "Divide & Conquer (Overview)",
         category: "Paradigms",
-        tags: ["divide and conquer", "overview"],
+        tags: ["divide and conquer", "overview"]
       },
       {
         path: "/dc",
         label: "Divide & Conquer",
         category: "Paradigms",
-        tags: ["divide and conquer", "algorithms"],
+        tags: ["divide and conquer", "algorithms"]
       },
       {
         path: "/prims",
         label: "Prim's Algorithm",
         category: "Paradigms",
-        tags: ["prim's", "mst", "minimum spanning tree", "greedy", "graph"],
+        tags: ["prim's", "mst", "minimum spanning tree", "greedy", "graph"]
       },
       {
         path: "/kruskal",
         label: "Kruskal's Algorithm",
         category: "Paradigms",
-        tags: ["kruskal's", "mst", "minimum spanning tree", "greedy", "graph"],
-      },
-    ],
+        tags: ["kruskal's", "mst", "minimum spanning tree", "greedy", "graph"]
+      }
+    ]
   },
-  
+
   // String algorithms section
   {
     heading: "String Algorithms",
     items: [
-      { path: "/string-overview", label: "Overview", category: "String Algorithms", tags: ["string", "overview", "algorithms"] },
-      { path: "/string", label: "KMP Algorithm", category: "String Algorithms", tags: ["string", "KMP", "pattern matching", "algorithms"] },
-      { path: "/string/rabin-karp", label: "Rabin-Karp Algorithm", category: "String Algorithms", tags: ["string", "rabin-karp", "rolling hash", "pattern matching", "algorithms"] },
-    ],
+      {
+        path: "/string-overview",
+        label: "Overview",
+        category: "String Algorithms",
+        tags: ["string", "overview", "algorithms"]
+      },
+      {
+        path: "/string",
+        label: "KMP Algorithm",
+        category: "String Algorithms",
+        tags: ["string", "KMP", "pattern matching", "algorithms"]
+      },
+      {
+        path: "/string/rabin-karp",
+        label: "Rabin-Karp Algorithm",
+        category: "String Algorithms",
+        tags: ["string", "rabin-karp", "rolling hash", "pattern matching", "algorithms"]
+      }
+    ]
   },
 
   // Additional topics section
   {
     heading: "Other Topics",
     items: [
-      { path: "/hashing-overview", label: "Hashing (Overview)", category: "Other", tags: ["hashing", "overview"] },
-      { path: "/hashing", label: "Hashing Algorithms", category: "Other", tags: ["hashing", "algorithms"] },
-      { path: "/tree-overview", label: "Trees (Overview)", category: "Other", tags: ["trees", "overview"] },
+      {
+        path: "/hashing-overview",
+        label: "Hashing (Overview)",
+        category: "Other",
+        tags: ["hashing", "overview"]
+      },
+      {
+        path: "/hashing",
+        label: "Hashing Algorithms",
+        category: "Other",
+        tags: ["hashing", "algorithms"]
+      },
+      {
+        path: "/tree-overview",
+        label: "Trees (Overview)",
+        category: "Other",
+        tags: ["trees", "overview"]
+      },
       { path: "/tree", label: "Tree Algorithms", category: "Other", tags: ["tree", "algorithms"] },
       { path: "/data-structures/trie", label: "Trie Visualizer", category: "Other", tags: ["trie", "prefix tree", "data structure"] },
       { path: "/huffman", label: "Huffman Coding", category: "Other", tags: ["huffman", "compression", "greedy", "encoding"] },

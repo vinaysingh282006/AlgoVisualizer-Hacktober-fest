@@ -332,6 +332,16 @@ const Navbar = () => {
                   >
                     DSA Sheet by NEETCODE
                   </Link>
+
+                  <Link
+                    to="https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="dropdown-item"
+                    onClick={() => setDesktopNotesOpen(false)}
+                  >
+                    DSA Sheet by STRIVER
+                  </Link>
                 </div>
               )}
             </div>
@@ -349,8 +359,11 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* ThemeToggle remains on the right */}
-        <ThemeToggle />
+        {/* Right side controls: UserDropdown & ThemeToggle */}
+        <div className="hidden md:flex items-center gap-3">
+          <UserDropdown />
+          <ThemeToggle />
+        </div>
 
         {/* Mobile Hamburger */}
         <button
