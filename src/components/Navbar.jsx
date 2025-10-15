@@ -305,6 +305,14 @@ const Navbar = () => {
                     React
                   </Link>
                   <Link
+                    to="/notes/nextjs"
+                    className={`dropdown-item ${isActive("/notes/nextjs") ? "active" : ""
+                      }`}
+                    onClick={() => setDesktopNotesOpen(false)}
+                  >
+                    NextJs
+                  </Link>
+                  <Link
                     to="/notes/rust"
                     className={`dropdown-item ${isActive("/notes/rust") ? "active" : ""
                       }`}

@@ -33,6 +33,10 @@ const notesMap = {
     { name: "Fundamentals", path: "/notes/react/fundamentals" },
     // Add more React topics here
   ],
+  nextjs: [
+    { name: "Fundamentals", path: "/notes/nextjs/fundamentals" },
+    // Add more Next.js topics here
+  ],
   rust: [
     { name: "Fundamentals", path: "/notes/rust/fundamentals" },
     // Add more Rust topics here
