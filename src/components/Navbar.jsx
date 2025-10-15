@@ -54,6 +54,8 @@ const DesktopNavItem = ({
   toggleDropdown,
   isActive,
   getIcon,
+  selectedCommunity,
+  setSelectedCommunity
 }) => {
   if (item.dropdown) {
     return (
@@ -67,7 +69,7 @@ const DesktopNavItem = ({
               size: 18,
               className: "drop-icon",
             })}
-          <span>{item.label}</span>
+          <span>{item.label === "Community" ? selectedCommunity : item.label}</span>
           <ChevronDown
             size={16}
             className={`dropdown-arrow ${isOpen === index ? "rotated" : ""}`}
@@ -183,6 +185,8 @@ const Navbar = () => {
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(null);
   const [desktopNotesOpen, setDesktopNotesOpen] = useState(false);
   const [mobileNotesOpen, setMobileNotesOpen] = useState(false);
+  const [selectedCommunity, setSelectedCommunity] = useState("Community");
+  const [selectedNotes, setSelectedNotes] = useState("Notes");
 
   const location = useLocation();
   const { theme } = useTheme();
@@ -237,6 +241,8 @@ const Navbar = () => {
                 toggleDropdown={toggleDesktopDropdown}
                 isActive={isActive}
                 getIcon={getIcon}
+                selectedCommunity={selectedCommunity}
+                setSelectedCommunity={setSelectedCommunity}
               />
             ))}
 
@@ -248,7 +254,7 @@ const Navbar = () => {
                 onClick={() => setDesktopNotesOpen(!desktopNotesOpen)}
               >
                 <BookOpen size={18} className="drop-icon" />
-                <span>Notes</span>
+                <span>{selectedNotes}</span>
                 <ChevronDown
                   size={16}
                   className={`${desktopNotesOpen ? "rotated" : ""}`}
@@ -326,7 +332,10 @@ const Navbar = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="dropdown-item"
-                    onClick={() => setDesktopNotesOpen(false)}
+                    onClick={() => {
+                      setSelectedNotes("DSA Sheet  by Shradha Khapra");
+                      setDesktopNotesOpen(false);
+                    }}
                   >
                     DSA Sheet  by Shradha Khapra
                   </Link>
@@ -335,9 +344,22 @@ const Navbar = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="dropdown-item"
-                    onClick={() => setDesktopNotesOpen(false)}
+                    onClick={() => {
+                      setSelectedNotes("DSA Sheet by NEETCODE");
+                      setDesktopNotesOpen(false);
+                    }}
                   >
                     DSA Sheet by NEETCODE
+                  </Link>
+
+                  <Link
+                    to="https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="dropdown-item"
+                    onClick={() => setDesktopNotesOpen(false)}
+                  >
+                    DSA Sheet by STRIVER
                   </Link>
                 </div>
               )}
@@ -355,8 +377,11 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* ThemeToggle remains on the right */}
-        <ThemeToggle />
+        {/* Right side controls: UserDropdown & ThemeToggle */}
+        <div className="hidden md:flex items-center gap-3">
+          <UserDropdown />
+          <ThemeToggle />
+        </div>
 
         {/* Mobile Hamburger */}
         <button
@@ -419,7 +444,7 @@ const Navbar = () => {
             onClick={() => setMobileNotesOpen(!mobileNotesOpen)}
           >
             <BookOpen size={18} className="icon" />
-            <span>Notes</span>
+            <span>{selectedNotes}</span>
             <ChevronDown
               size={16}
               className={`${mobileNotesOpen ? "rotated" : ""}`}
@@ -432,6 +457,7 @@ const Navbar = () => {
               to="/notes/java"
               className="mobile-menu-link"
               onClick={() => {
+                setSelectedNotes("Java");
                 setMobileNotesOpen(false);
                 setIsMobileMenuOpen(false);
               }}
@@ -442,6 +468,7 @@ const Navbar = () => {
               to="/notes/python"
               className="mobile-menu-link"
               onClick={() => {
+                setSelectedNotes("Python");
                 setMobileNotesOpen(false);
                 setIsMobileMenuOpen(false);
               }}
@@ -452,6 +479,7 @@ const Navbar = () => {
               to="/notes/cpp"
               className="mobile-menu-link"
               onClick={() => {
+                setSelectedNotes("C++");
                 setMobileNotesOpen(false);
                 setIsMobileMenuOpen(false);
               }}
@@ -462,6 +490,7 @@ const Navbar = () => {
               to="/notes/c"
               className="mobile-menu-link"
               onClick={() => {
+                setSelectedNotes("C");
                 setMobileNotesOpen(false);
                 setIsMobileMenuOpen(false);
               }}
@@ -473,6 +502,7 @@ const Navbar = () => {
               to="/notes/javascript"
               className="mobile-menu-link"
               onClick={() => {
+                setSelectedNotes("JavaScript");
                 setMobileNotesOpen(false);
                 setIsMobileMenuOpen(false);
               }}

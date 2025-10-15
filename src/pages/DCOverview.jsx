@@ -9,7 +9,7 @@ const DCOverview = () => {
   return (
     <div className="theme-container" data-aos="fade-up" data-aos-duration="1000">
       <h1 className="theme-title" style={{ marginTop: "4rem" }}>
-        Guide to <span className="highlight">Divide & Conquer</span>
+        Guide to <span style={{ color: "var(--accent-primary)" }}>Divide & Conquer</span>
       </h1>
 
       <p

@@ -3,6 +3,10 @@ import IntroSection from "./sections/IntroSection";
 import DataTypesSection from "./sections/DataTypesSection";
 import FunctionsSection from "./sections/FunctionsSection";
 import ObjectsSection from "./sections/ObjectsSection";
+import OperatorsSection from "./sections/OperatorsSection";
+import DOMManipulationSection from "./sections/DOMManipulationSection";
+import AsyncProgrammingSection from "./sections/AsyncProgrammingSection";
+import ModernJavaScriptSection from "./sections/ModernJavaScriptSection";
 // import "../../../styles/fundamentals.css";
 import MongodbSection from "./sections/MongodbSection";
 const Fundamentals = () => {
@@ -47,22 +51,22 @@ const Fundamentals = () => {
     {
       id: "operators",
       label: "Operators",
-      component: <div>Coming soon...</div>,
+      component: <OperatorsSection copyCode={copyCode} copiedCode={copiedCode} />,
     },
     {
       id: "dom",
       label: "DOM Manipulation",
-      component: <div>Coming soon...</div>,
+      component: <DOMManipulationSection copyCode={copyCode} copiedCode={copiedCode} />,
     },
     {
       id: "async",
       label: "Async Programming",
-      component: <div>Coming soon...</div>,
+      component: <AsyncProgrammingSection copyCode={copyCode} copiedCode={copiedCode} />,
     },
     {
       id: "es6",
       label: "Modern JavaScript",
-      component: <div>Coming soon...</div>,
+      component: <ModernJavaScriptSection copyCode={copyCode} copiedCode={copiedCode} />,
     },
     {
       id: "mongodb",

@@ -2,9 +2,9 @@ import "../styles/global-theme.css";
 import Searching from "./Searching";
 const SearchingOverview = () => {
   return (
-    <div className="theme -container">
+    <div className="theme-container">
       <h1 className="theme-title" style={{ marginTop: "4rem" }}>
-        Guide to <span className="highlight">Searching</span>{" "}
+        Guide to <span style={{ color: "var(--accent-primary)" }}>Searching</span>
       </h1>
       <p
         style={{

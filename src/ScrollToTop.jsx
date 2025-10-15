@@ -162,7 +162,7 @@ export default function ScrollToTop() {
 
           /* Light theme styles */
           .scroll-to-top-btn {
-            bottom: 30px; /* Positioned above FAQ chatbot to avoid overlap */
+            bottom: 80px; /* Reduced so widgets are closer together */
             right: 24px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -171,6 +171,12 @@ export default function ScrollToTop() {
               0 8px 32px rgba(102, 126, 234, 0.3),
               0 4px 16px rgba(118, 75, 162, 0.2),
               inset 0 1px 0 rgba(255, 255, 255, 0.2);
+          }
+
+          /* Ensure the arrow icon is solid white */
+          .scroll-to-top-btn i,
+          .scroll-to-top-btn .fa-solid {
+            color: #ffffff !important;
           }
 
           /* Dark theme styles */
@@ -236,7 +242,7 @@ export default function ScrollToTop() {
               max-width: 48px;
               max-height: 48px;
               font-size: 18px;
-              bottom: 120px;
+              bottom: 160px;
               right: 20px;
             }
           }
@@ -250,7 +256,7 @@ export default function ScrollToTop() {
               max-width: 44px;
               max-height: 44px;
               font-size: 16px;
-              bottom: 100px;
+              bottom: 120px;
               right: 16px;
             }
           }

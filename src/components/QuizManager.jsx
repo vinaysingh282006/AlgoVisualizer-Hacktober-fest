@@ -38,13 +38,16 @@ const TOPICS = [
     "name": "Graph",
     "description": "Explore graph algorithms including BFS, DFS, Dijkstra, Cycle Detection, Graph Comparisons, and Minimum Spanning Trees."
 },
-
-
+{
+    id: "git",
+    name: "Git",
+    description: "Test your knowledge on Git commands, concepts, and workflows."
+},
   {
     id: "otherTopics",
     name: "Other Topics",
     description: "Explore specialized areas including Hashing Algorithms, Tree Algorithms, Game Search Algorithms, and Branch & Bound."
-  }
+  },
 
 
 ];
@@ -141,6 +144,7 @@ const QuizHelpers = {
     'paradigms': 'Paradigms',
     "graph": "Graph",
     "string-algorithms": "String Algorithms",
+    'git': 'Git',
     'otherTopics': 'Other Topics',
     'all': 'all'
   }),
@@ -217,6 +221,15 @@ const QuizManager = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [showExitConfirm, setShowExitConfirm] = useState(false);
 
+  // Helper to move to the next question or submit
+  const advanceToNext = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      handleNextQuestion();
+    } else {
+      handleSubmitQuiz();
+    }
+  };
+
   // Timer effect
   useEffect(() => {
     let timer;
@@ -224,11 +237,11 @@ const QuizManager = () => {
       timer = setTimeout(() => {
         setTimeRemaining(time => time - 1);
       }, 1000);
-    } else if (timedMode && timeRemaining === 0 && currentStep === QUIZ_STEPS.QUIZ) {
-      handleSubmitQuiz();
+    } else if (timedMode && timeRemaining === 0 && currentStep === QUIZ_STEPS.QUIZ && !isPaused) {
+      advanceToNext();
     }
     return () => clearTimeout(timer);
-  }, [timeRemaining, timedMode, currentStep, isPaused]);
+  }, [timeRemaining, timedMode, currentStep, isPaused, currentQuestionIndex]);
 
   // 🔹 Scroll fix
   useEffect(() => {
@@ -236,6 +249,13 @@ const QuizManager = () => {
       window.scrollTo(0, 0);
     }
   }, [currentStep]);
+
+  // Reset timer for each new question in timed mode
+  useEffect(() => {
+    if (timedMode && currentStep === QUIZ_STEPS.QUIZ) {
+      setTimeRemaining(60); // 60 seconds per question
+    }
+  }, [currentQuestionIndex, timedMode, currentStep]);
 
   const startQuiz = (topic, difficulty, timed = false) => {
     // Filter and shuffle questions
@@ -255,7 +275,7 @@ const QuizManager = () => {
     setQuizStartTime(new Date());
 
     if (timed) {
-      setTimeRemaining(filteredQuestions.length * 60); // 1 minute per question
+      setTimeRemaining(60); // 1 minute for the first question
     }
 
     setCurrentStep(QUIZ_STEPS.QUIZ);

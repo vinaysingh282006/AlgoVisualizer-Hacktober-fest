@@ -93,130 +93,82 @@ const CommunityLanding = () => {
         {/* Community Stats */}
         <motion.div
           variants={itemVariants}
-          className="stats-grid mb-8"
+          className="stats-grid"
           style={{
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "center",
-            alignItems: "center",
-            gap: "1rem",
+            alignItems: "stretch",
+            gap: "2rem",                 // Increased gap for better visual separation
             width: "100%",
-            padding: "2rem .5rem",
+            padding: "2rem 1rem",        // Uniform vertical/horizontal padding
+            boxSizing: "border-box"
           }}
         >
-          <div
-            className="stat-card"
-            style={{
-              background: "linear-gradient(135deg, #4f46e5 10%, #7c3aed 100%)",
-              color: "white",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              padding: "1.5rem 1rem",
-              borderRadius: "1rem",
-              minWidth: "min(150px, 100%)",
-              flex: "1 1 120px",
-              boxShadow: "0 4px 16px rgba(0,0,0,0.09)",
-            }}
-          >
-            <Users size={28} style={{ marginBottom: "0.75rem", opacity: 0.9 }} />
+          {[
+            {
+              bg: "linear-gradient(135deg, #4f46e5 10%, #7c3aed 100%)",
+              icon: <Users size={28} style={{ marginBottom: "1rem", opacity: 0.9 }} />,
+              value: "100+",
+              label: "Contributors"
+            },
+            {
+              bg: "linear-gradient(135deg, #16a34a 10%, #22c55e 100%)",
+              icon: <Github size={28} style={{ marginBottom: "1rem", opacity: 0.9 }} />,
+              value: "500+",
+              label: "Commits"
+            },
+            {
+              bg: "linear-gradient(135deg, #dc2626 10%, #f59e0b 100%)",
+              icon: <Star size={28} style={{ marginBottom: "1rem", opacity: 0.9 }} />,
+              value: "50+",
+              label: "Projects"
+            }
+          ].map((card, i) => (
             <div
-              className="stat-value"
+              key={card.label}
+              className="stat-card"
               style={{
-                fontSize: "clamp(1.25rem, 4vw, 1.75rem)",
-                fontWeight: 700,
-                color: "#ffffffff",
+                background: card.bg,
+                color: "white",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "2rem 1.5rem",           // Increased all-around padding
+                borderRadius: "1.2rem",           // Slightly larger rounding for modern look
+                minWidth: "220px",                // Wider cards for readability
+                maxWidth: "320px",
+                flex: "1 1 220px",                // Responsive: cards grow but stay minimum width
+                boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
+                margin: "0",                      // Remove default margin for flex spacing
+                boxSizing: "border-box"
               }}
             >
-              100+
+              {card.icon}
+              <div
+                className="stat-value"
+                style={{
+                  fontSize: "clamp(1.5rem, 4vw, 2.25rem)",
+                  fontWeight: 700,
+                  color: "#fff",
+                  marginBottom: "0.3rem"
+                }}
+              >
+                {card.value}
+              </div>
+              <div
+                className="stat-label"
+                style={{ 
+                  color: "rgba(255,255,255,0.92)",
+                  fontSize: "clamp(1rem, 2vw, 1.1rem)",
+                  textAlign: "center"
+                }}
+              >
+                {card.label}
+              </div>
             </div>
-            <div
-              className="stat-label"
-              style={{ 
-                color: "rgba(255,255,255,0.9)",
-                fontSize: "clamp(0.8rem, 3vw, 0.9rem)",
-                textAlign: "center"
-              }}
-            >
-              Contributors
-            </div>
-          </div>
-
-          <div
-            className="stat-card"
-            style={{
-              background: "linear-gradient(135deg, #16a34a 10%, #22c55e 100%)",
-              color: "white",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              padding: "1.5rem 1rem",
-              borderRadius: "1rem",
-              minWidth: "min(150px, 100%)",
-              flex: "1 1 120px",
-              boxShadow: "0 4px 16px rgba(0,0,0,0.09)",
-            }}
-          >
-            <Github size={28} style={{ marginBottom: "0.75rem", opacity: 0.9 }} />
-            <div
-              className="stat-value"
-              style={{
-                fontSize: "clamp(1.25rem, 4vw, 1.75rem)",
-                fontWeight: 700,
-                color: "#ffffffff",
-              }}
-            >
-              500+
-            </div>
-            <div
-              className="stat-label"
-              style={{ 
-                color: "rgba(255,255,255,0.9)",
-                fontSize: "clamp(0.8rem, 3vw, 0.9rem)",
-                textAlign: "center"
-              }}
-            >
-              Commits
-            </div>
-          </div>
-
-          <div
-            className="stat-card"
-            style={{
-              background: "linear-gradient(135deg, #dc2626 10%, #f59e0b 100%)",
-              color: "white",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              padding: "1.5rem 1rem",
-              borderRadius: "1rem",
-              minWidth: "min(150px, 100%)",
-              flex: "1 1 120px",
-              boxShadow: "0 4px 16px rgba(0,0,0,0.09)",
-            }}
-          >
-            <Star size={28} style={{ marginBottom: "0.75rem", opacity: 0.9 }} />
-            <div
-              className="stat-value"
-              style={{
-                fontSize: "clamp(1.25rem, 4vw, 1.75rem)",
-                fontWeight: 700,
-                color: "#ffffffff",
-              }}
-            >
-              50+
-            </div>
-            <div
-              className="stat-label"
-              style={{ 
-                color: "rgba(255,255,255,0.9)",
-                fontSize: "clamp(0.8rem, 3vw, 0.9rem)",
-                textAlign: "center"
-              }}
-            >
-              Projects
-            </div>
-          </div>
+          ))}
         </motion.div>
 
         {/* Community Sections */}

@@ -81,7 +81,7 @@
 }
 
 /* select topic */
-.quiz-selection {
+.quiz-start .quiz-selection {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -94,7 +94,7 @@
   transition: var(--transition);
 }
 
-.quiz-selection input {
+.quiz-start .quiz-selection input {
   background: transparent;
   font-size: 1rem;
   width: 100%;
@@ -105,14 +105,14 @@
   box-shadow: none;
 }
 
-.quiz-selection input::placeholder {
+.quiz-start .quiz-selection input::placeholder {
   color: #8b949e; /* softer gray */
   opacity: 0.8;
   transition: color 0.2s ease;
 }
 
 /* on focus of input search bar will transform */
-.quiz-selection:focus-within  {
+.quiz-start .quiz-selection:focus-within  {
   border-color: var(--color-bg);
   width: 100%;
   transform: translateY(-5px);
@@ -132,11 +132,57 @@
     text-align: center;
 }
 
+.topic-carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+}
+
+.topic-nav-btn {
+    background: #21262d;
+    border: 2px solid #30363d;
+    color: #8b949e;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.topic-nav-btn:hover:not(:disabled) {
+    background: #30363d;
+    color: #58a6ff;
+    border-color: #58a6ff;
+}
+
+.topic-nav-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+[data-theme="light"] .topic-nav-btn {
+    background: #f6f8fa;
+    border-color: #d1d9e0;
+    color: #656d76;
+}
+[data-theme="light"] .topic-nav-btn:hover:not(:disabled) {
+    background: #e1e7ed;
+    color: #0969da;
+    border-color: #0969da;
+}
+
 .topic-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* Changed to a fixed number of columns based on JS constant */
+    grid-template-columns: repeat(var(--cards-per-page, 4), 1fr);
     gap: 1rem;
     margin-bottom: 2rem;
+    width: 100%; /* Ensure grid takes available space */
 }
 
 .topic-card {

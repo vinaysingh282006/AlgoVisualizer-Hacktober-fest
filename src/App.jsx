@@ -31,6 +31,8 @@ import GraphBFS from "./pages/GraphBFS";
 import GraphCycleDetection from "./pages/GraphCycleDetection";
 // graph Eulerian 
 import GraphEulerian from "./pages/GraphEulerian.jsx";
+// scc graph
+import GraphSCC from "./pages/GraphSCC.jsx";
 import GraphDFS from "./pages/GraphDFS";
 import GraphDijkstra from "./pages/GraphDijkstra";
 import GraphAStar from "./pages/GraphAStar";
@@ -106,6 +108,10 @@ import Contributors from "./components/Contributors";
 import Contribute from "./components/Contribute";
 import Cheatsheet from "./components/Cheatsheet";
 import AlgorithmComparisonTable from './components/AlgorithmComparisonTable';
+
+// Performance Dashboard
+import PerformanceDashboard from "./components/PerformanceDashboard";
+import PerformanceDocs from "./pages/PerformanceDocs";
 
 // Static / Info Pages
 import Login from "./pages/Login";
@@ -245,6 +251,7 @@ const App = () => {
                         path="/graph/bellman-ford"
                         element={<BellmanFordPage />}
                       />
+                      <Route path='/graph/sccGraphs' element={<GraphSCC/>} />
 
 
                   {/* Algorithm Pages */}
@@ -276,6 +283,10 @@ const App = () => {
 
                   {/* Data Structures Documentation */}
                   <Route path="/data-structures-docs" element={<DSDocumentation />} />
+
+                  {/* Performance Dashboard */}
+                  <Route path="/performance" element={<PerformanceDashboard />} />
+                  <Route path="/performance/docs" element={<PerformanceDocs />} />
 
                   {/* Other Pages */}
                   <Route path="/quiz" element={<Quiz />} />

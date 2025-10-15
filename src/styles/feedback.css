@@ -2,32 +2,46 @@
 
 .feedback-fab {
   position: fixed;
-  left: 20px; /* moved to left bottom */
-  bottom: 30px;
-  width: 55px;
-  height: 55px;
+  right: 24px; /* place below scroll-to-top button on the right */
+  bottom: 14px;
+  width: 56px;
+  height: 56px; /* keep explicit to ensure circular shape */
   border-radius: 50%;
   border: none;
-  background: var(--user-accent-primary);
+  /* Match the modern gradient used by the scroll-to-top button */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #fff;
   font-size: 24px;
   cursor: pointer;
-  box-shadow: 0 8px 22px rgba(37, 117, 252, 0.35);
+  box-shadow: 
+    0 8px 32px rgba(102, 126, 234, 0.3),
+    0 4px 16px rgba(118, 75, 162, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Force a strict square to avoid oval rendering from padding or font sizing */
+  min-width: 56px;
+  max-width: 56px;
+  min-height: 56px;
+  max-height: 56px;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
   transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-  z-index: 1100;
+  z-index: 1101;
 }
 
 .feedback-fab:hover {
-  transform: translateY(-50%) scale(1.07);
-  background: var(--user-accent-primary);
-  box-shadow: 0 10px 28px rgba(37, 117, 252, 0.45);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 
+    0 12px 40px rgba(102, 126, 234, 0.4),
+    0 6px 20px rgba(118, 75, 162, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .feedback-fab:active {
-  transform: translateY(-50%) scale(0.97);
+  transform: translateY(-2px) scale(0.97);
 }
 
 .feedback-fab-icon {
@@ -44,11 +58,11 @@
   z-index: 1099;
 }
 
-/* Slide-in panel at bottom-right */
+/* Slide-in panel at bottom-right (above FAB) */
 .feedback-panel {
   position: fixed;
-  left: 20px; /* align panel with FAB on the left */
-  bottom: 90px; /* sit above the button */
+  right: 20px; /* align panel with FAB on the right */
+  bottom: 84px; /* sit above the button */
   width: 340px;
   max-width: calc(100vw - 40px);
   background: rgba(255, 255, 255, 0.96);
@@ -186,7 +200,14 @@
     max-width: none;
   }
   .feedback-fab {
-    right: 14px;
+    right: 16px;
     bottom: 14px;
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    max-width: 48px;
+    min-height: 48px;
+    max-height: 48px;
+    font-size: 16px;
   }
 }
