@@ -3018,6 +3018,52 @@ struct Node {
         this->next = nullptr;
     }
 };`,
+go: `package main
+
+import "fmt"
+
+// Define Node structure
+type Node struct {
+	data int
+	next *Node
+}
+
+// Define LinkedList structure
+type LinkedList struct {
+	head *Node
+}
+
+// InsertAtBeginning inserts a new node at the start of the list
+func (list *LinkedList) InsertAtBeginning(data int) {
+	newNode := &Node{data: data}
+	newNode.next = list.head  // Point new node to current head
+	list.head = newNode       // Update head to new node
+}
+
+// Display prints the linked list elements
+func (list *LinkedList) Display() {
+	curr := list.head
+	if curr == nil {
+		fmt.Println("List is empty")
+		return
+	}
+	for curr != nil {
+		fmt.Printf("%d -> ", curr.data)
+		curr = curr.next
+	}
+	fmt.Println("nil")
+}
+
+func main() {
+	list := &LinkedList{}
+
+	list.InsertAtBeginning(30)
+	list.InsertAtBeginning(20)
+	list.InsertAtBeginning(10)
+
+	fmt.Println("Linked List after inserting at beginning:")
+	list.Display()
+}`,
   },
 
   insertAtEnd: {
@@ -3068,6 +3114,66 @@ struct Node {
     
     current->next = newNode;
     size++;
+}`, 
+    go: `package main
+
+import "fmt"
+
+// Node represents a single element in the linked list
+type Node struct {
+	data int
+	next *Node
+}
+
+// LinkedList represents the linked list structure
+type LinkedList struct {
+	head *Node
+}
+
+// InsertAtEnd adds a new node at the end of the linked list
+func (list *LinkedList) InsertAtEnd(data int) {
+	newNode := &Node{data: data}
+
+	// If list is empty, new node becomes the head
+	if list.head == nil {
+		list.head = newNode
+		return
+	}
+
+	// Traverse to the last node
+	curr := list.head
+	for curr.next != nil {
+		curr = curr.next
+	}
+
+	// Link the new node at the end
+	curr.next = newNode
+}
+
+// Display prints all the elements in the linked list
+func (list *LinkedList) Display() {
+	curr := list.head
+	if curr == nil {
+		fmt.Println("List is empty")
+		return
+	}
+	for curr != nil {
+		fmt.Printf("%d -> ", curr.data)
+		curr = curr.next
+	}
+	fmt.Println("nil")
+}
+
+func main() {
+	list := &LinkedList{}
+
+	list.InsertAtEnd(10)
+	list.InsertAtEnd(20)
+	list.InsertAtEnd(30)
+	list.InsertAtEnd(40)
+
+	fmt.Println("Linked List after inserting at end:")
+	list.Display()
 }`,
   },
 
@@ -3130,6 +3236,76 @@ struct Node {
     newNode->next = current->next;
     current->next = newNode;
     size++;
+}`,
+    go:`package main
+
+import "fmt"
+
+// Node represents a node in the linked list
+type Node struct {
+	data int
+	next *Node
+}
+
+// LinkedList represents the linked list
+type LinkedList struct {
+	head *Node
+}
+
+// InsertAtPosition inserts a node at the given position (1-based index)
+func (list *LinkedList) InsertAtPosition(data int, position int) {
+	newNode := &Node{data: data}
+
+	// If inserting at the beginning (position 1)
+	if position == 1 {
+		newNode.next = list.head
+		list.head = newNode
+		return
+	}
+
+	// Traverse to the node before the desired position
+	curr := list.head
+	for i := 1; curr != nil && i < position-1; i++ {
+		curr = curr.next
+	}
+
+	// If position is out of bounds
+	if curr == nil {
+		fmt.Println("Error: Position out of range")
+		return
+	}
+
+	// Insert the new node
+	newNode.next = curr.next
+	curr.next = newNode
+}
+
+// Display prints all elements in the linked list
+func (list *LinkedList) Display() {
+	curr := list.head
+	if curr == nil {
+		fmt.Println("List is empty")
+		return
+	}
+	for curr != nil {
+		fmt.Printf("%d -> ", curr.data)
+		curr = curr.next
+	}
+	fmt.Println("nil")
+}
+
+func main() {
+	list := &LinkedList{}
+
+	// Inserting some initial elements
+	list.InsertAtPosition(10, 1) // 10
+	list.InsertAtPosition(20, 2) // 10 -> 20
+	list.InsertAtPosition(30, 3) // 10 -> 20 -> 30
+	list.InsertAtPosition(25, 3) // 10 -> 20 -> 25 -> 30
+	list.InsertAtPosition(5, 1)  // 5 -> 10 -> 20 -> 25 -> 30
+
+	fmt.Println("Linked List after inserting at various positions:")
+	list.Display()
 }`,
   },
 
@@ -3201,6 +3377,99 @@ struct Node {
     
     return false; // Node not found
 }`,
+    go:`package main
+
+import "fmt"
+
+// Node represents an element of the linked list
+type Node struct {
+	data int
+	next *Node
+}
+
+// LinkedList represents the linked list
+type LinkedList struct {
+	head *Node
+}
+
+// InsertAtEnd adds a new node at the end (for testing purpose)
+func (list *LinkedList) InsertAtEnd(data int) {
+	newNode := &Node{data: data}
+	if list.head == nil {
+		list.head = newNode
+		return
+	}
+	curr := list.head
+	for curr.next != nil {
+		curr = curr.next
+	}
+	curr.next = newNode
+}
+
+// DeleteNode deletes a node at a specific position (1-based index)
+func (list *LinkedList) DeleteNode(position int) {
+	if list.head == nil {
+		fmt.Println("Error: List is empty")
+		return
+	}
+
+	// If deleting the head node
+	if position == 1 {
+		list.head = list.head.next
+		return
+	}
+
+	// Traverse to the node before the one to delete
+	curr := list.head
+	for i := 1; curr != nil && i < position-1; i++ {
+		curr = curr.next
+	}
+
+	// If position is invalid
+	if curr == nil || curr.next == nil {
+		fmt.Println("Error: Position out of range")
+		return
+	}
+
+	// Skip the node to delete
+	curr.next = curr.next.next
+}
+
+// Display prints all elements in the linked list
+func (list *LinkedList) Display() {
+	curr := list.head
+	if curr == nil {
+		fmt.Println("List is empty")
+		return
+	}
+	for curr != nil {
+		fmt.Printf("%d -> ", curr.data)
+		curr = curr.next
+	}
+	fmt.Println("nil")
+}
+
+func main() {
+	list := &LinkedList{}
+
+	// Insert some elements
+	list.InsertAtEnd(10)
+	list.InsertAtEnd(20)
+	list.InsertAtEnd(30)
+	list.InsertAtEnd(40)
+	list.InsertAtEnd(50)
+
+	fmt.Println("Original Linked List:")
+	list.Display()
+
+	// Delete at various positions
+	list.DeleteNode(1) // Delete first node
+	list.DeleteNode(3) // Delete node at position 3
+	list.DeleteNode(10) // Invalid position
+
+	fmt.Println("Linked List after deletions:")
+	list.Display()
+}`,
   },
 
   deleteAtPosition: {
@@ -3267,6 +3536,138 @@ struct Node {
     size--;
     return true;
 }`,
+    go:`package main
+
+import "fmt"
+
+// Node structure for the Linked List
+type Node struct {
+	data int
+	next *Node
+}
+
+// LinkedList structure
+type LinkedList struct {
+	head *Node
+	size int
+}
+
+// =================================================================
+// HELPER METHODS
+// =================================================================
+
+// insertAtEnd adds a new node to the end of the list.
+func (l *LinkedList) insertAtEnd(data int) {
+	newNode := &Node{data: data, next: nil}
+	l.size++
+
+	if l.head == nil {
+		l.head = newNode
+		return
+	}
+
+	current := l.head
+	for current.next != nil {
+		current = current.next
+	}
+	current.next = newNode
+}
+
+// display prints the linked list from head to tail.
+func (l *LinkedList) display() {
+	current := l.head
+	if current == nil {
+		fmt.Println("List is empty.")
+		return
+	}
+
+	for current != nil {
+		fmt.Printf("%d -> ", current.data)
+		current = current.next
+	}
+	fmt.Println("nil")
+}
+
+// =================================================================
+// CORE FUNCTION: deleteAtPosition
+// =================================================================
+
+// deleteAtPosition deletes the node at the specified index (0-based).
+func (l *LinkedList) deleteAtPosition(index int) {
+	// 1. Handle Invalid Index
+	if index < 0 || index >= l.size {
+		fmt.Printf("Error: Index %d is out of bounds (Size: %d).\n", index, l.size)
+		return
+	}
+
+	// 2. Handle Deleting the Head (Index 0)
+	if index == 0 {
+		temp := l.head
+		l.head = l.head.next // Move head to the second node
+		temp.next = nil      // Dereference the old head
+		l.size--
+		return
+	}
+
+	// 3. Handle Deleting an Intermediate Node
+	current := l.head
+	var previous *Node
+
+	// Traverse to the node *before* the target node
+	for i := 0; i < index; i++ {
+		previous = current
+		current = current.next
+	}
+
+	// 'current' is the node to delete, 'previous' is the node before it.
+	if previous != nil {
+		previous.next = current.next // Skip the 'current' node
+		current.next = nil           // Dereference the deleted node
+		l.size--
+	}
+}
+
+// =================================================================
+// MAIN FUNCTION & DEMO
+// =================================================================
+
+func main() {
+	list := LinkedList{}
+	list.insertAtEnd(10)
+	list.insertAtEnd(20)
+	list.insertAtEnd(30)
+	list.insertAtEnd(40)
+	list.insertAtEnd(50)
+
+	fmt.Println("Original List:")
+	list.display() // Output: 10 -> 20 -> 30 -> 40 -> 50 -> nil
+
+	// --- DEMO 1: Deleting an intermediate node (Index 2: node 30) ---
+	fmt.Println("\nDeleting node at Index 2 (30):")
+	list.deleteAtPosition(2)
+	list.display() // Output: 10 -> 20 -> 40 -> 50 -> nil
+
+	// --- DEMO 2: Deleting the head (Index 0: node 10) ---
+	fmt.Println("\nDeleting node at Index 0 (10):")
+	list.deleteAtPosition(0)
+	list.display() // Output: 20 -> 40 -> 50 -> nil
+
+	// --- DEMO 3: Deleting the tail (Index 2: node 50) ---
+	fmt.Println("\nDeleting node at Index 2 (50):")
+	list.deleteAtPosition(2)
+	list.display() // Output: 20 -> 40 -> nil
+
+	// --- DEMO 4: Attempting to delete out of bounds ---
+	fmt.Println("\nAttempting to delete node at Index 5:")
+	list.deleteAtPosition(5) // Output: Error: Index 5 is out of bounds...
+	list.display()
+
+	// --- DEMO 5: Attempting to delete the last node ---
+	fmt.Println("\nDeleting remaining nodes:")
+	list.deleteAtPosition(0)
+	list.deleteAtPosition(0)
+	list.display() // Output: List is empty.
+}`,
   },
 
   traverse: {
@@ -3331,6 +3732,88 @@ void traverseRecursive(Node* node) {
     
     cout << node->data << " -> ";
     traverseRecursive(node->next);
+}`,
+    go:`package main
+
+import "fmt"
+
+// Node structure for the Linked List
+type Node struct {
+	data int
+	next *Node
+}
+
+// LinkedList structure
+type LinkedList struct {
+	head *Node
+	size int
+}
+
+// =================================================================
+// TRAVERSAL FUNCTION
+// =================================================================
+
+// traverse prints the data of every node in the list from start to end.
+func (l *LinkedList) traverse() {
+	// Start the traversal at the head of the list.
+	current := l.head
+
+	if current == nil {
+		fmt.Println("List is empty. Traversal stopped.")
+		return
+	}
+
+	fmt.Print("Traversal Order: ")
+	// Loop as long as the current node is not nil (i.e., we haven't reached the end).
+	for current != nil {
+		fmt.Printf("%d -> ", current.data)
+		// Move to the next node in the sequence.
+		current = current.next
+	}
+	fmt.Println("nil (End of List)")
+}
+
+// =================================================================
+// HELPER FOR DEMO
+// =================================================================
+
+// insertAtEnd adds a new node to the end of the list.
+func (l *LinkedList) insertAtEnd(data int) {
+	newNode := &Node{data: data, next: nil}
+	l.size++
+
+	if l.head == nil {
+		l.head = newNode
+		return
+	}
+
+	current := l.head
+	for current.next != nil {
+		current = current.next
+	}
+	current.next = newNode
+}
+
+// =================================================================
+// MAIN FUNCTION & DEMO
+// =================================================================
+
+func main() {
+	list := LinkedList{}
+	
+	// Demonstrate traversal on an empty list
+	fmt.Println("--- Demo 1: Empty List ---")
+	list.traverse() 
+	
+	// Populate the list
+	list.insertAtEnd(100)
+	list.insertAtEnd(200)
+	list.insertAtEnd(300)
+	list.insertAtEnd(400)
+	
+	// Demonstrate traversal on a populated list
+	fmt.Println("\n--- Demo 2: Populated List ---")
+	list.traverse() // Output: Traversal Order: 100 -> 200 -> 300 -> 400 -> nil
 }`,
   },
 
@@ -3420,6 +3903,109 @@ Node* reverseRecursive(Node* node) {
     
     return newHead;
 }`,
+    go:`package main
+
+import "fmt"
+
+// Node structure for the Linked List
+type Node struct {
+	data int
+	next *Node
+}
+
+// LinkedList structure
+type LinkedList struct {
+	head *Node
+}
+
+// =================================================================
+// CORE FUNCTION: REVERSE
+// =================================================================
+
+// reverse reverses the order of the nodes in the linked list in place.
+func (l *LinkedList) reverse() {
+	var previous *Node = nil
+	current := l.head
+	var nextNext *Node = nil
+
+	// Iterate through the list until the end is reached (current is nil)
+	for current != nil {
+		// 1. Store the next node before modifying the link
+		nextNext = current.next
+
+		// 2. Reverse the current node's pointer to point to the previous node
+		current.next = previous
+
+		// 3. Move 'previous' and 'current' pointers one step forward
+		previous = current
+		current = nextNext
+	}
+
+	// Update the head of the list to be the former tail (which is now 'previous')
+	l.head = previous
+}
+
+// =================================================================
+// HELPER METHODS
+// =================================================================
+
+// insertAtEnd adds a new node to the end of the list.
+func (l *LinkedList) insertAtEnd(data int) {
+	newNode := &Node{data: data, next: nil}
+
+	if l.head == nil {
+		l.head = newNode
+		return
+	}
+
+	current := l.head
+	for current.next != nil {
+		current = current.next
+	}
+	current.next = newNode
+}
+
+// display prints the linked list from head to tail.
+func (l *LinkedList) display(label string) {
+	current := l.head
+	fmt.Printf("%s: ", label)
+	if current == nil {
+		fmt.Println("List is empty.")
+		return
+	}
+
+	for current != nil {
+		fmt.Printf("%d -> ", current.data)
+		current = current.next
+	}
+	fmt.Println("nil")
+}
+
+// =================================================================
+// MAIN FUNCTION & DEMO
+// =================================================================
+
+func main() {
+	list := LinkedList{}
+
+	// Populate the list
+	list.insertAtEnd(10)
+	list.insertAtEnd(20)
+	list.insertAtEnd(30)
+	list.insertAtEnd(40)
+	list.insertAtEnd(50)
+
+	// Display original list
+	list.display("Original List") 
+	// Output: Original List: 10 -> 20 -> 30 -> 40 -> 50 -> nil
+
+	// Reverse the list
+	list.reverse()
+
+	// Display reversed list
+	list.display("Reversed List") 
+	// Output: Reversed List: 50 -> 40 -> 30 -> 20 -> 10 -> nil
+}`,
   },
 
   search: {
@@ -3473,6 +4059,99 @@ def contains(self, data):
 bool contains(int data) {
     return search(data) != -1;
 }`,
+    go:`package main
+
+import "fmt"
+
+// Node structure for the Linked List
+type Node struct {
+	data int
+	next *Node
+}
+
+// LinkedList structure
+type LinkedList struct {
+	head *Node
+}
+
+// =================================================================
+// CORE FUNCTION: SEARCH
+// =================================================================
+
+// search finds the first occurrence of a target value and returns its index.
+// Returns -1 if the value is not found.
+func (l *LinkedList) search(target int) int {
+	current := l.head
+	index := 0
+
+	// Traverse the list until the end (current is nil)
+	for current != nil {
+		// Check if the current node's data matches the target
+		if current.data == target {
+			return index // Found the element, return its index
+		}
+
+		// Move to the next node and increment the index
+		current = current.next
+		index++
+	}
+
+	// If the loop finishes without returning, the target was not found
+	return -1 
+}
+
+// =================================================================
+// HELPER FOR DEMO
+// =================================================================
+
+// insertAtEnd adds a new node to the end of the list.
+func (l *LinkedList) insertAtEnd(data int) {
+	newNode := &Node{data: data, next: nil}
+
+	if l.head == nil {
+		l.head = newNode
+		return
+	}
+
+	current := l.head
+	for current.next != nil {
+		current = current.next
+	}
+	current.next = newNode
+}
+
+// =================================================================
+// MAIN FUNCTION & DEMO
+// =================================================================
+
+func main() {
+	list := LinkedList{}
+	
+	// Populate the list
+	list.insertAtEnd(10)
+	list.insertAtEnd(20)
+	list.insertAtEnd(30)
+	list.insertAtEnd(40)
+	list.insertAtEnd(50)
+	
+	// --- DEMO 1: Successful Search (Value 30) ---
+	target1 := 30
+	index1 := list.search(target1)
+	fmt.Printf("Searching for %d: Found at index %d\n", target1, index1)
+	// Expected Output: Searching for 30: Found at index 2
+
+	// --- DEMO 2: Successful Search (Value 50 - The Tail) ---
+	target2 := 50
+	index2 := list.search(target2)
+	fmt.Printf("Searching for %d: Found at index %d\n", target2, index2)
+	// Expected Output: Searching for 50: Found at index 4
+
+	// --- DEMO 3: Unsuccessful Search (Value 99) ---
+	target3 := 99
+	index3 := list.search(target3)
+	fmt.Printf("Searching for %d: Found at index %d\n", target3, index3)
+	// Expected Output: Searching for 99: Found at index -1
+}`,
   },
 
   getSize: {
@@ -3518,6 +4197,76 @@ int getSizeByTraversal() {
     
     return count;
 }`,
+    go:`package main
+
+import "fmt"
+
+// Node structure for the Linked List
+type Node struct {
+	data int
+	next *Node
+}
+
+// LinkedList structure
+type LinkedList struct {
+	head *Node
+	size int // Field to store the current size of the list
+}
+
+// =================================================================
+// CORE FUNCTION: GET SIZE
+// =================================================================
+
+// getSize returns the number of nodes currently in the linked list.
+// This is an O(1) operation because the size is maintained dynamically.
+func (l *LinkedList) getSize() int {
+	return l.size
+}
+
+// =================================================================
+// HELPER METHODS (for size maintenance)
+// =================================================================
+
+// insertAtEnd adds a new node to the end of the list and updates the size.
+func (l *LinkedList) insertAtEnd(data int) {
+	newNode := &Node{data: data, next: nil}
+	
+	if l.head == nil {
+		l.head = newNode
+	} else {
+		current := l.head
+		for current.next != nil {
+			current = current.next
+		}
+		current.next = newNode
+	}
+	
+	l.size++ // Increment size after successful insertion
+}
+
+// =================================================================
+// MAIN FUNCTION & DEMO
+// =================================================================
+
+func main() {
+	list := LinkedList{}
+	
+	fmt.Printf("Initial size of the list: %d\n", list.getSize()) // Output: 0
+
+	// Insert nodes and observe size updates
+	list.insertAtEnd(10)
+	fmt.Printf("Size after first insert (10): %d\n", list.getSize()) // Output: 1
+	
+	list.insertAtEnd(20)
+	list.insertAtEnd(30)
+	fmt.Printf("Size after three inserts (10, 20, 30): %d\n", list.getSize()) // Output: 3
+	
+	list.insertAtEnd(40)
+	list.insertAtEnd(50)
+	list.insertAtEnd(60)
+	
+	fmt.Printf("Final size of the list: %d\n", list.getSize()) // Output: 6
+}`,
   },
 
   clear: {
@@ -3546,6 +4295,80 @@ def is_empty(self):
 
 bool isEmpty() {
     return head == nullptr;
+}`,
+    go: `package main
+
+import "fmt"
+
+// Node represents an individual element in the linked list.
+type Node struct {
+	data int
+	next *Node // Pointer to the next node in the sequence.
+}
+
+// LinkedList holds the head reference and the size of the list.
+type LinkedList struct {
+	head *Node
+	size int
+}
+
+// =================================================================
+// CORE FUNCTION: DISPLAY (Traversal)
+// =================================================================
+
+// display iterates through the list from the head and prints each node's data.
+func (l *LinkedList) display() {
+	current := l.head
+
+	if current == nil {
+		fmt.Println("List is empty.")
+		return
+	}
+
+	fmt.Print("List Contents: ")
+	// Traverse until the pointer is nil (the end of the list)
+	for current != nil {
+		fmt.Printf("%d -> ", current.data)
+		current = current.next // Move to the next node
+	}
+	fmt.Println("nil")
+}
+
+// =================================================================
+// HELPER FOR DEMO
+// =================================================================
+
+// insertAtEnd adds a new node to the end of the list.
+func (l *LinkedList) insertAtEnd(data int) {
+	newNode := &Node{data: data, next: nil}
+	l.size++
+
+	if l.head == nil {
+		l.head = newNode
+		return
+	}
+
+	current := l.head
+	for current.next != nil {
+		current = current.next
+	}
+	current.next = newNode
+}
+
+// =================================================================
+// MAIN FUNCTION & DEMO
+// =================================================================
+
+func main() {
+	list := LinkedList{}
+	
+	// Populate the list with sample data
+	list.insertAtEnd(5)
+	list.insertAtEnd(10)
+	list.insertAtEnd(15)
+	
+	fmt.Println("Demonstrating clear list structure and traversal:")
+	list.display() // Output: List Contents: 5 -> 10 -> 15 -> nil
 }`,
   },
 };
