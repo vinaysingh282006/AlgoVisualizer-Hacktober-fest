@@ -34,7 +34,15 @@ export const navbarNavigationItems = [
       { path: "/contributor-leaderboard", label: "Leaderboard" }
     ]
   },
-  { path: "/documentation", label: "Documentation", icon: "BookOpen" },
+  { path: "/data-structures", label: "Documentation", icon: "BookOpen" },
+  {
+    label: "Tools",
+    icon: "Cpu",
+    dropdown: [
+      { path: "/performance", label: "Performance Analyzer" },
+      { path: "/performance/docs", label: "Performance Docs" },
+    ],
+  },
   {
     label: "Notes",
     icon: "BookOpen",
@@ -90,22 +98,24 @@ export const learnSections = [
   },
 
   {
-    heading: "Sorting",
-    items: [
-      {
-        path: "/sorting",
-        label: "Overview",
-        category: "Sorting",
-        tags: ["overview", "algorithms"]
-      },
-      {
-        path: "/sorting/algorithm-comparison", // ✅ updated URL
-        label: "Algorithm Comparison",
-        category: "Sorting",
-        tags: ["comparison", "time complexity"]
-      }
-    ]
-  },
+  heading: "Sorting",
+  items: [
+    {
+      path: "/sorting",
+      label: "Overview",
+      category: "Sorting",
+      tags: ["overview", "algorithms"]
+    },
+    {
+      path: "/sorting/algorithm-comparison", // ✅ updated URL
+      label: "Algorithm Comparison",
+      category: "Sorting",
+      tags: ["comparison", "time complexity"]
+    },
+  ],
+},
+
+
 
   // Searching algorithms section
   {
@@ -280,42 +290,12 @@ export const learnSections = [
         tags: ["trees", "overview"]
       },
       { path: "/tree", label: "Tree Algorithms", category: "Other", tags: ["tree", "algorithms"] },
-      {
-        path: "/data-structures/trie",
-        label: "Trie Visualizer",
-        category: "Other",
-        tags: ["trie", "prefix tree", "data structure"]
-      },
-      {
-        path: "/huffman",
-        label: "Huffman Coding",
-        category: "Other",
-        tags: ["huffman", "compression", "greedy", "encoding"]
-      },
-      {
-        path: "/game-search-overview",
-        label: "Game Search (Overview)",
-        category: "Other",
-        tags: ["game search", "overview"]
-      },
-      {
-        path: "/game-search",
-        label: "Game Search Algorithms",
-        category: "Other",
-        tags: ["game search", "algorithms"]
-      },
-      {
-        path: "/branchbound-overview",
-        label: "Branch & Bound (Overview)",
-        category: "Other",
-        tags: ["branch and bound", "overview"]
-      },
-      {
-        path: "/branchbound",
-        label: "Branch & Bound",
-        category: "Other",
-        tags: ["branch and bound", "algorithms"]
-      }
-    ]
-  }
+      { path: "/data-structures/trie", label: "Trie Visualizer", category: "Other", tags: ["trie", "prefix tree", "data structure"] },
+      { path: "/huffman", label: "Huffman Coding", category: "Other", tags: ["huffman", "compression", "greedy", "encoding"] },
+      { path: "/game-search-overview", label: "Game Search (Overview)", category: "Other", tags: ["game search", "overview"] },
+      { path: "/game-search", label: "Game Search Algorithms", category: "Other", tags: ["game search", "algorithms"] },
+      { path: "/branchbound-overview", label: "Branch & Bound (Overview)", category: "Other", tags: ["branch and bound", "overview"] },
+      { path: "/branchbound", label: "Branch & Bound", category: "Other", tags: ["branch and bound", "algorithms"] },
+    ],
+  },
 ];
