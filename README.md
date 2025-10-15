@@ -511,21 +511,94 @@ npm run preview
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
-<h2 id="project-structure">📁 Project Structure</h2>
+<h2 id="project-structure">📁 Project Structure — AlgoVisualizer</h2>
+
+Below is the complete folder structure of the **AlgoVisualizer** project:
 
 ```bash
 AlgoVisualizer/
-├── public/                 # Static assets
-├── src/
-│   ├── algorithms/         # Algorithm implementations
-│   ├── components/         # Reusable React components
-│   ├── data/              # Static data and configurations
-│   ├── hooks/             # Custom React hooks
-│   ├── pages/             # Main application pages
-│   ├── styles/            # CSS styling files
-│   └── utils/             # Utility functions and helpers
-├── package.json           # Project dependencies and scripts
-└── README.md             # Project documentation
+├── .github/                            # GitHub-related configurations
+│   ├── ISSUE_TEMPLATE/                 # Templates for creating new issues
+│   ├── workflows/                      # GitHub Actions CI/CD workflows
+│   └── pull_request_template.md        # Template for pull requests
+│
+├── .idea/                              # JetBrains IDE (WebStorm/IntelliJ) project settings
+│   ├── inspectionProfiles/             # Code inspection rules
+│   ├── misc.xml
+│   ├── modules.xml
+│   └── vcs.xml
+│
+├── Backend/                            # Backend code (Node.js + Express)
+│   └── src/
+│       └── routes/
+│           ├── auth.js                 # Authentication routes
+│           ├── authController.js       # Handles authentication logic
+│           └── emailService.js         # Email sending service
+│
+├── docs/                               # Documentation files
+│   └── AUTO_UNASSIGN_GUIDE.md          # Guide for auto-unassignment workflow
+│
+├── public/                             # Static assets served directly
+│   ├── sample-data/                    # Example/sample dataset
+│   ├── Favicon.png
+│   ├── _redirects                      # Netlify redirects configuration
+│   ├── favicon.ico
+│   ├── logo.jpg
+│   ├── manifest.json                   # Web app manifest
+│   └── robots.txt                      # SEO and crawling rules
+│
+├── src/                                # Main frontend (React + Vite) source folder
+│   ├── algorithms/                     # All algorithm visualizations (sorting, searching, etc.)
+│   ├── assets/                         # Static assets like images and GIFs
+│   │   ├── blog/                       # Blog-related assets
+│   │   ├── gssoc logo.png
+│   │   └── statistics.gif
+│   ├── components/                     # Reusable React UI components
+│   ├── contexts/                       # React Context (Theme, Auth, etc.)
+│   ├── data/                           # Static/dynamic JSON or mock data
+│   ├── docs/                           # Frontend documentation files
+│   ├── hooks/                          # Custom React hooks
+│   ├── pages/                          # Page-level components (Home, About, etc.)
+│   ├── routes/                         # Route definitions for navigation
+│   ├── searching/                      # Searching algorithms visualization
+│   ├── services/                       # API and helper service files
+│   ├── styles/                         # CSS/Tailwind styling files
+│   ├── utils/                          # Utility/helper functions
+│   ├── App.jsx                         # Root React component
+│   ├── IntroSection.jsx                # Homepage intro component
+│   ├── ScrollToTop.jsx                 # Scroll to top behavior
+│   ├── TAILWIND_DOCS.md                # Documentation for Tailwind usage
+│   ├── ThemeContext.jsx                # Context for light/dark mode
+│   ├── main.css                        # Global stylesheet
+│   ├── main.jsx                        # Application entry file
+│   ├── navigatetotop.js                # Script for navigation top behavior
+│   ├── reportWebVitals.js              # Performance metrics
+│   └── setupTests.js                   # Test setup configuration
+│
+├── .env.example                        # Example environment configuration
+├── .env.production                     # Production environment configuration
+├── .gitignore                          # Files/folders ignored by Git
+├── .prettierrc                         # Prettier code formatting configuration
+├── .vercelignore                       # Ignore files for Vercel deployment
+│
+├── BACK_TO_TOP_DOCUMENTATION.md        # Documentation for back-to-top feature
+├── CODE_OF_CONDUCT.md                  # Contributor code of conduct
+├── CONTRIBUTING.md                     # Guidelines for contributing
+├── EXPORT_FEATURES.md                  # Documentation of export features
+├── LICENSE                             # Project license
+├── README.md                           # Main project documentation
+├── SECURITY.md                         # Security guidelines
+├── USER_INPUT_DOCUMENTATION.md         # Documentation on user inputs
+│
+├── desktop.ini                         # System file (can be ignored)
+├── index.html                          # Main HTML file for React app
+├── package-lock.json                   # Auto-generated dependency lock file
+├── package.json                        # Project dependencies and scripts
+├── sorting-refactor-issue.md           # Issue template for sorting refactor
+├── sorting-refactor-pr.md              # PR template for sorting refactor
+├── ter                                 # (Possibly temp/test folder)
+├── vercel.json                         # Vercel deployment configuration
+└── vite.config.js                      # Vite configuration file for React build
 ```
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
