@@ -333,28 +333,48 @@
 }
 
 /* Dark theme support */
-@media (prefers-color-scheme: dark) {
-  .input-panel {
-    --surface-bg: #21262d;
-    --border-primary: #30363d;
-    --text-primary: #e6edf3;
-    --text-secondary: #8b949e;
-    --text-muted: #656d76;
-    --text-placeholder: #7d8590;
-    --background-primary: #0d1117;
-    --background-secondary: #21262d;
-    --background-hover: #30363d;
-    --background-code: #161b22;
-    --accent-primary: #58a6ff;
-    --accent-primary-hover: #4493f8;
-    --background-success: #0f2419;
-    --border-success: #238636;
-    --text-success: #3fb950;
-    --background-danger: #2c1617;
-    --border-danger: #f85149;
-    --text-danger: #f85149;
-  }
+:root {
+  --surface-bg: #f8f9fa;
+  --border-primary: #e1e4e8;
+  --text-primary: #24292e;
+  --text-secondary: #586069;
+  --text-muted: #959da5;
+  --text-placeholder: #6c757d;
+  --background-primary: #ffffff;
+  --background-secondary: #f6f8fa;
+  --background-hover: #f0f0f0;
+  --background-code: #f6f8fa;
+  --accent-primary: #0366d6;
+  --accent-primary-hover: #0256cc;
+  --background-success: #dcffe4;
+  --border-success: #34d058;
+  --text-success: #28a745;
+  --background-danger: #ffe6e6;
+  --border-danger: #d73a49;
+  --text-danger: #d73a49;
 }
+
+:root[data-theme='dark'] {
+  --surface-bg: #21262d;
+  --border-primary: #30363d;
+  --text-primary: #e6edf3;
+  --text-secondary: #8b949e;
+  --text-muted: #656d76;
+  --text-placeholder: #7d8590;
+  --background-primary: #0d1117;
+  --background-secondary: #21262d;
+  --background-hover: #30363d;
+  --background-code: #161b22;
+  --accent-primary: #58a6ff;
+  --accent-primary-hover: #4493f8;
+  --background-success: #0f2419;
+  --border-success: #238636;
+  --text-success: #3fb950;
+  --background-danger: #2c1617;
+  --border-danger: #f85149;
+  --text-danger: #f85149;
+}
+
 
 /* Animation for smooth transitions */
 .input-panel * {
@@ -398,8 +418,7 @@
   background: #f8f9fa; /* light mode */
 }
 
-@media (prefers-color-scheme: dark) {
-  .input-panel {
-    background: #21262d; /* dark mode */
-  }
+.input-panel {
+  background: var(--surface-bg, #f8f9fa); /* ✔️ uses variable with fallback */
 }
+
