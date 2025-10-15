@@ -435,21 +435,203 @@ npm run preview
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
-<h2 id="project-structure">📁 Project Structure</h2>
+<h2 id="project-structure">📁 Project Structure — AlgoVisualizer</h2>
+
+Below is the complete folder structure of the **AlgoVisualizer** project:
 
 ```bash
 AlgoVisualizer/
-├── public/                 # Static assets
-├── src/
-│   ├── algorithms/         # Algorithm implementations
-│   ├── components/         # Reusable React components
-│   ├── data/              # Static data and configurations
-│   ├── hooks/             # Custom React hooks
-│   ├── pages/             # Main application pages
-│   ├── styles/            # CSS styling files
-│   └── utils/             # Utility functions and helpers
-├── package.json           # Project dependencies and scripts
-└── README.md             # Project documentation
+├── .github/
+│   ├── ISSUE_TEMPLATE/               # GitHub Issue templates
+│   ├── workflows/                    # GitHub Actions CI/CD workflows
+│   └── pull_request_template.md      # PR template for contributors
+│
+├── .idea/                            # JetBrains IDE configuration files
+├── docs/                             # Documentation files
+│   ├── AUTO_UNASSIGN_GUIDE.md
+│   └── ...
+│
+├── public/                           # Static files served publicly
+│   ├── Favicon.png
+│   ├── _redirects
+│   ├── favicon.ico
+│   ├── logo.jpg
+│   ├── manifest.json
+│   ├── robots.txt
+│   ├── gssoc logo.png
+│   └── statistics.gif
+│
+├── sample-data/                      # Example data for algorithms
+│
+├── src/                              # Main source code folder
+│   ├── algorithms/                   # Core algorithm implementations
+│   ├── assets/                       # Static assets (images, icons, etc.)
+│   ├── blog/                         # Blog-related components
+│   ├── components/                   # Reusable UI components
+│   │   ├── BinaryTree/
+│   │   ├── LinkedList/
+│   │   ├── Queue/
+│   │   ├── Stack/
+│   │   ├── Trie/
+│   │   ├── AStarVisualizer.jsx
+│   │   ├── AlgorithmComparison.jsx
+│   │   ├── AlgorithmVisualizer.jsx
+│   │   ├── BacktrackingVisualizer.jsx
+│   │   ├── BranchBoundVisualizer.jsx
+│   │   ├── CodeExplanation.jsx
+│   │   ├── CodeRunnerJava.jsx
+│   │   ├── CodeRunnerPython.jsx
+│   │   ├── ComplexityBox.jsx
+│   │   ├── Contribute.jsx
+│   │   ├── Contributors.jsx
+│   │   ├── DCVisualizer.jsx
+│   │   ├── DFSCycleVisualizer.jsx
+│   │   ├── DPVisualizer.jsx
+│   │   ├── Doubt.jsx
+│   │   ├── EnhancedScrollToTop.jsx
+│   │   ├── ExportControls.js
+│   │   ├── ExportDemo.jsx
+│   │   ├── FaqBotService.js
+│   │   ├── FaqChatbot.jsx
+│   │   ├── FeedbackWidget.jsx
+│   │   ├── Footer.jsx
+│   │   ├── GameSearchVisualizer.jsx
+│   │   ├── GraphComparison.jsx
+│   │   ├── GraphVisualizer.jsx
+│   │   ├── GreedyVisualizer.jsx
+│   │   ├── HashingVisualizer.jsx
+│   │   ├── Header.jsx
+│   │   ├── HuffmanVisualizer.jsx
+│   │   ├── InputPanel.jsx
+│   │   ├── KruskalVisualizer.jsx
+│   │   ├── LearnerLeaderboard.jsx
+│   │   ├── MathVisualizer.jsx
+│   │   ├── Navbar.jsx
+│   │   ├── NotificationWidget.jsx
+│   │   ├── PrimVisualizer.jsx
+│   │   ├── Privacy.jsx
+│   │   ├── ProblemOfTheDay.jsx
+│   │   ├── ProgressTracker.jsx
+│   │   ├── QuestionCard.jsx
+│   │   ├── QuizManager.jsx
+│   │   ├── QuizStart.jsx
+│   │   ├── QuizTest.js
+│   │   ├── QuizTopicSelection.jsx
+│   │   ├── RabinKarpVisualizer.jsx
+│   │   ├── ResultPage.jsx
+│   │   ├── Sidebar.jsx
+│   │   ├── SimpleExportControls.jsx
+│   │   ├── Sorting.jsx
+│   │   ├── StringVisualizer.jsx
+│   │   ├── SubscribeButton.jsx
+│   │   ├── ThemeToggle.jsx
+│   │   ├── TreeVisualizer.jsx
+│   │   ├── UnifiedStats.jsx
+│   │   ├── UnifiedVisualizer.jsx
+│   │   ├── UserDropdown.jsx
+│   │   ├── WeeklyChallenge.jsx
+│   │   ├── about.css
+│   │   ├── about.jsx
+│   │   ├── complexityBox.css
+│   │   ├── contact.jsx
+│   │   ├── cookie-policy.jsx
+│   │   └── terms.jsx
+│   │
+│   ├── contexts/                     # React Context APIs (e.g., theme, user)
+│   ├── data/                         # Static data files
+│   ├── docs/                         # Component-specific documentation
+│   ├── hooks/                        # Custom React hooks
+│   ├── pages/                        # Page-level React components
+│   │   ├── Notes/
+│   │   ├── BacktrackingOverview.jsx
+│   │   ├── BacktrackingPage.jsx
+│   │   ├── Blog.jsx
+│   │   ├── BranchBoundOverview.jsx
+│   │   ├── BranchBoundPage.jsx
+│   │   ├── CodeEditor.jsx
+│   │   ├── CommunityLanding.jsx
+│   │   ├── ContributorBoard.jsx
+│   │   ├── ContributorLeaderboard.jsx
+│   │   ├── ContributorProfileModal.jsx
+│   │   ├── DCOverview.jsx
+│   │   ├── DCPage.jsx
+│   │   ├── DPOverview.jsx
+│   │   ├── DPPage.jsx
+│   │   ├── DSDocumentation.jsx
+│   │   ├── DataStructures.jsx
+│   │   ├── Documentation.jsx
+│   │   ├── FAQ.jsx
+│   │   ├── GameSearchOverview.jsx
+│   │   ├── GameSearchPage.jsx
+│   │   ├── GitLearning.jsx
+│   │   ├── Graph.jsx
+│   │   ├── GraphAStar.jsx
+│   │   ├── GraphBFS.jsx
+│   │   ├── GraphCycleDetection.jsx
+│   │   ├── GraphDFS.jsx
+│   │   ├── GraphDijkstra.jsx
+│   │   ├── GreedyOverview.jsx
+│   │   ├── GreedyPage.jsx
+│   │   ├── HashingOverview.jsx
+│   │   ├── HashingPage.jsx
+│   │   ├── Home.jsx
+│   │   ├── HuffmanPage.jsx
+│   │   ├── JavaOOPS.jsx
+│   │   ├── KruskalPage.jsx
+│   │   ├── LearnLanding.jsx
+│   │   ├── Login.jsx
+│   │   ├── MathOverview.jsx
+│   │   ├── MathPage.jsx
+│   │   ├── Playground.jsx
+│   │   ├── PrimPage.jsx
+│   │   ├── Quiz.jsx
+│   │   ├── Searching.jsx
+│   │   ├── SearchingOverview.jsx
+│   │   ├── Settings.jsx
+│   │   ├── Signup.jsx
+│   │   ├── Sorting.jsx
+│   │   ├── SortingDoc.jsx
+│   │   ├── StringOverview.jsx
+│   │   ├── StringPage.jsx
+│   │   ├── StringRabinKarpPage.jsx
+│   │   ├── TreeOverview.jsx
+│   │   └── TreePage.jsx
+│   │
+│   ├── searching/                    # Searching algorithm implementations
+│   ├── styles/                       # Global CSS / Tailwind styles
+│   ├── utils/                        # Helper utilities and logic
+│   │
+│   ├── App.jsx                       # Root React component
+│   ├── ScrollToTop.jsx
+│   ├── TAILWIND_DOCS.md
+│   ├── ThemeContext.jsx
+│   ├── main.css
+│   ├── main.jsx
+│   ├── navigatetotop.js
+│   ├── reportWebVitals.js
+│   └── setupTests.js
+│
+├── .env.example                      # Example environment variables
+├── .env.production                   # Production environment config
+├── .gitignore                        # Git ignore rules
+├── .vercelignore                     # Vercel deployment ignore rules
+├── BACK_TO_TOP_DOCUMENTATION.md
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+├── EXPORT_FEATURES.md
+├── LICENSE
+├── README.md                         # Main documentation (this file)
+├── SECURITY.md
+├── USER_INPUT_DOCUMENTATION.md
+├── desktop.ini
+├── index.html
+├── package-lock.json
+├── package.json
+├── sorting-refactor-issue.md
+├── sorting-refactor-pr.md
+├── ter/
+├── vercel.json
+└── vite.config.js                    # Vite configuration file
 ```
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
