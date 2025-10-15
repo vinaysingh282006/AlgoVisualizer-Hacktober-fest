@@ -108,7 +108,7 @@ const TreePage = () => {
         <div className="theme-card-header">
           <h3>Tree Algorithm - Code Implementation</h3>
           <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-            {["java", "python", "cpp", "javascript"].map((lang) => (
+            {["java", "python", "cpp", "javascript", "go"].map((lang) => (
               <button
                 key={lang}
                 className={`btn ${

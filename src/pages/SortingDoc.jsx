@@ -197,6 +197,14 @@ export default function SortingDoc() {
               </pre>
             </>
           )}
+          {code.go && (
+            <>
+              <h3>C++</h3>
+              <pre>
+                <code>{code.go}</code>
+              </pre>
+            </>
+          )}
         </section>
       )}
 
