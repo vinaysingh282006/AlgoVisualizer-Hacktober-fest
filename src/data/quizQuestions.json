@@ -386,8 +386,8 @@
             "O(n log n)",
             "O(n\u00b2)"
         ],
-        "correctAnswer": 1,
-        "explanation": "In the best case, Quick Sort can often achieve O(n), especially when data is already partially structured."
+        "correctAnswer": 2,
+        "explanation": "In the best case, Quick Sort can often achieve O(n log n), especially when data is already partially structured."
     },
     {
         "id": 27,
@@ -566,8 +566,8 @@
             "O(n log n)",
             "O(n\u00b2)"
         ],
-        "correctAnswer": 1,
-        "explanation": "In the best case, Intro Sort can often achieve O(n), especially when data is already partially structured."
+        "correctAnswer": 2,
+        "explanation": "In the best case, Intro Sort can often achieve O(n log n), especially when data is already partially structured."
     },
     {
         "id": 39,
@@ -644,7 +644,7 @@
         "correctAnswer": 0,
         "explanation": "Shell Sort is based on a fundamental step-by-step process, not advanced techniques like DP or hashing."
     },
-    {
+    { 
         "id": 44,
         "topic": "Sorting",
         "algorithm": "Shell Sort",
@@ -656,8 +656,8 @@
             "O(n log n)",
             "O(n\u00b2)"
         ],
-        "correctAnswer": 1,
-        "explanation": "In the best case, Shell Sort can often achieve O(n), especially when data is already partially structured."
+        "correctAnswer": 2,
+        "explanation": "In the best case, Shell Sort can often achieve O(n log n), especially when data is already partially structured."
     },
     {
         "id": 45,
