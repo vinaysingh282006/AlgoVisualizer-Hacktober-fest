@@ -29,6 +29,8 @@ import DataStructures from "./pages/DataStructures";
 import Graph from "./pages/Graph";
 import GraphBFS from "./pages/GraphBFS";
 import GraphCycleDetection from "./pages/GraphCycleDetection";
+// graph Eulerian 
+import GraphEulerian from "./pages/GraphEulerian.jsx";
 import GraphDFS from "./pages/GraphDFS";
 import GraphDijkstra from "./pages/GraphDijkstra";
 import GraphAStar from "./pages/GraphAStar";
@@ -90,6 +92,7 @@ import FloydWarshallPage from "./pages/GraphFloydWarshall";
 
 // Components
 import ArrayVisualizer from "./pages/Array.jsx";
+import KadaneVisualizer from "./pages/Kadane.jsx";
 import LinkedListPage from "./components/pages/LinkedListPage";
 import Queue from "./components/Queue/Queue";
 import Stack from "./components/Stack/Stack";
@@ -101,6 +104,10 @@ import Contributors from "./components/Contributors";
 import Contribute from "./components/Contribute";
 import Cheatsheet from "./components/Cheatsheet";
 import AlgorithmComparisonTable from './components/AlgorithmComparisonTable';
+
+// Performance Dashboard
+import PerformanceDashboard from "./components/PerformanceDashboard";
+import PerformanceDocs from "./pages/PerformanceDocs";
 
 // Static / Info Pages
 import Login from "./pages/Login";
@@ -201,7 +208,10 @@ const App = () => {
                       path="/data-structures"
                       element={<DataStructures />}
                     />
+
                     <Route path="/data-structures/array" element={<ArrayVisualizer />} />
+                    <Route path="/data-structures/kadane" element={<KadaneVisualizer />} />
+
                     <Route
                       path="/data-structures/linked-list"
                       element={<LinkedListPage />}
@@ -217,25 +227,26 @@ const App = () => {
                       element={<TrieVisualizer />}
                     />
 
-                    {/* Graph */}
-                    <Route path="/graph" element={<Graph />} />
-                    <Route path="/graph/bfs" element={<GraphBFS />} />
-                    <Route path="/graph/dfs" element={<GraphDFS />} />
-                    <Route path="/graph/dijkstra" element={<GraphDijkstra />} />
-                    <Route path="/graph/astar" element={<GraphAStar />} />
-                    <Route
-                      path="/graph/comparison"
-                      element={<GraphComparison />}
-                    />
-                    <Route
-                      path="/graph/cycleDetection"
-                      element={<GraphCycleDetection />}
-                    />
-                    {/* ✅ Bellman-Ford Route */}
-                    <Route
-                      path="/graph/bellman-ford"
-                      element={<BellmanFordPage />}
-                    />
+                      {/* Graph */}
+                      <Route path="/graph" element={<Graph />} />
+                      <Route path="/graph/bfs" element={<GraphBFS />} />
+                      <Route path="/graph/dfs" element={<GraphDFS />} />
+                      <Route path="/graph/dijkstra" element={<GraphDijkstra />} />
+                      <Route path="/graph/astar" element={<GraphAStar />} />
+                      <Route
+                        path="/graph/comparison"
+                        element={<GraphComparison />}
+                      />
+                      <Route
+                        path="/graph/cycleDetection"
+                        element={<GraphCycleDetection />}
+                      />
+                      <Route path="/graph/eulerianGraphs" element={<GraphEulerian/>} />
+                      {/* ✅ Bellman-Ford Route */}
+                      <Route
+                        path="/graph/bellman-ford"
+                        element={<BellmanFordPage />}
+                      />
 
 
                   {/* Algorithm Pages */}
@@ -267,6 +278,10 @@ const App = () => {
 
                   {/* Data Structures Documentation */}
                   <Route path="/data-structures-docs" element={<DSDocumentation />} />
+
+                  {/* Performance Dashboard */}
+                  <Route path="/performance" element={<PerformanceDashboard />} />
+                  <Route path="/performance/docs" element={<PerformanceDocs />} />
 
                   {/* Other Pages */}
                   <Route path="/quiz" element={<Quiz />} />

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaPlay, FaClock, FaInfinity } from "react-icons/fa6";
+import { FaPlay, FaClock, FaInfinity, FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 const QuizStart = ({
   topics,
@@ -11,6 +11,7 @@ const QuizStart = ({
 }) => {
   const [timedMode, setTimedMode] = useState(false);
   const [error, setError] = useState("");
+  const [topicPage, setTopicPage] = useState(0);
 
   const difficulties = [
     { id: "easy", name: "Easy", description: "Basic concepts and simple problems" },
@@ -18,6 +19,20 @@ const QuizStart = ({
     { id: "hard", name: "Hard", description: "Advanced problems and edge cases" },
     { id: "all", name: "Mixed", description: "A blend of all difficulty levels" },
   ];
+
+  const allTopics = [
+    ...topics,
+    { id: 'all', name: 'All Topics', description: 'Questions from every category.' }
+  ];
+
+  const CARDS_PER_PAGE = 3;
+  const totalTopicPages = Math.ceil(allTopics.length / CARDS_PER_PAGE);
+  const displayedTopics = allTopics.slice(
+    topicPage * CARDS_PER_PAGE,
+    (topicPage + 1) * CARDS_PER_PAGE
+  );
+
+  const handleTopicNav = (direction) => setTopicPage(p => p + direction);
 
   const handleStartQuiz = () => {
     // Allow both topic and difficulty to be 'all'
@@ -35,8 +50,22 @@ const QuizStart = ({
       {/* Topic Selection */}
       <div className="topic-selection">
         <h2 className="section-title">Choose a Topic</h2>
-        <div className="topic-grid">
-          {topics.map((topic) => (
+        <div className="topic-carousel">
+          {totalTopicPages > 1 && (
+            <button 
+              className="topic-nav-btn prev" 
+              onClick={() => handleTopicNav(-1)} 
+              disabled={topicPage === 0}
+              aria-label="Previous topics"
+            >
+              <FaChevronLeft />
+            </button>
+          )}
+        <div 
+          className="topic-grid" 
+          style={{ '--cards-per-page': CARDS_PER_PAGE }}
+        >
+            {displayedTopics.map((topic) => (
             <div
               key={topic.id}
               className={`topic-card ${selectedTopic === topic.id ? "selected" : ""}`}
@@ -50,17 +79,12 @@ const QuizStart = ({
               <p>{topic.description}</p>
             </div>
           ))}
-          <div
-            className={`topic-card ${selectedTopic === "all" ? "selected" : ""}`}
-            onClick={() => setSelectedTopic("all")}
-            onKeyDown={(e) => e.key === 'Enter' && setSelectedTopic("all")}
-            tabIndex={0}
-            role="button"
-            aria-pressed={selectedTopic === "all"}
-          >
-            <h3>All Topics</h3>
-            <p>Questions from every category.</p>
           </div>
+          {totalTopicPages > 1 && (
+            <button className="topic-nav-btn next" onClick={() => handleTopicNav(1)} disabled={topicPage >= totalTopicPages - 1} aria-label="Next topics">
+              <FaChevronRight />
+            </button>
+          )}
         </div>
       </div>
 

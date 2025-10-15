@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import Fuse from "fuse.js";
 import { learnSections } from "../utils/navigation";
 import { Search } from "lucide-react";
 import { useTheme } from "../ThemeContext"; // ⬅️ use your theme context
@@ -9,20 +10,53 @@ const BINARY_TREE_PATH = "/data-structures/binary-tree";
 
 const LearnLanding = () => {
   const [q, setQ] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const { theme } = useTheme(); // "dark" | "light"
 
-  const filtered = useMemo(() => {
-    if (!q.trim()) return learnSections;
-    const lower = q.toLowerCase();
-    return learnSections
-      .map((sec) => ({
-        ...sec,
-        items: sec.items.filter((it) =>
-          it.label.toLowerCase().includes(lower)
-        ),
+  const fuse = useMemo(() => {
+    const allItems = learnSections.flatMap((sec) =>
+      sec.items.map((item) => ({
+        ...item,
+        sectionId: sec.id,
+        sectionHeading: sec.heading,
       }))
-      .filter((sec) => sec.items.length > 0);
-  }, [q]);
+    );
+    return new Fuse(allItems, {
+      keys: ["label", "keywords", "description", "sectionHeading"],
+      includeScore: true,
+      threshold: 0.4,
+    });
+  }, []);
+
+  const categories = useMemo(() => ["All", ...learnSections.map((sec) => sec.heading)], []);
+
+  const filtered = useMemo(() => {
+    // Start with all sections or filter by category if one is selected
+    const baseSections =
+      selectedCategory === "All"
+        ? learnSections
+        : learnSections.filter((sec) => sec.heading === selectedCategory);
+
+    if (!q.trim()) return baseSections;
+
+    const results = fuse.search(q);
+    const sections = new Map();
+
+    for (const { item } of results) {
+      // Only include results that match the selected category (or all if "All" is selected)
+      if (selectedCategory === "All" || item.sectionHeading === selectedCategory) {
+        if (!sections.has(item.sectionId)) {
+          sections.set(item.sectionId, {
+            id: item.sectionId,
+            heading: item.sectionHeading,
+            items: [],
+          });
+        }
+        sections.get(item.sectionId).items.push(item);
+      }
+    }
+    return Array.from(sections.values());
+  }, [q, fuse, selectedCategory]);
 
   return (
       <div className={`learn-page ${theme}`}>
@@ -40,6 +74,18 @@ const LearnLanding = () => {
               aria-label="Search learn topics"
             />
             {q && <button onClick={() => setQ("")} aria-label="Clear search">Clear</button>}
+          </div>
+
+          <div className="category-filters">
+            {categories.map((category) => (
+              <button
+                key={category}
+                className={`category-filter-btn ${selectedCategory === category ? "active" : ""}`}
+                onClick={() => setSelectedCategory(category)}
+              >
+                {category}
+              </button>
+            ))}
           </div>
         </header>
 

@@ -120,7 +120,7 @@ const BranchBoundOverview = () => {
         data-aos="fade-up"
         data-aos-delay="100"
       >
-        Guide to <span className="highlight">Branch and Bound</span>
+        Guide to <span style={{ color: "var(--accent-primary)" }}>Branch and Bound</span>
       </h1>
 
       <p

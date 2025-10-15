@@ -2,6 +2,8 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef, useLayoutEffect } from "react";
 import algorithmsData from "../algorithms/algorithms.json";
 import "../styles/UnifiedVisualizer.css";
+import ComplexityAnalyzer from "./ComplexityAnalyzer";
+import { performanceAlgorithms } from "../algorithms/performanceAlgorithms";
 
 // Import all your algorithm functions here
 import { runAlgorithmAsync, getAlgorithmType } from "../algorithms/runner";
@@ -55,7 +57,7 @@ export default function AlgorithmVisualizer({
   });
 
   const [error, setError] = useState(null);
-  const animationIntervalRef = useRef(null);
+  const [showPerformanceAnalysis, setShowPerformanceAnalysis] = useState(false);
 
   // ✅ Responsive bar width calculation
 const containerRef = useRef(null);
@@ -406,6 +408,12 @@ useLayoutEffect(() => {
           >
             Reset
           </button>
+          <button 
+            onClick={() => setShowPerformanceAnalysis(!showPerformanceAnalysis)}
+            aria-label="Toggle performance analysis"
+          >
+            {showPerformanceAnalysis ? "Hide Analysis" : "Show Analysis"}
+          </button>
           {algorithmsData.find((a) => a.name === algorithmName)?.type ===
             "searching" && (
             <input
@@ -478,6 +486,13 @@ useLayoutEffect(() => {
       >
         {renderBars}
       </div>
+      
+      {showPerformanceAnalysis && !visualOnly && !controlled && (
+        <ComplexityAnalyzer 
+          algorithm={performanceAlgorithms[algorithmName] || null} 
+          algorithmName={algorithmName}
+        />
+      )}
     </div>
   );
 }

@@ -158,7 +158,7 @@ export default function EnhancedScrollToTop({
 
           /* Button positioning to avoid overlap with FAQ chatbot */
           .enhanced-scroll-to-top-btn {
-            bottom: 140px;
+            bottom: 150px; /* reduced spacing to sit closer to feedback FAB */
             right: 24px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -312,7 +312,7 @@ export default function EnhancedScrollToTop({
               width: 48px;
               height: 48px;
               font-size: 18px;
-              bottom: 120px;
+              bottom: 160px;
               right: 20px;
             }
           }
@@ -322,9 +322,15 @@ export default function EnhancedScrollToTop({
               width: 44px;
               height: 44px;
               font-size: 16px;
-              bottom: 100px;
+              bottom: 120px;
               right: 16px;
             }
+
+          /* Ensure enhanced arrow icon is white */
+          .enhanced-scroll-to-top-btn i,
+          .enhanced-scroll-to-top-btn .fa-solid {
+            color: #ffffff !important;
+          }
 
             .scroll-progress-indicator {
               height: 2px;
