@@ -63,8 +63,8 @@ import CFundamentals from "./pages/Notes/C/Fundamentals";
 // JavaScript Notes
 import JavaScriptFundamentals from "./pages/Notes/JavaScript/Fundamentals.jsx";
 import JavaScriptVariablesAndDataTypes from "./pages/Notes/JavaScript/VariablesAndDataTypes.jsx";
-// React Notes
-import ReactFundamentals from "./pages/Notes/React/Fundamentals.jsx";
+// Next.js Notes
+import NextJsFundamentals from "./pages/Notes/NextJs/Fundamentals.jsx";
 
 // Rust Notes
 import RustFundamentals from "./pages/Notes/Rust/Fundamentals";
@@ -322,8 +322,8 @@ const App = () => {
                   <Route path="/notes/javascript/fundamentals" element={<JavaScriptFundamentals/>} />
                   <Route path="/notes/javascript/variables-and-data-types" element={<JavaScriptVariablesAndDataTypes/>} />
 
-                  <Route path="/notes/react" element={<Navigate to="/notes/react/fundamentals" replace />} />
-                  <Route path="/notes/react/fundamentals" element={<ReactFundamentals />} />
+                  <Route path="/notes/nextjs" element={<Navigate to="/notes/nextjs/fundamentals" replace />} />
+                  <Route path="/notes/nextjs/fundamentals" element={<NextJsFundamentals />} />
 
                   <Route path="/notes/c" element={<Navigate to="/notes/c/fundamentals" replace />} />
                   <Route path="/notes/c/fundamentals" element={<CFundamentals />} />

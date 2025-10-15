@@ -303,12 +303,12 @@ const Navbar = () => {
                     JavaScript
                   </Link>
                   <Link
-                    to="/notes/react"
-                    className={`dropdown-item ${isActive("/notes/react") ? "active" : ""
+                    to="/notes/nextjs"
+                    className={`dropdown-item ${isActive("/notes/nextjs") ? "active" : ""
                       }`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
-                    React
+                    NextJs
                   </Link>
                   <Link
                     to="/notes/rust"
