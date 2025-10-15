@@ -7,7 +7,7 @@ const GreedyOverview = () => {
   return (
     <div className="theme-container">
       <h1 className="theme-title" style={{ marginTop: "4rem" }}>
-        Guide to <span className="highlight">Greedy Algorithms</span>
+        Guide to <span style={{ color: "var(--accent-primary)" }}>Greedy Algorithms</span>
       </h1>
 
       <p
