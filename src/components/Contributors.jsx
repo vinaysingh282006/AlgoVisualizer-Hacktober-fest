@@ -421,8 +421,8 @@ const Contributors = () => {
               >
                 <div className="badge-content">
                   <span className="contribution-count">{contributor.contributions}</span>
-                  <span className="contribution-label">commits</span>
-                  <span className="contribution-level">{badgeStyle.label}</span>
+                  <span className="contribution-label"> commits </span>
+                  <span className="contribution-level"> {badgeStyle.label} </span>
                 </div>
               </div>
             </div>
