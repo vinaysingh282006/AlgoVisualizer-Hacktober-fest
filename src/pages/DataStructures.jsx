@@ -1,19 +1,10 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import {
-  Search,
-  Clock,
-  Database,
-  BookOpen,
-  Zap,
-  Users,
-  Star,
-  X,
-} from "lucide-react";
+import { Search, Clock, Database, BookOpen, Zap, Users, Star, X } from "lucide-react";
 import { useTheme } from "../ThemeContext";
 import { useNavigate } from "react-router-dom";
 import "../styles/Documentation.css";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 // ============================================================================
 // 1. STATIC DATA & HELPERS
@@ -35,7 +26,7 @@ const algorithmDatabase = {
         stability: "Stable",
         inPlace: true,
         adaptivity: "Adaptive",
-        implemented: true,
+        implemented: true
       },
       {
         name: "Selection Sort",
@@ -47,7 +38,7 @@ const algorithmDatabase = {
         stability: "Unstable",
         inPlace: true,
         adaptivity: "Not Adaptive",
-        implemented: true,
+        implemented: true
       },
       {
         name: "Insertion Sort",
@@ -59,25 +50,23 @@ const algorithmDatabase = {
         stability: "Stable",
         inPlace: true,
         adaptivity: "Adaptive",
-        implemented: true,
-        
+        implemented: true
       },
       {
         name: "Merge Sort",
         id: "mergeSort",
-        description:
-          "Divides array into halves, sorts recursively, and merges them.",
+        description: "Divides array into halves, sorts recursively, and merges them.",
         timeComplexity: {
           best: "O(n log n)",
           average: "O(n log n)",
           worst: "O(n log n)",
-          averaget: "O(n log n)",
+          averaget: "O(n log n)"
         },
         spaceComplexity: "O(n)",
         stability: "Stable",
         inPlace: false,
         adaptivity: "Not Adaptive",
-        implemented: true,
+        implemented: true
       },
       {
         name: "Quick Sort",
@@ -88,13 +77,13 @@ const algorithmDatabase = {
           best: "O(n log n)",
           average: "O(n log n)",
           worst: "O(n²)",
-          averaget: "O(n log n)",
+          averaget: "O(n log n)"
         },
         spaceComplexity: "O(log n)",
         stability: "Unstable",
         inPlace: true,
         adaptivity: "Not Adaptive",
-        implemented: true,
+        implemented: true
       },
       {
         name: "Tim Sort",
@@ -105,13 +94,13 @@ const algorithmDatabase = {
           best: "O(n)",
           average: "O(n log n)",
           worst: "O(n log n)",
-          averaget: "O(n log n)",
+          averaget: "O(n log n)"
         },
         spaceComplexity: "O(n)",
         stability: "Stable",
         inPlace: false,
         adaptivity: "Adaptive",
-        implemented: true,
+        implemented: true
       },
       {
         name: "Intro Sort",
@@ -122,13 +111,13 @@ const algorithmDatabase = {
           best: "O(n log n)",
           average: "O(n log n)",
           worst: "O(n log n)",
-          averaget: "O(n log n)",
+          averaget: "O(n log n)"
         },
         spaceComplexity: "O(log n)",
         stability: "Unstable",
         inPlace: true,
         adaptivity: "Not Adaptive",
-        implemented: true,
+        implemented: true
       },
       {
         name: "Shell Sort",
@@ -139,39 +128,39 @@ const algorithmDatabase = {
           best: "O(n log n)",
           average: "O(n(log n)^2)",
           worst: "O(n(log n)^2)",
-          averaget: "O(n(log n)^2)",
+          averaget: "O(n(log n)^2)"
         },
         spaceComplexity: "O(1)",
         stability: "Unstable",
         inPlace: true,
         adaptivity: "Not Adaptive",
-        implemented: true,
+        implemented: true
       },
       {
         name: "Cycle Sort",
         id: "cycleSort",
         description:
-        "An in-place, unstable sorting algorithm that minimizes writes by rotating elements to their correct position in a cycle. Especially useful when write operations are expensive (e.g., EEPROM/flash memory).",
+          "An in-place, unstable sorting algorithm that minimizes writes by rotating elements to their correct position in a cycle. Especially useful when write operations are expensive (e.g., EEPROM/flash memory).",
         timeComplexity: {
           best: "O(n²)",
           average: "O(n²)",
           worst: "O(n²)",
-          averaget: "O(n²)",
+          averaget: "O(n²)"
         },
         spaceComplexity: "O(1)",
         stability: "Unstable",
         inPlace: true,
         adaptivity: "Not Adaptive",
-        implemented: true,
-      },
-
-    ],
+        implemented: true
+      }
+    ]
   },
   searching: {
     title: "Search Algorithms",
     icon: "🔍",
     color: "#4ade80",
-    algorithms: [,
+    algorithms: [
+      ,
       {
         name: "Linear Search",
         id: "linearSearch",
@@ -180,7 +169,7 @@ const algorithmDatabase = {
         timeComplexity: { best: "O(1)", average: "O(n)", worst: "O(n)", averaget: "O(n)" },
         spaceComplexity: "O(1)",
         dataRequirement: "None (works on unsorted data)",
-        implemented: true,
+        implemented: true
       },
       {
         name: "Binary Search",
@@ -191,26 +180,26 @@ const algorithmDatabase = {
           best: "O(1)",
           average: "O(log n)",
           worst: "O(log n)",
-          averaget: "O(log n)",
+          averaget: "O(log n)"
         },
         spaceComplexity: "O(1)",
         dataRequirement: "Sorted array",
-        implemented: true,
+        implemented: true
       },
       {
         name: "Exponential Search",
         id: "exponentialSearch",
         description:
-          "For sorted arrays: expands the search range exponentially (1, 2, 4, 8, …) until it bounds the target, then performs binary search within that range.",        
+          "For sorted arrays: expands the search range exponentially (1, 2, 4, 8, …) until it bounds the target, then performs binary search within that range.",
         timeComplexity: {
           best: "O(1)",
           average: "O(log n)",
           worst: "O(log n)",
-          averaget: "O(log n)",
+          averaget: "O(log n)"
         },
         spaceComplexity: "O(1)",
         dataRequirement: "Sorted array",
-        implemented: true,
+        implemented: true
       },
 
       {
@@ -221,7 +210,7 @@ const algorithmDatabase = {
         timeComplexity: { best: "O(1)", average: "O(√n)", worst: "O(√n)", averaget: "O(√n)" },
         spaceComplexity: "O(1)",
         dataRequirement: "Sorted array",
-        implemented: true,
+        implemented: true
       },
 
       {
@@ -233,11 +222,11 @@ const algorithmDatabase = {
           best: "O(1)",
           average: "O(log₃ n)",
           worst: "O(log₃ n)",
-          averaget: "O(log₃ n)",
+          averaget: "O(log₃ n)"
         },
         spaceComplexity: "O(1)",
         dataRequirement: "Sorted array",
-        implemented: true,
+        implemented: true
       },
 
       {
@@ -250,55 +239,50 @@ const algorithmDatabase = {
           best: "O(1)",
           average: "O(log n)",
           worst: "O(log n)",
-          averaget: "O(log n)",
+          averaget: "O(log n)"
         },
         spaceComplexity: "O(1)",
         dataRequirement: "Sorted array",
-        implemented: true,
-      },
-    ],
+        implemented: true
+      }
+    ]
   },
   dataStructures: {
     title: "Data Structures",
     icon: "🏗️",
     color: "#ffd93d",
     algorithms: [
-
-        {
-        name:"Array",
+      {
+        name: "Array",
         id: "array",
-        description: "An array is a collection of elements of the same data type stored in contiguous memory locations.",
-         timeComplexity:{
-          Access : "O(1)",
+        description:
+          "An array is a collection of elements of the same data type stored in contiguous memory locations.",
+        timeComplexity: {
+          Access: "O(1)",
           SearchLinear: " O(n)",
           SearchBinary: "O(log n)",
-          Insertion:"O(1) (amortized)",
-          Deletion:"O(1)",
-          Traversal:"O(n)",
-          
-         },
-         spaceComplexity: "O(n)",
-        implemented: true,
-        
+          Insertion: "O(1) (amortized)",
+          Deletion: "O(1)",
+          Traversal: "O(n)"
+        },
+        spaceComplexity: "O(n)",
+        implemented: true
       },
       {
         name: "Linked List",
         id: "linkedList",
-        description:
-          "Linear data structure where elements are stored in nodes.",
+        description: "Linear data structure where elements are stored in nodes.",
         timeComplexity: {
           insertion: "O(1)",
           deletion: "O(1)",
           search: "O(n)",
           access: "O(n)",
-          averaget: "O(n)",
+          averaget: "O(n)"
         },
         spaceComplexity: "O(n)",
-        implemented: true,
+        implemented: true
       },
 
-    
-      
       {
         name: "Stack",
         id: "stack",
@@ -308,10 +292,10 @@ const algorithmDatabase = {
           pop: "O(1)",
           peek: "O(1)",
           search: "O(n)",
-          averaget: "O(1)",
+          averaget: "O(1)"
         },
         spaceComplexity: "O(n)",
-        implemented: true,
+        implemented: true
       },
       {
         name: "Queue",
@@ -322,25 +306,24 @@ const algorithmDatabase = {
           dequeue: "O(1)",
           front: "O(1)",
           search: "O(n)",
-          averaget: "O(1)",
+          averaget: "O(1)"
         },
         spaceComplexity: "O(n)",
-        implemented: true,
+        implemented: true
       },
       {
         name: "Binary Tree",
         id: "binaryTree",
-        description:
-          "Hierarchical data structure where each node has at most two children.",
+        description: "Hierarchical data structure where each node has at most two children.",
         timeComplexity: {
           insertion: "O(log n)",
           deletion: "O(log n)",
           search: "O(log n)",
           traversal: "O(n)",
-          averaget: "O(log n)",
+          averaget: "O(log n)"
         },
         spaceComplexity: "O(n)",
-        implemented: true,
+        implemented: true
       },
       {
         name: "Trie",
@@ -352,11 +335,29 @@ const algorithmDatabase = {
           deletion: "O(m)",
           search: "O(m)",
           prefixSearch: "O(m)",
-          averaget: "O(m)",
+          averaget: "O(m)"
         },
         spaceComplexity: "O(N)",
         implemented: true,
       },
+      {
+        name:"KadanesAlgorithm",
+        id:"kadane",
+        description:"Kadane’s Algorithm is used to find the maximum sum of a contiguous subarray in an array (which may contain negative numbers).",
+         timeComplexity:"O(n)",
+         spaceComplexity: "O(1)",
+        implemented: true,
+      },
+      {
+      name: "KMP Algorithm",
+      id: "kmp",
+      description:
+        "Efficient string matching algorithm that avoids re-checking characters by using the LPS (Longest Prefix Suffix) array.",
+      timeComplexity: { best: "O(n + m)", average: "O(n + m)", worst: "O(n + m)" },
+      spaceComplexity: "O(m)",
+      implemented: true,
+    },
+
     ],
   },
 };
@@ -368,7 +369,7 @@ const getComplexityColor = (complexity) => {
     "O(n)": "#ffd93d",
     "O(n log n)": "#ff9500",
     "O(n²)": "#ff6b6b",
-    "O(√n)": "#a78bfa",
+    "O(√n)": "#a78bfa"
   };
   return colors[complexity] || "#e0e6ed";
 };
@@ -379,93 +380,86 @@ const getComplexityColor = (complexity) => {
 
 function AlgorithmCard({ algorithm }) {
   const navigate = useNavigate();
-  const toKebab = s => s.replace(/[A-Z]/g, m => `-${m.toLowerCase()}`);
+  const toKebab = (s) => s.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`);
 
   const handleCardClick = () => {
     if (algorithm.implemented) {
-      if (
-        algorithm.category === "dataStructures" &&
-        algorithm.id === "linkedList" 
-      ) {
+      if (algorithm.category === "dataStructures" && algorithm.id === "linkedList") {
         navigate("/data-structures/linked-list");
-      } 
-      else if (algorithm.category === "sorting") {
+      } else if (algorithm.category === "sorting") {
         navigate(`/sorting/${algorithm.id}/docs`);
       } else if (algorithm.category === "searching") {
         if (algorithm.id === "ternarySearch") {
-        navigate("/searching/ternarySearch"); 
+          navigate("/searching/ternarySearch");
         }
 
         if (algorithm.id === "binarySearch") {
-        navigate("/searching/binarySearch"); 
+          navigate("/searching/binarySearch");
         }
 
         if (algorithm.id === "jumpSearch") {
-        navigate("/searching/jumpSearch");
+          navigate("/searching/jumpSearch");
         }
 
         if (algorithm.id === "exponentialSearch") {
-        navigate("/searching/exponentialSearch");
+          navigate("/searching/exponentialSearch");
         }
 
         if (algorithm.id === "fibonacciSearch") {
-        navigate("/searching/fibonacciSearch");
+          navigate("/searching/fibonacciSearch");
         }
-       
       } else if (algorithm.category === "dataStructures") {
         navigate(`/data-structures/${toKebab(algorithm.id)}`);
       }
     }
   };
 
-  
+  return (
+    <div
+      className={`algorithm-card ${algorithm.implemented ? "clickable" : ""}`}
+      onClick={handleCardClick}
+      title={algorithm.description}
+      style={{ cursor: algorithm.implemented ? "pointer" : "default" }}
+      data-aos="fade-up"
+      data-aos-duration="1000"
+      data-aos-once="true"
+    >
+      {/* Header */}
+      <div className="card-header flex items-center justify-between mb-3 ">
+        <div className="card-title-group flex items-center gap-2">
+          <span className="card-icon text-blue-500 text-lg">{algorithm.categoryIcon}</span>
+          <h3 className=" text-gray-800 font-bold text-center text-2xl leading-tight">
+            {algorithm.name}
+          </h3>
+        </div>
 
- return (
-  <div
-    className={`algorithm-card ${algorithm.implemented ? "clickable" : ""}`}
-    onClick={handleCardClick}
-    title={algorithm.description}
-    style={{ cursor: algorithm.implemented ? "pointer" : "default" }}
-    data-aos="fade-up"
-    data-aos-duration="1000"
-    data-aos-once="true"
-  >
-    {/* Header */}
-    <div className="card-header flex items-center justify-between mb-3 ">
-      <div className="card-title-group flex items-center gap-2">
-        <span className="card-icon text-blue-500 text-lg">{algorithm.categoryIcon}</span>
-        <h3 className=" text-gray-800 font-bold text-center text-2xl leading-tight">
-          {algorithm.name}
-        </h3>
+        {algorithm.implemented ? (
+          <div className="status-badge implemented text-xs font-medium bg-green-100 text-green-700 px-2 py-1 rounded-full">
+            Implemented
+          </div>
+        ) : (
+          <div className="status-badge coming-soon text-xs font-medium bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
+            Coming Soon
+          </div>
+        )}
       </div>
 
-      {algorithm.implemented ? (
-        <div className="status-badge implemented text-xs font-medium bg-green-100 text-green-700 px-2 py-1 rounded-full">
-          Implemented
+      {/* Description */}
+      <p className="card-description tracking-tighter text-sm text-gray-600 leading-relaxed mb-3 text-left text-pretty">
+        {algorithm.description}
+      </p>
+      {algorithm.category === "sorting" || algorithm.category === "searching" ? (
+        <div>
+          <p className="text-xl  font-bold text-black">TC : {algorithm.timeComplexity.averaget} </p>
+          <p className="text-xl font-bold text-black">SC : {algorithm.spaceComplexity} </p>
         </div>
-      ) : (
-        <div className="status-badge coming-soon text-xs font-medium bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
-          Coming Soon
-        </div>
-      )}
-    </div>
-
-    {/* Description */}
-    <p className="card-description tracking-tighter text-sm text-gray-600 leading-relaxed mb-3 text-left text-pretty">
-      {algorithm.description}
-    </p>
-    {algorithm.category === "sorting" || algorithm.category === "searching" ? (
-      <div>
-        <p className="text-xl  font-bold text-black">TC : {algorithm.timeComplexity.averaget} </p>
-        <p className="text-xl font-bold text-black">SC : {algorithm.spaceComplexity} </p>
+      ) : null}
+      {/* Category Badge */}
+      <div className="card-category-badge mt-auto text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded-md font-extrabold italic inline-block">
+        {algorithm.categoryTitle}
       </div>
-    ):null}
-    {/* Category Badge */}
-    <div className="card-category-badge mt-auto text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded-md font-extrabold italic inline-block">
-      {algorithm.categoryTitle}
     </div>
-  </div>
-);
+  );
 }
 
 // ============================================================================
@@ -473,7 +467,7 @@ function AlgorithmCard({ algorithm }) {
 // ============================================================================
 
 function DataStructuresPage() {
-   const { theme } = useTheme(); 
+  const { theme } = useTheme();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [filteredAlgorithms, setFilteredAlgorithms] = useState([]);
@@ -487,7 +481,7 @@ function DataStructuresPage() {
           category: categoryKey,
           categoryTitle: category.title,
           categoryIcon: category.icon,
-          categoryColor: category.color,
+          categoryColor: category.color
         });
       });
     });
@@ -497,9 +491,7 @@ function DataStructuresPage() {
   useEffect(() => {
     let allAlgorithms = getAllAlgorithms();
     if (selectedCategory !== "all") {
-      allAlgorithms = allAlgorithms.filter(
-        (algo) => algo.category === selectedCategory
-      );
+      allAlgorithms = allAlgorithms.filter((algo) => algo.category === selectedCategory);
     }
     if (searchTerm) {
       allAlgorithms = allAlgorithms.filter(
@@ -517,31 +509,31 @@ function DataStructuresPage() {
         key: "all",
         label: "All",
         icon: BookOpen,
-        count: getAllAlgorithms().length,
+        count: getAllAlgorithms().length
       },
       {
         key: "sorting",
         label: "Sorting",
         icon: Users,
-        count: algorithmDatabase.sorting.algorithms.length,
+        count: algorithmDatabase.sorting.algorithms.length
       },
       {
         key: "searching",
         label: "Searching",
         icon: Search,
-        count: algorithmDatabase.searching.algorithms.length,
+        count: algorithmDatabase.searching.algorithms.length
       },
       {
         key: "dataStructures",
         label: "Data Structures",
         icon: Database,
-        count: algorithmDatabase.dataStructures.algorithms.length,
-      },
+        count: algorithmDatabase.dataStructures.algorithms.length
+      }
     ],
     [getAllAlgorithms]
   );
 
- return (
+  return (
     <div className="theme-container" data-aos="fade-up" data-aos-duration="1000">
       <h1 className="theme-title">Algorithm Documentation</h1>
 
@@ -550,26 +542,32 @@ function DataStructuresPage() {
         className="theme-card filters-section p-4 rounded-lg shadow-md"
         style={{
           backgroundColor: theme === "light" ? "#ffffff" : "#1f2937",
-          color: theme === "light" ? "#111827" : "#f9fafb",
+          color: theme === "light" ? "#111827" : "#f9fafb"
         }}
         data-aos="fade-up"
         data-aos-delay="200"
       >
         {/* Search bar */}
-        <div className="search-bar flex items-center mb-4">
-          <Search size={20} style={{ color: theme === "light" ? "#6b7280" : "#d1d5db" }} />
-          <input
-            type="text"
-            placeholder="Search algorithms..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="form-control ml-2 flex-1 p-2 rounded border"
-            style={{
-              backgroundColor: theme === "light" ? "#ffffff" : "#374151",
-              color: theme === "light" ? "#111827" : "#f9fafb",
-              borderColor: theme === "light" ? "#d1d5db" : "#4b5563",
-            }}
-          />
+        <div className="search-bar mb-4">
+          <div className="relative flex items-center">
+            <Search
+              size={20}
+              className="absolute left-2"
+              style={{ color: theme === "light" ? "#6b7280" : "#d1d5db" }}
+            />
+            <input
+              type="text"
+              placeholder="Search algorithms.."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="form-control w-full pl-10 p-2 rounded border"
+              style={{
+                backgroundColor: theme === "light" ? "#ffffff" : "#374151",
+                color: theme === "light" ? "#111827" : "#f9fafb",
+                borderColor: theme === "light" ? "#d1d5db" : "#4b5563"
+              }}
+            />
+          </div>
         </div>
 
         {/* Category Filters */}
@@ -590,11 +588,7 @@ function DataStructuresPage() {
                     : theme === "light"
                     ? "#f3f4f6"
                     : "#374151",
-                  color: isActive
-                    ? "#ffffff"
-                    : theme === "light"
-                    ? "#111827"
-                    : "#d1d5db",
+                  color: isActive ? "#ffffff" : theme === "light" ? "#111827" : "#d1d5db"
                 }}
               >
                 <IconComponent size={16} className="mr-1" />
@@ -609,11 +603,7 @@ function DataStructuresPage() {
                       : theme === "light"
                       ? "#e5e7eb"
                       : "#4b5563",
-                    color: isActive
-                      ? "#ffffff"
-                      : theme === "light"
-                      ? "#111827"
-                      : "#f9fafb",
+                    color: isActive ? "#ffffff" : theme === "light" ? "#111827" : "#f9fafb"
                   }}
                 >
                   {category.count}
@@ -628,7 +618,6 @@ function DataStructuresPage() {
       <div className="results-grid">
         {filteredAlgorithms.length > 0 ? (
           filteredAlgorithms.map((algorithm) => (
-            
             <AlgorithmCard key={algorithm.id} algorithm={algorithm} />
           ))
         ) : (
@@ -636,7 +625,7 @@ function DataStructuresPage() {
             className="no-results-card theme-card p-6 rounded-lg flex flex-col items-center justify-center"
             style={{
               backgroundColor: theme === "light" ? "#ffffff" : "#1f2937",
-              color: theme === "light" ? "#111827" : "#f9fafb",
+              color: theme === "light" ? "#111827" : "#f9fafb"
             }}
             data-aos="fade-up"
             data-aos-delay="400"

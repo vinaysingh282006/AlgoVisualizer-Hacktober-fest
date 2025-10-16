@@ -7,7 +7,7 @@ const TreeOverview = () => {
   return (
     <div className="theme-container">
       <h1 className="theme-title" style={{ marginTop: "4rem" }}>
-        Guide to <span className="highlight">Tree Algorithms</span>
+        Guide to <span style={{ color: "var(--accent-primary)" }}>Tree Algorithms</span>
       </h1>
 
       <p

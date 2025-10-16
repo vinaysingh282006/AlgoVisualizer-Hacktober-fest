@@ -81,8 +81,8 @@ const DCPage = () => {
       <div className="theme-card" style={{ marginTop: "2rem" }} data-aos="fade-up" data-aos-delay="400">
         <div className="theme-card-header">
           <h3>Divide & Conquer - Code Implementation</h3>
-          <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-            {["java", "python", "cpp", "javascript"].map((lang) => (
+          <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>_
+            {["java", "python", "cpp", "javascript", "go"].map((lang) => (
               <button
                 key={lang}
                 className={`btn ${

@@ -286,6 +286,59 @@ const DEFAULT_EXAMPLE = {
   ]
 };
 
+const generateRandomGraph = (numNodes, canvasWidth, canvasHeight, edgeDensity = 0.4) => {
+  const nodes = [];
+  const edges = [];
+  const minDistance = 100; // Minimum distance between nodes
+
+  // Generate nodes with random positions, ensuring they are not too close
+  for (let i = 0; i < numNodes; i++) {
+    let x, y, tooClose;
+    do {
+      tooClose = false;
+      x = Math.random() * (canvasWidth - 100) + 50;
+      y = Math.random() * (canvasHeight - 100) + 50;
+      for (const node of nodes) {
+        const distance = Math.sqrt((node.x - x) ** 2 + (node.y - y) ** 2);
+        if (distance < minDistance) {
+          tooClose = true;
+          break;
+        }
+      }
+    } while (tooClose);
+    nodes.push({ x, y });
+  }
+
+  // Ensure the graph is connected by creating a path through all nodes
+  const unvisited = new Set(nodes.map((_, i) => i));
+  const visited = new Set();
+  let current = 0;
+  unvisited.delete(current);
+  visited.add(current);
+
+  while (unvisited.size > 0) {
+    let next = unvisited.values().next().value;
+    const weight = Math.floor(Math.random() * 20) + 1;
+    edges.push({ start: current, end: next, weight });
+    current = next;
+    unvisited.delete(current);
+    visited.add(current);
+  }
+
+  // Add additional random edges based on density
+  for (let i = 0; i < numNodes; i++) {
+    for (let j = i + 1; j < numNodes; j++) {
+      // Avoid adding an edge if it already exists
+      const edgeExists = edges.some(e => (e.start === i && e.end === j) || (e.start === j && e.end === i));
+      if (!edgeExists && Math.random() < edgeDensity) {
+        const weight = Math.floor(Math.random() * 20) + 1;
+        edges.push({ start: i, end: j, weight });
+      }
+    }
+  }
+  return { nodes, edges };
+};
+
 const GraphVisualizer = ({ defaultAlgorithm = null, autoLoadExample = false, canvasWidth = 800, canvasHeight = 500 }) => {
   const [nodes, setNodes] = useState([]);
   const [edges, setEdges] = useState([]);
@@ -331,7 +384,7 @@ const GraphVisualizer = ({ defaultAlgorithm = null, autoLoadExample = false, can
 
   useEffect(() => {
     if (autoLoadExample) {
-      loadDefaultExample();
+      loadRandomGraph();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoLoadExample]);
@@ -502,15 +555,21 @@ const GraphVisualizer = ({ defaultAlgorithm = null, autoLoadExample = false, can
     setResult(null);
   }, []);
 
-  const loadDefaultExample = useCallback(() => {
-    setNodes(DEFAULT_EXAMPLE.nodes);
-    setEdges(DEFAULT_EXAMPLE.edges);
-    setDijkstraStart(0);
-    setDijkstraEnd(5);
+  const loadRandomGraph = useCallback(() => {
+    const numNodes = Math.floor(Math.random() * 5) + 5; // 5 to 9 nodes
+    const { nodes: newNodes, edges: newEdges } = generateRandomGraph(numNodes, canvasWidth, canvasHeight);
+    
+    setNodes(newNodes);
+    setEdges(newEdges);
+
+    const startNode = 0;
+    const endNode = newNodes.length > 1 ? newNodes.length - 1 : null;
+    setDijkstraStart(startNode);
+    setDijkstraEnd(endNode);
     setVisualState({ visited: new Set(), path: [] });
     setResult(null);
-    setMessage("Loaded default example graph. Choose an algorithm and run.");
-  }, []);
+    setMessage("Loaded a random example graph. Choose an algorithm and run.");
+  }, [canvasWidth, canvasHeight]);
 
   // Memoize the algorithm options to prevent unnecessary re-renders
   const algorithmOptions = useMemo(() => [
@@ -540,7 +599,7 @@ const GraphVisualizer = ({ defaultAlgorithm = null, autoLoadExample = false, can
         </button>
         <button
           className="btn btn-secondary"
-          onClick={loadDefaultExample}
+          onClick={loadRandomGraph}
           disabled={isVisualizing}
           aria-label="Load example graph"
         >

@@ -117,7 +117,7 @@ const GraphCycleDetection = () => {
           </h3> 
            
           <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-            {["java", "python", "cpp", "javascript"].map((lang) => (
+            {["java", "python", "cpp", "javascript", "go"].map((lang) => (
               <button
                 key={lang}
                 className={`btn ${
@@ -164,13 +164,15 @@ const GraphCycleDetection = () => {
             }}
           >
             <code>
-              {graphType === "Directed"
+              {(graphType === "Directed"
                 ? algo === "BFS"
                   ? cycleDetectionDirected.bfs[selectedLanguage]
                   : cycleDetectionDirected.dfs[selectedLanguage]
                 : algo === "BFS"
                 ? cycleDetectionUndirected.bfs[selectedLanguage]
-                : cycleDetectionUndirected.dfs[selectedLanguage]}
+                : cycleDetectionUndirected.dfs[selectedLanguage]) ||
+                `// ${algo} implementation for ${graphType} graph in ${selectedLanguage.toUpperCase()} coming soon!
+`}
             </code>
           </pre>
         </div>

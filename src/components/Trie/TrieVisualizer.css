@@ -1,3 +1,4 @@
+
 /* src/components/Trie/TrieVisualizer.css */
 
 :root{
@@ -13,6 +14,25 @@
   --path:#ff6b6b;
   --visited:#ffd166;
   --end-word:#4ecdc4;
+   --input-bg: #0b1426;
+}
+
+:root[data-theme='light'] {
+  --bg: #f7f9fc;
+  --surface: #ffffff;
+  --surface-2: #f3f5f8;
+  --border: #d0d7e2;
+  --muted: #606775;
+  --text: #111827;
+  --primary: #0066ff;
+  --accent: #b485ff;
+  --edge: #c5c9d3;
+  --path: #ff6b6b;
+  --visited: #ffb400;
+  --end-word: #00bfa6;
+
+  /* 🆕 light background for inputs */
+  --input-bg: #ffffff;
 }
 
 .tv-wrap{
@@ -118,17 +138,27 @@
 .tv-input{
   flex:1 1 140px;
   padding:12px 12px;
-  background:#0b1426;
+ background: var(--input-bg);
   border:1px solid var(--border);
   border-radius:12px;
   color:var(--text);
   font-size:14px;
 }
+
+.tv-btn, 
+.tv-word-pill,
+.tv-feature-tag,
+.tv-explanation-list li,
+.tv-explanation-workflow {
+  background: var(--input-bg);
+}
+
+
 .tv-textarea{ min-height:64px; resize:vertical; }
 
 .tv-btn{
   padding:11px 14px;
-  background:#0b1426;
+  background:var(--input-bg);
   color:var(--text);
   border:1px solid var(--border);
   border-radius:12px;
@@ -232,7 +262,7 @@
 }
 .tv-word-pill{
   padding:6px 10px;
-  background:#0b1426;
+  background:var(--input-bg);
   border:1px solid var(--border);
   border-radius:999px;
   font-weight:700; font-size:12px;
@@ -242,7 +272,7 @@
 .tv-info-toggle{
   margin-left:12px;
   padding:6px 12px;
-  background:#0b1426;
+  background:var(--input-bg);
   color:var(--text);
   border:1px solid var(--border);
   border-radius:8px;
@@ -302,7 +332,7 @@
   line-height:1.4;
   margin:6px 0;
   padding:8px 12px;
-  background:#0b1426;
+  background:var(--input-bg);
   border:1px solid var(--border);
   border-radius:8px;
 }
@@ -320,7 +350,7 @@
 }
 
 .tv-explanation-workflow{
-  background:#0b1426;
+  background:var(--input-bg);
   border:1px solid var(--border);
   border-radius:8px;
   padding:12px;

@@ -52,15 +52,16 @@ const NewsletterForm = ({ email, setEmail, isLoading, handleSubmit, isSubscribed
     <form onSubmit={handleSubmit} className="newsletter-form">
       <div className="input-container">
         <FaEnvelope className="input-icon" />
-        <input
-          type="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="newsletter-input"
-          disabled={isLoading}
-        />
       </div>
+      <input
+        type="email"
+        placeholder="    Enter your email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="newsletter-input"
+        disabled={isLoading}
+      />
+
       <button
         type="submit"
         className={`newsletter-btn ${isLoading ? "loading" : ""}`}
