@@ -351,12 +351,33 @@ const Contributors = () => {
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
-        whileHover={{ scale: 1.05 }}
+        whileHover={{
+          scale: 1.05,
+          backgroundColor: "var(--theme-primary)",
+          color: "var(--theme-bg)"
+        }}
         whileTap={{ scale: 0.95 }}
+        style={{
+          position: "absolute",
+          left: "10px",
+          top: "10px",
+          zIndex: 1,
+          padding: "8px 12px",
+          marginRight: "15px",
+          fontSize: "0.9rem",
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
+          background: "var(--theme-bg)",
+          border: "1px solid var(--theme-border)",
+          borderRadius: "6px",
+          cursor: "pointer",
+          color: "var(--theme-text)"
+        }}
       >
         <svg
-          width="20"
-          height="20"
+          width="17"
+          height="17"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
