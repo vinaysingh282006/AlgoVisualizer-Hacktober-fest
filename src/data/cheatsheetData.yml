@@ -796,6 +796,43 @@ advancedAlgorithms:
         - "Duplicate detection"
         - "Sets/Maps"
 
+  # Added Game theory 
+    - name: "Game Theory"
+      category: "Technique"
+      description: "Mathematical framework to analyze strategic interactions between two-more players making optimal moves."
+      keyPoints:
+        - "Zero-sum and non-zero-sum games"
+        - "Optimal strategies and equilibrium points"
+        - "Minimax principle"
+        - "Nim and Grundy numbers (Sprague-Grundy theorem)"
+        - "Winning vs Losing positions"
+        - "Combinatorial game theory"
+      examples:
+        - "Nim Game"
+        - "Grundy Numbers"
+        - "Tic-Tac-Toe (Minimax Algorithm)"
+        - "Coin Game / Stone Game variations"
+        - "Matrix Games"
+      whenToUse:
+        - "Two players alternate moves with complete information"
+        - "Each move changes game state deterministically"
+        - "You need to determine if the first or second player has a winning strategy"
+        - "Problems involving removal/addition of elements (piles, coins, stones)"
+        - "Competitive turn-based decision problems"
+      importantFormulas:
+        - "Grundy number of a position = mex({Grundy numbers of reachable states})"
+        - "If XOR of all pile Grundy numbers = 0 → losing position"
+        - "Else → winning position"
+      patterns:
+        - "Nim-like games (XOR-based analysis)"
+        - "DP on game states"
+        - "Minimax with memoization"
+        - "Impartial vs Partisan games classification"
+      complexity:
+        time: "Varies — O(state transitions) or O(n) for classic Nim-type games"
+        space: "O(number of states)"
+
+
 bigOReference:
   title: "Big-O Complexity Chart"
   complexities:
