@@ -140,8 +140,8 @@ const HuffmanPage = () => {
       <div className="theme-card" style={{ marginTop: '2rem' }} data-aos="fade-up" data-aos-delay="300">
         <div className="theme-card-header">
           <h3>Huffman Coding - Code Implementation</h3>
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            {["java", "python", "cpp", "javascript"].map((lang) => (
+          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>_
+            {["java", "python", "cpp", "javascript", "go"].map((lang) => (
               <button
                 key={lang}
                 className={`btn ${selectedLanguage === lang ? 'btn-primary' : 'btn-secondary'}`}

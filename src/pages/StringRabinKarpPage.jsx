@@ -111,7 +111,7 @@ const StringRabinKarpPage = () => {
         <div className="theme-card-header">
           <h3>Rabin-Karp Algorithm - Code Implementation</h3>
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            {["java", "python", "cpp"].map((lang) => (
+            {["java", "python", "cpp", "go"].map((lang) => (
               <button
                 key={lang}
                 className={`btn ${selectedLanguage === lang ? 'btn-primary' : 'btn-secondary'}`}

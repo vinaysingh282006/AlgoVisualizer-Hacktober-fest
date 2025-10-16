@@ -9,6 +9,7 @@ import { MobileMenuProvider } from "./contexts/MobileMenuContext";
 import { AlgorithmProvider } from "./contexts/AlgorithmContext";
 import { NotificationsProvider } from "./contexts/NotificationsContext";
 import { GoogleAuthProvider } from "./contexts/GoogleAuthContext";
+import { ThemeProvider } from "./ThemeContext";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -31,6 +32,8 @@ import GraphBFS from "./pages/GraphBFS";
 import GraphCycleDetection from "./pages/GraphCycleDetection";
 // graph Eulerian 
 import GraphEulerian from "./pages/GraphEulerian.jsx";
+// scc graph
+import GraphSCC from "./pages/GraphSCC.jsx";
 import GraphDFS from "./pages/GraphDFS";
 import GraphDijkstra from "./pages/GraphDijkstra";
 import GraphAStar from "./pages/GraphAStar";
@@ -61,6 +64,8 @@ import CFundamentals from "./pages/Notes/C/Fundamentals";
 // JavaScript Notes
 import JavaScriptFundamentals from "./pages/Notes/JavaScript/Fundamentals.jsx";
 import JavaScriptVariablesAndDataTypes from "./pages/Notes/JavaScript/VariablesAndDataTypes.jsx";
+// Next.js Notes
+import NextJsFundamentals from "./pages/Notes/NextJs/Fundamentals.jsx";
 
 // Rust Notes
 import RustFundamentals from "./pages/Notes/Rust/Fundamentals";
@@ -93,6 +98,7 @@ import FloydWarshallPage from "./pages/GraphFloydWarshall";
 // Components
 import ArrayVisualizer from "./pages/Array.jsx";
 import KadaneVisualizer from "./pages/Kadane.jsx";
+import KMPVisualizer from "./pages/KMP";
 import LinkedListPage from "./components/pages/LinkedListPage";
 import Queue from "./components/Queue/Queue";
 import Stack from "./components/Stack/Stack";
@@ -163,7 +169,8 @@ const App = () => {
   }, []);
 
   return (
-    <GoogleAuthProvider>
+    <ThemeProvider>
+      <GoogleAuthProvider>
       <SettingsProvider>
         <MobileMenuProvider>
           <AlgorithmProvider>
@@ -211,6 +218,8 @@ const App = () => {
 
                     <Route path="/data-structures/array" element={<ArrayVisualizer />} />
                     <Route path="/data-structures/kadane" element={<KadaneVisualizer />} />
+                    <Route path="/data-structures/kmp" element={<KMPVisualizer />} />
+
 
                     <Route
                       path="/data-structures/linked-list"
@@ -247,6 +256,7 @@ const App = () => {
                         path="/graph/bellman-ford"
                         element={<BellmanFordPage />}
                       />
+                      <Route path='/graph/sccGraphs' element={<GraphSCC/>} />
 
 
                   {/* Algorithm Pages */}
@@ -317,6 +327,9 @@ const App = () => {
                   <Route path="/notes/javascript/fundamentals" element={<JavaScriptFundamentals/>} />
                   <Route path="/notes/javascript/variables-and-data-types" element={<JavaScriptVariablesAndDataTypes/>} />
 
+                  <Route path="/notes/nextjs" element={<Navigate to="/notes/nextjs/fundamentals" replace />} />
+                  <Route path="/notes/nextjs/fundamentals" element={<NextJsFundamentals />} />
+
                   <Route path="/notes/c" element={<Navigate to="/notes/c/fundamentals" replace />} />
                   <Route path="/notes/c/fundamentals" element={<CFundamentals />} />
 
@@ -371,6 +384,7 @@ const App = () => {
       </MobileMenuProvider>
     </SettingsProvider>
     </GoogleAuthProvider>
+    </ThemeProvider>
   );
 };
 
