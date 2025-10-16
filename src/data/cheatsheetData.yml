@@ -796,6 +796,114 @@ advancedAlgorithms:
         - "Duplicate detection"
         - "Sets/Maps"
 
+  # Added Game theory 
+    - name: "Game Theory"
+      category: "Technique"
+      description: "Mathematical framework to analyze strategic interactions between two-more players making optimal moves."
+      keyPoints:
+        - "Zero-sum and non-zero-sum games"
+        - "Optimal strategies and equilibrium points"
+        - "Minimax principle"
+        - "Nim and Grundy numbers (Sprague-Grundy theorem)"
+        - "Winning vs Losing positions"
+        - "Combinatorial game theory"
+      examples:
+        - "Nim Game"
+        - "Grundy Numbers"
+        - "Tic-Tac-Toe (Minimax Algorithm)"
+        - "Coin Game / Stone Game variations"
+        - "Matrix Games"
+      whenToUse:
+        - "Two players alternate moves with complete information"
+        - "Each move changes game state deterministically"
+        - "You need to determine if the first or second player has a winning strategy"
+        - "Problems involving removal/addition of elements (piles, coins, stones)"
+        - "Competitive turn-based decision problems"
+      importantFormulas:
+        - "Grundy number of a position = mex({Grundy numbers of reachable states})"
+        - "If XOR of all pile Grundy numbers = 0 → losing position"
+        - "Else → winning position"
+      patterns:
+        - "Nim-like games (XOR-based analysis)"
+        - "DP on game states"
+        - "Minimax with memoization"
+        - "Impartial vs Partisan games classification"
+      complexity:
+        time: "Varies — O(state transitions) or O(n) for classic Nim-type games"
+        space: "O(number of states)"
+
+  # Added Game Theory
+    - name: "Number Theory"
+      category: "Technique"
+      description: "Applies mathematical principles to solve computational and modular problems efficiently, used in cryptography, combinatorics, and competitive programming."
+      keyPoints:
+        - "Modular Arithmetic (mod properties, inverse mod)"
+        - "Prime Numbers & Sieve of Eratosthenes"
+        - "GCD & LCM"
+        - "Modular Exponentiation"
+        - "Fermat’s Little Theorem"
+        - "Euler’s Totient Function"
+        - "Chinese Remainder Theorem"
+      examples:
+        - "Count of Prime Numbers up to N"
+        - "Modular Multiplicative Inverse of a Number"
+        - "Big Modulo Exponentiation (a^b % M)"
+        - "Number of Divisors of N"
+      whenToUse:
+        - "When dealing with large numbers under modulo (10^9+7 or similar)"
+        - "When you need to compute powers, inverses, or combinations efficiently"
+        - "When problems involve divisibility, primes, or modular relationships"
+        - "When optimizing mathematical or combinatorial computations"
+      importantFormulas:
+        - "GCD(a, b) = GCD(b, a % b)"
+        - "a^(b) % m → use Binary Exponentiation for O(log b)"
+        - "Fermats Theorem: a^(m-1) ≡ 1 (mod m) if m is prime"
+        - "Modular Inverse: a^(m-2) % m (when m is prime)"
+      patterns:
+        - "Prime-based optimization (precompute primes using Sieve)"
+        - "Combinatorics with modular arithmetic (nCr % mod)"
+        - "Mathematical counting problems"
+        - "Modular inverse and fast exponentiation patterns"
+      complexity:
+        time: "O(n log log n) for sieve; O(log n) for modular operations"
+        space: "O(n) for precomputed arrays (like primes or factorials)"
+
+# Added Sliding Window
+    - name: "Sliding Window"
+      category: "Technique"
+      description: "A technique to efficiently solve problems involving contiguous subarrays or substrings by maintaining a window of elements and moving it across the data structure."
+      keyPoints:
+        - "Fixed-size sliding window"
+        - "Variable-size sliding window"
+        - "Cumulative sum / running sum"
+        - "Two-pointer approach within the window"
+        - "Optimizing nested loops to linear time"
+        - "Variable length window size problems"
+      examples:
+        - "Maximum sum subarray of size K"
+        - "Longest substring without repeating characters"
+        - "Minimum size subarray sum ≥ S"
+        - "Sliding window maximum / minimum"
+        - "Count of anagrams of a pattern in a string"
+      whenToUse:
+        - "When problem involves contiguous elements in arrays or strings"
+        - "When brute-force nested loops are too slow (O(n²))"
+        - "When looking for sums, counts, or patterns within subarrays or substrings"
+        - "When tracking min/max or frequency of elements in a window"
+      importantFormulas:
+        - "Sum of window: maintain running sum; add new element, remove exiting element"
+        - "Frequency map for characters/numbers in window"
+        - "Window size = right - left + 1"
+        - "Check condition while moving left pointer in variable-size window"
+      patterns:
+        - "Fixed-size window: often used for max/min sum or average of subarray of size K"
+        - "Variable-size window: often used for at-least/at-most conditions (like sum ≥ S)"
+        - "Sliding window with hash map: for distinct elements, anagrams, substring patterns"
+        - "Two pointers within a window for dynamic constraints"
+      complexity:
+        time: "O(n) for most single-pass sliding window problems"
+        space: "O(k) for frequency maps or auxiliary data structures, O(1) for simple sum/count"
+
 bigOReference:
   title: "Big-O Complexity Chart"
   complexities:

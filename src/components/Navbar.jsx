@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import {
+import { 
   Home,
   BarChart3,
   Search,
@@ -20,7 +20,7 @@ import {
   Gamepad,
   TreeDeciduous,
   Menu
-} from "lucide-react";
+} from "lucide-react"; 
 import { useTheme } from "../ThemeContext";
 import { navbarNavigationItems } from "../utils/navigation";
 import UserDropdown from "./UserDropdown";
@@ -54,25 +54,38 @@ const DesktopNavItem = ({
   isActive,
   getIcon,
   selectedCommunity,
-  setSelectedCommunity
-}) => {
+  setSelectedCommunity,
+  isSidebarExpanded
+}) => { 
   if (item.dropdown) {
     return (
-      <div className="navbar-item dropdown" key={index}>
+      <div 
+        className="navbar-item dropdown" 
+        key={index}
+        onMouseEnter={() => toggleDropdown(index)}
+        onMouseLeave={() => {
+          // Add a small delay to prevent closing when moving to the dropdown menu
+          setTimeout(() => toggleDropdown(null), 100);
+        }}
+      >
         <button
           className={`dropdown-toggle ${isOpen === index ? "active" : ""}`}
-          onClick={() => toggleDropdown(index)}
+          data-tooltip={item.label === "Community" ? selectedCommunity : item.label}
         >
           {item.icon &&
             React.createElement(getIcon(item.icon), {
               size: 18,
               className: "drop-icon"
             })}
-          <span>{item.label === "Community" ? selectedCommunity : item.label}</span>
-          <ChevronDown
-            size={16}
-            className={`dropdown-arrow ${isOpen === index ? "rotated" : ""}`}
-          />
+          <span className="navbar-label dropdown-label">
+            {item.label === "Community" ? selectedCommunity : item.label}
+          </span>
+          {isSidebarExpanded && (
+            <ChevronDown
+              size={16}
+              className={`dropdown-arrow ${isOpen === index ? "rotated" : ""}`}
+            />
+          )}
         </button>
         {isOpen === index && (
           <div className="dropdown-menu">
@@ -96,6 +109,7 @@ const DesktopNavItem = ({
     <Link
       to={item.path}
       className={`navbar-link ${isActive(item.path) ? "active" : ""}`}
+      data-tooltip={item.label}
       key={index}
     >
       {item.icon &&
@@ -103,7 +117,7 @@ const DesktopNavItem = ({
           size: 18,
           className: "icon"
         })}
-      <span>{item.label}</span>
+      <span className="navbar-label">{item.label}</span>
     </Link>
   );
 };
@@ -173,11 +187,35 @@ const Navbar = () => {
   const [mobileNotesOpen, setMobileNotesOpen] = useState(false);
   const [selectedCommunity, setSelectedCommunity] = useState("Community");
   const [selectedNotes, setSelectedNotes] = useState("Notes");
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
 
   const location = useLocation();
   const { theme } = useTheme();
   const navbarRef = useRef(null);
 
+  const navMenuRef = useRef(null);
+  const itemRefs = useRef({});
+  const [lineStyle, setLineStyle] = useState({});
+
+  // Function to update the magic line's position
+  const updateLine = (element) => {
+    if (element) {
+      setLineStyle({
+        width: element.offsetWidth,
+        left: element.offsetLeft,
+      });
+    }
+  };
+
+  // Set initial position and update on route change
+  useEffect(() => {
+    const activeItem = Object.values(itemRefs.current).find(
+      (el) => el && el.classList.contains("active")
+    );
+    if (activeItem) {
+      updateLine(activeItem);
+    }
+  }, [location.pathname]);
   const getIcon = (name) => ICON_COMPONENTS[name] || null;
   const isActive = (path) => location.pathname === path;
 
@@ -200,23 +238,35 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className={`navbar fixed top-0 left-0 right-0 z-50 ${theme}`} ref={navbarRef}>
-      <div className="navbar-container flex items-center justify-between px-4 py-2">
+    <nav 
+      className={`navbar sidebar-nav ${isSidebarExpanded ? 'expanded' : ''} ${theme}`} 
+      ref={navbarRef}
+      onMouseEnter={() => setIsSidebarExpanded(true)}
+      onMouseLeave={() => {
+        setIsSidebarExpanded(false);
+        setDesktopDropdownOpen(null); // Close dropdowns when leaving sidebar
+      }}
+    >
+      <div className="navbar-container">
         {/* Logo */}
         <Link to="/" className="navbar-logo flex items-center gap-2">
           <img src="/logo.jpg" alt="AlgoVisualizer Logo" className="logo-img" />
-          <span className="logo-text">
+          <span className="logo-text navbar-label">
             Algo<span>Visualizer</span>
           </span>
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex justify-center items-center gap-2">
+        <div
+          className="hidden md:flex justify-center items-center gap-2 desktop-nav-menu"
+          ref={navMenuRef}
+        >
           {/* Render nav items excluding "Notes" */}
           {navbarNavigationItems
             .filter((item) => item.label.toLowerCase() !== "notes")
             .map((item, i) => (
               <DesktopNavItem
+                ref={(el) => (itemRefs.current[item.path || `dropdown-${i}`] = el)}
                 key={i}
                 item={item}
                 index={i}
@@ -226,19 +276,28 @@ const Navbar = () => {
                 getIcon={getIcon}
                 selectedCommunity={selectedCommunity}
                 setSelectedCommunity={setSelectedCommunity}
+                isSidebarExpanded={isSidebarExpanded}
+                onMouseEnter={(e) => updateLine(e.currentTarget)}
               />
             ))}
 
           {/* Insert Notes dropdown here (moved from right) */}
           {location.pathname !== "/notes/rust" && (
-            <div className="navbar-item dropdown">
-              <button
+            <div className="navbar-item dropdown" ref={(el) => (itemRefs.current['notes-dropdown'] = el)}
+                  onMouseEnter={() => setDesktopNotesOpen(true)}
+                  onMouseLeave={() => {
+                    setTimeout(() => setDesktopNotesOpen(false), 100);
+                  }}
+             >
+              <button 
                 className={`dropdown-toggle ${desktopNotesOpen ? "active" : ""}`}
                 onClick={() => setDesktopNotesOpen(!desktopNotesOpen)}
               >
                 <BookOpen size={18} className="drop-icon" />
-                <span>{selectedNotes}</span>
-                <ChevronDown size={16} className={`${desktopNotesOpen ? "rotated" : ""}`} />
+                <span className="navbar-label">{selectedNotes}</span>
+                {isSidebarExpanded && (
+                  <ChevronDown size={16} className={`${desktopNotesOpen ? "rotated" : ""}`} />
+                )}
               </button>
               {desktopNotesOpen && (
                 <div className="dropdown-menu">
@@ -344,14 +403,20 @@ const Navbar = () => {
           <Link
             to="/algorithm-comparison-table"
             className={`navbar-link ${isActive("/algorithm-comparison-table") ? "active" : ""}`}
+            data-tooltip="Compare"
+            ref={(el) => (itemRefs.current['/algorithm-comparison-table'] = el)}
+            onMouseEnter={(e) => updateLine(e.currentTarget)}
           >
             <BarChart3 size={18} className="icon" />
-            <span>Compare</span>
+            <span className="navbar-label">Compare</span>
           </Link>
+
+          {/* Magic Line for active/hover indicator */}
+          <div className="magic-line" style={lineStyle}></div>
         </div>
 
         {/* Right side controls: UserDropdown & ThemeToggle */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="sidebar-footer hidden md:flex">
           <UserDropdown />
           <ThemeToggle />
         </div>

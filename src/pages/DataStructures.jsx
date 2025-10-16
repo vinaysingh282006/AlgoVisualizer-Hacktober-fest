@@ -358,6 +358,16 @@ const algorithmDatabase = {
       implemented: true,
     },
 
+    {
+     name:"Dijkstras Algorithm",
+     id:"dijkstras",
+     description:
+     "Dijkstra’s algorithm finds the shortest path between nodes in a weighted graph with non-negative edge weights.",
+     timeComplexity:"O(V²)",
+     spaceComplexity:"O(V) ",
+     implemented:true,
+    },
+
     ],
   },
 };

@@ -640,6 +640,7 @@ git commit -m "feature: add awesome feature"
 git push origin feature/your-feature-name
 ``` 
 Then go to AlgoVisualizer Pull Requests and create a PR with a clear description of your changes.
+For further information to contribute, visit our [contributing guidelines](./CONTRIBUTING.md)
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
