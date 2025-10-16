@@ -18,6 +18,12 @@ VITE_RAPIDAPI_KEY=your_rapidapi_key_here
 # Other configuration
 VITE_GITHUB_REPO=YourUser/YourRepo
 VITE_API_URL=your_api_url_here
+
+VITE_GOOGLE_CLIENT_ID=your_google_client_id_here
+VITE_GOOGLE_REDIRECT_URI=http://localhost:5173   
+VITE_GOOGLE_AUTH_SCOPE=email profile openid
+VITE_GOOGLE_API_URL=https://accounts.google.com/o/oauth2/v2/auth
+
 ```
 
 ### Getting API Keys
@@ -32,6 +38,11 @@ VITE_API_URL=your_api_url_here
 1. Go to GitHub Settings > Developer settings > Personal access tokens
 2. Generate a new token with `public_repo` scope
 3. Add it to your `.env.local` file
+
+#### Google Authentication
+1. Head to [https://console.cloud.google.com/](Google Console) 
+2. Create an account and head to **Google Auth Platform / Clients**
+3. Create a client and copy the necessary details to **.env.local**
 
 ### Security Best Practices
 
