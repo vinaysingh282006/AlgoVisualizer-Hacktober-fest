@@ -1108,13 +1108,13 @@
         "difficulty": "Easy",
         "question": "What is the basic idea of Linked List?",
         "options": [
-            "Linked List compares and processes elements step by step",
+            "A linear data structure where elements (nodes) are connected using pointers.",
             "It uses dynamic programming",
             "It uses hashing",
             "It uses recursion with memoization"
         ],
         "correctAnswer": 0,
-        "explanation": "Linked List is based on a fundamental step-by-step process, not advanced techniques like DP or hashing."
+        "explanation": "Each node contains data and a reference (link) to the next node, allowing dynamic memory allocation and easy insertion or deletion."
     },
     {
         "id": 62,
@@ -1128,8 +1128,8 @@
             "O(n log n)",
             "O(n\u00b2)"
         ],
-        "correctAnswer": 1,
-        "explanation": "In the best case, Linked List can often achieve O(n), especially when data is already partially structured."
+        "correctAnswer": 0,
+        "explanation": "In the best case, Linked List can often achieve O(1), especially for insertion/deletion at head"
     },
     {
         "id": 63,
@@ -1198,13 +1198,13 @@
         "difficulty": "Easy",
         "question": "What is the basic idea of Stack?",
         "options": [
-            "Stack compares and processes elements step by step",
+            "A linear data structure that follows the LIFO (Last In, First Out) principle.",
             "It uses dynamic programming",
             "It uses hashing",
             "It uses recursion with memoization"
         ],
         "correctAnswer": 0,
-        "explanation": "Stack is based on a fundamental step-by-step process, not advanced techniques like DP or hashing."
+        "explanation": "Stack follows LIFO — the last element added is the first to be removed."
     },
     {
         "id": 68,
@@ -1218,8 +1218,8 @@
             "O(n log n)",
             "O(n\u00b2)"
         ],
-        "correctAnswer": 1,
-        "explanation": "In the best case, Stack can often achieve O(n), especially when data is already partially structured."
+        "correctAnswer": 0,
+        "explanation": "In the best case, Stack can often achieve O(1), especially for push/pop operations."
     },
     {
         "id": 69,
@@ -1288,13 +1288,13 @@
         "difficulty": "Easy",
         "question": "What is the basic idea of Queue?",
         "options": [
-            "Queue compares and processes elements step by step",
+            "A linear data structure that follows the FIFO (First In, First Out) principle.",
             "It uses dynamic programming",
             "It uses hashing",
             "It uses recursion with memoization"
         ],
         "correctAnswer": 0,
-        "explanation": "Queue is based on a fundamental step-by-step process, not advanced techniques like DP or hashing."
+        "explanation": "Queue follows FIFO — the first element added is the first to be removed"
     },
     {
         "id": 74,
@@ -1308,8 +1308,8 @@
             "O(n log n)",
             "O(n\u00b2)"
         ],
-        "correctAnswer": 1,
-        "explanation": "In the best case, Queue can often achieve O(n), especially when data is already partially structured."
+        "correctAnswer": 0,
+        "explanation": "In the best case, Queue can often achieve O(1), especially for enqueue/dequeue operations"
     },
     {
         "id": 75,
@@ -1378,13 +1378,13 @@
         "difficulty": "Easy",
         "question": "What is the basic idea of Binary Tree?",
         "options": [
-            "Binary Tree compares and processes elements step by step",
+            "A hierarchical data structure in which each node has at most two children — a left and a right child.",
             "It uses dynamic programming",
             "It uses hashing",
             "It uses recursion with memoization"
         ],
         "correctAnswer": 0,
-        "explanation": "Binary Tree is based on a fundamental step-by-step process, not advanced techniques like DP or hashing."
+        "explanation": "Binary Tree organizes data hierarchically, where each node can have up to two children."
     },
     {
         "id": 80,
