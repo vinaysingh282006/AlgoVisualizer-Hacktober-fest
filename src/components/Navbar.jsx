@@ -19,7 +19,7 @@ import {
   Zap,
   Gamepad,
   TreeDeciduous,
-  Menu,
+  Menu
 } from "lucide-react";
 import { useTheme } from "../ThemeContext";
 import { navbarNavigationItems } from "../utils/navigation";
@@ -27,7 +27,6 @@ import UserDropdown from "./UserDropdown";
 import ThemeToggle from "./ThemeToggle";
 
 const ICON_COMPONENTS = {
-  Home,
   BarChart3,
   Search,
   Database,
@@ -43,7 +42,7 @@ const ICON_COMPONENTS = {
   Zap,
   Gamepad,
   TreeDeciduous,
-  Menu,
+  Menu
 };
 
 // Desktop Nav Item
@@ -67,7 +66,7 @@ const DesktopNavItem = ({
           {item.icon &&
             React.createElement(getIcon(item.icon), {
               size: 18,
-              className: "drop-icon",
+              className: "drop-icon"
             })}
           <span>{item.label === "Community" ? selectedCommunity : item.label}</span>
           <ChevronDown
@@ -81,8 +80,7 @@ const DesktopNavItem = ({
               <Link
                 key={subIndex}
                 to={sub.path}
-                className={`dropdown-item ${isActive(sub.path) ? "active" : ""
-                  }`}
+                className={`dropdown-item ${isActive(sub.path) ? "active" : ""}`}
                 onClick={() => toggleDropdown(null)}
               >
                 {sub.label}
@@ -103,7 +101,7 @@ const DesktopNavItem = ({
       {item.icon &&
         React.createElement(getIcon(item.icon), {
           size: 18,
-          className: "icon",
+          className: "icon"
         })}
       <span>{item.label}</span>
     </Link>
@@ -111,27 +109,18 @@ const DesktopNavItem = ({
 };
 
 // Mobile Nav Item
-const MobileNavItem = ({
-  item,
-  index,
-  isOpen,
-  toggleDropdown,
-  isActive,
-  getIcon,
-  closeMenu,
-}) => {
+const MobileNavItem = ({ item, index, isOpen, toggleDropdown, isActive, getIcon, closeMenu }) => {
   if (item.dropdown) {
     return (
       <div className="mobile-dropdown" key={index}>
         <button
-          className={`mobile-dropdown-toggle ${isOpen === index ? "active" : ""
-            }`}
+          className={`mobile-dropdown-toggle ${isOpen === index ? "active" : ""}`}
           onClick={() => toggleDropdown(index)}
         >
           {item.icon &&
             React.createElement(getIcon(item.icon), {
               size: 18,
-              className: "icon",
+              className: "icon"
             })}
           <span>{item.label}</span>
           <ChevronDown
@@ -140,15 +129,12 @@ const MobileNavItem = ({
           />
         </button>
 
-        <div
-          className={`mobile-dropdown-menu ${isOpen === index ? "open" : ""}`}
-        >
+        <div className={`mobile-dropdown-menu ${isOpen === index ? "open" : ""}`}>
           {item.dropdown.map((sub, subIndex) => (
             <Link
               key={subIndex}
               to={sub.path}
-              className={`mobile-menu-link ${isActive(sub.path) ? "active" : ""
-                }`}
+              className={`mobile-menu-link ${isActive(sub.path) ? "active" : ""}`}
               onClick={() => {
                 toggleDropdown(null);
                 closeMenu();
@@ -172,7 +158,7 @@ const MobileNavItem = ({
       {item.icon &&
         React.createElement(getIcon(item.icon), {
           size: 18,
-          className: "icon",
+          className: "icon"
         })}
       <span>{item.label}</span>
     </Link>
@@ -214,10 +200,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav
-      className={`navbar fixed top-0 left-0 right-0 z-50 ${theme}`}
-      ref={navbarRef}
-    >
+    <nav className={`navbar fixed top-0 left-0 right-0 z-50 ${theme}`} ref={navbarRef}>
       <div className="navbar-container flex items-center justify-between px-4 py-2">
         {/* Logo */}
         <Link to="/" className="navbar-logo flex items-center gap-2">
@@ -255,73 +238,64 @@ const Navbar = () => {
               >
                 <BookOpen size={18} className="drop-icon" />
                 <span>{selectedNotes}</span>
-                <ChevronDown
-                  size={16}
-                  className={`${desktopNotesOpen ? "rotated" : ""}`}
-                />
+                <ChevronDown size={16} className={`${desktopNotesOpen ? "rotated" : ""}`} />
               </button>
               {desktopNotesOpen && (
                 <div className="dropdown-menu">
                   <Link
                     to="/notes/java"
-                    className={`dropdown-item ${isActive("/notes/java") ? "active" : ""
-                      }`}
+                    className={`dropdown-item ${isActive("/notes/java") ? "active" : ""}`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     Java
                   </Link>
                   <Link
                     to="/notes/python"
-                    className={`dropdown-item ${isActive("/notes/python") ? "active" : ""
-                      }`}
+                    className={`dropdown-item ${isActive("/notes/python") ? "active" : ""}`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     Python
                   </Link>
                   <Link
                     to="/notes/cpp"
-                    className={`dropdown-item ${isActive("/notes/cpp") ? "active" : ""
-                      }`}
+                    className={`dropdown-item ${isActive("/notes/cpp") ? "active" : ""}`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     C++
                   </Link>
                   <Link
                     to="/notes/c"
-                    className={`dropdown-item ${isActive("/notes/c") ? "active" : ""
-                      }`}
+                    className={`dropdown-item ${isActive("/notes/c") ? "active" : ""}`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     C
                   </Link>
                   <Link
                     to="/notes/javascript"
-                    className={`dropdown-item ${isActive("/notes/javascript") ? "active" : ""
-                      }`}
+                    className={`dropdown-item ${isActive("/notes/javascript") ? "active" : ""}`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     JavaScript
                   </Link>
                   <Link
                     to="/notes/nextjs"
-                    className={`dropdown-item ${isActive("/notes/nextjs") ? "active" : ""
-                      }`}
+                    className={`dropdown-item ${isActive("/notes/nextjs") ? "active" : ""}`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     NextJs
                   </Link>
                   <Link
                     to="/notes/rust"
-                    className={`dropdown-item ${isActive("/notes/rust") ? "active" : ""
-                      }`}
+                    className={`dropdown-item ${isActive("/notes/rust") ? "active" : ""}`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     Rust
                   </Link>
                   <Link
                     to="/notes/MERN/MERNFundamentals"
-                    className={`dropdown-item ${isActive("/notes/MERN/MERNFundamentals") ? "active" : ""
-                      }`}
+                    className={`dropdown-item ${
+                      isActive("/notes/MERN/MERNFundamentals") ? "active" : ""
+                    }`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     MERN
@@ -337,7 +311,7 @@ const Navbar = () => {
                       setDesktopNotesOpen(false);
                     }}
                   >
-                    DSA Sheet  by Shradha Khapra
+                    DSA Sheet by Shradha Khapra
                   </Link>
                   <Link
                     to="https://codolio.com/question-tracker/sheet/neetcode-150?category=popular"
@@ -369,8 +343,7 @@ const Navbar = () => {
           {/* Algorithm Comparison Table Link */}
           <Link
             to="/algorithm-comparison-table"
-            className={`navbar-link ${isActive("/algorithm-comparison-table") ? "active" : ""
-              }`}
+            className={`navbar-link ${isActive("/algorithm-comparison-table") ? "active" : ""}`}
           >
             <BarChart3 size={18} className="icon" />
             <span>Compare</span>
@@ -401,10 +374,7 @@ const Navbar = () => {
         <div className="mobile-menu-header">
           <div className="mobile-menu-header-content">
             <span className="mobile-menu-title">AlgoVisualizer</span>
-            <button
-              className="mobile-menu-close-btn"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
+            <button className="mobile-menu-close-btn" onClick={() => setIsMobileMenuOpen(false)}>
               <X size={20} />
             </button>
           </div>
@@ -428,8 +398,7 @@ const Navbar = () => {
         {/* Algorithm Comparison Table Link - Mobile */}
         <Link
           to="/algorithm-comparison-table"
-          className={`mobile-menu-link ${isActive("/algorithm-comparison-table") ? "active" : ""
-            }`}
+          className={`mobile-menu-link ${isActive("/algorithm-comparison-table") ? "active" : ""}`}
           onClick={() => setIsMobileMenuOpen(false)}
         >
           <BarChart3 size={18} className="icon" />
@@ -439,20 +408,14 @@ const Navbar = () => {
         {/* Notes Section */}
         <div className="mobile-dropdown">
           <button
-            className={`mobile-dropdown-toggle ${mobileNotesOpen ? "active" : ""
-              }`}
+            className={`mobile-dropdown-toggle ${mobileNotesOpen ? "active" : ""}`}
             onClick={() => setMobileNotesOpen(!mobileNotesOpen)}
           >
             <BookOpen size={18} className="icon" />
             <span>{selectedNotes}</span>
-            <ChevronDown
-              size={16}
-              className={`${mobileNotesOpen ? "rotated" : ""}`}
-            />
+            <ChevronDown size={16} className={`${mobileNotesOpen ? "rotated" : ""}`} />
           </button>
-          <div
-            className={`mobile-dropdown-menu ${mobileNotesOpen ? "open" : ""}`}
-          >
+          <div className={`mobile-dropdown-menu ${mobileNotesOpen ? "open" : ""}`}>
             <Link
               to="/notes/java"
               className="mobile-menu-link"
