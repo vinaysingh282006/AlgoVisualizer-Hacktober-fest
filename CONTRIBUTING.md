@@ -36,16 +36,26 @@ Let’s build a vibrant, respectful, and collaborative community!
 git clone https://github.com/<your-username>/AlgoVisualizer.git
 cd AlgoVisualizer
 ```
-
 ### 2. Setup Environment
 **⚙️ Install dependencies:**
 ```bash
 npm install
 ```
+**▶️ setup API keys:**
+```bash
+cp .env.example .env.local
+```
+> **Proceed to [SECURITY.md](./SECURITY.md) for more details.**
+**If you are contributing to backend, visit the [AlgoVisualizer Backend](https://github.com/RhythmPahwa14/AlgoVisualizer-Backend) for further assistance.**
+
 **▶️ Start the development server:**
 ```bash
 npm run dev
 ```
+**Visit http://localhost:5173/ to view the website**
+
+> If your browser does not render the website, try opening the link in **Chrome** browser
+
 ### 3. Create a new branch:
 ```bash
 git checkout -b feat/my-feature
@@ -60,10 +70,11 @@ git commit -m "feat: describe your change"
 git push origin feat/my-feature
 ```
 ### 6.Create a Pull Request on GitHub and describe what you’ve done.
-
+**Head to your forked repository and create a Pull Request. Congratz you've contributed to this project!**
 ![Setup GIF](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmxpNzEyMjhzb2k3eDc1MWFzM3lhZnFrZXJxZDVpMDZ2am9wZHhzcCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/LESpNIDaNBUcRIPzng/giphy.gif)
 
 ---
+
 
 ## 🐛 Reporting Issues
 
