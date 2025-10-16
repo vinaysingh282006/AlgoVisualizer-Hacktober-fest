@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import {
+import { 
   Home,
   BarChart3,
   Search,
@@ -20,7 +20,7 @@ import {
   Gamepad,
   TreeDeciduous,
   Menu
-} from "lucide-react";
+} from "lucide-react"; 
 import { useTheme } from "../ThemeContext";
 import { navbarNavigationItems } from "../utils/navigation";
 import UserDropdown from "./UserDropdown";
@@ -54,18 +54,22 @@ const DesktopNavItem = ({
   isActive,
   getIcon,
   selectedCommunity,
-  setSelectedCommunity
-}) => {
+  setSelectedCommunity,
+  isSidebarExpanded
+}) => { 
   if (item.dropdown) {
     return (
       <div 
         className="navbar-item dropdown" 
         key={index}
-        onMouseLeave={() => toggleDropdown(null)}
+        onMouseEnter={() => toggleDropdown(index)}
+        onMouseLeave={() => {
+          // Add a small delay to prevent closing when moving to the dropdown menu
+          setTimeout(() => toggleDropdown(null), 100);
+        }}
       >
         <button
           className={`dropdown-toggle ${isOpen === index ? "active" : ""}`}
-          onMouseEnter={() => toggleDropdown(index)}
           data-tooltip={item.label === "Community" ? selectedCommunity : item.label}
         >
           {item.icon &&
@@ -76,10 +80,12 @@ const DesktopNavItem = ({
           <span className="navbar-label dropdown-label">
             {item.label === "Community" ? selectedCommunity : item.label}
           </span>
-          <ChevronDown
-            size={16}
-            className={`dropdown-arrow ${isOpen === index ? "rotated" : ""}`}
-          />
+          {isSidebarExpanded && (
+            <ChevronDown
+              size={16}
+              className={`dropdown-arrow ${isOpen === index ? "rotated" : ""}`}
+            />
+          )}
         </button>
         {isOpen === index && (
           <div className="dropdown-menu">
@@ -181,6 +187,7 @@ const Navbar = () => {
   const [mobileNotesOpen, setMobileNotesOpen] = useState(false);
   const [selectedCommunity, setSelectedCommunity] = useState("Community");
   const [selectedNotes, setSelectedNotes] = useState("Notes");
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
 
   const location = useLocation();
   const { theme } = useTheme();
@@ -231,12 +238,20 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className={`navbar fixed top-0 left-0 right-0 z-50 ${theme}`} ref={navbarRef}>
-      <div className="navbar-container flex items-center justify-between px-4 py-2">
+    <nav 
+      className={`navbar sidebar-nav ${isSidebarExpanded ? 'expanded' : ''} ${theme}`} 
+      ref={navbarRef}
+      onMouseEnter={() => setIsSidebarExpanded(true)}
+      onMouseLeave={() => {
+        setIsSidebarExpanded(false);
+        setDesktopDropdownOpen(null); // Close dropdowns when leaving sidebar
+      }}
+    >
+      <div className="navbar-container">
         {/* Logo */}
         <Link to="/" className="navbar-logo flex items-center gap-2">
           <img src="/logo.jpg" alt="AlgoVisualizer Logo" className="logo-img" />
-          <span className="logo-text">
+          <span className="logo-text navbar-label">
             Algo<span>Visualizer</span>
           </span>
         </Link>
@@ -245,10 +260,6 @@ const Navbar = () => {
         <div
           className="hidden md:flex justify-center items-center gap-2 desktop-nav-menu"
           ref={navMenuRef}
-          onMouseLeave={() => {
-            const activeItem = Object.values(itemRefs.current).find(el => el && el.classList.contains('active'));
-            if (activeItem) updateLine(activeItem);
-          }}
         >
           {/* Render nav items excluding "Notes" */}
           {navbarNavigationItems
@@ -265,6 +276,7 @@ const Navbar = () => {
                 getIcon={getIcon}
                 selectedCommunity={selectedCommunity}
                 setSelectedCommunity={setSelectedCommunity}
+                isSidebarExpanded={isSidebarExpanded}
                 onMouseEnter={(e) => updateLine(e.currentTarget)}
               />
             ))}
@@ -272,14 +284,20 @@ const Navbar = () => {
           {/* Insert Notes dropdown here (moved from right) */}
           {location.pathname !== "/notes/rust" && (
             <div className="navbar-item dropdown" ref={(el) => (itemRefs.current['notes-dropdown'] = el)}
-                 onMouseEnter={(e) => updateLine(e.currentTarget)}>
-              <button
+                  onMouseEnter={() => setDesktopNotesOpen(true)}
+                  onMouseLeave={() => {
+                    setTimeout(() => setDesktopNotesOpen(false), 100);
+                  }}
+             >
+              <button 
                 className={`dropdown-toggle ${desktopNotesOpen ? "active" : ""}`}
                 onClick={() => setDesktopNotesOpen(!desktopNotesOpen)}
               >
                 <BookOpen size={18} className="drop-icon" />
-                <span>{selectedNotes}</span>
-                <ChevronDown size={16} className={`${desktopNotesOpen ? "rotated" : ""}`} />
+                <span className="navbar-label">{selectedNotes}</span>
+                {isSidebarExpanded && (
+                  <ChevronDown size={16} className={`${desktopNotesOpen ? "rotated" : ""}`} />
+                )}
               </button>
               {desktopNotesOpen && (
                 <div className="dropdown-menu">
@@ -398,7 +416,7 @@ const Navbar = () => {
         </div>
 
         {/* Right side controls: UserDropdown & ThemeToggle */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="sidebar-footer hidden md:flex">
           <UserDropdown />
           <ThemeToggle />
         </div>
