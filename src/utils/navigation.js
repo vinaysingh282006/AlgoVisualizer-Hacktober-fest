@@ -21,8 +21,8 @@ export const headerNavigationItems = [
 
 // Main navbar navigation items (used in Navbar component)
 export const navbarNavigationItems = [
-  { path: "/learn", label: "Learn", icon: "BookOpen" },
-  { path: "/cheatsheet", label: "Cheatsheet", icon: "BookOpen" },
+  { path: "/learn", label: "Learn", icon: "Zap" },
+  { path: "/cheatsheet", label: "Cheatsheet", icon: "Hash" },
   { path: "/quiz", label: "Quiz", icon: "Trophy" },
   {
     label: "Community",
