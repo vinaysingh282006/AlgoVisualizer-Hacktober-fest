@@ -97,6 +97,7 @@ import FloydWarshallPage from "./pages/GraphFloydWarshall";
 // Components
 import ArrayVisualizer from "./pages/Array.jsx";
 import KadaneVisualizer from "./pages/Kadane.jsx";
+import KMPVisualizer from "./pages/KMP";
 import LinkedListPage from "./components/pages/LinkedListPage";
 import Queue from "./components/Queue/Queue";
 import Stack from "./components/Stack/Stack";
@@ -215,6 +216,8 @@ const App = () => {
 
                     <Route path="/data-structures/array" element={<ArrayVisualizer />} />
                     <Route path="/data-structures/kadane" element={<KadaneVisualizer />} />
+                    <Route path="/data-structures/kmp" element={<KMPVisualizer />} />
+
 
                     <Route
                       path="/data-structures/linked-list"
