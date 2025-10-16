@@ -238,7 +238,9 @@ body {
   flex: 0; /* Don't allow menu to expand, maintaining compact layout */
   margin-right: 0.5rem; /* Small margin before user dropdown */
 }
-
+.desktop-nav-menu {
+  position: relative;
+}
 .navbar-item {
   font-size: 0.9rem;
   position: relative;
@@ -263,6 +265,7 @@ body {
   position: relative;
   overflow: hidden;
   white-space: nowrap; /* Prevent link text wrap */
+  justify-content: center; /* Center icon */
 }
 .navbar-link .icon {
   display: inline-block;
@@ -270,11 +273,16 @@ body {
   opacity: 0;
   transform: translateX(-4px);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
+  /* overflow: hidden; */
+  max-width: 20px; /* Always show icon */
+  opacity: 1;
+  transform: translateX(0); 
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Add transition back */
 }
 .navbar-link:hover .icon {
   opacity: 1;
-  max-width: 20px;
+  /* max-width: 20px; */
+  max-width: 20px; /* Ensure icon is visible on hover */
   transform: translateX(0);
 }
 .navbar-menu > .navbar-item:last-child {
@@ -289,13 +297,14 @@ body {
   bottom: 0;
   background: var(--hover-bg);
   /* background-color: green; */
-  opacity: 0;
+  opacity: 0; /* We will hide this and use the magic line */
   transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: -1;
 }
 
 .navbar-link:hover::before {
-  opacity: 1;
+  /* opacity: 1; */
+  opacity: 0;
 }
 
 .dropdown:hover,
@@ -307,8 +316,8 @@ body {
 
 .dropdown:active,
 .navbar-link.active {
-  color: var(--primary-color);
-  background: var(--primary-color-alpha);
+  color: var(--primary-color); 
+  /* background: var(--primary-color-alpha); */ /* Remove background */
   /* background-color: green; */
 }
 
@@ -370,15 +379,15 @@ body {
   bottom: 0;
   background-color: var(--pr);
   /* background: var(--primary-color-alpha); */
-  border: 2px solid rgb(34, 136, 215);
-  opacity: 0;
+  /* border: 2px solid rgb(34, 136, 215); */
+  opacity: 0; /* Hide this as well */
   transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: -1;
 }
 
 .dropdown-toggle:hover::before,
 .dropdown-toggle.active::before {
-  opacity: 1;
+  opacity: 0;
 }
 
 .dropdown-toggle:hover,
@@ -386,7 +395,7 @@ body {
   /* background: var(--hover-bg); */
   background: var(--primary-color-alpha);
   color: var(--primary-color);
-  transform: translateY(-1px);
+  /* transform: translateY(-1px); */ /* Let's use the line for feedback */
 }
 
 /* Dark mode hover text color fix */
@@ -646,6 +655,83 @@ body {
   white-space: nowrap;
 }
 
+/* Slide-out text label styles */
+.navbar-label {
+  display: inline-block;
+  max-width: 0;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* Always show labels for main dropdowns */
+.dropdown-label {
+  max-width: 150px;
+  opacity: 1;
+  transform: translateX(0);
+  margin-left: 0.5rem;
+}
+
+.navbar-link:hover .navbar-label,
+.dropdown-toggle:hover .navbar-label {
+  max-width: 150px; /* Adjust as needed */
+  opacity: 1;
+  transform: translateX(0);
+  margin-left: 0.5rem; /* Space between icon and text */
+}
+
+/* Ensure icons are always visible */
+.navbar-link .icon,
+.dropdown-toggle .drop-icon {
+  max-width: 20px;
+  opacity: 1;
+}
+
 .dropdown-toggle:hover{
   background:#aaa;
+}
+
+
+/* .magic-line {
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: 3px;
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: left, width;
+  pointer-events: none;
+}  */
+
+/* Responsive adjustments for medium screens (tablets) */
+@media (min-width: 768px) and (max-width: 1200px) {
+  /* Hide all text labels by default on medium screens */
+  .navbar-label {
+    max-width: 0;
+    opacity: 0;
+    transform: translateX(-10px);
+    margin-left: 0;
+  }
+
+  /* On hover, slide the labels out */
+  .navbar-link:hover .navbar-label,
+  .dropdown-toggle:hover .navbar-label {
+    max-width: 150px;
+    opacity: 1;
+    transform: translateX(0);
+    margin-left: 0.5rem;
+  }
+}
+
+/* On larger screens, ensure dropdown labels are always visible */
+@media (min-width: 1200.02px) {
+  .dropdown-label {
+    max-width: 150px;
+    opacity: 1;
+    transform: translateX(0);
+    margin-left: 0.5rem;
+  }
 }

@@ -58,17 +58,24 @@ const DesktopNavItem = ({
 }) => {
   if (item.dropdown) {
     return (
-      <div className="navbar-item dropdown" key={index}>
+      <div 
+        className="navbar-item dropdown" 
+        key={index}
+        onMouseLeave={() => toggleDropdown(null)}
+      >
         <button
           className={`dropdown-toggle ${isOpen === index ? "active" : ""}`}
-          onClick={() => toggleDropdown(index)}
+          onMouseEnter={() => toggleDropdown(index)}
+          data-tooltip={item.label === "Community" ? selectedCommunity : item.label}
         >
           {item.icon &&
             React.createElement(getIcon(item.icon), {
               size: 18,
               className: "drop-icon"
             })}
-          <span>{item.label === "Community" ? selectedCommunity : item.label}</span>
+          <span className="navbar-label dropdown-label">
+            {item.label === "Community" ? selectedCommunity : item.label}
+          </span>
           <ChevronDown
             size={16}
             className={`dropdown-arrow ${isOpen === index ? "rotated" : ""}`}
@@ -96,6 +103,7 @@ const DesktopNavItem = ({
     <Link
       to={item.path}
       className={`navbar-link ${isActive(item.path) ? "active" : ""}`}
+      data-tooltip={item.label}
       key={index}
     >
       {item.icon &&
@@ -103,7 +111,7 @@ const DesktopNavItem = ({
           size: 18,
           className: "icon"
         })}
-      <span>{item.label}</span>
+      <span className="navbar-label">{item.label}</span>
     </Link>
   );
 };
@@ -178,6 +186,29 @@ const Navbar = () => {
   const { theme } = useTheme();
   const navbarRef = useRef(null);
 
+  const navMenuRef = useRef(null);
+  const itemRefs = useRef({});
+  const [lineStyle, setLineStyle] = useState({});
+
+  // Function to update the magic line's position
+  const updateLine = (element) => {
+    if (element) {
+      setLineStyle({
+        width: element.offsetWidth,
+        left: element.offsetLeft,
+      });
+    }
+  };
+
+  // Set initial position and update on route change
+  useEffect(() => {
+    const activeItem = Object.values(itemRefs.current).find(
+      (el) => el && el.classList.contains("active")
+    );
+    if (activeItem) {
+      updateLine(activeItem);
+    }
+  }, [location.pathname]);
   const getIcon = (name) => ICON_COMPONENTS[name] || null;
   const isActive = (path) => location.pathname === path;
 
@@ -211,12 +242,20 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex justify-center items-center gap-2">
+        <div
+          className="hidden md:flex justify-center items-center gap-2 desktop-nav-menu"
+          ref={navMenuRef}
+          onMouseLeave={() => {
+            const activeItem = Object.values(itemRefs.current).find(el => el && el.classList.contains('active'));
+            if (activeItem) updateLine(activeItem);
+          }}
+        >
           {/* Render nav items excluding "Notes" */}
           {navbarNavigationItems
             .filter((item) => item.label.toLowerCase() !== "notes")
             .map((item, i) => (
               <DesktopNavItem
+                ref={(el) => (itemRefs.current[item.path || `dropdown-${i}`] = el)}
                 key={i}
                 item={item}
                 index={i}
@@ -226,12 +265,14 @@ const Navbar = () => {
                 getIcon={getIcon}
                 selectedCommunity={selectedCommunity}
                 setSelectedCommunity={setSelectedCommunity}
+                onMouseEnter={(e) => updateLine(e.currentTarget)}
               />
             ))}
 
           {/* Insert Notes dropdown here (moved from right) */}
           {location.pathname !== "/notes/rust" && (
-            <div className="navbar-item dropdown">
+            <div className="navbar-item dropdown" ref={(el) => (itemRefs.current['notes-dropdown'] = el)}
+                 onMouseEnter={(e) => updateLine(e.currentTarget)}>
               <button
                 className={`dropdown-toggle ${desktopNotesOpen ? "active" : ""}`}
                 onClick={() => setDesktopNotesOpen(!desktopNotesOpen)}
@@ -344,10 +385,16 @@ const Navbar = () => {
           <Link
             to="/algorithm-comparison-table"
             className={`navbar-link ${isActive("/algorithm-comparison-table") ? "active" : ""}`}
+            data-tooltip="Compare"
+            ref={(el) => (itemRefs.current['/algorithm-comparison-table'] = el)}
+            onMouseEnter={(e) => updateLine(e.currentTarget)}
           >
             <BarChart3 size={18} className="icon" />
-            <span>Compare</span>
+            <span className="navbar-label">Compare</span>
           </Link>
+
+          {/* Magic Line for active/hover indicator */}
+          <div className="magic-line" style={lineStyle}></div>
         </div>
 
         {/* Right side controls: UserDropdown & ThemeToggle */}
