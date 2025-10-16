@@ -3,27 +3,49 @@ import PropTypes from 'prop-types';
 
 const ThemeContext = createContext();
 
-export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState("light");
+// Helper function to get system theme preference
+const getSystemTheme = () => {
+  if (typeof window !== 'undefined' && window.matchMedia) {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  return 'light';
+};
 
-  // Load saved theme from localStorage
+// Always use system theme - no localStorage persistence
+const getInitialTheme = () => {
+  if (typeof window === 'undefined') return 'light';
+  return getSystemTheme();
+};
+
+export const ThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState(() => getInitialTheme());
+
+  // Apply theme and listen to system theme changes
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) setTheme(savedTheme);
-    document.documentElement.setAttribute("data-theme", savedTheme || "light");
-  }, []);
+    document.documentElement.setAttribute("data-theme", theme);
+    
+    // Listen for system theme changes
+    if (typeof window !== 'undefined' && window.matchMedia) {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      const handleChange = (e) => {
+        const newTheme = e.matches ? 'dark' : 'light';
+        setTheme(newTheme);
+      };
+      
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery.removeEventListener('change', handleChange);
+    }
+  }, [theme]);
 
   const toggleTheme = useCallback(() => {
-    // Use functional update to avoid depending on current theme
     setTheme((prev) => {
       const newTheme = prev === "light" ? "dark" : "light";
       document.documentElement.setAttribute("data-theme", newTheme);
-      localStorage.setItem("theme", newTheme);
       return newTheme;
     });
   }, []);
 
-  // When switching themes, adjust only white-like text to black in light mode for readability
+  // Text color adjustment for light mode
   useEffect(() => {
     const WHITE_HEXES = new Set(["#ffffff", "#fff", "#e0e6ed"]);
     const WHITE_RGB = new Set([
@@ -33,12 +55,10 @@ export const ThemeProvider = ({ children }) => {
       "rgba(224, 230, 237, 1)"
     ]);
 
-    // Helper to determine if an element's effective color is white/off-white
     const isWhiteLike = (el) => {
       const cs = window.getComputedStyle(el);
       const rgb = cs.color.trim();
       if (WHITE_RGB.has(rgb)) return true;
-      // Try to compare inline hex if present
       const inline = (el.getAttribute('style') || '').toLowerCase();
       if (WHITE_HEXES.has(inline.match(/color:\s*([^;]+)/)?.[1]?.trim())) return true;
       return false;
@@ -52,12 +72,10 @@ export const ThemeProvider = ({ children }) => {
       while (walker.nextNode()) {
         const el = walker.currentNode;
         if (!(el instanceof HTMLElement)) continue;
-        // Skip elements that explicitly define non-white brand colors via data-keep-color
         if (el.dataset && (el.dataset.keepColor === 'true' || el.getAttribute('data-keep-color') === 'true')) continue;
         if (isWhiteLike(el)) toOverride.push(el);
       }
       toOverride.forEach((el) => {
-        // store original to restore on dark
         if (!el.dataset.originalColor) {
           const cs = window.getComputedStyle(el);
           el.dataset.originalColor = cs.color;
@@ -73,20 +91,16 @@ export const ThemeProvider = ({ children }) => {
       const overridden = root.querySelectorAll('[data-overridden-text="true"]');
       overridden.forEach((el) => {
         if (!(el instanceof HTMLElement)) return;
-        // Remove inline color override to let original styles apply
         el.style.removeProperty('color');
         el.removeAttribute('data-overridden-text');
-        // originalColor kept only for safety; not re-applied to avoid fighting theme CSS
       });
     };
 
     if (typeof window !== 'undefined') {
       if (theme === 'light') {
-        // Defer a tick so styles are applied before measurement
         const id = window.requestAnimationFrame(applyLightOverrides);
         return () => window.cancelAnimationFrame(id);
       }
-      // On dark, remove prior overrides
       removeOverrides();
     }
     return undefined;

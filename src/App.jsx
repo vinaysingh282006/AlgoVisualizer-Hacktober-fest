@@ -9,6 +9,7 @@ import { MobileMenuProvider } from "./contexts/MobileMenuContext";
 import { AlgorithmProvider } from "./contexts/AlgorithmContext";
 import { NotificationsProvider } from "./contexts/NotificationsContext";
 import { GoogleAuthProvider } from "./contexts/GoogleAuthContext";
+import { ThemeProvider } from "./ThemeContext";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -168,7 +169,8 @@ const App = () => {
   }, []);
 
   return (
-    <GoogleAuthProvider>
+    <ThemeProvider>
+      <GoogleAuthProvider>
       <SettingsProvider>
         <MobileMenuProvider>
           <AlgorithmProvider>
@@ -382,6 +384,7 @@ const App = () => {
       </MobileMenuProvider>
     </SettingsProvider>
     </GoogleAuthProvider>
+    </ThemeProvider>
   );
 };
 
