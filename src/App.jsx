@@ -117,6 +117,7 @@ import AlgorithmComparisonTable from './components/AlgorithmComparisonTable';
 // Performance Dashboard
 import PerformanceDashboard from "./components/PerformanceDashboard";
 import PerformanceDocs from "./pages/PerformanceDocs";
+import AnalyticsDashboard from "./pages/AnalyticsDashboard";
 
 // Static / Info Pages
 import Login from "./pages/Login";
@@ -298,6 +299,7 @@ const App = () => {
                   {/* Performance Dashboard */}
                   <Route path="/performance" element={<PerformanceDashboard />} />
                   <Route path="/performance/docs" element={<PerformanceDocs />} />
+                  <Route path="/analytics" element={<AnalyticsDashboard />} />
 
                   {/* Other Pages */}
                   <Route path="/quiz" element={<Quiz />} />
