@@ -683,6 +683,51 @@ graph:
         - "Requires sorting edges"
         - "Uses union-find"
 
+#Added Segment Tree
+    - name: "Segment Tree"
+      timeComplexity:
+        best: "O(log N)"
+        average: "O(log N)"
+        worst: "O(log N)"
+      spaceComplexity: "O(4N)"
+      description: "A binary tree data structure that allows efficient range queries and updates (like sum, min, max, or gcd) on arrays."
+      useCases:
+        - "Range sum queries"
+        - "Range minimum/maximum queries"
+        - "Range updates (lazy propagation)"
+        - "Prefix/suffix computations"
+      pros:
+        - "Supports both queries and updates in logarithmic time"
+        - "Highly customizable for different associative operations"
+        - "Can be extended for lazy propagation to handle range updates efficiently"
+      cons:
+        - "High memory usage (~4N)"
+        - "Complex to implement correctly"
+        - "Overkill for static (non-updated) data"
+
+# Added Fenwick Tree
+    - name: "Fenwick Tree (Binary Indexed Tree)"
+      timeComplexity:
+        best: "O(log N)"
+        average: "O(log N)"
+        worst: "O(log N)"
+      spaceComplexity: "O(N)"
+      description: "A data structure that efficiently supports prefix sum and update operations using bit manipulation to traverse index ranges."
+      useCases:
+        - "Prefix sum queries"
+        - "Dynamic range sum queries"
+        - "Inversion count problems"
+        - "Cumulative frequency tables"
+      pros:
+        - "Simpler and more space-efficient than Segment Tree"
+        - "Fast O(log N) prefix and update operations"
+        - "Elegant implementation using bit manipulation"
+      cons:
+        - "Limited to operations that can be represented as prefix-based (e.g., sum)"
+        - "Cannot handle complex range updates without additional logic"
+        - "Harder to visualize than Segment Tree"
+
+
 advancedAlgorithms:
   title: "Advanced Techniques"
   icon: "🧠"
