@@ -832,7 +832,7 @@ advancedAlgorithms:
         time: "Varies — O(state transitions) or O(n) for classic Nim-type games"
         space: "O(number of states)"
 
-  # Added Game Theory
+  # Added Number Theory
     - name: "Number Theory"
       category: "Technique"
       description: "Applies mathematical principles to solve computational and modular problems efficiently, used in cryptography, combinatorics, and competitive programming."
@@ -903,6 +903,89 @@ advancedAlgorithms:
       complexity:
         time: "O(n) for most single-pass sliding window problems"
         space: "O(k) for frequency maps or auxiliary data structures, O(1) for simple sum/count"
+
+# Added Bit Manipulation
+    - name: "Bit Manipulation"
+      category: "Technique"
+      description: "Technique that leverages bitwise operators to perform operations on binary representations of numbers for optimizing arithmetic, logical, and set-based computations."
+      keyPoints:
+        - "Bitwise Operators: AND (&), OR (|), XOR (^), NOT (~), Left Shift (<<), Right Shift (>>)"
+        - "Set, unset, toggle, and check bits using masks"
+        - "Count set bits (Brian Kernighan’s algorithm, __builtin_popcount)"
+        - "Check power of two using (n & (n-1)) == 0"
+        - "Find unique elements using XOR property"
+        - "Subsets generation using bitmasking"
+        - "Manipulating bits for optimization in DP and combinatorics"
+      examples:
+        - "Find the single non-repeating element in an array where others appear twice"
+        - "Count number of 1s in binary representation of a number"
+        - "Check if a number is power of two"
+        - "Generate all subsets of a set using bitmasking"
+        - "Find two non-repeating elements in array where others appear twice"
+        - "Reverse bits of a number"
+      whenToUse:
+        - "When optimizing arithmetic or logical operations"
+        - "When problem constraints involve parity, power-of-two, or uniqueness"
+        - "When generating subsets or solving DP on subsets (bitmask DP)"
+        - "When you need to represent or manipulate multiple states efficiently"
+      importantFormulas:
+        - "Set bit: num | (1 << i)"
+        - "Unset bit: num & ~(1 << i)"
+        - "Toggle bit: num ^ (1 << i)"
+        - "Check bit: (num >> i) & 1"
+        - "Count set bits: while (n) { n &= (n - 1); count++; }"
+        - "Check power of two: (n > 0) and (n & (n - 1)) == 0"
+        - "XOR property: a ^ a = 0, a ^ 0 = a"
+      patterns:
+        - "Unique element problems using XOR"
+        - "Counting bits and bit masking DP problems"
+        - "Subsets generation using bitmask representation"
+        - "Optimizing combinatorial or state-space problems"
+        - "Binary representation tricks for parity and toggling"
+      complexity:
+        time: "O(1) for most bit operations; O(log n) when iterating over bits or subsets"
+        space: "O(1) for normal use; O(2^n) when using bitmask DP or subsets generation"
+
+# Added String Algorithms
+    - name: "String Algorithms"
+      category: "Technique"
+      description: "A collection of algorithms & techniques used to efficiently manipulate strings, often involving pattern matching, hashing, and prefix computations."
+      keyPoints:
+        - "Pattern matching algorithms (KMP, Rabin-Karp, Z Algorithm)"
+        - "Prefix function (π array) and LPS array computation"
+        - "String hashing (Rolling Hash, Polynomial Hash)"
+        - "Trie data structure for prefix-based operations"
+        - "Suffix Array and Suffix Tree concepts"
+        - "Manacher’s Algorithm for longest palindromic substring"
+        - "Two-pointer and sliding window techniques for substrings"
+      examples:
+        - "Find the first occurrence of a pattern in a string (KMP / Rabin-Karp)"
+        - "Find the longest prefix which is also a suffix"
+        - "Count distinct substrings using hashing or trie"
+        - "Check if two strings are anagrams"
+        - "Longest palindromic substring (Manacher’s)"
+        - "Longest common prefix among words"
+      whenToUse:
+        - "When dealing with substring search, repetition, or matching problems"
+        - "When optimizing naive O(n*m) substring comparisons"
+        - "When needing to handle prefix, suffix, or pattern queries efficiently"
+        - "When working with hashing for string comparison or substring uniqueness"
+      importantFormulas:
+        - "LPS (Longest Prefix Suffix): used in KMP preprocessing"
+        - "Rolling Hash: hash(s) = (s[0]*p^(n-1) + s[1]*p^(n-2) + ... + s[n-1]) % mod"
+        - "Z-Algorithm: Z[i] = length of longest substring starting at i which is also a prefix"
+        - "Manacher’s: uses center expansion with transformed string for O(n) palindrome finding"
+        - "String comparison via hash: hash1(l, r) == hash2(l, r) → same substring"
+      patterns:
+        - "Pattern matching: KMP, Rabin-Karp, Z-Algorithm"
+        - "Prefix-based problems: tries, prefix/suffix arrays"
+        - "Palindrome-related: Manacher’s, expand around center"
+        - "String hashing for duplicate substring detection"
+        - "Character frequency or window-based problems"
+      complexity:
+        time: "O(n) for KMP/Z/Manacher’s; O(n log n) for suffix array; O(n*m) for naive search"
+        space: "O(n) for prefix/hash arrays; O(1) for in-place algorithms"
+
 
 bigOReference:
   title: "Big-O Complexity Chart"
