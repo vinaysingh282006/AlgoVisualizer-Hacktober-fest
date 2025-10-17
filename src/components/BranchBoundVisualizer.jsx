@@ -21,20 +21,142 @@ const BranchBoundVisualizer = ({ defaultAlgorithm = "TSP" }) => {
   const copySteps = (arr) => arr.map((row) => (Array.isArray(row) ? [...row] : row));
 
   // ---------- TSP (demo placeholder) ----------
-  const tspBB = () => {
-    const stepsArr = [];
-    const costMatrix = [
-      [0, 10, 15, 20],
-      [10, 0, 35, 25],
-      [15, 35, 0, 30],
-      [20, 25, 30, 0],
-    ];
-    stepsArr.push({ type: "matrix", board: copySteps(costMatrix), message: "Initial cost matrix" });
-    stepsArr.push({ type: "matrix", board: copySteps(costMatrix), message: "Branch at City A → B" });
-    stepsArr.push({ type: "matrix", board: copySteps(costMatrix), message: "Bound ≈ 10, exploring…" });
-    stepsArr.push({ type: "matrix", board: copySteps(costMatrix), message: "Found path A-B-D-C-A (cost 80)" });
-    return stepsArr;
+// ---------- TSP (Branch & Bound) – animated steps ----------
+const tspBB = () => {
+  // Demo data (4 cities A–D arranged on a circle)
+  const cities = ["A", "B", "C", "D"];
+  const costMatrix = [
+    [Infinity, 10, 15, 20],
+    [10, Infinity, 35, 25],
+    [15, 35, Infinity, 30],
+    [20, 25, 30, Infinity],
+  ];
+
+  // Precompute simple circular layout for SVG
+  const R = 70, CX = 110, CY = 110;
+    const pos = cities.map((_, i) => {
+    const a = (2 * Math.PI * i) / cities.length - Math.PI / 2;
+    return { x: CX + R * Math.cos(a), y: CY + R * Math.sin(a) };
+  });
+
+  // Lower bound: cost so far + for each unvisited city, add its smallest outgoing edge (cheap but effective)
+  const lb = (currentCity, unvisited, costSoFar) => {
+    let b = costSoFar;
+    // from current city, if exists, add min outgoing to any unvisited (optimistic)
+    if (currentCity !== null && unvisited.size > 0) {
+      let mn = Infinity;
+      for (const v of unvisited) mn = Math.min(mn, costMatrix[currentCity][v]);
+      b += mn;
+    }
+    // for each unvisited, add its cheapest outgoing edge
+    for (const u of unvisited) {
+      let mn = Infinity;
+      for (let v = 0; v < cities.length; v++) if (v !== u) mn = Math.min(mn, costMatrix[u][v]);
+      b += mn;
+    }
+    return b;
   };
+
+  const makeStep = (state, message, action = "") => ({
+    type: "tsp",
+    cities,
+    matrix: costMatrix,
+    pos,
+    path: state.path.slice(),        // e.g., [0,2,3]
+    current: state.current,          // current city index or null
+    next: state.next ?? null,        // candidate next city (for display arrows)
+    visited: new Set(state.visited), // set of indices
+    cost: state.cost,
+    bound: state.bound,
+    bestCost: best.cost,
+    bestPath: best.path.slice(),
+    message,
+    action,                          // "branch","prune","update","done","start"
+  });
+
+  const steps = [];
+  const n = cities.length;
+  const best = { cost: Infinity, path: [] };
+
+  // state: { path:[], visited:Set, current:int|null, cost:number, bound:number }
+  const start = { path: [0], visited: new Set([0]), current: 0, cost: 0, bound: 0 };
+  start.bound = lb(start.current, new Set([1,2,3]), start.cost);
+  steps.push(makeStep(start, "Start at A (city 0)", "start"));
+
+  const stack = [start];
+
+  while (stack.length) {
+    const s = stack.pop();
+
+    // If we completed a Hamiltonian tour (visited all + return to start)
+    if (s.path.length === n) {
+      const retCost = costMatrix[s.current][0];
+      const tourCost = s.cost + retCost;
+      const leaf = { ...s, cost: tourCost, bound: tourCost, next: 0 };
+      if (tourCost < best.cost) {
+        best.cost = tourCost;
+        best.path = s.path.concat([0]);
+        steps.push(makeStep(leaf, `Complete tour; update BEST = ${tourCost}`, "update"));
+      } else {
+        steps.push(makeStep(leaf, `Complete tour = ${tourCost} (no improvement)`, "leaf"));
+      }
+      continue;
+    }
+
+    // compute children (branch to each unvisited)
+    const unvisited = new Set([...Array(n).keys()].filter(i => !s.visited.has(i)));
+    // explore cheaper candidates first to get good bestCost early
+    const childCandidates = [];
+    for (const v of unvisited) {
+      const edge = costMatrix[s.current][v];
+      const cost = s.cost + edge;
+      const rest = new Set(unvisited); rest.delete(v);
+      const bound = lb(v, rest, cost);
+      childCandidates.push({ v, edge, cost, bound });
+    }
+    childCandidates.sort((a,b) => (a.bound - b.bound));
+
+    for (const c of childCandidates.reverse()) {
+      // we push in reverse so the smallest bound is explored first (stack=LIFO)
+      const child = {
+        path: s.path.concat([c.v]),
+        visited: new Set(s.visited).add(c.v),
+        current: c.v,
+        cost: c.cost,
+        bound: c.bound,
+        next: null
+      };
+
+      // show branching intent (with 'next' arrow), then decide prune/keep
+      const peek = { ...child, next: c.v };
+      if (child.bound >= best.cost) {
+        steps.push(makeStep(peek, `Branch to ${cities[c.v]}: bound ${child.bound.toFixed(1)} ≥ best ${best.cost.toFixed(1)} → PRUNE`, "prune"));
+        continue;
+      }
+      steps.push(makeStep(peek, `Branch to ${cities[c.v]}: bound ${child.bound.toFixed(1)} < best ${isFinite(best.cost) ? best.cost.toFixed(1) : "∞"}`, "branch"));
+      stack.push(child);
+    }
+  }
+
+  // final summary
+  steps.push({
+    type: "tsp",
+    cities, matrix: costMatrix, pos,
+    path: best.path.slice(0, -1), // show path without final return
+    current: best.path[best.path.length - 2] ?? 0,
+    next: 0,
+    visited: new Set(best.path),
+    cost: best.cost,
+    bound: best.cost,
+    bestCost: best.cost,
+    bestPath: best.path,
+    message: `Done: best tour ${best.path.map(i=>cities[i]).join(" → ")} with cost ${best.cost}`,
+    action: "done",
+  });
+
+  return steps;
+};
+
 
   // ---------- 0/1 Knapsack (real Branch & Bound) ----------
   /**
@@ -391,16 +513,143 @@ const BranchBoundVisualizer = ({ defaultAlgorithm = "TSP" }) => {
     );
   };
   
+  const renderTSP = (s) => {
+    const { cities, pos, matrix, path, current, next, cost, bound, bestCost, bestPath, message, action } = s;
+  
+    // active edges for highlighting
+    const activeEdges = new Set();
+    for (let i = 0; i + 1 < path.length; i++) activeEdges.add(`${path[i]}-${path[i+1]}`);
+    if (typeof next === "number" && path.length && path[path.length-1] !== next) {
+      activeEdges.add(`${path[path.length-1]}-${next}`);
+    }
+  
+    const tag =
+      action === "branch" ? "bbt-tag bbt-tag--branch"
+      : action === "prune" ? "bbt-tag bbt-tag--prune"
+      : action === "update" ? "bbt-tag bbt-tag--best"
+      : action === "done" ? "bbt-tag bbt-tag--done"
+      : action === "start" ? "bbt-tag bbt-tag--start"
+      : "bbt-tag";
+  
+    return (
+      <div className="bbt-layout bbt-compact">
+        {/* LEFT: small graph */}
+        <div className="bbt-left">
+          <div className="bbt-stepbar">
+            <span className={tag}>{(action || "step").toUpperCase()}</span>
+            <span className="bbt-msg">{message}</span>
+          </div>
+  
+          <div className="bbt-graph">
+            <svg viewBox="0 0 260 260" className="bbt-svg">
+              {/* edges (light) */}
+              {cities.flatMap((_, i) =>
+                cities.map((__, j) =>
+                  i < j && isFinite(matrix[i][j]) ? (
+                    <line key={`${i}-${j}-bg`} x1={pos[i].x} y1={pos[i].y} x2={pos[j].x} y2={pos[j].y} className="bbt-edge" />
+                  ) : null
+                )
+              )}
+              {/* active path edges */}
+              {[...activeEdges].map((k) => {
+                const [a,b] = k.split("-").map(Number);
+                return <line key={`${k}-fg`} x1={pos[a].x} y1={pos[a].y} x2={pos[b].x} y2={pos[b].y} className="bbt-edge bbt-edge--active" />;
+              })}
+              {/* nodes */}
+              {cities.map((c, i) => {
+                const isCur = i === current;
+                const isNext = i === next;
+                return (
+                  <g key={`node-${i}`} transform={`translate(${pos[i].x},${pos[i].y})`}>
+                    <circle r="13" className={`bbt-node ${isCur ? "bbt-node--cur" : ""} ${isNext ? "bbt-node--next" : ""}`} />
+                    <text y="4" textAnchor="middle" className="bbt-nodeLabel">{c}</text>
+                  </g>
+                );
+              })}
+            </svg>
+          </div>
+        </div>
+  
+        {/* RIGHT: tighter stats card */}
+        <aside className="bbt-right">
+          <div className="bbt-card">
+            <div className="bbt-kv"><span className="bbt-k">Cost so far</span><span className="bbt-v">{cost}</span></div>
+            <div className="bbt-kv"><span className="bbt-k">Lower bound</span><span className="bbt-v">{Number.isFinite(bound) ? bound.toFixed(1) : "—"}</span></div>
+            <div className="bbt-divider" />
+            <div className="bbt-kv"><span className="bbt-k">Best tour cost</span><span className="bbt-v bbt-v--best">{Number.isFinite(bestCost) ? bestCost : "—"}</span></div>
+            <div className="bbt-bestPath">
+              <div className="bbt-k">Best tour</div>
+              <div className="bbt-path">{bestPath.length ? bestPath.map(i => cities[i]).join(" → ") : "—"}</div>
+            </div>
+          </div>
+        </aside>
+  
+        <style>{`
+          /* compact container */
+          .bbt-layout.bbt-compact {
+            max-width: 820px;       /* narrower overall */
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(260px, 1fr) 220px; /* slimmer right card */
+            gap: 14px;
+            align-items: start;
+          }
+          @media (max-width: 820px) {
+            .bbt-layout.bbt-compact { grid-template-columns: 1fr; }
+            .bbt-right { position: static; }
+          }
+  
+          .bbt-left { display: grid; gap: 10px; }
+          .bbt-stepbar { display:flex; gap:8px; align-items:center; }
+          .bbt-msg { opacity:.9; font-size: 0.92rem; }
+  
+          .bbt-tag { padding: 3px 8px; border-radius: 999px; font-size: 11px; border: 1px solid var(--border,#2a2a2a); background: var(--surface-bg,#0e0f13); white-space: nowrap; }
+          .bbt-tag--branch { background: rgba(33,150,243,.16); border-color: rgba(33,150,243,.45); }
+          .bbt-tag--prune  { background: rgba(255,193,7,.18);  border-color: rgba(255,193,7,.45); }
+          .bbt-tag--best   { background: rgba(79,195,247,.18); border-color: rgba(79,195,247,.45); }
+          .bbt-tag--done   { background: rgba(156,39,176,.18); border-color: rgba(156,39,176,.45); }
+          .bbt-tag--start  { background: rgba(76,175,80,.18);  border-color: rgba(76,175,80,.45); }
+  
+          /* graph box now small and centered */
+          .bbt-graph { max-width: 320px; margin: 0 auto; }
+          .bbt-svg { width: 100%; height: auto; border: 1px solid var(--border,#2a2a2a); border-radius: 10px; background: var(--surface-bg,#1c2228); }
+  
+          /* thinner edges & smaller nodes */
+          .bbt-edge { stroke: rgba(255,255,255,.14); stroke-width: 1.6; }
+          .bbt-edge--active { stroke: rgba(79,195,247,1); stroke-width: 2.6; }
+  
+          .bbt-node { fill: rgba(255,255,255,.08); stroke: rgba(255,255,255,.35); stroke-width: 1.4; }
+          .bbt-node--cur  { fill: rgba(33,150,243,.26); }
+          .bbt-node--next { stroke: rgba(79,195,247,.9); stroke-width: 2; }
+          .bbt-nodeLabel { font-size: 11px; fill: #fff; font-weight: 700; }
+  
+          /* slim right card */
+          .bbt-right { position: sticky; top: 8px; }
+          .bbt-card { border:1px solid var(--border,#2a2a2a); background:var(--surface-bg,#0e0f13); border-radius:12px; padding:12px; display:grid; gap:6px; }
+          .bbt-kv { display:flex; align-items:center; justify-content:space-between; }
+          .bbt-k { opacity:.75; font-size: 0.9rem; }
+          .bbt-v { font-weight:700; }
+          .bbt-v--best { color:#4fc3f7; }
+          .bbt-divider { height:1px; background:rgba(255,255,255,.08); margin:6px 0; }
+          .bbt-bestPath .bbt-path { margin-top:4px; opacity:.95; font-size: 0.9rem; }
+        `}</style>
+      </div>
+    );
+  };
+  
+  
   
   
 
   const renderBoard = () => {
     const step = steps[currentStep];
     if (!step) return null;
-    if (step.type === "matrix") return renderMatrix(step.board);
+    if (step.type === "tsp") return renderTSP(step);
+    if (step.type === "matrix") return renderMatrix(step.board);     // optional: legacy
     if (step.type === "knapsack") return renderKnapsack(step);
     return null;
   };
+  
 
   return (
     <div className="bb-visualizer">
