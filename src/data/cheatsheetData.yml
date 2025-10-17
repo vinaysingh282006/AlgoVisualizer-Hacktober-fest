@@ -793,6 +793,49 @@ graph:
         - "Consumes large memory for dense graphs"
         - "Not ideal for very large graphs"
 
+#Tarzen algorithm
+    - name: "Tarjan’s Algorithm"
+      timeComplexity:
+        best: "O(V + E)"
+        average: "O(V + E)"
+        worst: "O(V + E)"
+      spaceComplexity: "O(V)"
+      description: "Efficient algorithm to find all strongly connected components (SCCs) in a directed graph using a single DFS traversal and low-link values."
+      useCases:
+        - "Finding Strongly Connected Components (SCCs)"
+        - "Detecting cycles in directed graphs"
+        - "Optimizing dependency resolution"
+        - "Finding articulation points in networks"
+      pros:
+        - "Single DFS traversal — highly efficient"
+        - "No need to reverse the graph"
+        - "Linear time for SCC computation"
+      cons:
+        - "Complex to implement and debug"
+        - "Requires stack and recursion tracking"
+        - "Works only for directed graphs"
+
+#Kosaraju's algorithm
+    - name: "Kosaraju’s Algorithm"
+      timeComplexity:
+        best: "O(V + E)"
+        average: "O(V + E)"
+        worst: "O(V + E)"
+      spaceComplexity: "O(V)"
+      description: "Algorithm to find strongly connected components (SCCs) in a directed graph using two DFS passes — one on the original graph and one on its transpose."
+      useCases:
+        - "Finding Strongly Connected Components (SCCs)"
+        - "Cycle detection in directed graphs"
+        - "Topological sorting of SCCs"
+        - "Analyzing connectivity in networks"
+      pros:
+        - "Conceptually simple and easy to reason about"
+        - "Linear time complexity"
+        - "Intuitive approach using graph transposition"
+      cons:
+        - "Requires two full DFS traversals"
+        - "Needs additional memory for transpose graph"
+        - "Less efficient than Tarjan’s in practice"
 
 advancedAlgorithms:
   title: "Advanced Techniques"
