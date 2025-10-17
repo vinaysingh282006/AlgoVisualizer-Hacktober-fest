@@ -33,7 +33,8 @@ export const navbarNavigationItems = [
       { path: "/contributor-leaderboard", label: "Leaderboard" }
     ]
   },
-  { path: "/data-structures", label: "Documentation", icon: "BookOpen" },
+ { path: "/documentation", label: "Documentation", icon: "BookOpen" },
+
   {
     label: "Tools",
     icon: "Cpu",

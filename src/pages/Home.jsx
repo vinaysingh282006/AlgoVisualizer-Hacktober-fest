@@ -284,40 +284,49 @@ const Home = () => {
   };
 
   /** ===== Data ===== */
-  const features = [
-    {
-      icon: BarChart3,
-      title: "Sorting",
-      path: "/sorting",
-      description: "See Bubble, Quick, Merge, Heap & more in motion.",
-      gradient: "from-sky-400 to-blue-600",
-      badges: ["12+ algos", "Live steps", "Big-O"],
-    },
-    {
-      icon: SearchIcon,
-      title: "Searching",
-      path: "/searching",
-      description: "Binary, Linear, Jump, Exponential—visual & fast.",
-      gradient: "from-sky-400 to-blue-600",
-      badges: ["8+ algos", "Trace moves", "Compare runs"],
-    },
-    {
-      icon: GitBranch,
-      title: "Data Structures",
-      path: "/data-structures",
-      description: "Lists, Trees, Stacks, Queues, Graphs—built up.",
-      gradient: "from-sky-400 to-blue-600",
-      badges: ["15+ types", "Ops demo", "Memory view"],
-    },
-    {
-      icon: Share2,
-      title: "Graph Algorithms",
-      path: "/graph",
-      description: "BFS, DFS, Dijkstra on your own or sample graphs.",
-      gradient: "from-sky-400 to-blue-600",
-      badges: ["Build graph", "Path trace", "Weights"],
-    },
-  ];
+ const features = [
+  {
+    icon: BarChart3,
+    title: "Sorting",
+    path: "/sorting",
+    description: "See Bubble, Quick, Merge, Heap & more in motion.",
+    gradient: "from-sky-400 to-blue-600",
+    badges: ["12+ algos", "Live steps", "Big-O"],
+  },
+  {
+    icon: SearchIcon,
+    title: "Searching",
+    path: "/searching",
+    description: "Binary, Linear, Jump, Exponential—visual & fast.",
+    gradient: "from-sky-400 to-blue-600",
+    badges: ["8+ algos", "Trace moves", "Compare runs"],
+  },
+  {
+    icon: BookOpen,
+    title: "Documentation",
+    path: "/documentation",
+    description: "Complete algorithm reference with complexity analysis.",
+    gradient: "from-sky-400 to-blue-600",
+    badges: ["50+ algos", "Details", "Examples"],
+  },
+  {
+    icon: GitBranch,
+    title: "Data Structures",
+    path: "/data-structures",
+    description: "Lists, Trees, Stacks, Queues, Graphs—built up.",
+    gradient: "from-sky-400 to-blue-600",
+    badges: ["15+ types", "Ops demo", "Memory view"],
+  },
+  {
+    icon: Share2,
+    title: "Graph Algorithms",
+    path: "/graph",
+    description: "BFS, DFS, Dijkstra on your own or sample graphs.",
+    gradient: "from-sky-400 to-blue-600",
+    badges: ["Build graph", "Path trace", "Weights"],
+  },
+];
+
 
   const recentUpdates = [
     { type: "new", title: "Quick Sort: step guide", description: "Clean overlays with pivot highlights.", time: "2h ago" },
