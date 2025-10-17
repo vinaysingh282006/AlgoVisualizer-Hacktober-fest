@@ -94,6 +94,7 @@ import PrimPage from "./pages/PrimPage";
 import KruskalPage from "./pages/KruskalPage";
 import HuffmanPage from "./pages/HuffmanPage";
 import FloydWarshallPage from "./pages/GraphFloydWarshall";
+import BeginnerPrograms from "./pages/BeginnerPrograms";
 
 // Components
 import ArrayVisualizer from "./pages/Array.jsx";
@@ -286,6 +287,7 @@ const App = () => {
                   <Route path="/kruskal" element={<KruskalPage />} />
                   <Route path="/huffman" element={<HuffmanPage />} />
                   <Route path="/graph/floyd-warshall" element={<FloydWarshallPage />} />
+                  <Route path="/beginner-programs" element={<BeginnerPrograms />} />
 
 
                   {/* Data Structures Documentation */}
