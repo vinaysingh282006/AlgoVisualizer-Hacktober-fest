@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import {useNavigate} from "react-router-dom";
+ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { 
   Search, 
   Database, 
@@ -669,32 +670,42 @@ const getComplexityColor = (complexity) => {
 // 2. SUB-COMPONENTS
 // ============================================================================
 
-function AlgorithmCard({ algorithm }) {
+function AlgorithmCard({ algorithm ,onOpen}) {
   const IconComponent = algorithm.categoryIconComponent || Code;
+  const isLinearSearch=algorithm.id==="linearSearch";
   
   return (
-    <div
-      className="theme-card algorithm-card min-h-[200px] flex flex-col justify-between"
-      title={algorithm.description}
-    >
-      <div>
-        <div className="card-header">
-          <div className="card-title-group">
-            <span className="card-icon">
-              <IconComponent size={20} />
-            </span>
-            <h3 className="card-title">{algorithm.name}</h3>
-          </div>
-          {algorithm.implemented ? (
-            <div className="status-badge implemented">Implemented</div>
-          ) : (
-            <div className="status-badge coming-soon">Coming Soon</div>
-          )}
-        </div>
-        <p className="card-description line-clamp-3">{algorithm.description}</p>
+<div
+  className={`theme-card algorithm-card ${isLinearSearch ? 'cursor-pointer' : ''}`}
+  onClick={isLinearSearch ? onOpen : null}
+  role={isLinearSearch ? 'button' : ''}
+  tabIndex={isLinearSearch ? 0 : -1}
+  onKeyDown={isLinearSearch ? (e) => { if (e.key === 'Enter') onOpen(); } : null}
+  title={algorithm.description}
+>
+  <div>
+    <div className="card-header">
+      <div className="card-title-group">
+        <span className="card-icon">
+          <IconComponent size={20} />
+        </span>
+        <h3 className="card-title">{algorithm.name}</h3>
       </div>
-      <div className="card-category-badge mt-auto">{algorithm.categoryTitle}</div>
+
+      {algorithm.implemented ? (
+        <div className="status-badge implemented">Implemented</div>
+      ) : (
+        <div className="status-badge coming-soon">Coming Soon</div>
+      )}
     </div>
+
+    <p className="card-description line-clamp-3">{algorithm.description}</p>
+  </div>
+
+  <div className="card-category-badge mt-auto">{algorithm.categoryTitle}</div>
+</div>
+
+    
   );
 }
 
@@ -706,6 +717,13 @@ function AlgorithmDocumentation() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [filteredAlgorithms, setFilteredAlgorithms] = useState([]);
+  const navigate = useNavigate();
+  const handleCardClick = (algo) => {
+    if(algo.id==="linearSearch"){
+      navigate("/searching?algo=linear-search");
+      return;
+    }
+  };
 
   const getAllAlgorithms = useCallback(() => {
     const seen = new Map();
@@ -871,7 +889,7 @@ function AlgorithmDocumentation() {
         <div className="results-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
           {filteredAlgorithms.length > 0 ? (
             filteredAlgorithms.map((algorithm) => (
-              <AlgorithmCard key={algorithm.id} algorithm={algorithm} />
+              <AlgorithmCard key={algorithm.id} algorithm={algorithm}  onOpen={()=>handleCardClick(algorithm)}/>
             ))
           ) : (
             <div className="no-results-card theme-card text-center p-4 col-span-full">
