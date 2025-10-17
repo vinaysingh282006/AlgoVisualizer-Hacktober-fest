@@ -123,12 +123,105 @@ const runMinimax = (board = sampleBoard) => {
 
 
   // 2️⃣ Alpha-Beta Pruning
-  const runAlphaBeta = (board = sampleBoard) => {
-    const stepsArr = [];
-    stepsArr.push({ board: copySteps(board), message: "Running Alpha-Beta Pruning..." });
-    stepsArr.push({ board: copySteps(board), message: "Alpha-Beta Pruning complete." });
-    return stepsArr;
+// 2️⃣ Alpha-Beta Pruning (step-recording)
+const runAlphaBeta = (board = sampleBoard) => {
+  const stepsArr = [];
+  const size = boardSize;
+
+  // Build all winning lines for an NxN tic-tac-toe board (same as minimax)
+  const lines = [];
+  for (let r = 0; r < size; r++) lines.push([...Array(size)].map((_, c) => r * size + c));
+  for (let c = 0; c < size; c++) lines.push([...Array(size)].map((_, r) => r * size + c));
+  lines.push([...Array(size)].map((_, i) => i * size + i));
+  lines.push([...Array(size)].map((_, i) => (i + 1) * size - (i + 1)));
+
+  const winner = (b) => {
+    for (const line of lines) {
+      const sum = line.reduce((acc, idx) => acc + b[idx], 0);
+      if (sum === size) return 1;
+      if (sum === -size) return -1;
+    }
+    return 0;
   };
+
+  const evalBoard = (b) => {
+    const w = winner(b);
+    if (w !== 0) return w * 10;
+    let score = 0;
+    for (const line of lines) {
+      const vals = line.map(i => b[i]);
+      if (!vals.includes(-1)) score += 1;
+      if (!vals.includes(1))  score -= 1;
+    }
+    return score;
+  };
+
+  const empties = (b) => b.reduce((acc, v, i) => (v === 0 ? (acc.push(i), acc) : acc), []);
+  const clone = (b) => [...b];
+
+  const push = (b, message, meta = {}) =>
+    stepsArr.push({ board: copySteps(b), message, meta });
+
+  push(board, "Running Alpha-Beta Pruning...", { alpha: -Infinity, beta: Infinity, depth: 0 });
+
+  const alphabeta = (b, depth, alpha, beta, maximizing) => {
+    const w = winner(b);
+    const moves = empties(b);
+
+    // Depth limit to keep things snappy
+    if (w !== 0 || moves.length === 0 || depth > 6) {
+      const val = evalBoard(b);
+      push(b, `Depth ${depth}: leaf score = ${val}`, { alpha, beta, depth, leaf: true });
+      return val;
+    }
+
+    if (maximizing) {
+      let value = -Infinity;
+      for (let i = 0; i < moves.length; i++) {
+        const idx = moves[i];
+        const nb = clone(b);
+        nb[idx] = 1; // X
+        push(nb, `Try X at ${idx} (α=${fmt(alpha)}, β=${fmt(beta)}, d=${depth})`, { alpha, beta, depth, move: idx, player: 'X' });
+        const child = alphabeta(nb, depth + 1, alpha, beta, false);
+        value = Math.max(value, child);
+        alpha = Math.max(alpha, value);
+        push(nb, `Backtrack X at ${idx} → ${child} (α=${fmt(alpha)}, β=${fmt(beta)})`, { alpha, beta, depth, backtrack: true });
+
+        if (beta <= alpha) {
+          // prune remaining moves
+          push(nb, `Prune remaining ${moves.length - i - 1} branches (β ≤ α)`, { alpha, beta, depth, pruned: true });
+          break;
+        }
+      }
+      return value;
+    } else {
+      let value = Infinity;
+      for (let i = 0; i < moves.length; i++) {
+        const idx = moves[i];
+        const nb = clone(b);
+        nb[idx] = -1; // O
+        push(nb, `Try O at ${idx} (α=${fmt(alpha)}, β=${fmt(beta)}, d=${depth})`, { alpha, beta, depth, move: idx, player: 'O' });
+        const child = alphabeta(nb, depth + 1, alpha, beta, true);
+        value = Math.min(value, child);
+        beta = Math.min(beta, value);
+        push(nb, `Backtrack O at ${idx} → ${child} (α=${fmt(alpha)}, β=${fmt(beta)})`, { alpha, beta, depth, backtrack: true });
+
+        if (beta <= alpha) {
+          push(nb, `Prune remaining ${moves.length - i - 1} branches (β ≤ α)`, { alpha, beta, depth, pruned: true });
+          break;
+        }
+      }
+      return value;
+    }
+  };
+
+  const fmt = (v) => (v === Infinity ? "+∞" : v === -Infinity ? "−∞" : v);
+
+  alphabeta(board, 0, -Infinity, Infinity, true);
+  push(board, "Alpha-Beta Pruning complete.", { done: true });
+  return stepsArr;
+};
+
 
   // 3️⃣ Expectimax
   const runExpectimax = (board = sampleBoard) => {
@@ -188,6 +281,18 @@ const runMinimax = (board = sampleBoard) => {
         return -1;
       };
      const changedIndex = getChangedIndex();
+
+     const meta = steps[currentStep]?.meta;
+
+     {meta && (
+       <div className="ab-hud">
+         <span>α: <strong>{meta.alpha === undefined ? "—" : (meta.alpha === Infinity ? "+∞" : meta.alpha === -Infinity ? "−∞" : meta.alpha)}</strong></span>
+         <span>β: <strong>{meta.beta === undefined ? "—" : (meta.beta === Infinity ? "+∞" : meta.beta === -Infinity ? "−∞" : meta.beta)}</strong></span>
+         <span>depth: <strong>{meta.depth ?? "—"}</strong></span>
+         {meta.pruned && <span className="tag-pruned">PRUNE</span>}
+       </div>
+     )}
+     
 
   const renderBoard = () => {
     if (!steps[currentStep]) return null;
