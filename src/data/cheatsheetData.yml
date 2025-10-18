@@ -903,6 +903,122 @@ graph:
         - "Not suitable for dynamic graphs"
         - "Requires maintenance of in-degree array"
 
+# Tree algorithms
+trees:
+  title: "Tree Algorithms"
+  icon: "🌳"
+  color: "#8BC34A"
+  algorithms:
+    - name: "Binary Tree Traversal (Inorder)"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(h)"
+      description: "Visits left subtree, root, then right subtree recursively."
+      useCases:
+        - "BST sorted order traversal"
+        - "Expression tree evaluation"
+        - "Flatten tree to sorted array"
+      pros:
+        - "Natural sorted order for BST"
+        - "Simple recursive implementation"
+      cons:
+        - "Requires stack space"
+        - "Not suitable for non-BST ordering"
+
+    - name: "Binary Tree Traversal (Preorder)"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(h)"
+      description: "Visits root first, then left subtree, then right subtree."
+      useCases:
+        - "Tree copying/cloning"
+        - "Prefix expression generation"
+        - "Tree serialization"
+      pros:
+        - "Good for copying trees"
+        - "Root processed first"
+      cons:
+        - "Not sorted order for BST"
+        - "Stack space required"
+
+    - name: "Binary Tree Traversal (Postorder)"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(h)"
+      description: "Visits left subtree, right subtree, then root."
+      useCases:
+        - "Tree deletion"
+        - "Postfix expression evaluation"
+        - "Calculate directory sizes"
+      pros:
+        - "Children processed before parent"
+        - "Good for deletion operations"
+      cons:
+        - "Root processed last"
+        - "Requires stack space"
+
+    - name: "Level Order Traversal (BFS)"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(w)"
+      description: "Visits nodes level by level using a queue."
+      useCases:
+        - "Level-wise processing"
+        - "Find tree width"
+        - "Connect nodes at same level"
+      pros:
+        - "Natural level-by-level order"
+        - "No recursion needed"
+      cons:
+        - "Uses queue space"
+        - "Not sorted for BST"
+
+    - name: "Lowest Common Ancestor (LCA)"
+      timeComplexity:
+        best: "O(log n)"
+        average: "O(h)"
+        worst: "O(n)"
+      spaceComplexity: "O(h)"
+      description: "Finds the lowest common ancestor of two nodes in a tree."
+      useCases:
+        - "Finding distance between nodes"
+        - "Range queries in trees"
+        - "Hierarchical relationships"
+      pros:
+        - "Efficient for balanced trees"
+        - "Fundamental tree operation"
+      cons:
+        - "Can be O(n) for skewed trees"
+        - "Requires parent pointers or recursion"
+
+    - name: "Morris Traversal"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(1)"
+      description: "Traverses tree without recursion or stack by creating temporary links."
+      useCases:
+        - "Space-constrained environments"
+        - "Inorder traversal without stack"
+        - "Constant space traversal"
+      pros:
+        - "O(1) space complexity"
+        - "No recursion or stack"
+      cons:
+        - "Modifies tree temporarily"
+        - "More complex implementation"
+        - "Not intuitive"
+
+
 advancedAlgorithms:
   title: "Advanced Techniques"
   icon: "🧠"
