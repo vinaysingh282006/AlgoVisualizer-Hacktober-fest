@@ -367,6 +367,7 @@ const algorithmDatabase = {
      spaceComplexity:"O(V) ",
      implemented:true,
     },
+
     {
       name:"Divide And Conquer",
       id:"divideandconquer",
@@ -394,6 +395,7 @@ const algorithmDatabase = {
       spaceComplexity:"O(V + E)",
       implemented:true,
     }
+
 
     ],
   },
