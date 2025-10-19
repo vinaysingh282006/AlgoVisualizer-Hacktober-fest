@@ -98,6 +98,7 @@ import BeginnerPrograms from "./pages/BeginnerPrograms";
 import ClosestPair from './pages/ClosestPair';
 
 import ConvexHull from "./pages/ConvexHull";
+import RadixSortDocs from "./pages/RadixSortDocs.jsx";
 
 // Components
 import ArrayVisualizer from "./pages/Array.jsx";
@@ -307,6 +308,8 @@ const App = () => {
                   <Route path="/beginner-programs" element={<BeginnerPrograms />} />
                   <Route path="/closest-pair" element={<ClosestPair />} />
                   <Route path="/convex-hull" element={<ConvexHull />} />
+                  <Route path="/radix-sort-docs" element={<RadixSortDocs />} />
+
 
 
                   {/* Data Structures Documentation */}
