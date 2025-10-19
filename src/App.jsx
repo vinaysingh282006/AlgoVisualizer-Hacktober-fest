@@ -95,6 +95,8 @@ import KruskalPage from "./pages/KruskalPage";
 import HuffmanPage from "./pages/HuffmanPage";
 import FloydWarshallPage from "./pages/GraphFloydWarshall";
 import BeginnerPrograms from "./pages/BeginnerPrograms";
+import ClosestPair from './pages/ClosestPair';
+
 import ConvexHull from "./pages/ConvexHull";
 
 // Components
@@ -303,6 +305,7 @@ const App = () => {
                   <Route path="/huffman" element={<HuffmanPage />} />
                   <Route path="/graph/floyd-warshall" element={<FloydWarshallPage />} />
                   <Route path="/beginner-programs" element={<BeginnerPrograms />} />
+                  <Route path="/closest-pair" element={<ClosestPair />} />
                   <Route path="/convex-hull" element={<ConvexHull />} />
 
 
