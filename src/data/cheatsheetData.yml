@@ -1018,6 +1018,116 @@ trees:
         - "More complex implementation"
         - "Not intuitive"
 
+# 6 Different Advance Tree algorithm
+    - name: "Tree Diameter"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(h)"
+      description: "Finds the longest path between any two nodes in the tree."
+      useCases:
+        - "Network analysis"
+        - "Finding tree width metrics"
+        - "Graph connectivity problems"
+      pros:
+        - "Linear time solution"
+        - "Important tree metric"
+      cons:
+        - "Requires DFS traversal"
+        - "Can be tricky with edge cases"
+
+    - name: "Serialize and Deserialize Tree"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(n)"
+      description: "Converts tree to string format and reconstructs it."
+      useCases:
+        - "Save tree to disk"
+        - "Network transmission"
+        - "Tree cloning"
+      pros:
+        - "Preserves tree structure"
+        - "Enables persistence"
+      cons:
+        - "Requires string parsing"
+        - "Uses extra space"
+
+    - name: "Vertical Order Traversal"
+      timeComplexity:
+        best: "O(n log n)"
+        average: "O(n log n)"
+        worst: "O(n log n)"
+      spaceComplexity: "O(n)"
+      description: "Groups nodes by vertical columns from left to right."
+      useCases:
+        - "Tree visualization"
+        - "Column-wise processing"
+        - "Vertical views of trees"
+      pros:
+        - "Natural column grouping"
+        - "Useful for visualization"
+      cons:
+        - "Requires sorting"
+        - "Extra space for hash map"
+
+    - name: "Binary Tree to Doubly Linked List"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(h)"
+      description: "Converts BST to sorted doubly linked list in-place."
+      useCases:
+        - "Space-efficient sorting"
+        - "Tree flattening"
+        - "Converting to linear structure"
+      pros:
+        - "In-place conversion"
+        - "Maintains sorted order"
+      cons:
+        - "Destroys original tree"
+        - "Requires careful pointer manipulation"
+
+    - name: "Zigzag Level Order Traversal"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(w)"
+      description: "Traverses the tree level by level, alternating the direction of traversal on each level (left-to-right, then right-to-left)."
+      useCases:
+        - "Tree visualization"
+        - "Alternating level order patterns"
+        - "Interview traversal problems"
+      pros:
+        - "Simple BFS-based logic"
+        - "Provides clear structure visualization"
+      cons:
+        - "Requires direction toggling logic"
+        - "Extra space for queue and reversal"
+
+    - name: "Boundary Traversal of Binary Tree"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(h)"
+      description: "Traverses the boundary nodes of a binary tree in anti-clockwise order including left boundary, leaves, and right boundary."
+      useCases:
+        - "Tree visualization"
+        - "Traversal pattern problems"
+        - "Complex interview traversal variants"
+      pros:
+        - "Covers the complete outer boundary"
+        - "Combines preorder and postorder concepts"
+      cons:
+        - "Edge cases for leaf duplication"
+        - "Requires multiple traversals (left, leaf, right)"
+
+
 
 advancedAlgorithms:
   title: "Advanced Techniques"
