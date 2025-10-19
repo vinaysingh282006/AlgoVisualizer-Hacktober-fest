@@ -368,6 +368,35 @@ const algorithmDatabase = {
      implemented:true,
     },
 
+    {
+      name:"Divide And Conquer",
+      id:"divideandconquer",
+      description:
+      "Divide and Conquer is a problem-solving technique where a problem is broken down into smaller subproblems (Divide), solved independently (Conquer), and then combined to get the final solution (Combine).",
+      timeComplexity:"O(n log n)",
+      spaceComplexity:"O(n)",
+      implemented:true,
+    },
+    {
+      name:"0/1 Knapsack",
+      id:"knapsack",
+      description:
+      "The 0/1 Knapsack problem chooses items with maximum total value without exceeding the capacity. Each item can either be taken (1) or not (0).",
+      timeComplexity:"O(n × W)",
+      spaceComplexity:"O(n × W)",
+      implemented:true,
+    },
+    {
+      name:"prims Algorithm",
+      id:"prims",
+      description:
+      "Prim's algorithm is a greedy algorithm that finds a Minimum Spanning Tree (MST)for a weighted undirected graph. This means it connects all vertices with the minimum total edge weight, ensuring no cycles are formed.",
+      timeComplexity:"O((V+E)log V)",
+      spaceComplexity:"O(V + E)",
+      implemented:true,
+    }
+
+
     ],
   },
 };
