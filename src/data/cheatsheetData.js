@@ -11,7 +11,7 @@ export const cheatsheetData = {
   searching: parsedData.searching,
   dataStructures: parsedData.dataStructures,
   graph: parsedData.graph,
-  tree: parsedData.trees, // added tree
+  tree: parsedData.trees, // added tree to the session.
   advancedAlgorithms: parsedData.advancedAlgorithms
 };
 
