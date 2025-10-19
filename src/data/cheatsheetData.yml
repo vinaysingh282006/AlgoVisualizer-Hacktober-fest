@@ -816,7 +816,7 @@ graph:
         - "Works only for directed graphs"
 
 #Kosaraju's algorithm
-    - name: "Kosaraju's Algorithm"
+    - name: "Kosaraju’s Algorithm"
       timeComplexity:
         best: "O(V + E)"
         average: "O(V + E)"
@@ -835,6 +835,7 @@ graph:
       cons:
         - "Requires two full DFS traversals"
         - "Needs additional memory for transpose graph"
+
         - "Less efficient than Tarjan's in practice"
 
 #Johnsan's algo
@@ -1171,6 +1172,9 @@ trees:
         - "Edge cases for leaf duplication"
         - "Requires multiple traversals (left, leaf, right)"
 
+
+
+        - "Less efficient than Tarjan’s in practice"
 
 
 advancedAlgorithms:
