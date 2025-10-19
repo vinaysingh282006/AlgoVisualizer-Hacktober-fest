@@ -816,7 +816,7 @@ graph:
         - "Works only for directed graphs"
 
 #Kosaraju's algorithm
-    - name: "Kosaraju's Algorithm"
+    - name: "Kosaraju’s Algorithm"
       timeComplexity:
         best: "O(V + E)"
         average: "O(V + E)"
@@ -835,6 +835,7 @@ graph:
       cons:
         - "Requires two full DFS traversals"
         - "Needs additional memory for transpose graph"
+
         - "Less efficient than Tarjan's in practice"
 
 #Johnsan's algo
@@ -902,6 +903,50 @@ graph:
         - "Works only on DAGs"
         - "Not suitable for dynamic graphs"
         - "Requires maintenance of in-degree array"
+
+    - name: "Dinic's Algorithm"
+      timeComplexity:
+        best: "O(E * sqrt(V))"
+        average: "O(V² * E)"
+        worst: "O(V² * E)"
+      spaceComplexity: "O(V + E)"
+      description: "An optimized algorithm for computing the maximum flow in a flow network using a layered graph (level graph) and blocking flow concept."
+      useCases:
+        - "Maximum flow problems"
+        - "Bipartite matching"
+        - "Circulation with demands"
+        - "Network routing and capacity planning"
+      pros:
+        - "Much faster than Ford-Fulkerson for large graphs"
+        - "Deterministic and guaranteed to terminate"
+        - "Works well on sparse and dense graphs"
+      cons:
+        - "Complex implementation"
+        - "Not intuitive for beginners"
+        - "Less efficient for graphs with small flow values"
+
+    - name: "Edmonds-Karp Algorithm"
+      timeComplexity:
+        best: "O(V * E²)"
+        average: "O(V * E²)"
+        worst: "O(V * E²)"
+      spaceComplexity: "O(V + E)"
+      description: "A specific implementation of the Ford-Fulkerson method that uses Breadth-First Search (BFS) to find the shortest augmenting paths, guaranteeing polynomial time complexity."
+      useCases:
+        - "Maximum flow computation"
+        - "Bipartite graph matching"
+        - "Network design and traffic optimization"
+        - "Flow-based resource allocation"
+      pros:
+        - "Guaranteed to run in polynomial time"
+        - "Easier to implement than Dinic's Algorithm"
+        - "Predictable and stable performance"
+      cons:
+        - "Slower compared to Dinic's on large graphs"
+        - "Higher time complexity (O(V * E²))"
+        - "Inefficient for graphs with very high edge count"
+
+
 
 # Tree algorithms for the cheatsheet added
 trees:
@@ -1127,6 +1172,9 @@ trees:
         - "Edge cases for leaf duplication"
         - "Requires multiple traversals (left, leaf, right)"
 
+
+
+        - "Less efficient than Tarjan’s in practice"
 
 
 advancedAlgorithms:

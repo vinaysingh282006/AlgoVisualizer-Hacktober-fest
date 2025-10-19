@@ -95,13 +95,18 @@ import KruskalPage from "./pages/KruskalPage";
 import HuffmanPage from "./pages/HuffmanPage";
 import FloydWarshallPage from "./pages/GraphFloydWarshall";
 import BeginnerPrograms from "./pages/BeginnerPrograms";
+import ConvexHull from "./pages/ConvexHull";
 
 // Components
 import ArrayVisualizer from "./pages/Array.jsx";
 import KadaneVisualizer from "./pages/Kadane.jsx";
 import DijkstraVisualizer from "./pages/Dijkstra.jsx";
+
 import DivideAndConquerVisualizer from "./pages/DivideAndConquer.jsx";
 import KnapsackVisualizer from "../Downloads/AlgoVisualizer-master/AlgoVisualizer-master/src/pages/Knapsack.jsx";
+import PrimsAlgorithm from "./pages/Prims.jsx";
+
+
 import KMPVisualizer from "./pages/KMP";
 import LinkedListPage from "./components/pages/LinkedListPage";
 import Queue from "./components/Queue/Queue";
@@ -153,6 +158,7 @@ import LearnerLeaderboard from "./components/LearnerLeaderboard";
 import WeeklyChallenge from "./components/WeeklyChallenge";
 import GitLearning from "./pages/GitLearning.jsx";
 import GitBasicsQuiz from "./pages/GitBasicsQuiz";
+import PrimVisualizer from "./components/PrimVisualizer.jsx";
 
 const App = () => {
   const location = useLocation();
@@ -225,8 +231,12 @@ const App = () => {
                     <Route path="/data-structures/kadane" element={<KadaneVisualizer />} />
                     <Route path="/data-structures/kmp" element={<KMPVisualizer />} />
                     <Route path="/data-structures/dijkstras" element={<DijkstraVisualizer/>} />
+
                     <Route path="/data-structures/divideandconquer" element={<DivideAndConquerVisualizer/>} />
                     <Route path="/data-structures/knapsack" element={<KnapsackVisualizer/>} />
+                    <Route path="/data-structures/prims" element={<PrimVisualizer/>} />
+
+
 
 
                     <Route
@@ -293,6 +303,7 @@ const App = () => {
                   <Route path="/huffman" element={<HuffmanPage />} />
                   <Route path="/graph/floyd-warshall" element={<FloydWarshallPage />} />
                   <Route path="/beginner-programs" element={<BeginnerPrograms />} />
+                  <Route path="/convex-hull" element={<ConvexHull />} />
 
 
                   {/* Data Structures Documentation */}
