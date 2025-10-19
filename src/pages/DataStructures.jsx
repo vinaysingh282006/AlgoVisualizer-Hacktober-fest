@@ -367,24 +367,6 @@ const algorithmDatabase = {
      spaceComplexity:"O(V) ",
      implemented:true,
     },
-    {
-      name:"Divide And Conquer",
-      id:"divideandconquer",
-      description:
-      "Divide and Conquer is a problem-solving technique where a problem is broken down into smaller subproblems (Divide), solved independently (Conquer), and then combined to get the final solution (Combine).",
-      timeComplexity:"O(n log n)",
-      spaceComplexity:"O(n)",
-      implemented:true,
-    },
-    {
-      name:"0/1 Knapsack",
-      id:"knapsack",
-      description:
-      "The 0/1 Knapsack problem chooses items with maximum total value without exceeding the capacity. Each item can either be taken (1) or not (0).",
-      timeComplexity:"O(n × W)",
-      spaceComplexity:"O(n × W)",
-      implemented:true,
-    }
 
     ],
   },
