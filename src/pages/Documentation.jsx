@@ -238,7 +238,7 @@ const algorithmDatabase = {
           access: "O(n)"
         },
         spaceComplexity: "O(n)",
-        implemented: false
+        implemented:true
       },
       {
         name: "Stack",
@@ -251,7 +251,7 @@ const algorithmDatabase = {
           search: "O(n)"
         },
         spaceComplexity: "O(n)",
-        implemented: false
+        implemented:true
       },
       {
         name: "Queue",
@@ -264,7 +264,7 @@ const algorithmDatabase = {
           search: "O(n)"
         },
         spaceComplexity: "O(n)",
-        implemented: false
+        implemented: true
       },
       {
         name: "Binary Tree",
@@ -277,7 +277,7 @@ const algorithmDatabase = {
           traversal: "O(n)"
         },
         spaceComplexity: "O(n)",
-        implemented: false
+        implemented: true
       }
     ]
   },
