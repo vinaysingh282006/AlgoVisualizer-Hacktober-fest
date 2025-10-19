@@ -903,7 +903,7 @@ graph:
         - "Not suitable for dynamic graphs"
         - "Requires maintenance of in-degree array"
 
-# Tree algorithms
+# Tree algorithms for the cheatsheet added
 trees:
   title: "Tree Algorithms"
   icon: "🌳"
