@@ -384,6 +384,15 @@ const algorithmDatabase = {
       timeComplexity:"O(n × W)",
       spaceComplexity:"O(n × W)",
       implemented:true,
+    },
+    {
+      name:"prims Algorithm",
+      id:"prims",
+      description:
+      "Prim's algorithm is a greedy algorithm that finds a Minimum Spanning Tree (MST)for a weighted undirected graph. This means it connects all vertices with the minimum total edge weight, ensuring no cycles are formed.",
+      timeComplexity:"O((V+E)log V)",
+      spaceComplexity:"O(V + E)",
+      implemented:true,
     }
 
     ],
