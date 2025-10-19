@@ -96,6 +96,7 @@ import HuffmanPage from "./pages/HuffmanPage";
 import FloydWarshallPage from "./pages/GraphFloydWarshall";
 import BeginnerPrograms from "./pages/BeginnerPrograms";
 import ConvexHull from "./pages/ConvexHull";
+import EditDistance from "./pages/EditDistance.jsx";
 
 // Components
 import ArrayVisualizer from "./pages/Array.jsx";
@@ -291,6 +292,8 @@ const App = () => {
                   <Route path="/graph/floyd-warshall" element={<FloydWarshallPage />} />
                   <Route path="/beginner-programs" element={<BeginnerPrograms />} />
                   <Route path="/convex-hull" element={<ConvexHull />} />
+                  <Route path="/edit-distance" element={<EditDistance />} />
+
 
 
                   {/* Data Structures Documentation */}
