@@ -9,6 +9,14 @@ const boxStyle = {
   marginBottom: '2rem',
   border: '1px solid var(--border-color, #e0e0e0)',
   boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02)',
+  transition: 'all 0.3s ease-in-out',
+  cursor: 'pointer',
+};
+
+const hoverStyle = {
+  transform: 'translateY(-6px)',
+  boxShadow: '0 8px 16px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06)',
+  borderColor: 'var(--primary, #007bff)',
 };
 
 const sectionTitle = {
@@ -37,30 +45,39 @@ const listStyle = {
   marginBottom: '1rem',
 };
 
+const HoverCard = ({ children }) => {
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  return (
+    <div
+      style={isHovered ? { ...boxStyle, ...hoverStyle } : boxStyle}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {children}
+    </div>
+  );
+};
+
 const PerformanceDocs = () => {
   return (
     <div className="w-full flex justify-center">
-      <div className="max-w-4xl p-6"> 
-        {/* --- CHANGES START HERE for the H1 heading --- */}
-        <h1 
-          className="font-extrabold text-5xl md:text-6xl lg:text-7xl mb-10 text-center" // Tailwind classes for large, responsive font, extra bold, and centered text
-          style={{ 
-            color: 'var(--primary, #007bff)', // Use primary color, or a strong blue default
-            letterSpacing: '-0.025em', // Slightly tighten letter spacing
-            lineHeight: '1.1', // Adjust line height
-            textShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Subtle text shadow for depth
-            // You could also add a gradient here if you want:
-            // background: 'linear-gradient(45deg, var(--primary), var(--secondary, #6f42c1))',
-            // WebkitBackgroundClip: 'text',
-            // WebkitTextFillColor: 'transparent',
+      <div className="max-w-4xl p-6">
+        {/* H1 heading */}
+        <h1
+          className="font-extrabold text-7xl md:text-8xl lg:text-9xl mb-10 text-center"
+          style={{
+            color: 'var(--primary, #007bff)',
+            letterSpacing: '-0.025em',
+            lineHeight: '1.1',
+            textShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
           }}
         >
           Performance Analysis Documentation
         </h1>
-        {/* --- CHANGES END HERE --- */}
 
         {/* What is Performance Analysis */}
-        <div style={boxStyle}>
+        <HoverCard>
           <h2 style={sectionTitle}>What is Performance Analysis?</h2>
           <p style={paragraph}>
             The Performance Analysis feature in AlgoVisualizer allows you to empirically measure and visualize 
@@ -76,10 +93,10 @@ const PerformanceDocs = () => {
             <li>Analysis with various data types (random, sorted, reverse, nearly sorted)</li>
             <li>Customizable input sizes for detailed analysis</li>
           </ul>
-        </div>
+        </HoverCard>
 
         {/* How to Use */}
-        <div style={boxStyle}>
+        <HoverCard>
           <h2 style={sectionTitle}>How to Use Performance Analysis</h2>
 
           <h3 style={subheading}>1. In Algorithm Visualizers</h3>
@@ -105,10 +122,10 @@ const PerformanceDocs = () => {
             <li>Specifying custom input sizes</li>
             <li>Adjusting the range of input sizes to test</li>
           </ul>
-        </div>
+        </HoverCard>
 
         {/* Understanding the Results */}
-        <div style={boxStyle}>
+        <HoverCard>
           <h2 style={sectionTitle}>Understanding the Results</h2>
 
           <h3 style={subheading}>Performance Charts</h3>
@@ -137,10 +154,10 @@ const PerformanceDocs = () => {
             <li>A factor near n indicates linear time O(n)</li>
             <li>A factor near n² indicates quadratic time O(n²)</li>
           </ul>
-        </div>
+        </HoverCard>
 
         {/* Benefits for Learning */}
-        <div style={boxStyle}>
+        <HoverCard>
           <h2 style={sectionTitle}>Benefits for Learning</h2>
           <p style={paragraph}>
             This feature enhances the educational value of AlgoVisualizer by:
@@ -156,7 +173,8 @@ const PerformanceDocs = () => {
             Try out the performance analysis feature today and gain deeper insights into how algorithms 
             perform in practice!
           </p>
-        </div>
+        </HoverCard>
+
       </div>
     </div>
   );
