@@ -753,8 +753,8 @@ function AlgorithmDocumentation() {
       return;
     }
     // Existing linearSearch route
-    if (algo.id === "linearSearch") {
-      navigate("/searching?algo=linear-search");
+   if (algo.category === "searching" && algo.implemented) {
+      navigate(`/searching/${algo.id}`);
       return;
     }
     // No-op for other categories (your stated scope = sorting)
@@ -929,7 +929,7 @@ function AlgorithmDocumentation() {
                 algorithm={algorithm}
                 // ✅ Clickable only for implemented sorting algos and linearSearch (kept)
                 onOpen={
-                  (algorithm.category === "sorting" && algorithm.implemented) ||
+                  (algorithm.category === "sorting" || algorithm.category === "searching" && algorithm.implemented) ||
                   algorithm.id === "linearSearch"
                     ? () => handleCardClick(algorithm)
                     : undefined
