@@ -96,6 +96,7 @@ import HuffmanPage from "./pages/HuffmanPage";
 import FloydWarshallPage from "./pages/GraphFloydWarshall";
 import BeginnerPrograms from "./pages/BeginnerPrograms";
 import ClosestPair from './pages/ClosestPair';
+import DocClosestPair from "./pages/docClosestPair";
 
 import ConvexHull from "./pages/ConvexHull";
 import ArrayLearning from "./pages/ArrayLearning";
@@ -327,6 +328,7 @@ const App = () => {
                   <Route path="/quick-sort-docs" element={<QuickSortDocs />} />
                   <Route path="/merge-sort-docs" element={<MergeSortDocs />} />
                   <Route path="/edit-distance" element={<EditDistance />} />
+                  <Route path="/doc/closest-pair" element={<DocClosestPair />} />
 
 
 
