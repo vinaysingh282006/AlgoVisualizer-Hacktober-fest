@@ -134,6 +134,9 @@ import ContributorLeaderboard from "./pages/ContributorLeaderboard";
 import AlgorithmDocumentation from "./pages/Documentation";
 import CodeEditor from "./pages/CodeEditor";
 
+// ✅ Algorithm Recommendation System
+import AlgorithmRecommendationDemo from "./pages/AlgorithmRecommendationDemo";
+
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "./styles/components.css";
@@ -186,6 +189,9 @@ const App = () => {
 
                 <main className="main-content page-content">
                   <Routes>
+                    {/* Algorithm Recommendation System */}
+                    <Route path="/recommendations" element={<AlgorithmRecommendationDemo />} />
+
                     {/* Home */}
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
