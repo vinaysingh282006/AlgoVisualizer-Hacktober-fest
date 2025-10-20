@@ -1,29 +1,30 @@
 // src/routes/AppRoutes.jsx
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Pages
-import Home from "../pages/Home.jsx";
-import Login from "../pages/Login.jsx";
-import Signup from "../pages/Signup.jsx";
-import ForgotPassword from "../pages/ForgotPassword.jsx";
-import ResetPassword from "../pages/ResetPassword.jsx";
-import Sorting from "../pages/Sorting.jsx";
-import Searching from "../pages/Searching.jsx";
-import TreePage from "../pages/TreePage.jsx";
-import LinkedListPage from "../pages/LinkedListPage.jsx";
-import SortingDoc from "../pages/SortingDoc.jsx";
-import Quiz from "../pages/Quiz.jsx";
-import Contact from "../pages/contact.jsx";
-import Privacy from "../pages/privacy.jsx";
-import Terms from "../pages/terms.jsx";
-import About from "../pages/about.jsx";
-import Settings from "../components/Settings.jsx";
+const Home = lazy(() => import("../pages/Home.jsx"));
+const Login = lazy(() => import("../pages/Login.jsx"));
+const Signup = lazy(() => import("../pages/Signup.jsx"));
+const ForgotPassword = lazy(() => import("../pages/ForgotPassword.jsx"));
+const ResetPassword = lazy(() => import("../pages/ResetPassword.jsx"));
+const Sorting = lazy(() => import("../pages/Sorting.jsx"));
+const Searching = lazy(() => import("../pages/Searching.jsx"));
+const TreePage = lazy(() => import("../pages/TreePage.jsx"));
+const LinkedListPage = lazy(() => import("../pages/LinkedListPage.jsx"));
+const SortingDoc = lazy(() => import("../pages/SortingDoc.jsx"));
+const Quiz = lazy(() => import("../pages/Quiz.jsx"));
+const Contact = lazy(() => import("../pages/contact.jsx"));
+const Privacy = lazy(() => import("../pages/privacy.jsx"));
+const Terms = lazy(() => import("../pages/terms.jsx"));
+const About = lazy(() => import("../pages/about.jsx"));
+const Settings = lazy(() => import("../components/Settings.jsx"));
 // Add other pages as needed
 
 const AppRoutes = () => {
   return (
     <Router>
+      <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
@@ -45,6 +46,7 @@ const AppRoutes = () => {
 
         {/* Add more routes for other pages/components */}
       </Routes>
+      </Suspense>
     </Router>
   );
 };

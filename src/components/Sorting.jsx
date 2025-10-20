@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import AlgorithmVisualizer from "./AlgorithmVisualizer";
+import ErrorBoundary from "./ErrorBoundary";
 import CodeExplanation from "./CodeExplanation";
 import SimpleExportControls from "./SimpleExportControls";
 import InputPanel from "./InputPanel";
@@ -344,7 +345,9 @@ const Sorting = () => {
 
       <div id="sort-visualization-container" className="theme-card visualization-card">
         <div className="theme-card-header"><h3>Visualization - {algorithmName}</h3></div>
-        <AlgorithmVisualizer algorithmName={algorithmName} initialArray={state.array} visualOnly={true} barGap={computeGap()} fontSize={computeBarFontSize()} />
+        <ErrorBoundary>
+          <AlgorithmVisualizer algorithmName={algorithmName} initialArray={state.array} visualOnly={true} barGap={computeGap()} fontSize={computeBarFontSize()} />
+        </ErrorBoundary>
       </div>
 
       <CodeExplanation algorithm={state.algorithm} pseudocode={ALGORITHM_PSEUDOCODE[state.algorithm]} isVisible={state.showCodeExplanation} onClose={() => updateState('showCodeExplanation', false)} />
