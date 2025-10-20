@@ -394,7 +394,16 @@ const algorithmDatabase = {
       timeComplexity:"O((V+E)log V)",
       spaceComplexity:"O(V + E)",
       implemented:true,
-    }
+    },
+    {
+      name:"Bit Manipulation",
+      id:"bitmanipulation",
+      description:
+      "Bit Manipulation is the act of algorithmically manipulating bits or binary digits, which are the most basic form of data in computing. It allows optimization of space and time, especially in competitive programming.",
+      timeComplexity:"O(1)",
+      spaceComplexity:"O(1)",
+      implemented:true,
+    },
 
 
     ],
