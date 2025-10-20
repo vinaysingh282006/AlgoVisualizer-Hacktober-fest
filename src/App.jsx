@@ -98,6 +98,7 @@ import BeginnerPrograms from "./pages/BeginnerPrograms";
 import ClosestPair from './pages/ClosestPair';
 
 import ConvexHull from "./pages/ConvexHull";
+import HeapSortDocs from "./pages/HeapSortDocs";
 import RadixSortDocs from "./pages/RadixSortDocs.jsx";
 import QuickSortDocs from "./pages/QuickSortDocs.jsx";
 import MergeSortDocs from "./pages/MergeSortDocs.jsx";
@@ -319,6 +320,7 @@ const App = () => {
                   <Route path="/beginner-programs" element={<BeginnerPrograms />} />
                   <Route path="/closest-pair" element={<ClosestPair />} />
                   <Route path="/convex-hull" element={<ConvexHull />} />
+                  <Route path="/heap-sort-docs" element={<HeapSortDocs />} />
                   <Route path="/radix-sort-docs" element={<RadixSortDocs />} />
                   <Route path="/quick-sort-docs" element={<QuickSortDocs />} />
                   <Route path="/merge-sort-docs" element={<MergeSortDocs />} />
