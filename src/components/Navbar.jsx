@@ -94,7 +94,7 @@ const DesktopNavItem = ({
                 key={subIndex}
                 to={sub.path}
                 className={`dropdown-item block w-full text-left px-3 py-2 hover:bg-gray-700 rounded-md transition-colors duration-150 ${
-    isActive(sub.path) ? "bg-gray-700" : ""} bg-white`}
+    isActive(sub.path) ? "bg-gray-700" : ""}`}
                 onClick={() => toggleDropdown(null)}
               >
                 {sub.label}
@@ -109,7 +109,7 @@ const DesktopNavItem = ({
   return (
     <Link
       to={item.path}
-      className={`navbar-link ${isActive(item.path) ? "active" : ""} bg-white`}
+      className={`navbar-link ${isActive(item.path) ? "active" : ""}`}
       data-tooltip={item.label}
       key={index}
     >
@@ -149,7 +149,7 @@ const MobileNavItem = ({ item, index, isOpen, toggleDropdown, isActive, getIcon,
             <Link
               key={subIndex}
               to={sub.path}
-              className={`mobile-menu-link ${isActive(sub.path) ? "active" : ""} bg-white`}
+              className={`mobile-menu-link ${isActive(sub.path) ? "active" : ""}`}
               onClick={() => {
                 toggleDropdown(null);
                 closeMenu();
@@ -166,7 +166,7 @@ const MobileNavItem = ({ item, index, isOpen, toggleDropdown, isActive, getIcon,
   return (
     <Link
       to={item.path}
-      className={`mobile-menu-link ${isActive(item.path) ? "active" : ""} bg-white`}
+      className={`mobile-menu-link ${isActive(item.path) ? "active" : ""}`}
       onClick={closeMenu}
       key={index}
     >
@@ -304,49 +304,49 @@ const Navbar = () => {
                 <div className="dropdown-menu bg-slate-800 text-white rounded-md shadow-lg mt-1 w-full">
                   <Link
                     to="/notes/java"
-                    className={`dropdown-item ${isActive("/notes/java") ? "active" : ""} bg-white`}
+                    className={`dropdown-item ${isActive("/notes/java") ? "active" : ""}`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     Java
                   </Link>
                   <Link
                     to="/notes/python"
-                    className={`dropdown-item ${isActive("/notes/python") ? "active" : ""} bg-white`}
+                    className={`dropdown-item ${isActive("/notes/python") ? "active" : ""}`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     Python
                   </Link>
                   <Link
                     to="/notes/cpp"
-                    className={`dropdown-item ${isActive("/notes/cpp") ? "active" : ""} bg-white`}
+                    className={`dropdown-item ${isActive("/notes/cpp") ? "active" : ""}`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     C++
                   </Link>
                   <Link
                     to="/notes/c"
-                    className={`dropdown-item ${isActive("/notes/c") ? "active" : ""} bg-white`}
+                    className={`dropdown-item ${isActive("/notes/c") ? "active" : ""}`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     C
                   </Link>
                   <Link
                     to="/notes/javascript"
-                    className={`dropdown-item ${isActive("/notes/javascript") ? "active" : ""} bg-white`}
+                    className={`dropdown-item ${isActive("/notes/javascript") ? "active" : ""}`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     JavaScript
                   </Link>
                   <Link
                     to="/notes/nextjs"
-                    className={`dropdown-item ${isActive("/notes/nextjs") ? "active" : ""} bg-white`}
+                    className={`dropdown-item ${isActive("/notes/nextjs") ? "active" : ""}`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     NextJs
                   </Link>
                   <Link
                     to="/notes/rust"
-                    className={`dropdown-item ${isActive("/notes/rust") ? "active" : ""} bg-white`}
+                    className={`dropdown-item ${isActive("/notes/rust") ? "active" : ""}`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     Rust
@@ -365,7 +365,7 @@ const Navbar = () => {
                     to="https://docs.google.com/spreadsheets/d/1mvlc8EYc3OVVU3X7NKoC0iZJr_45BL_pVxiJec0r94c/htmlview?gid=0#gid=0"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="dropdown-item bg-white"
+                    className="dropdown-item"
                     onClick={() => {
                       setSelectedNotes("DSA Sheet  by Shradha Khapra");
                       setDesktopNotesOpen(false);
@@ -377,7 +377,7 @@ const Navbar = () => {
                     to="https://codolio.com/question-tracker/sheet/neetcode-150?category=popular"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="dropdown-item bg-white"
+                    className="dropdown-item"
                     onClick={() => {
                       setSelectedNotes("DSA Sheet by NEETCODE");
                       setDesktopNotesOpen(false);
@@ -390,7 +390,7 @@ const Navbar = () => {
                     to="https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="dropdown-item bg-white"
+                    className="dropdown-item"
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     DSA Sheet by STRIVER
