@@ -1176,6 +1176,26 @@ trees:
 
         - "Less efficient than Tarjan’s in practice"
 
+    - name: "DSW Algorithm"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(1)"
+      description: "Balances a Binary Search Tree (BST) in-place by first converting it into a vine (linked list) and then performing rotations to transform it into a balanced tree."
+      useCases:
+        - "One-time rebalancing of unbalanced BSTs"
+        - "Optimizing search efficiency after bulk insertions"
+        - "Space-constrained environments where AVL/Red-Black trees are too heavy"
+      pros:
+        - "Runs in linear time"
+        - "Requires only constant extra space"
+        - "Simple, non-recursive process"
+      cons:
+       - "Not suitable for frequent insertions/deletions"
+       - "More complex than self-balancing tree insertions"
+       - "Applies only to BSTs, not general binary trees"
+
 
 advancedAlgorithms:
   title: "Advanced Techniques"
