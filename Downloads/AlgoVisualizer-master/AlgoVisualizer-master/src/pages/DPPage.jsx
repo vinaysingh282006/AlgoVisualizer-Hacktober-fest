@@ -88,8 +88,8 @@ const DPPage = () => {
         Explore how dynamic programming algorithms work step-by-step. Visualize top-down and bottom-up approaches, and try your own examples.
       </p>
 
-      {/* 🔔 Subscribe button for notifications */}
-      <SubscribeButton algorithmId={selectedAlgorithm} />
+      {/* 🔔 Subscribe button for notifications (uncommented for nmow as not in use*/}
+      {/* <SubscribeButton algorithmId={selectedAlgorithm} /> */} 
 
       <div data-aos="fade-up" data-aos-delay="200">
         <DPVisualizer

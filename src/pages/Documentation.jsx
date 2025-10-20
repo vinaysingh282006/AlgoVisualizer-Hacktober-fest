@@ -329,7 +329,21 @@ const algorithmDatabase = {
         spaceComplexity: "O(V)",
         implemented: true,
         subType: "dijkstra"
-      }
+      },{
+  name: "Bellman–Ford Algorithm",
+  id: "graphBellmanFord",
+  description:
+    "Computes shortest path distances from a single source to all vertices in a weighted graph, including those with negative edge weights. Relaxes all edges |V| − 1 times and detects negative weight cycles if any.",
+  timeComplexity: {
+    best: "O(VE)",
+    average: "O(VE)",
+    worst: "O(VE)"
+  },
+  spaceComplexity: "O(V)",
+  implemented: true,
+  subType: "bellmanFord"
+}
+
     ]
   },
   backtracking: {
@@ -756,6 +770,9 @@ function AlgorithmDocumentation() {
     // Existing linearSearch special-case
     if (algo.id === "linearSearch") {
       navigate("/searching?algo=linear-search");
+    // Existing linearSearch route
+   if (algo.category === "searching" && algo.implemented) {
+      navigate(`/searching/${algo.id}`);
       return;
     }
 
@@ -881,6 +898,19 @@ function AlgorithmDocumentation() {
                 />
               );
             })
+            filteredAlgorithms.map((algorithm) => (
+              <AlgorithmCard
+                key={algorithm.id}
+                algorithm={algorithm}
+                // ✅ Clickable only for implemented sorting algos and linearSearch (kept)
+                onOpen={
+                  (algorithm.category === "sorting" || algorithm.category === "searching" && algorithm.implemented) ||
+                  algorithm.id === "linearSearch"
+                    ? () => handleCardClick(algorithm)
+                    : undefined
+                }
+              />
+            ))
           ) : (
             <div className="no-results-card theme-card text-center p-4 col-span-full">
               <Search size={48} className="mx-auto" />
