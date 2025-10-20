@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { body, validationResult } = require("express-validator");
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
@@ -8,9 +9,15 @@ const { sendEmail } = require("../services/emailService");
 // ==========================
 // Forgot Password Route
 // ==========================
-router.post("/forgot-password", async (req, res) => {
+router.post(
+  "/forgot-password",
+  body("email").isEmail().withMessage("Valid email is required"),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ ok: false, errors: errors.array() });
+    }
   const { email } = req.body;
-  if (!email) return res.status(400).json({ message: "Email is required" });
 
   try {
     const user = await User.findOne({ email });
@@ -36,17 +43,22 @@ router.post("/forgot-password", async (req, res) => {
     console.error("Forgot password error:", err);
     res.status(500).json({ message: "Server error" });
   }
-});
+  }
+);
 
 // ==========================
 // Reset Password Route
 // ==========================
-router.post("/reset-password/:token", async (req, res) => {
+router.post(
+  "/reset-password/:token",
+  body("password").isLength({ min: 6 }).withMessage("Password must be at least 6 characters"),
+  async (req, res) => {
   const { token } = req.params;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ ok: false, errors: errors.array() });
+    }
   const { password } = req.body;
-
-  if (!password)
-    return res.status(400).json({ message: "Password is required" });
 
   try {
     const user = await User.findOne({
@@ -69,6 +81,7 @@ router.post("/reset-password/:token", async (req, res) => {
     console.error("Reset password error:", err);
     res.status(500).json({ message: "Server error" });
   }
-});
+  }
+);
 
 module.exports = router;
