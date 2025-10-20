@@ -99,6 +99,10 @@ import ClosestPair from './pages/ClosestPair';
 
 import ConvexHull from "./pages/ConvexHull";
 import HeapSortDocs from "./pages/HeapSortDocs";
+import RadixSortDocs from "./pages/RadixSortDocs.jsx";
+import QuickSortDocs from "./pages/QuickSortDocs.jsx";
+import MergeSortDocs from "./pages/MergeSortDocs.jsx";
+import EditDistance from "./pages/EditDistance.jsx";
 
 // Components
 import ArrayVisualizer from "./pages/Array.jsx";
@@ -108,6 +112,7 @@ import DijkstraVisualizer from "./pages/Dijkstra.jsx";
 import DivideAndConquerVisualizer from "./pages/DivideAndConquer.jsx";
 import KnapsackVisualizer from "../Downloads/AlgoVisualizer-master/AlgoVisualizer-master/src/pages/Knapsack.jsx";
 import PrimsAlgorithm from "./pages/Prims.jsx";
+import BitManipulation from "./pages/BitManipulation.jsx";
 
 
 import KMPVisualizer from "./pages/KMP";
@@ -141,6 +146,9 @@ import FAQ from "./pages/FAQ";
 import ContributorLeaderboard from "./pages/ContributorLeaderboard";
 import AlgorithmDocumentation from "./pages/Documentation";
 import CodeEditor from "./pages/CodeEditor";
+
+// ✅ Algorithm Recommendation System
+import AlgorithmRecommendationDemo from "./pages/AlgorithmRecommendationDemo";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -195,6 +203,9 @@ const App = () => {
 
                 <main className="main-content page-content">
                   <Routes>
+                    {/* Algorithm Recommendation System */}
+                    <Route path="/recommendations" element={<AlgorithmRecommendationDemo />} />
+
                     {/* Home */}
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
@@ -234,6 +245,7 @@ const App = () => {
                     <Route path="/data-structures/kadane" element={<KadaneVisualizer />} />
                     <Route path="/data-structures/kmp" element={<KMPVisualizer />} />
                     <Route path="/data-structures/dijkstras" element={<DijkstraVisualizer/>} />
+                    <Route path="/data-structures/bitmanipulation" element={<BitManipulation/>} />
 
                     <Route path="/data-structures/divideandconquer" element={<DivideAndConquerVisualizer/>} />
                     <Route path="/data-structures/knapsack" element={<KnapsackVisualizer/>} />
@@ -309,6 +321,10 @@ const App = () => {
                   <Route path="/closest-pair" element={<ClosestPair />} />
                   <Route path="/convex-hull" element={<ConvexHull />} />
                   <Route path="/heap-sort-docs" element={<HeapSortDocs />} />
+                  <Route path="/radix-sort-docs" element={<RadixSortDocs />} />
+                  <Route path="/quick-sort-docs" element={<QuickSortDocs />} />
+                  <Route path="/merge-sort-docs" element={<MergeSortDocs />} />
+                  <Route path="/edit-distance" element={<EditDistance />} />
 
 
 
