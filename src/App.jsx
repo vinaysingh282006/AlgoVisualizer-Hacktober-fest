@@ -107,6 +107,7 @@ import DijkstraVisualizer from "./pages/Dijkstra.jsx";
 import DivideAndConquerVisualizer from "./pages/DivideAndConquer.jsx";
 import KnapsackVisualizer from "../Downloads/AlgoVisualizer-master/AlgoVisualizer-master/src/pages/Knapsack.jsx";
 import PrimsAlgorithm from "./pages/Prims.jsx";
+import BitManipulation from "./pages/BitManipulation.jsx";
 
 
 import KMPVisualizer from "./pages/KMP";
@@ -233,6 +234,7 @@ const App = () => {
                     <Route path="/data-structures/kadane" element={<KadaneVisualizer />} />
                     <Route path="/data-structures/kmp" element={<KMPVisualizer />} />
                     <Route path="/data-structures/dijkstras" element={<DijkstraVisualizer/>} />
+                    <Route path="/data-structures/bitmanipulation" element={<BitManipulation/>} />
 
                     <Route path="/data-structures/divideandconquer" element={<DivideAndConquerVisualizer/>} />
                     <Route path="/data-structures/knapsack" element={<KnapsackVisualizer/>} />
