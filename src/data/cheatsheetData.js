@@ -12,6 +12,7 @@ export const cheatsheetData = {
   dataStructures: parsedData.dataStructures,
   graph: parsedData.graph,
   tree: parsedData.trees, // added tree to the session.
+  patterns: parsedData.patterns, // added patterns to cheatsheet.
   advancedAlgorithms: parsedData.advancedAlgorithms
 };
 
