@@ -319,7 +319,21 @@ const algorithmDatabase = {
         spaceComplexity: "O(V)",
         implemented: true,
         subType: "dijkstra"
-      }
+      },{
+  name: "Bellman–Ford Algorithm",
+  id: "graphBellmanFord",
+  description:
+    "Computes shortest path distances from a single source to all vertices in a weighted graph, including those with negative edge weights. Relaxes all edges |V| − 1 times and detects negative weight cycles if any.",
+  timeComplexity: {
+    best: "O(VE)",
+    average: "O(VE)",
+    worst: "O(VE)"
+  },
+  spaceComplexity: "O(V)",
+  implemented: true,
+  subType: "bellmanFord"
+}
+
     ]
   },
   backtracking: {
