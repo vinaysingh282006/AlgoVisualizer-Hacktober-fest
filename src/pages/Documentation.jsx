@@ -30,10 +30,9 @@ import "../styles/global-theme.css";
 const algorithmDatabase = {
   sorting: {
     title: "Sorting Algorithms",
-    icon: ArrowDownUp, // Changed from 🔄
+    icon: ArrowDownUp,
     color: "#66ccff",
     algorithms: [
-      // ... all your sorting algorithms stay the same
       {
         name: "Bubble Sort",
         id: "bubbleSort",
@@ -166,7 +165,7 @@ const algorithmDatabase = {
   },
   searching: {
     title: "Search Algorithms",
-    icon: Search, // Changed from 🔍
+    icon: Search,
     color: "#4ade80",
     algorithms: [
       {
@@ -223,7 +222,7 @@ const algorithmDatabase = {
   },
   dataStructures: {
     title: "Data Structures",
-    icon: Database, // Changed from 🏗️
+    icon: Database,
     color: "#ffd93d",
     algorithms: [
       {
@@ -283,7 +282,7 @@ const algorithmDatabase = {
   },
   graph: {
     title: "Graph Algorithms",
-    icon: Network, // Changed from 🧭
+    icon: Network,
     color: "#66ccff",
     algorithms: [
       {
@@ -307,6 +306,17 @@ const algorithmDatabase = {
         subType: "dfs"
       },
       {
+        name: "Kruskal’s Algorithm",
+        id: "kruskalMST",
+        description:
+          "A greedy algorithm that finds a Minimum Spanning Tree (MST) for a connected weighted graph by sorting edges and adding them in increasing order of weight without forming cycles.",
+        timeComplexity: { best: "O(E log E)", average: "O(E log E)", worst: "O(E log E)" },
+        spaceComplexity: "O(V)",
+        implemented: true,
+        subType: "kruskal",
+        path: "/kruskal"
+      },
+      {
         name: "Dijkstra's Algorithm",
         id: "graphDijkstra",
         description:
@@ -324,7 +334,7 @@ const algorithmDatabase = {
   },
   backtracking: {
     title: "Backtracking Algorithms",
-    icon: Target, // Changed from 🧩
+    icon: Target,
     color: "#f9a825",
     algorithms: [
       {
@@ -381,7 +391,7 @@ const algorithmDatabase = {
   },
   dynamicProgramming: {
     title: "Dynamic Programming",
-    icon: Brain, // Changed from 📊
+    icon: Brain,
     color: "#f97316",
     algorithms: [
       {
@@ -454,7 +464,7 @@ const algorithmDatabase = {
   },
   greedy: {
     title: "Greedy Algorithms",
-    icon: Wallet, // Changed from 💰
+    icon: Wallet,
     color: "#f97316",
     algorithms: [
       {
@@ -497,7 +507,7 @@ const algorithmDatabase = {
   },
   divideAndConquer: {
     title: "Divide & Conquer",
-    icon: Split, // Changed from 🪓
+    icon: Split,
     color: "#a78bfa",
     algorithms: [
       {
@@ -536,7 +546,7 @@ const algorithmDatabase = {
   },
   hashing: {
     title: "Hashing",
-    icon: Hash, // Changed from 🔑
+    icon: Hash,
     color: "#ff6b6b",
     algorithms: [
       {
@@ -575,7 +585,7 @@ const algorithmDatabase = {
   },
   plants: {
     title: "Trees",
-    icon: TreeDeciduous, // Changed from 🌳
+    icon: TreeDeciduous,
     color: "#4ade80",
     algorithms: [
       {
@@ -613,7 +623,7 @@ const algorithmDatabase = {
 
   gameSearch: {
     title: "Game Search",
-    icon: Gamepad2, // Changed from 🎮
+    icon: Gamepad2,
     color: "#f9a825",
     algorithms: [
       {
@@ -653,7 +663,7 @@ const algorithmDatabase = {
   },
   branchAndBound: {
     title: "Branch & Bound",
-    icon: Box, // Changed from 📦
+    icon: Box,
     color: "#34d399",
     algorithms: [
       {
@@ -677,19 +687,6 @@ const algorithmDatabase = {
   }
 };
 
-const getComplexityColor = (complexity) => {
-  if (!complexity) return "#e0e6ed";
-
-  if (complexity.includes("O(1)")) return "#4ade80";
-  if (complexity.includes("O(log")) return "#66ccff";
-  if (complexity.includes("O(n²)")) return "#ff6b6b";
-  if (complexity.includes("O(n log n)")) return "#ff9500";
-  if (complexity.includes("O(n)")) return "#ffd93d";
-  if (complexity.includes("O(√n)")) return "#a78bfa";
-
-  return "#e0e6ed"; // default color
-};
-
 // ============================================================================
 // 2. SUB-COMPONENTS
 // ============================================================================
@@ -697,41 +694,38 @@ const getComplexityColor = (complexity) => {
 function AlgorithmCard({ algorithm ,onOpen}) {
   const IconComponent = algorithm.categoryIconComponent || Code;
 
-  // ✅ Make clickable only if onOpen is provided
   const isClickable = typeof onOpen === 'function';
   
   return (
-<div
-  className={`theme-card algorithm-card ${isClickable ? 'cursor-pointer' : ''}`}
-  onClick={isClickable ? onOpen : null}
-  role={isClickable ? 'button' : ''}
-  tabIndex={isClickable ? 0 : -1}
-  onKeyDown={isClickable ? (e) => { if (e.key === 'Enter') onOpen(); } : null}
-  title={algorithm.description}
->
-  <div>
-    <div className="card-header">
-      <div className="card-title-group">
-        <span className="card-icon">
-          <IconComponent size={20} />
-        </span>
-        <h3 className="card-title">{algorithm.name}</h3>
+    <div
+      className={`theme-card algorithm-card ${isClickable ? 'cursor-pointer' : ''}`}
+      onClick={isClickable ? onOpen : undefined}
+      role={isClickable ? 'button' : undefined}
+      tabIndex={isClickable ? 0 : -1}
+      onKeyDown={isClickable ? (e) => { if (e.key === 'Enter') onOpen(); } : undefined}
+      title={algorithm.description}
+    >
+      <div>
+        <div className="card-header">
+          <div className="card-title-group">
+            <span className="card-icon">
+              <IconComponent size={20} />
+            </span>
+            <h3 className="card-title">{algorithm.name}</h3>
+          </div>
+
+          {algorithm.implemented ? (
+            <div className="status-badge implemented">Implemented</div>
+          ) : (
+            <div className="status-badge coming-soon">Coming Soon</div>
+          )}
+        </div>
+
+        <p className="card-description line-clamp-3">{algorithm.description}</p>
       </div>
 
-      {algorithm.implemented ? (
-        <div className="status-badge implemented">Implemented</div>
-      ) : (
-        <div className="status-badge coming-soon">Coming Soon</div>
-      )}
+      <div className="card-category-badge mt-auto">{algorithm.categoryTitle}</div>
     </div>
-
-    <p className="card-description line-clamp-3">{algorithm.description}</p>
-  </div>
-
-  <div className="card-category-badge mt-auto">{algorithm.categoryTitle}</div>
-</div>
-
-    
   );
 }
 
@@ -745,19 +739,27 @@ function AlgorithmDocumentation() {
   const [filteredAlgorithms, setFilteredAlgorithms] = useState([]);
   const navigate = useNavigate();
 
-  // ✅ Central handler: use existing id for sorting docs; keep linearSearch
+  // ✅ Central handler: now path-aware (handles Kruskal and any future cards with `path`)
   const handleCardClick = (algo) => {
-    // Sorting → /sorting/:algoId/docs (using the existing camelCase id)
+    // Highest priority: explicit path on the item (e.g., /kruskal)
+    if (algo.path && algo.implemented) {
+      navigate(algo.path);
+      return;
+    }
+
+    // Sorting → /sorting/:algoId/docs
     if (algo.category === "sorting" && algo.implemented) {
       navigate(`/sorting/${algo.id}/docs`);
       return;
     }
-    // Existing linearSearch route
+
+    // Existing linearSearch special-case
     if (algo.id === "linearSearch") {
       navigate("/searching?algo=linear-search");
       return;
     }
-    // No-op for other categories (your stated scope = sorting)
+
+    // Not navigable: do nothing
   };
 
   const getAllAlgorithms = useCallback(() => {
@@ -782,78 +784,18 @@ function AlgorithmDocumentation() {
     const allAlgorithms = getAllAlgorithms();
     return [
       { key: "all", label: "All", icon: BookOpen, count: allAlgorithms.length },
-      {
-        key: "sorting",
-        label: "Sorting",
-        icon: ArrowDownUp,
-        count: algorithmDatabase.sorting?.algorithms.length || 0
-      },
-      {
-        key: "searching",
-        label: "Searching",
-        icon: Search,
-        count: algorithmDatabase.searching?.algorithms.length || 0
-      },
-      {
-        key: "dataStructures",
-        label: "Data Structures",
-        icon: Database,
-        count: algorithmDatabase.dataStructures?.algorithms.length || 0
-      },
-      {
-        key: "graph",
-        label: "Graph",
-        icon: Network,
-        count: algorithmDatabase.graph?.algorithms.length || 0
-      },
-      {
-        key: "backtracking",
-        label: "Backtracking",
-        icon: Target,
-        count: algorithmDatabase.backtracking?.algorithms.length || 0
-      },
-      {
-        key: "dynamicProgramming",
-        label: "Dynamic Programming",
-        icon: Brain,
-        count: algorithmDatabase.dynamicProgramming?.algorithms.length || 0
-      },
-      {
-        key: "greedy",
-        label: "Greedy",
-        icon: Wallet,
-        count: algorithmDatabase.greedy?.algorithms.length || 0
-      },
-      {
-        key: "divideAndConquer",
-        label: "Divide & Conquer",
-        icon: Split,
-        count: algorithmDatabase.divideAndConquer?.algorithms.length || 0
-      },
-      {
-        key: "hashing",
-        label: "Hashing",
-        icon: Hash,
-        count: algorithmDatabase.hashing?.algorithms.length || 0
-      },
-      {
-        key: "plants",
-        label: "Trees",
-        icon: TreeDeciduous,
-        count: algorithmDatabase.plants?.algorithms.length || 0
-      },
-      {
-        key: "gameSearch",
-        label: "Game Search",
-        icon: Gamepad2,
-        count: algorithmDatabase.gameSearch?.algorithms.length || 0
-      },
-      {
-        key: "branchAndBound",
-        label: "Branch & Bound",
-        icon: Box,
-        count: algorithmDatabase.branchAndBound?.algorithms.length || 0
-      }
+      { key: "sorting", label: "Sorting", icon: ArrowDownUp, count: algorithmDatabase.sorting?.algorithms.length || 0 },
+      { key: "searching", label: "Searching", icon: Search, count: algorithmDatabase.searching?.algorithms.length || 0 },
+      { key: "dataStructures", label: "Data Structures", icon: Database, count: algorithmDatabase.dataStructures?.algorithms.length || 0 },
+      { key: "graph", label: "Graph", icon: Network, count: algorithmDatabase.graph?.algorithms.length || 0 },
+      { key: "backtracking", label: "Backtracking", icon: Target, count: algorithmDatabase.backtracking?.algorithms.length || 0 },
+      { key: "dynamicProgramming", label: "Dynamic Programming", icon: Brain, count: algorithmDatabase.dynamicProgramming?.algorithms.length || 0 },
+      { key: "greedy", label: "Greedy", icon: Wallet, count: algorithmDatabase.greedy?.algorithms.length || 0 },
+      { key: "divideAndConquer", label: "Divide & Conquer", icon: Split, count: algorithmDatabase.divideAndConquer?.algorithms.length || 0 },
+      { key: "hashing", label: "Hashing", icon: Hash, count: algorithmDatabase.hashing?.algorithms.length || 0 },
+      { key: "plants", label: "Trees", icon: TreeDeciduous, count: algorithmDatabase.plants?.algorithms.length || 0 },
+      { key: "gameSearch", label: "Game Search", icon: Gamepad2, count: algorithmDatabase.gameSearch?.algorithms.length || 0 },
+      { key: "branchAndBound", label: "Branch & Bound", icon: Box, count: algorithmDatabase.branchAndBound?.algorithms.length || 0 }
     ];
   }, [getAllAlgorithms]);
 
@@ -863,10 +805,11 @@ function AlgorithmDocumentation() {
       allAlgorithms = allAlgorithms.filter((algo) => algo.category === selectedCategory);
     }
     if (searchTerm) {
+      const q = searchTerm.toLowerCase();
       allAlgorithms = allAlgorithms.filter(
         (algo) =>
-          algo.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          algo.description.toLowerCase().includes(searchTerm.toLowerCase())
+          algo.name.toLowerCase().includes(q) ||
+          algo.description.toLowerCase().includes(q)
       );
     }
     setFilteredAlgorithms(allAlgorithms);
@@ -923,19 +866,21 @@ function AlgorithmDocumentation() {
       <div className="min-h-[60vh] w-full">
         <div className="results-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
           {filteredAlgorithms.length > 0 ? (
-            filteredAlgorithms.map((algorithm) => (
-              <AlgorithmCard
-                key={algorithm.id}
-                algorithm={algorithm}
-                // ✅ Clickable only for implemented sorting algos and linearSearch (kept)
-                onOpen={
-                  (algorithm.category === "sorting" && algorithm.implemented) ||
-                  algorithm.id === "linearSearch"
-                    ? () => handleCardClick(algorithm)
-                    : undefined
-                }
-              />
-            ))
+            filteredAlgorithms.map((algorithm) => {
+              // 🔗 Decide if this card should be clickable
+              const isNavigable =
+                (algorithm.path && algorithm.implemented) || // e.g., Kruskal → /kruskal
+                (algorithm.category === "sorting" && algorithm.implemented) ||
+                algorithm.id === "linearSearch";
+
+              return (
+                <AlgorithmCard
+                  key={algorithm.id}
+                  algorithm={algorithm}
+                  onOpen={isNavigable ? () => handleCardClick(algorithm) : undefined}
+                />
+              );
+            })
           ) : (
             <div className="no-results-card theme-card text-center p-4 col-span-full">
               <Search size={48} className="mx-auto" />
