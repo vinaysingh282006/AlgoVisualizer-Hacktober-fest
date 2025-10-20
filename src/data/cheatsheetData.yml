@@ -1171,10 +1171,295 @@ trees:
       cons:
         - "Edge cases for leaf duplication"
         - "Requires multiple traversals (left, leaf, right)"
-
-
-
         - "Less efficient than Tarjan’s in practice"
+
+        
+# patterns for dsa
+patterns:
+  title: "Famous DSA Patterns"
+  icon: "🎯"
+  color: "#E91E63"
+  algorithms:
+    - name: "Two Pointers"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(1)"
+      description: "Uses two pointers moving through data structure to solve problems efficiently."
+      useCases:
+        - "Pair sum in sorted array"
+        - "Remove duplicates from sorted array"
+        - "Container with most water"
+        - "3Sum problem"
+      pros:
+        - "Space efficient O(1)"
+        - "Better than nested loops"
+        - "Simple to implement"
+      cons:
+        - "Usually requires sorted data"
+        - "Not always applicable"
+
+    - name: "Fast & Slow Pointers"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(1)"
+      description: "Two pointers moving at different speeds to detect cycles or find middle elements."
+      useCases:
+        - "Detect cycle in linked list"
+        - "Find middle of linked list"
+        - "Happy number problem"
+        - "Palindrome linked list"
+      pros:
+        - "Detects cycles efficiently"
+        - "O(1) space complexity"
+        - "Simple concept"
+      cons:
+        - "Limited to specific problems"
+        - "Can be confusing initially"
+
+    - name: "Merge Intervals"
+      timeComplexity:
+        best: "O(n log n)"
+        average: "O(n log n)"
+        worst: "O(n log n)"
+      spaceComplexity: "O(n)"
+      description: "Combines overlapping intervals by sorting and merging."
+      useCases:
+        - "Merge overlapping intervals"
+        - "Insert interval"
+        - "Meeting rooms problem"
+        - "Employee free time"
+      pros:
+        - "Handles complex interval logic"
+        - "Clear approach"
+      cons:
+        - "Requires sorting"
+        - "Edge cases can be tricky"
+
+    - name: "In-place Reversal of Linked List"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(1)"
+      description: "Reverses linked list nodes in-place by changing pointers."
+      useCases:
+        - "Reverse linked list"
+        - "Reverse sublist"
+        - "Reverse K-group"
+        - "Rotate list"
+      pros:
+        - "O(1) space"
+        - "Efficient pointer manipulation"
+      cons:
+        - "Easy to make mistakes with pointers"
+        - "Edge cases need careful handling"
+    - name: "Prefix XOR"
+      category: "Bit Manipulation"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(n)"
+      description: "Uses prefix XOR array to compute XOR over any subarray efficiently and solve problems like finding missing numbers or pairs."
+      useCases:
+        - "Subarray XOR queries"
+        - "Finding unique numbers in array"
+        - "Solving problems with XOR properties efficiently"
+      pros:
+        - "Reduces repeated XOR computation"
+        - "Enables clever bitwise solutions in O(n)"
+      cons:
+        - "Understanding XOR properties is crucial"
+        - "Edge cases like empty subarray need handling"
+
+    - name: "Two Heaps"
+      timeComplexity:
+        best: "O(log n)"
+        average: "O(log n)"
+        worst: "O(log n)"
+      spaceComplexity: "O(n)"
+      description: "Uses max heap and min heap to find median or manage two halves of data."
+      useCases:
+        - "Find median from data stream"
+        - "Sliding window median"
+        - "IPO problem"
+      pros:
+        - "Efficient median finding"
+        - "Dynamic data handling"
+      cons:
+        - "Complex implementation"
+        - "Extra space needed"
+
+    - name: "Subsets (BFS/DFS)"
+      timeComplexity:
+        best: "O(2ⁿ)"
+        average: "O(2ⁿ)"
+        worst: "O(2ⁿ)"
+      spaceComplexity: "O(2ⁿ)"
+      description: "Generates all possible subsets using backtracking or iteration."
+      useCases:
+        - "Generate all subsets"
+        - "Subsets with duplicates"
+        - "Permutations"
+        - "Letter combinations"
+      pros:
+        - "Systematic generation"
+        - "Covers all possibilities"
+      cons:
+        - "Exponential time"
+        - "High memory usage"
+
+    - name: "Modified Binary Search"
+      timeComplexity:
+        best: "O(log n)"
+        average: "O(log n)"
+        worst: "O(log n)"
+      spaceComplexity: "O(1)"
+      description: "Adapts binary search for rotated arrays, infinite arrays, or special conditions."
+      useCases:
+        - "Search in rotated sorted array"
+        - "Find minimum in rotated array"
+        - "Search in infinite array"
+        - "Peak element"
+      pros:
+        - "Logarithmic time"
+        - "Works on modified sorted data"
+      cons:
+        - "Tricky boundary conditions"
+        - "Requires sorted property"
+
+    - name: "Top K Elements"
+      timeComplexity:
+        best: "O(n log k)"
+        average: "O(n log k)"
+        worst: "O(n log k)"
+      spaceComplexity: "O(k)"
+      description: "Finds top K elements using heap or quickselect."
+      useCases:
+        - "Top K frequent elements"
+        - "Kth largest element"
+        - "K closest points"
+        - "Connect ropes with minimum cost"
+      pros:
+        - "Efficient for large datasets"
+        - "Better than sorting entire array"
+      cons:
+        - "Heap operations overhead"
+        - "Not stable ordering"
+
+    - name: "K-way Merge"
+      timeComplexity:
+        best: "O(n log k)"
+        average: "O(n log k)"
+        worst: "O(n log k)"
+      spaceComplexity: "O(k)"
+      description: "Merges K sorted arrays/lists using a min heap."
+      useCases:
+        - "Merge K sorted lists"
+        - "Kth smallest in sorted matrix"
+        - "Smallest range covering K lists"
+      pros:
+        - "Efficient merging"
+        - "Works for large K"
+      cons:
+        - "Requires heap"
+        - "Extra space for heap"
+
+    - name: "Monotonic Stack"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(n)"
+      description: "Maintains elements in monotonic order to find next greater/smaller elements."
+      useCases:
+        - "Next greater element"
+        - "Daily temperatures"
+        - "Largest rectangle in histogram"
+        - "Trapping rain water"
+      pros:
+        - "Linear time solution"
+        - "Efficient for range queries"
+      cons:
+        - "Not intuitive initially"
+        - "Extra space for stack"
+
+    - name: "Union Find (Disjoint Set)"
+      timeComplexity:
+        best: "O(α(n))"
+        average: "O(α(n))"
+        worst: "O(α(n))"
+      spaceComplexity: "O(n)"
+      description: "Tracks connected components with path compression and union by rank."
+      useCases:
+        - "Number of islands"
+        - "Graph valid tree"
+        - "Accounts merge"
+        - "Redundant connection"
+      pros:
+        - "Near constant time operations"
+        - "Efficient for connectivity"
+      cons:
+        - "Complex implementation"
+        - "Not for directed graphs"
+
+    - name: "Prefix Sum"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(n)"
+      description: "Precomputes cumulative sums for fast range sum queries."
+      useCases:
+        - "Range sum query"
+        - "Subarray sum equals K"
+        - "Continuous subarray sum"
+        - "Product of array except self"
+      pros:
+        - "O(1) range queries after preprocessing"
+        - "Simple to implement"
+      cons:
+        - "Extra space needed"
+        - "Updates require recomputation"
+    - name: "Heavy-Light Decomposition (HLD)"
+      category: "Tree / Advanced"
+      timeComplexity:
+        best: "O(log n) per query"
+        average: "O(log n)"
+        worst: "O(log n)"
+      spaceComplexity: "O(n)"
+      description: "Decomposes tree into paths to answer path or subtree queries efficiently."
+      useCases:
+        - "Path queries in trees (sum, max, min)"
+        - "Dynamic tree operations"
+      pros:
+        - "Supports complex queries efficiently"
+        - "Reduces tree problem to array/range query problem"
+      cons:
+        - "Complex to implement"
+        - "Needs segment tree/fenwick tree integration"
+
+    - name: "Sparse Table / Range Query Static DP"
+      category: "Array / DP"
+      timeComplexity:
+        best: "O(1) per query after O(n log n) preprocessing"
+        average: "O(1)"
+        worst: "O(1)"
+      spaceComplexity: "O(n log n)"
+      description: "Preprocesses array to answer range min/max/gcd queries in O(1) for static arrays."
+      useCases:
+        - "Static RMQ problems"
+        - "GCD/Min/Max queries on immutable array"
+      pros:
+        - "Extremely fast query time"
+        - "Simple and deterministic"
+      cons:
+        - "Works only on immutable arrays"
+        - "Preprocessing takes O(n log n)"
 
 
 advancedAlgorithms:
