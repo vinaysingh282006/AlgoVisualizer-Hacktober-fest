@@ -93,7 +93,8 @@ const DesktopNavItem = ({
               <Link
                 key={subIndex}
                 to={sub.path}
-                className={`dropdown-item ${isActive(sub.path) ? "active" : ""}`}
+                className={`dropdown-item block w-full text-left px-3 py-2 hover:bg-gray-700 rounded-md transition-colors duration-150 ${
+    isActive(sub.path) ? "bg-gray-700" : ""}`}
                 onClick={() => toggleDropdown(null)}
               >
                 {sub.label}
@@ -247,7 +248,7 @@ const Navbar = () => {
         setDesktopDropdownOpen(null); // Close dropdowns when leaving sidebar
       }}
     >
-      <div className="navbar-container">
+      <div className="navbar-container flex flex-col items-start w-full px-4">
         {/* Logo */}
         <Link to="/" className="navbar-logo flex items-center gap-2">
           <img src="/logo.jpg" alt="AlgoVisualizer Logo" className="logo-img" />
@@ -258,7 +259,7 @@ const Navbar = () => {
 
         {/* Desktop nav */}
         <div
-          className="hidden md:flex justify-center items-center gap-2 desktop-nav-menu"
+          className="hidden md:flex flex-col items-start gap-3 w-full desktop-nav-menu"
           ref={navMenuRef}
         >
           {/* Render nav items excluding "Notes" */}
@@ -300,7 +301,7 @@ const Navbar = () => {
                 )}
               </button>
               {desktopNotesOpen && (
-                <div className="dropdown-menu">
+                <div className="dropdown-menu bg-slate-800 text-white rounded-md shadow-lg mt-1 w-full">
                   <Link
                     to="/notes/java"
                     className={`dropdown-item ${isActive("/notes/java") ? "active" : ""}`}
@@ -354,7 +355,7 @@ const Navbar = () => {
                     to="/notes/MERN/MERNFundamentals"
                     className={`dropdown-item ${
                       isActive("/notes/MERN/MERNFundamentals") ? "active" : ""
-                    }`}
+                    } bg-white`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     MERN
