@@ -73,6 +73,12 @@ export const learnSections = [
         tags: ["overview"]
       },
       {
+        path:"/data-structures/array",
+        label:"Array",
+        category:"Data Structures",
+        tags:["array", "pointers"]
+      },
+      {
         path: "/data-structures/linked-list",
         label: "Linked List",
         category: "Data Structures",
