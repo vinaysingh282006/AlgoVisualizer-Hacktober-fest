@@ -29,7 +29,8 @@ export const navbarNavigationItems = [
     icon: "Users",
     dropdown: [
       { path: "/community", label: "Community" },
-      { path: "/contributor-leaderboard", label: "Contributors" },
+      { path: "/contribute", label: "Contribute" },
+      { path: "/contributors", label: "Contributors" },
       { path: "/contributor-leaderboard", label: "Leaderboard" }
     ]
   },

@@ -55,16 +55,16 @@ const ComplexityAnalyzer = ({ algorithm, algorithmName }) => {
   };
   
   return (
-    <div className="complexity-analyzer mt-8 p-6 bg-gray-800 rounded-lg shadow-lg">
-      <h3 className="text-xl font-bold mb-4 text-white">Performance Analysis</h3>
+    <div className="complexity-analyzer flex flex-col gap-5 mt-8 !p-6 rounded-lg shadow-2xl">
+      <h3 className="text-xl text-center font-bold mb-4 text-white">Performance Analysis</h3>
       
       <div className="mb-4 flex flex-wrap gap-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-300 mb-1">Test Data Type</label>
+        <div className='flex flex-col gap-2 justify-center items-center'>
+          <label className="block text-sm font-medium mb-1">Test Data Type</label>
           <select 
             value={testDataType} 
             onChange={handleDataTypeChange}
-            className="bg-gray-700 text-white rounded px-3 py-2"
+            className="bg-gray-700 !border-2 !border-gray-800 text-white rounded shadow-2xl px-3 py-2"
           >
             <option value="random">Random</option>
             <option value="sorted">Sorted</option>
@@ -73,13 +73,13 @@ const ComplexityAnalyzer = ({ algorithm, algorithmName }) => {
           </select>
         </div>
         
-        <div>
-          <label className="block text-sm font-medium text-gray-300 mb-1">Data Sizes (comma separated)</label>
+        <div className='flex flex-col gap-2 justify-center items-center'>
+          <label className="block text-sm font-medium mb-1">Data Sizes (comma separated)</label>
           <input 
             type="text" 
             defaultValue={dataSizes.join(', ')}
             onChange={handleDataSizesChange}
-            className="bg-gray-700 text-white rounded px-3 py-2 w-64"
+            className="bg-gray-700 text-white !border-2 !border-gray-800 rounded shadow-2xl px-3 py-2 w-64"
             placeholder="10, 50, 100, 500, 1000"
           />
         </div>
@@ -87,7 +87,7 @@ const ComplexityAnalyzer = ({ algorithm, algorithmName }) => {
         <button 
           onClick={runAnalysis}
           disabled={isLoading}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
+          className="bg-blue-600 hover:bg-blue-700 !text-white !text-xl font-bold py-2 px-4 rounded disabled:opacity-50"
         >
           {isLoading ? 'Analyzing...' : 'Run Analysis'}
         </button>
@@ -96,12 +96,12 @@ const ComplexityAnalyzer = ({ algorithm, algorithmName }) => {
       {isLoading ? (
         <div className="text-center py-8">
           <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
-          <p className="mt-2 text-gray-300">Running performance analysis...</p>
+          <p className="!mt-2">Running performance analysis...</p>
         </div>
       ) : performanceData.length > 0 ? (
         <div className="mt-6">
-          <h4 className="text-lg font-semibold mb-4 text-white">Execution Time vs Input Size</h4>
-          <div className="h-80">
+          <h4 className="text-lg font-semibold !mb-8 text-white">Execution Time vs Input Size</h4>
+          <div className="h-100">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
                 data={performanceData}
@@ -109,22 +109,18 @@ const ComplexityAnalyzer = ({ algorithm, algorithmName }) => {
               >
                 <CartesianGrid strokeDasharray="3 3" stroke="#444" />
                 <XAxis 
-                  dataKey="inputSize" 
-                  stroke="#ddd" 
+                  dataKey="inputSize"  
                   label={{ 
                     value: 'Input Size', 
                     position: 'insideBottomRight', 
-                    offset: -5,
-                    fill: '#ddd'
+                    offset: -5, 
                   }} 
                 />
-                <YAxis 
-                  stroke="#ddd" 
+                <YAxis   
                   label={{ 
                     value: 'Execution Time (ms)', 
                     angle: -90, 
-                    position: 'insideLeft',
-                    fill: '#ddd'
+                    position: 'insideLeft', 
                   }} 
                 />
                 <Tooltip 
@@ -136,7 +132,6 @@ const ComplexityAnalyzer = ({ algorithm, algorithmName }) => {
                   type="monotone" 
                   dataKey="executionTime" 
                   name="Execution Time (ms)" 
-                  stroke="#8884d8" 
                   activeDot={{ r: 8 }} 
                 />
               </LineChart>
@@ -149,17 +144,17 @@ const ComplexityAnalyzer = ({ algorithm, algorithmName }) => {
               <table className="min-w-full bg-gray-700 rounded-lg">
                 <thead>
                   <tr>
-                    <th className="py-2 px-4 bg-gray-800 text-left text-gray-300">Input Size</th>
-                    <th className="py-2 px-4 bg-gray-800 text-left text-gray-300">Execution Time (ms)</th>
-                    <th className="py-2 px-4 bg-gray-800 text-left text-gray-300">Complexity Estimation</th>
+                    <th className="py-2 px-4 bg-gray-800 text-left !text-gray-100">Input Size</th>
+                    <th className="py-2 px-4 bg-gray-800 text-left !text-gray-100">Execution Time (ms)</th>
+                    <th className="py-2 px-4 bg-gray-800 text-left !text-gray-100">Complexity Estimation</th>
                   </tr>
                 </thead>
                 <tbody>
                   {performanceData.map((data, index) => (
                     <tr key={index} className={index % 2 === 0 ? 'bg-gray-600' : 'bg-gray-700'}>
-                      <td className="py-2 px-4 text-white">{data.inputSize}</td>
-                      <td className="py-2 px-4 text-white">{data.executionTime.toFixed(4)}</td>
-                      <td className="py-2 px-4 text-white">
+                      <td className="py-2 px-4 !text-gray-200">{data.inputSize}</td>
+                      <td className="py-2 px-4 !text-gray-200">{data.executionTime.toFixed(4)}</td>
+                      <td className="py-2 px-4 !text-gray-200">
                         {index > 0 ? 
                           `${((data.executionTime / performanceData[index-1].executionTime) / (data.inputSize / performanceData[index-1].inputSize)).toFixed(2)}x growth factor` : 
                           'Baseline'
@@ -173,7 +168,7 @@ const ComplexityAnalyzer = ({ algorithm, algorithmName }) => {
           </div>
         </div>
       ) : (
-        <div className="text-center py-8 text-gray-400">
+        <div className="text-center py-8">
           <p>No performance data available. Run analysis to see results.</p>
         </div>
       )}

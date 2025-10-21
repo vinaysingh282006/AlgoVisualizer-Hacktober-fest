@@ -345,7 +345,7 @@ const Contributors = () => {
       data-aos-duration="1000"
     >
       {/* Back Button */}
-      <motion.button
+      {/* <motion.button
         onClick={handleBackClick}
         className="back-button"
         initial={{ opacity: 0, x: -20 }}
@@ -389,7 +389,7 @@ const Contributors = () => {
           <path d="M19 12H5" />
         </svg>
         <span>Back to Community</span>
-      </motion.button>
+      </motion.button> */}
 
       <motion.div
         initial={{ opacity: 0, y: -30 }}
@@ -476,17 +476,16 @@ const Contributors = () => {
                 <div
                   className="contribution-stats"
                   style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    margin: "1rem 0",
-                    padding: "1rem 0",
+                    padding:'1rem 1.3rem',
+                    display: "grid", 
+                    gridTemplateColumns:'repeat(2 , 1fr)',
+                    margin: "1rem 0", 
                     gap: "1rem",
                     borderRadius: "12px",
                     boxShadow: `0 4px 12px ${`var(--shadow-color)`}`
                   }}
                 >
-                  <div className="stat-item" style={{ flexDirection: "column" }}>
+                  <div className="stat-item"  >
                     <span className="stat-icon">📊</span>
                     <span className="stat-value">{contributor.contributions}</span>
                     <span className="stat-label">Commits</span>
