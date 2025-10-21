@@ -3,7 +3,6 @@ import { FaEnvelope, FaHeart, FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../styles/footer-improved.css";
 import "../styles/footer.css";
 import logo from "/logo.jpg";
 import AOS from "aos";
@@ -51,17 +50,17 @@ const NewsletterForm = ({ email, setEmail, isLoading, handleSubmit, isSubscribed
   return (
     <form onSubmit={handleSubmit} className="newsletter-form">
       <div className="input-container">
+        <input
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="newsletter-input"
+          disabled={isLoading}
+          required
+        />
         <FaEnvelope className="input-icon" />
       </div>
-      <input
-        type="email"
-        placeholder="    Enter your email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="newsletter-input"
-        disabled={isLoading}
-      />
-
       <button
         type="submit"
         className={`newsletter-btn ${isLoading ? "loading" : ""}`}
@@ -168,6 +167,8 @@ const Footer = () => {
           </svg>
         </div>
 
+        <div className="footer-top-divider"></div>
+
         <div className="footer-content">
           {/* Brand Section */}
           <div
@@ -189,7 +190,6 @@ const Footer = () => {
                 <span className="logo-text">AlgoVisualizer</span>
               </div>
               <p className="brand-tagline">Visualize algorithms. Master coding. Elevate skills.</p>
-              {/* moved social links inside brand-header so they align with the tagline */}
               <div className="social-links brand-social-links">
                 {socialLinks.map((link, index) => (
                   <SocialLink key={index} href={link.href} icon={link.icon} title={link.title} />
@@ -242,13 +242,13 @@ const Footer = () => {
 
           {/* Newsletter */}
           <div
-            className="footer-column newsletter-column !grid !grid-cols-1 !place-items-center"
+            className="footer-column newsletter-column"
             data-aos="fade-up"
             data-aos-duration="1000"
             data-aos-delay="800"
           >
             <h3 className="column-title">Stay Updated</h3>
-            <p className="newsletter-description !text-center">
+            <p className="newsletter-description">
               Get the latest algorithm visualizations and coding insights delivered to your inbox.
             </p>
 

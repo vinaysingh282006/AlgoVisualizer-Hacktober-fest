@@ -1,4 +1,4 @@
-/* ----------------- Modern Responsive Footer Styles ----------------- */
+/* ----------------- Improved Footer Alignment Styles ----------------- */
 .footer-container {
   position: relative;
   background: var(--card-bg, #f8fafc);
@@ -14,11 +14,20 @@
   margin: 0;
   box-sizing: border-box;
   will-change: opacity, transform;
+  background: linear-gradient(to bottom, var(--card-bg, #f8fafc) 0%, var(--surface-bg, #ffffff) 100%);
 }
 
 .footer-container.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.footer-top-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--border-primary, #d1d5db), transparent);
+  max-width: min(1200px, 95vw);
+  margin: 0 auto clamp(18px, 3vw, 24px);
+  opacity: 0.7;
 }
 
 .footer-wave {
@@ -59,6 +68,7 @@
   transform: translateY(30px);
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
   box-sizing: border-box;
+  align-items: start;
 }
 
 .footer-container.visible .footer-content {
@@ -66,23 +76,48 @@
   transform: translateY(0);
 }
 
-/* Staggered animation for footer columns */
 .footer-column {
   display: flex;
   flex-direction: column;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
-.footer-container.visible .footer-column:nth-child(1) { transition-delay: 0.3s; }
-.footer-container.visible .footer-column:nth-child(2) { transition-delay: 0.4s; }
-.footer-container.visible .footer-column:nth-child(3) { transition-delay: 0.5s; }
-.footer-container.visible .footer-column:nth-child(4) { transition-delay: 0.6s; }
+.column-title {
+  font-size: clamp(16px, 3vw, 18px);
+  font-weight: 600;
+  color: var(--text-primary, #1f2937);
+  margin-bottom: clamp(15px, 3vw, 20px);
+  position: relative;
+  padding-bottom: clamp(8px, 2vw, 10px);
+  text-align: left;
+  transition: color 0.3s ease;
+  min-height: 28px;
+  display: flex;
+  align-items: flex-end;
+  padding-left: 0;
+  margin-left: 0;
+  width: 100%;
+}
 
-.footer-container.visible .footer-column {
-  opacity: 1;
-  transform: translateY(0);
+.column-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--user-accent-primary), var(--user-accent-secondary));
+  border-radius: 3px;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.column-title:hover::after {
+  width: 60px;
+  background: linear-gradient(90deg, var(--user-accent-secondary), var(--user-accent-primary));
 }
 
 .brand-column {
@@ -90,25 +125,8 @@
   box-sizing: border-box;
 }
 
-/* Social links in brand column */
-.brand-social-links {
-  display: flex;
-  gap: clamp(12px, 2vw, 15px);
-  margin-top: clamp(15px, 3vw, 20px);
-  flex-wrap: wrap;
-  /* Align with the brand text/logo on larger screens */
-  justify-content: flex-start;
-  align-items: center;
-}
-
-/* Brand Section */
 .brand-header {
   margin-bottom: clamp(20px, 4vw, 25px);
-}
-
-/* Ensure brand header content (tagline + socials) align to the left on larger screens
-   but keep centered behavior on smaller viewports via existing media queries. */
-.brand-header {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -229,92 +247,15 @@
   outline-offset: 2px;
 }
 
-.footer-credits a {
-  color: var(--user-accent-primary);
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  margin: 0 2px;
-  position: relative;
+.brand-social-links {
+  display: flex;
+  gap: clamp(12px, 2vw, 15px);
+  margin-top: clamp(15px, 3vw, 20px);
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-.footer-credits a::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--user-accent-primary), var(--user-accent-secondary));
-  transition: width 0.3s ease;
-  border-radius: 1px;
-}
-
-.footer-credits a:hover::after {
-  width: 100%;
-}
-
-.footer-credits a:hover {
-  color: var(--user-accent-secondary);
-  text-decoration: underline;
-  transform: translateY(-1px);
-}
-
-.heart-icon {
-  color: var(--success-color, #10b981);
-  margin: 0 4px;
-  animation: heartbeat 2s infinite;
-  transition: color 0.3s ease;
-}
-
-.heart-icon:hover {
-  color: #f87171;
-  animation-duration: 1s;
-}
-
-@keyframes heartbeat {
-  0% { transform: scale(1); }
-  14% { transform: scale(1.3); }
-  28% { transform: scale(1); }
-  42% { transform: scale(1.3); }
-  70% { transform: scale(1); }
-  100% { transform: scale(1); }
-}
-
-/* Column Titles */
-.column-title {
-  font-size: clamp(16px, 3vw, 18px);
-  font-weight: 600;
-  color: var(--text-primary, #1f2937);
-  margin-bottom: clamp(15px, 3vw, 20px);
-  position: relative;
-  padding-bottom: clamp(8px, 2vw, 10px);
-  text-align: left;
-  transition: color 0.3s ease;
-}
-
-.column-title:hover {
-  color: var(--user-accent-primary);
-}
-
-.column-title::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 40px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--user-accent-primary), var(--user-accent-secondary));
-  border-radius: 3px;
-  transition: width 0.3s ease, background 0.3s ease;
-}
-
-.column-title:hover::after {
-  width: 60px;
-  background: linear-gradient(90deg, var(--user-accent-secondary), var(--user-accent-primary));
-}
-
-/* Footer Links */
 .footer-links {
   list-style: none;
   padding: 0;
@@ -383,48 +324,60 @@
   outline-offset: 2px;
 }
 
-/* Newsletter Section */
+/* PERFECTLY ALIGNED NEWSLETTER SECTION */
 .newsletter-column {
   max-width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
+  text-align: left;
+  justify-content: flex-start;
+  padding-left: 0;
+  margin-left: 0;
+  width: 100%;
 }
 
 .newsletter-description {
   color: var(--text-secondary, #6b7280);
   font-size: clamp(13px, 2.5vw, 14px);
   line-height: 1.6;
-  margin-bottom: clamp(15px, 3vw, 20px);
-  text-align: center;
-  max-width: min(450px, 90%);
+  margin: 6px 0 clamp(15px, 3vw, 18px) 0;
+  text-align: left;
+  width: 100%;
+  max-width: min(480px, 100%);
+  padding: 0;
+  margin-left: 0;
   transition: color 0.3s ease;
-}
-
-.newsletter-description:hover {
-  color: var(--text-primary, #1f2937);
+  /* REMOVE ALL GAPS - align exactly like other sections */
+  text-indent: 0;
+  align-self: stretch;
+  /* Force exact same alignment as resource links */
+  position: relative;
+  left: 0;
 }
 
 .newsletter-form {
   display: flex;
   flex-direction: column;
-  gap: clamp(12px, 2.5vw, 15px);
+  gap: clamp(12px, 2.5vw, 14px);
   width: 100%;
   max-width: min(400px, 100%);
+  padding-left: 0;
+  margin-left: 0;
+  align-self: flex-start;
 }
 
 .input-container {
   position: relative;
   width: 100%;
-  gap: 10px;
+  padding-left: 0;
+  margin-left: 0;
 }
 
 .input-icon {
   position: absolute;
   left: clamp(12px, 2.5vw, 15px);
   top: 50%;
-  margin-top:40px;
   transform: translateY(-50%);
   color: var(--text-muted, #9ca3af);
   font-size: clamp(14px, 3vw, 16px);
@@ -442,6 +395,7 @@
   font-size: clamp(13px, 2.5vw, 14px);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-sizing: border-box;
+  padding-left: clamp(40px, 4vw, 45px);
 }
 
 .newsletter-input:focus + .input-icon,
@@ -536,7 +490,6 @@
   outline-offset: 2px;
 }
 
-/* Subscription Success */
 .subscription-success {
   text-align: center;
   padding: clamp(15px, 3vw, 20px);
@@ -603,7 +556,6 @@
   font-size: clamp(13px, 2.5vw, 14px);
 }
 
-/* Social Links */
 .social-links {
   display: flex;
   gap: clamp(10px, 2vw, 12px);
@@ -634,14 +586,6 @@
   box-shadow: 0 5px 15px var(--shadow-md);
 }
 
-/* Override: ensure brand column social icons align with brand text/logo on larger screens.
-   This rule comes after the generic .social-links rule so it wins the cascade on desktop. */
-.brand-column .brand-social-links {
-  justify-content: flex-start;
-  align-items: center;
-}
-
-/* Footer Bottom */
 .footer-bottom {
   margin-top: auto;
 }
@@ -663,7 +607,6 @@
   box-sizing: border-box;
 }
 
-/* Footer Main Row */
 .footer-main-row {
   display: flex;
   justify-content: center;
@@ -694,7 +637,58 @@
   text-align: center;
 }
 
-/* Footer Legal Row */
+.footer-credits a {
+  color: var(--user-accent-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin: 0 2px;
+  position: relative;
+}
+
+.footer-credits a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--user-accent-primary), var(--user-accent-secondary));
+  transition: width 0.3s ease;
+  border-radius: 1px;
+}
+
+.footer-credits a:hover::after {
+  width: 100%;
+}
+
+.footer-credits a:hover {
+  color: var(--user-accent-secondary);
+  text-decoration: underline;
+  transform: translateY(-1px);
+}
+
+.heart-icon {
+  color: var(--success-color, #10b981);
+  margin: 0 4px;
+  animation: heartbeat 2s infinite;
+  transition: color 0.3s ease;
+}
+
+.heart-icon:hover {
+  color: #f87171;
+  animation-duration: 1s;
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.3); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.3); }
+  70% { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+
 .footer-legal-row {
   display: flex;
   justify-content: center;
@@ -751,6 +745,16 @@
   user-select: none;
 }
 
+.footer-container.visible .footer-column:nth-child(1) { transition-delay: 0.3s; }
+.footer-container.visible .footer-column:nth-child(2) { transition-delay: 0.4s; }
+.footer-container.visible .footer-column:nth-child(3) { transition-delay: 0.5s; }
+.footer-container.visible .footer-column:nth-child(4) { transition-delay: 0.6s; }
+
+.footer-container.visible .footer-column {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* =========================
    Enhanced Responsive Breakpoints
 ========================= */
@@ -768,12 +772,10 @@
     padding-right: 0;
   }
 
-  /* On tablet widths the brand column becomes centered, so center the social links too */
   .brand-column .brand-social-links {
     justify-content: center;
   }
 
-  /* On tablet, center the brand header contents as well */
   .brand-header {
     align-items: center;
     text-align: center;
@@ -781,10 +783,14 @@
   
   .newsletter-column {
     grid-column: span 2;
+    align-items: center;
+    text-align: center;
   }
   
   .column-title {
     text-align: center;
+    padding-left: 0;
+    margin-left: 0;
   }
   
   .column-title::after {
@@ -799,6 +805,18 @@
   .brand-tagline {
     max-width: none;
     margin: 0 auto;
+  }
+  
+  .newsletter-description {
+    text-align: center;
+    max-width: none;
+    padding: 0;
+    margin-left: 0;
+    left: 0;
+  }
+  
+  .newsletter-form {
+    align-self: center;
   }
 }
 
@@ -828,6 +846,8 @@
   .resources-column,
   .newsletter-column {
     display: flex;
+    align-items: center;
+    text-align: center;
   }
   
   .footer-legal-row {
@@ -871,6 +891,22 @@
   .legal-separator {
     display: none;
   }
+  
+  .newsletter-column {
+    align-items: center;
+  }
+  
+  .newsletter-description {
+    text-align: center;
+    max-width: none;
+    padding: 0;
+    margin-left: 0;
+    left: 0;
+  }
+  
+  .newsletter-form {
+    align-self: center;
+  }
 }
 
 /* Small Mobile (320px - 480px) */
@@ -892,6 +928,7 @@
     grid-column: span 1;
     padding: 0;
     text-align: center;
+    align-items: center;
   }
   
   .brand-column {
@@ -987,6 +1024,8 @@
   
   .column-title {
     text-align: center;
+    padding-left: 0;
+    margin-left: 0;
   }
   
   .footer-links {
@@ -995,6 +1034,18 @@
   
   .footer-links a {
     justify-content: center;
+  }
+  
+  .newsletter-description {
+    text-align: center;
+    padding: 0 10px;
+    max-width: none;
+    left: 0;
+  }
+  
+  .newsletter-form {
+    width: 100%;
+    padding: 0 10px;
   }
 }
 
@@ -1065,8 +1116,7 @@
   }
 }
 
-/* Strong override: ensure brand header contents (tagline + socials) are left-aligned on desktop
-   This uses a desktop-only media query with specific selectors and !important to defeat other stylesheet rules. */
+/* Strong override: ensure brand header contents (tagline + socials) are left-aligned on desktop */
 @media (min-width: 1025px) {
   .footer-column.brand-column .brand-header {
     align-items: flex-start !important;
@@ -1080,7 +1130,7 @@
   }
 }
 
-/* Landscape mobile improvements change here */
+/* Landscape mobile improvements */
 @media (max-width: 812px) and (orientation: landscape) {
   .footer-container {
     padding: 20px 0 10px;
@@ -1102,10 +1152,22 @@
   .newsletter-column {
     display: flex;
     grid-column: span 1;
+    align-items: center;
+    text-align: center;
   }
   
   .footer-legal-row {
     display: flex;
+  }
+  
+  .newsletter-description {
+    text-align: center;
+    max-width: none;
+    left: 0;
+  }
+  
+  .newsletter-form {
+    align-self: center;
   }
 }
 
@@ -1128,7 +1190,7 @@
   }
 }
 
-/* Theme-aware border for footer when footer.css takes precedence */
+/* Theme-aware border for footer */
 [data-theme="light"] .footer-container {
   border-top: 1px solid rgba(0,0,0,0.10);
 }
