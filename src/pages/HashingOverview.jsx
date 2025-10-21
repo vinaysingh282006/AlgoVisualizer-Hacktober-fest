@@ -1,32 +1,44 @@
 // src/pages/HashingOverview.jsx
 import React from "react";
 import "../styles/global-theme.css";
-import HashingPage from "./HashingPage"; // Your visualizer component
+import HashingPage from "./HashingPage";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 const HashingOverview = () => {
   return (
-    <div className="theme-container" data-aos="fade-up" data-aos-duration="1000">
+    <div
+      className="theme-container"
+      data-aos="fade-up"
+      data-aos-duration="1000"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
+        padding: "2rem 0",
+      }}
+    >
       <h1 className="theme-title" style={{ marginTop: "4rem" }}>
-        Guide to <span style={{ color: "var(--accent-primary)" }}>Hashing</span>
+        Guide to{" "}
+        <span style={{ color: "var(--accent-primary)" }}>Hashing</span>
       </h1>
 
       <p
         style={{
-          textAlign: "center",
           maxWidth: "700px",
           margin: "-2rem auto 2rem auto",
           color: "var(--theme-text-secondary)",
         }}
       >
-        Hashing is a technique used to map data of arbitrary size to fixed-size values, called hash codes,
-        which can then be used for efficient data storage, retrieval, and lookup.
+        Hashing is a technique used to map data of arbitrary size to fixed-size values,
+        called hash codes, which can then be used for efficient data storage,
+        retrieval, and lookup.
       </p>
 
       <p
         style={{
-          textAlign: "center",
           maxWidth: "700px",
           margin: "-2rem auto 2rem auto",
           color: "var(--text-color)",
@@ -44,23 +56,34 @@ const HashingOverview = () => {
         : Enable fast insertion, deletion, and search operations with minimal collisions.
       </p>
 
-      <div className="theme-card" style={{ width: "1300px" }} data-aos="fade-up" data-aos-delay="200">
+      <div
+        className="theme-card"
+        style={{ width: "80%", maxWidth: "1300px" }}
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
         <div className="theme-card-header">
           <h3>What is Hashing?</h3>
         </div>
         <p style={{ color: "var(--theme-text-secondary)", lineHeight: 1.6 }}>
-          Hashing is widely used in data structures like hash tables, sets, and maps to allow constant time
-          lookup, insertion, and deletion. Collisions, which occur when multiple keys map to the same hash,
-          are resolved using techniques such as chaining or open addressing. Rolling hashes are used in string
-          matching algorithms like Rabin-Karp.
+          Hashing is widely used in data structures like hash tables, sets, and maps to
+          allow constant time lookup, insertion, and deletion. Collisions, which occur
+          when multiple keys map to the same hash, are resolved using techniques such as
+          chaining or open addressing. Rolling hashes are used in string matching
+          algorithms like Rabin-Karp.
         </p>
       </div>
 
-      <div className="theme-card" style={{ width: "1300px" }} data-aos="fade-up" data-aos-delay="300">
+      <div
+        className="theme-card"
+        style={{ width: "80%", maxWidth: "1300px" }}
+        data-aos="fade-up"
+        data-aos-delay="300"
+      >
         <div className="theme-card-header">
           <h3>🌱 Key Takeaways</h3>
         </div>
-        <ul className="search-points">
+        <ul className="search-points" style={{ textAlign: "left" }}>
           <li>Provides O(1) average time complexity for search, insert, and delete operations</li>
           <li>Handles collisions using chaining or open addressing</li>
           <li>Rolling hash enables efficient substring matching</li>
@@ -68,7 +91,12 @@ const HashingOverview = () => {
         </ul>
       </div>
 
-      <div className="theme-card" style={{ width: "1300px" }} data-aos="fade-up" data-aos-delay="400">
+      <div
+        className="theme-card"
+        style={{ width: "80%", maxWidth: "1300px" }}
+        data-aos="fade-up"
+        data-aos-delay="400"
+      >
         <div className="theme-card-header">
           <h3>⚡ Complexity Analysis</h3>
         </div>
@@ -110,7 +138,7 @@ const HashingOverview = () => {
         </table>
       </div>
 
-      {/* Include your interactive hashing visualizer */}
+      {/* Interactive Hashing Visualizer */}
       <HashingPage />
     </div>
   );
