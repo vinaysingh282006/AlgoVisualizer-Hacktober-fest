@@ -377,7 +377,12 @@ const Blog = () => {
           ) : (
             <div className="blog-cards-grid" role="list" aria-label="List of blog articles">
               {filteredPosts.map((post) => (
-                <article key={post.id} className="blog-card" role="listitem" aria-labelledby={`post-${post.id}-title`}>
+                <article 
+                key={post.id} 
+                className="blog-card bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 transition-all duration-300 hover:shadow-lg hover:-translate-y-1" 
+                role="listitem" 
+                aria-labelledby={`post-${post.id}-title`}
+                >
                   <div className="blog-card-header">
                     <div className="blog-card-category">
                       <Code size={16} aria-hidden="true" />
@@ -389,7 +394,7 @@ const Blog = () => {
                     </div>
                   </div>
 
-                  <div className="blog-card-content">
+                  <div className="blog-card-content p-5 text-gray-800 dark:text-gray-100">
                     <h3 id={`post-${post.id}-title`} className="blog-card-title">
                       {post.title}
                     </h3>
@@ -405,7 +410,7 @@ const Blog = () => {
                     </div>
                   </div>
 
-                  <div className="blog-card-footer">
+                  <div className="blog-card-footer mt-4 flex justify-between items-center border-t border-gray-200 dark:border-gray-700 pt-3">
                     <div className="blog-card-meta">
                       <span className="blog-card-author">
                         <User size={14} aria-hidden="true" />
@@ -420,7 +425,7 @@ const Blog = () => {
                     {post.link ? (
                       <a
                         href={post.link}
-                        className="blog-card-btn"
+                        className="blog-card-btn text-blue-600 dark:text-blue-400 font-semibold hover:underline flex items-center gap-1"
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={() => trackPostInteraction(post.id, "read_more")}

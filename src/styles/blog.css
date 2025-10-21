@@ -702,3 +702,183 @@
   color: var(--theme-btn-primary-text);
   transform: translateY(-1px);
 }
+
+/* ===== FIX: Make Latest Articles Always Visible ===== */
+.blog-card {
+  background: #ffffff;
+  color: #1a1a1a;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+}
+
+.blog-card:hover {
+  transform: translateY(-6px);
+  border-color: #667eea;
+  box-shadow: 0 12px 25px rgba(102, 126, 234, 0.15);
+}
+
+.blog-card-title {
+  color: #1a1a1a;
+  transition: color 0.3s ease;
+}
+
+.blog-card-excerpt {
+  color: #555;
+}
+
+.blog-card-footer {
+  border-top: 1px solid #eaeaea;
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.blog-card-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.blog-card-btn:hover {
+  background: linear-gradient(135deg, #5b6ff3 0%, #8655b9 100%);
+  transform: translateY(-2px);
+}
+
+.blog-card-date,
+.blog-card-read-time,
+.blog-card-author {
+  color: #666;
+}
+
+.blog-tag,
+.blog-category,
+.blog-filter-btn {
+  background: #f5f5f5;
+  color: #333; 
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.blog-tag:hover,
+.blog-category:hover,
+.blog-filter-btn:hover {
+  background: #667eea; 
+  color: #fff;
+  border-color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(102, 126, 234, 0.2);
+}
+
+.blog-filter-btn.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border: none;
+}
+
+[data-theme="dark"] .blog-card {
+  background: #0b1120; /* same deep navy tone */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  color: #f0f4ff;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+[data-theme="dark"] .blog-card:hover {
+  border-color: rgba(102, 126, 234, 0.5);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.15);
+  transform: translateY(-4px);
+}
+
+[data-theme="dark"] .blog-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.8rem;
+  transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .blog-card-title:hover {
+  color: #7aa2f7; /* soft blue highlight */
+}
+
+[data-theme="dark"] .blog-card-excerpt {
+  color: #c7d3f5;
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+}
+
+[data-theme="dark"] .blog-card-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: auto;
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #9aa5ce;
+}
+
+[data-theme="dark"] .blog-card-author,
+[data-theme="dark"] .blog-card-read-time,
+[data-theme="dark"] .blog-card-date {
+  color: #a0b2d9;
+}
+
+[data-theme="dark"] .blog-card-btn {
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.6rem 1.3rem;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+}
+
+[data-theme="dark"] .blog-card-btn:hover {
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  transform: translateY(-2px);
+}
+
+[data-theme="dark"] .blog-card-category {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #93c5fd;
+  background: rgba(59, 130, 246, 0.15);
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  display: inline-block;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.3px;
+}
+
+[data-theme="dark"] .blog-card-category:hover {
+  background: rgba(59, 130, 246, 0.3);
+}
