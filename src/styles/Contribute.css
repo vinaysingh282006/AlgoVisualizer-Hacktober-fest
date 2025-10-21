@@ -96,8 +96,7 @@
 /* ------------------------
    Hero Section
 ------------------------ */
-.contribute-hero {
-  padding: 9rem 0 7rem 0;
+.contribute-hero { 
   text-align: center;
   position: relative;
 }
@@ -154,12 +153,12 @@
   flex-direction: column;
   align-items: center;
   gap: 0.65rem;
-  padding: 2rem;
+  padding: 10px;
   background: var(--card-bg);
   border: 1px solid var(--border-primary);
   border-radius: 20px;
   backdrop-filter: blur(11px);
-  min-width: 140px;
+  min-width: 80px;
   transition: box-shadow 0.3s, border-color 0.3s, transform 0.3s;
   box-shadow: 0 8px 28px rgba(99,102,241,0.08);
 }
@@ -194,7 +193,7 @@
    What is AlgoVisualizer Section
 ------------------------ */
 .what-is-section {
-  padding: 7rem 0 7rem 0;
+  padding: 0.7rem;
   position: relative;
 }
 
