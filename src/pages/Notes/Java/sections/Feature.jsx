@@ -92,7 +92,7 @@ const Feature = () => {
           ))}
         </div>
         {/* summary table */}
-        <div style={{display:'flex' , justifyContent:'center' , alignItems:'center', flexDirection:'column'}}>
+        {/* <div style={{display:'flex' , justifyContent:'center' , alignItems:'center', flexDirection:'column'}}>
             <h2 style={{ textAlign: "center", fontSize: "2rem" }}>🧠 Summary Table</h2>
             <div style={{display:'flex' , justifyContent:'center' , gap:'.7rem' , flexDirection:"column" , width:"70%" , border:"2px solid #000"}}>
                 {features.map((s , i) => (
@@ -102,7 +102,7 @@ const Feature = () => {
                     </div>
                 ))}
             </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
