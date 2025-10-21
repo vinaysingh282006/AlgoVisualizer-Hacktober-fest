@@ -113,5 +113,11 @@
     "type": "backtracking",
     "description": "Solves the N-Queens problem using backtracking. Places N queens on an N×N board so that no two queens attack each other.",
     "useCase": "Classic backtracking example used to demonstrate constraint satisfaction and recursive search."
-  }
+  },
+  {
+  "name": "Bellman-Ford",
+  "type": "graph",
+  "description": "Bellman-Ford Algorithm computes the shortest paths from a single source vertex to all other vertices in a weighted graph, even if the graph contains negative weight edges. It detects negative weight cycles as well.",
+  "useCase": "Useful in graphs with negative weight edges and for detecting negative cycles in network routing and optimization problems."
+}
 ]
