@@ -330,28 +330,27 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  text-align: left;
+  text-align: left; /* left on desktop */
   justify-content: flex-start;
   padding-left: 0;
   margin-left: 0;
   width: 100%;
+  gap: clamp(10px, 2vw, 16px);
 }
 
 .newsletter-description {
-  color: var(--text-secondary, #6b7280);
-  font-size: clamp(13px, 2.5vw, 14px);
+  color: var(--text-secondary, #9aa4b2);
+  font-size: clamp(14px, 2.5vw, 16px);
   line-height: 1.6;
-  margin: 6px 0 clamp(15px, 3vw, 18px) 0;
+  margin: 8px 0 clamp(18px, 3vw, 22px) 0;
   text-align: left;
   width: 100%;
-  max-width: min(480px, 100%);
+  max-width: min(520px, 100%);
   padding: 0;
   margin-left: 0;
-  transition: color 0.3s ease;
-  /* REMOVE ALL GAPS - align exactly like other sections */
+  transition: color 0.3s ease, transform 0.15s ease;
   text-indent: 0;
   align-self: stretch;
-  /* Force exact same alignment as resource links */
   position: relative;
   left: 0;
 }
@@ -376,63 +375,66 @@
 
 .input-icon {
   position: absolute;
-  left: clamp(12px, 2.5vw, 15px);
+  left: clamp(16px, 3vw, 20px);
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-muted, #9ca3af);
-  font-size: clamp(14px, 3vw, 16px);
-  transition: color 0.3s ease, transform 0.3s ease;
-  z-index: 1;
+  font-size: clamp(16px, 3.2vw, 18px);
+  transition: color 0.2s ease, transform 0.2s ease;
+  z-index: 2;
 }
 
 .newsletter-input {
   width: 100%;
-  padding: clamp(12px, 2.5vw, 14px) clamp(12px, 2.5vw, 15px) clamp(12px, 2.5vw, 14px) clamp(40px, 4vw, 45px);
-  border: 1px solid var(--border-primary, #d1d5db);
-  background: var(--surface-bg, #ffffff);
-  color: var(--text-primary, #1f2937);
-  border-radius: 8px;
-  font-size: clamp(13px, 2.5vw, 14px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0 clamp(14px, 2.5vw, 18px) 0 clamp(56px, 6vw, 64px);
+  height: clamp(48px, 6vw, 56px);
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.03); /* dark-style input */
+  color: var(--text-on-dark, #d1d5db);
+  border-radius: 12px;
+  font-size: clamp(14px, 2.5vw, 16px);
+  transition: all 0.18s ease;
   box-sizing: border-box;
-  padding-left: clamp(40px, 4vw, 45px);
+  padding-left: clamp(56px, 6vw, 64px);
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,0.02);
 }
 
 .newsletter-input:focus + .input-icon,
 .newsletter-input:valid + .input-icon {
   color: var(--user-accent-primary);
-  transform: translateY(-50%) scale(1.1);
+  transform: translateY(-50%) scale(1.05);
 }
 
 .newsletter-input:focus {
   outline: none;
-  border-color: var(--user-accent-primary);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-  transform: scale(1.02);
+  border-color: rgba(59,130,246,0.75);
+  box-shadow: 0 6px 18px rgba(59,130,246,0.12);
+  transform: translateY(-1px);
 }
 
 .newsletter-input::placeholder {
-  color: var(--text-muted, #9ca3af);
+  color: rgba(255,255,255,0.45);
 }
 
 .newsletter-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(6px, 1.5vw, 8px);
-  padding: clamp(12px, 2.5vw, 14px) clamp(16px, 3vw, 20px);
-  background: linear-gradient(135deg, var(--user-accent-primary), var(--user-accent-secondary));
-  color: var(--button-primary-text, #ffffff);
+  gap: clamp(4px, 2vw, 7.5px);
+  height: clamp(48px, 7vw, 54px);
+  padding: 0 clamp(18px, 3vw, 24px);
+  background: linear-gradient(90deg, #63b3ff 0%, #60a5fa 50%, #7dd3fc 100%);
+  color: var(--button-primary-text, #061224);
   border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: clamp(13px, 2.5vw, 14px);
+  border-radius: 14px;
+  font-weight: 800;
+  font-size: clamp(15px, 2.8vw, 18px);
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.18s ease;
   width: 100%;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 18px 40px rgba(59,130,246,0.18);
   box-sizing: border-box;
 }
 
@@ -443,8 +445,8 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: 0.5s;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transition: 0.35s ease;
 }
 
 .newsletter-btn:hover::before {
@@ -452,9 +454,8 @@
 }
 
 .newsletter-btn:hover:not(.loading) {
-  background: linear-gradient(135deg, var(--user-accent-primary), var(--user-accent-secondary));
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 24px 60px rgba(59,130,246,0.22);
 }
 
 .newsletter-btn.loading {
