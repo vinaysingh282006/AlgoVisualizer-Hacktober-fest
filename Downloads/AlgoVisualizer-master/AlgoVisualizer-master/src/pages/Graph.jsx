@@ -5,6 +5,9 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 const Graph = () => {
+  useEffect(() => {
+    AOS.init({ once: true });
+  }, []);
   return (
     <div className="theme-container" data-aos="fade-up" data-aos-duration="1000">
       <h1 className="theme-title">Graph Algorithms Visualization</h1>
@@ -56,6 +59,7 @@ const Graph = () => {
           <a href="/graph/dfs" className="btn btn-secondary" style={{ textDecoration: 'none' }}>DFS</a>
           <a href="/graph/dijkstra" className="btn btn-secondary" style={{ textDecoration: 'none' }}>Dijkstra</a>
           <a href="/graph/astar" className="btn btn-secondary" style={{ textDecoration: 'none' }}>A*</a>
+          <a href="/graph/bellman-ford" className="btn btn-secondary" style={{ textDecoration: 'none' }}>Bellman-Ford</a
         </div>
       </div>
       <div className="theme-card" data-aos="fade-up" data-aos-delay="400">
@@ -74,6 +78,21 @@ const Graph = () => {
           </div>
         </div>
       </div>
+      <div className="theme-card" data-aos="fade-up" data-aos-delay="450">
+  <div className="theme-card-header">
+    <h3>Bellman-Ford Shortest Path Algorithm</h3>
+  </div>
+  <p style={{ color: "var(--theme-text-secondary)", lineHeight: 1.6 }}>
+    Bellman-Ford algorithm finds the shortest path in graphs that may have negative edge weights and can detect negative weight cycles.
+  </p>
+  <div className="complexity-grid">
+    <div className="complexity-item">
+      <span className="complexity-label">Time Complexity:</span>
+      <span className="complexity-value">O(V * E)</span>
+    </div>
+  </div>
+</div>
+
 
       <div data-aos="fade-up" data-aos-delay="500">
         <GraphVisualizer />

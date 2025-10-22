@@ -72,6 +72,63 @@ const GraphAlgorithms = {
     visualizationSteps.push({ type: "path", path });
     return { visualizationSteps, distances, path };
   },
+  bellmanFord: ({ nodes, edges, startNode, endNode, setVisualState, setMessage }) => {
+  if (startNode === null || endNode === null) {
+    alert("Please select a start and end node first.");
+    return;
+  }
+
+  setVisualState({ visited: new Set(), path: [] });
+  setMessage(`Running Bellman–Ford from ${startNode} to ${endNode}...`);
+
+  const numNodes = nodes.length;
+  const distances = Array(numNodes).fill(Infinity);
+  const prev = Array(numNodes).fill(null);
+  const steps = [];
+
+  distances[startNode] = 0;
+
+  for (let i = 0; i < numNodes - 1; i++) {
+    edges.forEach(({ start, end, weight }) => {
+      if (distances[start] + weight < distances[end]) {
+        distances[end] = distances[start] + weight;
+        prev[end] = start;
+      }
+      if (distances[end] + weight < distances[start]) {
+        distances[start] = distances[end] + weight;
+        prev[start] = end;
+      }
+    });
+  }
+
+  // Check for negative weight cycles
+  let hasNegativeCycle = false;
+  edges.forEach(({ start, end, weight }) => {
+    if (distances[start] + weight < distances[end]) {
+      hasNegativeCycle = true;
+    }
+    if (distances[end] + weight < distances[start]) {
+      hasNegativeCycle = true;
+    }
+  });
+
+  if (hasNegativeCycle) {
+    setMessage("Negative weight cycle detected!");
+    return { steps: [], path: [], distances };
+  }
+
+  const path = [];
+  let current = endNode;
+  while (current !== null) {
+    const p = prev[current];
+    if (p !== null) path.unshift({ start: p, end: current });
+    current = p;
+  }
+  steps.push({ type: "path", path });
+
+  return { steps, path, distances };
+},
+
 
   // BFS algorithm implementation
   bfs: ({ nodes, edges, startNode, endNode, setVisualState, setMessage, getNeighbors, animateVisualization }) => {

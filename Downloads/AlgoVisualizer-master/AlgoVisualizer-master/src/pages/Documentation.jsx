@@ -279,6 +279,17 @@ const algorithmDatabase = {
         implemented: true,
         subType: "dijkstra",
       },
+      {
+  name: "Bellman-Ford Algorithm",
+  id: "graphBellmanFord",
+  description:
+    "Computes shortest paths from a source to all vertices in a weighted graph, allowing for negative weights and detecting negative weight cycles.",
+  timeComplexity: { best: "O(VE)", average: "O(VE)", worst: "O(VE)" },
+  spaceComplexity: "O(V)",
+  implemented: true,
+  subType: "bellman-ford",
+},
+
     ],
   },
   backtracking: {
