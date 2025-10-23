@@ -158,102 +158,116 @@ const AnalyticsDashboard = () => {
   if (!events) return <div>Loading analytics...</div>;
 
   return (
-    <div style={{ padding: "1rem" }}>
-      <h1>Algorithm Analytics Dashboard</h1>
+    <div className="w-full flex justify-center px-4 sm:px-6 py-6">
+      <div className="max-w-6xl w-full mx-auto">
+        <h1
+          className="font-extrabold text-5xl md:text-6xl mb-6 text-center"
+          style={{
+            color: "var(--primary, #007bff)",
+            letterSpacing: "-0.025em",
+            lineHeight: "1.1",
+            textShadow: "0 2px 4px rgba(0,0,0,0.08)",
+          }}
+        >
+          ALGORITHM ANALYTICS DASHBOARD
+        </h1>
 
-      <div style={{ display: "flex", gap: 12, alignItems: "center", margin: "1rem 0" }}>
-        <label>
-          Algorithm:
-          <select value={algorithmFilter} onChange={(e) => setAlgorithmFilter(e.target.value)} style={{ marginLeft: 8 }}>
-            <option value="all">All</option>
-            {algorithms.map((a) => (
-              <option key={a} value={a}>{a}</option>
-            ))}
-          </select>
-        </label>
+        <div className="max-h-[85vh] overflow-y-auto">
+          <div style={{ display: "flex", gap: 12, alignItems: "center", margin: "1rem 0" }}>
+            <label>
+              Algorithm:
+              <select value={algorithmFilter} onChange={(e) => setAlgorithmFilter(e.target.value)} style={{ marginLeft: 8 }}>
+                <option value="all">All</option>
+                {algorithms.map((a) => (
+                  <option key={a} value={a}>{a}</option>
+                ))}
+              </select>
+            </label>
 
-        <label>
-          From:
-          <input type="date" value={fromDate} onChange={(e) => setFromDate(e.target.value)} style={{ marginLeft: 8 }} />
-        </label>
+            <label>
+              From:
+              <input type="date" value={fromDate} onChange={(e) => setFromDate(e.target.value)} style={{ marginLeft: 8 }} />
+            </label>
 
-        <label>
-          To:
-          <input type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} style={{ marginLeft: 8 }} />
-        </label>
+            <label>
+              To:
+              <input type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} style={{ marginLeft: 8 }} />
+            </label>
 
-        <ShowResultsButton filtered={filtered} />
-      </div>
+            <ShowResultsButton filtered={filtered} />
+          </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 360px", gap: 16 }}>
-        <div>
-          <section style={{ height: 320, margin: "1rem 0" }}>
-            <h3>Average Time Spent (per algorithm)</h3>
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={avgTimePerAlgo} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="seconds" fill="#8884d8" />
-              </BarChart>
-            </ResponsiveContainer>
-          </section>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 360px", gap: 16 }}>
+            <div>
+              <section style={{ height: 320, margin: "1rem 0" }}>
+                <h3>Average Time Spent (per algorithm)</h3>
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={avgTimePerAlgo} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="seconds" fill="#8884d8" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </section>
 
-          <section style={{ height: 320, margin: "1rem 0" }}>
-            <h3>Step Completion (sessions reaching step index)</h3>
-            <div style={{ height: 300 }}>
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={completionChartData.reduce((acc, alg) => {
-                  alg.counts.forEach((count, idx) => {
-                    acc[idx] = acc[idx] || { step: `Step ${idx + 1}` };
-                    acc[idx][alg.algorithm] = count;
-                  });
-                  return acc;
-                }, [])}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="step" />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  {completionChartData.map((alg, idx) => (
-                    <Line key={alg.algorithm} type="monotone" dataKey={alg.algorithm} stroke={COLORS[idx % COLORS.length]} />
-                  ))}
-                </LineChart>
-              </ResponsiveContainer>
+              <section style={{ height: 320, margin: "1rem 0" }}>
+                <h3>Step Completion (sessions reaching step index)</h3>
+                <div style={{ height: 300 }}>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={completionChartData.reduce((acc, alg) => {
+                      alg.counts.forEach((count, idx) => {
+                        acc[idx] = acc[idx] || { step: `Step ${idx + 1}` };
+                        acc[idx][alg.algorithm] = count;
+                      });
+                      return acc;
+                    }, [])}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="step" />
+                      <YAxis />
+                      <Tooltip />
+                      <Legend />
+                      {completionChartData.map((alg, idx) => (
+                        <Line key={alg.algorithm} type="monotone" dataKey={alg.algorithm} stroke={COLORS[idx % COLORS.length]} />
+                      ))}
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
+              </section>
             </div>
-          </section>
+
+            <aside>
+              <section style={{ marginBottom: 16 }}>
+                <h3>Key Metrics</h3>
+                <div>Average Time (s): {metrics.avgTime.toFixed(2)}</div>
+                <div>Sessions (with duration): {metrics.sessions}</div>
+                <div>Retries: {metrics.retries}</div>
+                <div>Avg Steps Completed: {metrics.avgCompletionStep.toFixed(2)}</div>
+              </section>
+
+              <section>
+                <h3>Most Retried</h3>
+                <div style={{ height: 220 }}>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie data={retriesPerAlgo} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
+                        {retriesPerAlgo.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                      </Pie>
+                      <Legend />
+                      <Tooltip />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
+              </section>
+            </aside>
+          </div>
+
+          <ResultsSection filtered={filtered} />
         </div>
-
-        <aside>
-          <section style={{ marginBottom: 16 }}>
-            <h3>Key Metrics</h3>
-            <div>Average Time (s): {metrics.avgTime.toFixed(2)}</div>
-            <div>Sessions (with duration): {metrics.sessions}</div>
-            <div>Retries: {metrics.retries}</div>
-            <div>Avg Steps Completed: {metrics.avgCompletionStep.toFixed(2)}</div>
-          </section>
-
-          <section>
-            <h3>Most Retried</h3>
-            <div style={{ height: 220 }}>
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie data={retriesPerAlgo} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
-                    {retriesPerAlgo.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Legend />
-                  <Tooltip />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-          </section>
-        </aside>
       </div>
-
-      <ResultsSection filtered={filtered} />
     </div>
   );
 };
@@ -307,4 +321,4 @@ const ResultsTable = ({ filtered }) => {
     </div>
   );
 };
-    export default AnalyticsDashboard;
+export default AnalyticsDashboard;
