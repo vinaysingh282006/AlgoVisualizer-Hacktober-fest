@@ -259,7 +259,7 @@ const Navbar = () => {
 
         {/* Desktop nav */}
         <div
-          className="hidden md:flex flex-col items-start gap-3 w-full desktop-nav-menu"
+          className="md:flex flex-col items-start gap-3 w-full desktop-nav-menu"
           ref={navMenuRef}
         >
           {/* Render nav items excluding "Notes" */}
