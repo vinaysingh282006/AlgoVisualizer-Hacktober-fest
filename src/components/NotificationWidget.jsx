@@ -20,41 +20,41 @@ const NotificationWidget = () => {
   return (
     <div className={`fixed z-[1150] ${isMobile ? "top-20 right-2.5" : "top-[92px] right-5"}`}>
       <button
-        className={`px-${isMobile ? "2" : "3"} py-${isMobile ? "1.5" : "2"} text-${
-          isMobile ? "xs" : "sm"
-        } rounded-lg border border-gray-300 bg-white text-gray-800 shadow transition-all whitespace-nowrap`}
+        aria-label={`Notifications (${unreadCount} unread)`}
+        title={`Notifications (${unreadCount} unread)`}
+        className="notification-bell-button"
         onClick={() => setOpen(!open)}
       >
-        {isMobile ? `🔔 ${unreadCount}` : `Notifications (${unreadCount})`}
+        {/* Bell icon SVG */}
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          viewBox="0 0 24 24" 
+          fill="currentColor"
+          className="bell-icon"
+          aria-hidden="true"
+        >
+          <path fillRule="evenodd" d="M5.25 9a6.75 6.75 0 0 1 13.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 0 1-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 1 1-7.48 0 24.585 24.585 0 0 1-4.831-1.244.75.75 0 0 1-.298-1.205A8.217 8.217 0 0 0 5.25 9.75V9Zm4.502 8.9a2.25 2.25 0 1 0 4.496 0 25.057 25.057 0 0 1-4.496 0Z" clipRule="evenodd" />
+        </svg>
+        <span className={`notification-badge ${unreadCount === 0 ? 'zero' : ''}`}>
+          {unreadCount > 99 ? '99+' : unreadCount}
+        </span>
       </button>
       {open && (
         <div
-          className={`absolute mt-2 right-0 bg-white border border-gray-300 rounded-lg p-${
-            isMobile ? "3" : "4"
-          } shadow-lg w-[300px] max-h-[calc(100vh-180px)] overflow-y-auto`}
+          className="notification-dropdown"
           style={{
             width: isMobile ? `${Math.min(300, window.innerWidth - 32)}px` : "300px",
             maxWidth: "calc(100vw - 32px)"
           }}
         >
           {notifications.length === 0 && (
-            <p className={`m-0 text-gray-500 text-${isMobile ? "xs" : "sm"}`}>No notifications</p>
+            <p className="notification-empty">No notifications</p>
           )}
           {notifications.map((n) => (
             <div
               key={n.id}
-              className={`mb-2 rounded bg-${n.read ? "gray-100" : "blue-100"} px-2 py-${
-                isMobile ? "1" : "2"
-              } cursor-pointer text-${
-                isMobile ? "xs" : "sm"
-              } leading-tight transition-opacity break-words`}
+              className={`notification-item-card ${n.read ? 'read' : 'unread'}`}
               onClick={() => markAsRead(n.id)}
-              onMouseEnter={(e) => {
-                e.target.style.opacity = "0.8";
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.opacity = "1";
-              }}
             >
               {n.message}
             </div>
