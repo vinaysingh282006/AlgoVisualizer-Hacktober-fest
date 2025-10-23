@@ -1,12 +1,12 @@
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import { 
-  Search, 
-  Database, 
-  BookOpen, 
-  Users, 
-  Star, 
-  GitBranch, 
+import {
+  Search,
+  Database,
+  BookOpen,
+  Users,
+  Star,
+  GitBranch,
   Code,
   ArrowDownUp,
   Zap,
@@ -237,7 +237,7 @@ const algorithmDatabase = {
           access: "O(n)"
         },
         spaceComplexity: "O(n)",
-        implemented:true
+        implemented: true
       },
       {
         name: "Stack",
@@ -250,7 +250,7 @@ const algorithmDatabase = {
           search: "O(n)"
         },
         spaceComplexity: "O(n)",
-        implemented:true
+        implemented: true
       },
       {
         name: "Queue",
@@ -705,18 +705,17 @@ const algorithmDatabase = {
 // 2. SUB-COMPONENTS
 // ============================================================================
 
-function AlgorithmCard({ algorithm ,onOpen}) {
+function AlgorithmCard({ algorithm, onOpen }) {
   const IconComponent = algorithm.categoryIconComponent || Code;
+  const isClickable = typeof onOpen === "function";
 
-  const isClickable = typeof onOpen === 'function';
-  
   return (
     <div
-      className={`theme-card algorithm-card ${isClickable ? 'cursor-pointer' : ''}`}
+      className={`theme-card algorithm-card ${isClickable ? "cursor-pointer" : ""}`}
       onClick={isClickable ? onOpen : undefined}
-      role={isClickable ? 'button' : undefined}
+      role={isClickable ? "button" : undefined}
       tabIndex={isClickable ? 0 : -1}
-      onKeyDown={isClickable ? (e) => { if (e.key === 'Enter') onOpen(); } : undefined}
+      onKeyDown={isClickable ? (e) => { if (e.key === "Enter") onOpen(); } : undefined}
       title={algorithm.description}
     >
       <div>
@@ -753,21 +752,16 @@ function AlgorithmDocumentation() {
   const [filteredAlgorithms, setFilteredAlgorithms] = useState([]);
   const navigate = useNavigate();
 
-  // ✅ Central handler: now path-aware (handles Kruskal and any future cards with `path`)
+  // Central handler: path-aware (handles Kruskal and future cards with `path`)
   const handleCardClick = (algo) => {
-    // Highest priority: explicit path on the item (e.g., /kruskal)
     if (algo.path && algo.implemented) {
       navigate(algo.path);
       return;
     }
-
-    // Sorting → /sorting/:algoId/docs
     if (algo.category === "sorting" && algo.implemented) {
       navigate(`/sorting/${algo.id}/docs`);
       return;
     }
-
-    // Existing linearSearch special-case
     if (algo.id === "linearSearch") {
       navigate("/searching?algo=linear-search");
     // Existing linearSearch route
@@ -775,8 +769,6 @@ function AlgorithmDocumentation() {
       navigate(`/searching/${algo.id}`);
       return;
     }
-
-    // Not navigable: do nothing
   };
 
   const getAllAlgorithms = useCallback(() => {
@@ -856,9 +848,7 @@ function AlgorithmDocumentation() {
               return (
                 <button
                   key={category.key}
-                  className={`btn ${
-                    isActive ? "btn-primary" : "btn-secondary"
-                  } px-4 py-2 rounded-full flex items-center justify-between min-w-[180px] transition-all duration-200 hover:scale-105 group`}
+                  className={`btn ${isActive ? "btn-primary" : "btn-secondary"} px-4 py-2 rounded-full flex items-center justify-between min-w-[180px] transition-all duration-200 hover:scale-105 group`}
                   onClick={() => setSelectedCategory(category.key)}
                 >
                   <div className="flex items-center gap-2">
@@ -866,9 +856,7 @@ function AlgorithmDocumentation() {
                     <span className="font-medium">{category.label}</span>
                   </div>
                   <div
-                    className={`relative z-10 ${
-                      isActive ? "bg-white text-[#1a1a1a]" : "bg-primary text-white"
-                    } ml-2 px-2.5 py-0.5 rounded-full text-sm font-semibold min-w-[28px] flex items-center justify-center`}
+                    className={`relative z-10 ${isActive ? "bg-white text-[#1a1a1a]" : "bg-primary text-white"} ml-2 px-2.5 py-0.5 rounded-full text-sm font-semibold min-w-[28px] flex items-center justify-center`}
                     style={{ isolation: "isolate" }}
                   >
                     {category.count}
@@ -884,9 +872,8 @@ function AlgorithmDocumentation() {
         <div className="results-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
           {filteredAlgorithms.length > 0 ? (
             filteredAlgorithms.map((algorithm) => {
-              // 🔗 Decide if this card should be clickable
               const isNavigable =
-                (algorithm.path && algorithm.implemented) || // e.g., Kruskal → /kruskal
+                (algorithm.path && algorithm.implemented) ||
                 (algorithm.category === "sorting" && algorithm.implemented) ||
                 algorithm.id === "linearSearch";
 
