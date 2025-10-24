@@ -681,3 +681,43 @@
 [data-theme="light"] .field-icon {
   color: rgba(0, 0, 0, 0.6);
 }
+/* --- Fix for field-icon overflow and misalignment --- */
+.field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.field-icon {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  color: var(--doubt-subtext);
+  opacity: 0.8;
+  pointer-events: none;
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+/* Keep icons vertically aligned even for textareas */
+.field-input.textarea + .field-icon,
+textarea.field-input + .field-icon {
+  top: 1.2rem; /* slight downward shift for multiline fields */
+  transform: none;
+}
+
+/* Ensure text never overlaps with the icon */
+.field-input {
+  padding-left: 48px !important;
+  box-sizing: border-box;
+}
+
+/* Optional: reduce icon overlap when zoomed or scaled */
+@media (max-width: 480px) {
+  .field-icon {
+    left: 12px;
+  }
+  .field-input {
+    padding-left: 42px !important;
+  }
+}
