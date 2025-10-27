@@ -1,5 +1,5 @@
 // Test file to verify the new performance algorithms work correctly
-import { performanceAlgorithms } from './performanceAlgorithms';
+import { performanceAlgorithms } from './performanceAlgorithms.js';
 
 // Test data
 const testArray = [64, 34, 25, 12, 22, 11, 90];

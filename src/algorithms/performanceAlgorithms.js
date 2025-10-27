@@ -398,6 +398,21 @@ export const jumpSearchPerformance = (arr, target) => {
 export const radixSortPerformance = (arr) => {
   if (arr.length <= 1) return [...arr];
   
+  // Separate positive and negative numbers
+  const negatives = arr.filter(x => x < 0).map(x => -x); // Make positive for sorting
+  const positives = arr.filter(x => x >= 0);
+  
+  // Sort negatives and positives separately
+  const sortedNegatives = radixSortPositive(negatives).map(x => -x).reverse(); // Reverse to get correct order
+  const sortedPositives = radixSortPositive(positives);
+  
+  // Combine results
+  return [...sortedNegatives, ...sortedPositives];
+};
+
+function radixSortPositive(arr) {
+  if (arr.length <= 1) return [...arr];
+  
   const array = [...arr];
   const max = Math.max(...array);
   
