@@ -282,108 +282,6 @@ export const bucketSortPerformance = (arr) => {
   return result;
 };
 
-export const cocktailShakerSortPerformance = (arr) => {
-  const array = [...arr];
-  const n = array.length;
-  let swapped = true;
-  let start = 0;
-  let end = n - 1;
-  
-  while (swapped) {
-    swapped = false;
-    
-    // Forward pass
-    for (let i = start; i < end; i++) {
-      if (array[i] > array[i + 1]) {
-        [array[i], array[i + 1]] = [array[i + 1], array[i]];
-        swapped = true;
-      }
-    }
-    
-    if (!swapped) break;
-    
-    end--;
-    swapped = false;
-    
-    // Backward pass
-    for (let i = end; i > start; i--) {
-      if (array[i] < array[i - 1]) {
-        [array[i], array[i - 1]] = [array[i - 1], array[i]];
-        swapped = true;
-      }
-    }
-    
-    start++;
-  }
-  
-  return array;
-};
-
-export const countingSortPerformance = (arr) => {
-  if (arr.length <= 1) return [...arr];
-  
-  const array = [...arr];
-  const max = Math.max(...array);
-  const min = Math.min(...array);
-  const range = max - min + 1;
-  const count = new Array(range).fill(0);
-  const output = [];
-  
-  // Store count of each element
-  for (let i = 0; i < array.length; i++) {
-    count[array[i] - min]++;
-  }
-  
-  // Build the output array
-  for (let i = 0; i < range; i++) {
-    while (count[i]-- > 0) {
-      output.push(i + min);
-    }
-  }
-  
-  return output;
-};
-
-export const heapSortPerformance = (arr) => {
-  const array = [...arr];
-  const n = array.length;
-  
-  // Build max heap
-  for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
-    heapify(array, n, i);
-  }
-  
-  // Extract elements from heap one by one
-  for (let i = n - 1; i > 0; i--) {
-    [array[0], array[i]] = [array[i], array[0]]; // Move current root to end
-    heapify(array, i, 0); // Call heapify on the reduced heap
-  }
-  
-  return array;
-};
-
-function heapify(array, n, i) {
-  let largest = i; // Initialize largest as root
-  const left = 2 * i + 1;
-  const right = 2 * i + 2;
-  
-  // If left child is larger than root
-  if (left < n && array[left] > array[largest]) {
-    largest = left;
-  }
-  
-  // If right child is larger than largest so far
-  if (right < n && array[right] > array[largest]) {
-    largest = right;
-  }
-  
-  // If largest is not root
-  if (largest !== i) {
-    [array[i], array[largest]] = [array[largest], array[i]]; // Swap
-    heapify(array, n, largest); // Recursively heapify the affected sub-tree
-  }
-}
-
 export const introSortPerformance = (arr) => {
   const array = [...arr];
   const n = array.length;
@@ -750,15 +648,12 @@ export const performanceAlgorithms = {
   "Selection Sort": selectionSortPerformance,
   "Quick Sort": quickSortPerformance,
   "Merge Sort": mergeSortPerformance,
-  "Cocktail Shaker Sort": cocktailShakerSortPerformance, // ✅ Added
-  "Counting Sort": countingSortPerformance,             // ✅ Added
-  "Heap Sort": heapSortPerformance,                     // ✅ Added
-  "Linear Search": linearSearchPerformance,
-  "Binary Search": binarySearchPerformance,
-  "Bucket Sort": bucketSortPerformance,
   "Cocktail Shaker Sort": cocktailShakerSortPerformance,
   "Counting Sort": countingSortPerformance,
   "Heap Sort": heapSortPerformance,
+  "Linear Search": linearSearchPerformance,
+  "Binary Search": binarySearchPerformance,
+  "Bucket Sort": bucketSortPerformance,
   "Intro Sort": introSortPerformance,
   "Jump Search": jumpSearchPerformance,
   "Radix Sort": radixSortPerformance,
