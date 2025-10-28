@@ -1,5 +1,9 @@
 // src/utils/arrayHelpers.js
 
+// Constants for better code maintainability
+const BAR_HEIGHT_MULTIPLIER = 5; // Multiplier to convert array values to pixel height
+const MIN_PASSWORD_LENGTH = 8; // Minimum required password length
+
 export const generateRandomArray = (length, min, max) => {
     return Array.from({ length }, () => Math.floor(Math.random() * (max - min + 1)) + min);
 };
@@ -10,7 +14,7 @@ export const createBars = (array) => {
     array.forEach(num => {
         const bar = document.createElement("div");
         bar.classList.add("array-bar");
-        bar.style.height = `${num * 5}px`; // Adjust bar height
+        bar.style.height = `${num * BAR_HEIGHT_MULTIPLIER}px`; // Adjust bar height
         arrayContainer.appendChild(bar);
     });
 };
@@ -39,8 +43,8 @@ export const validatePassword = (password) => {
     if (!password.match(/[!@#$%^&*(),.?":{}|<>]/)) {
         errors.push("Add at least one special character");
     }
-    if (password.length < 8) {
-        errors.push("Password must be at least 8 characters long");
+    if (password.length < MIN_PASSWORD_LENGTH) {
+        errors.push(`Password must be at least ${MIN_PASSWORD_LENGTH} characters long`);
     }
 
     return {
