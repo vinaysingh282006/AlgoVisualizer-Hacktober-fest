@@ -1,5 +1,6 @@
 // src/components/AlgorithmVisualizer.jsx
 import React, { useState, useEffect, useMemo, useCallback, useRef, useLayoutEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import algorithmsData from "../algorithms/algorithms.json";
 import "../styles/UnifiedVisualizer.css";
 import ComplexityAnalyzer from "./ComplexityAnalyzer";
@@ -54,7 +55,8 @@ export default function AlgorithmVisualizer({
     isAnimating: false,
     isPaused: false,
     animationSpeedMs: DEFAULT_ANIMATION_SPEED,
-    barMotion: true
+    barMotion: true,
+    perspective3D: false
   });
 
   const [error, setError] = useState(null);
@@ -267,6 +269,10 @@ useLayoutEffect(() => {
     updateState('barMotion', !state.barMotion);
   }, [state.barMotion, updateState]);
 
+  const togglePerspective3D = useCallback(() => {
+    updateState('perspective3D', !state.perspective3D);
+  }, [state.perspective3D, updateState]);
+
   // Keyboard controls for speed adjustment and pause/resume
   useEffect(() => {
     const handleKeyPress = (e) => {
@@ -344,8 +350,9 @@ useLayoutEffect(() => {
         }
       }
 
+      // Enhanced bar with Framer Motion animations and 3D effects
       return (
-        <div
+        <motion.div
           key={idx}
           className={`visualization-bar ${colorClass}`}
           style={{
@@ -355,24 +362,71 @@ useLayoutEffect(() => {
             transition: state.barMotion
               ? VISUALIZATION_CONFIG.motionTransition.replace('{speed}', state.animationSpeedMs)
               : "none",
-            transform: isHighlighted ? VISUALIZATION_CONFIG.highlightScale : VISUALIZATION_CONFIG.normalScale,
+            transformStyle: "preserve-3d",
+            transform: state.perspective3D 
+              ? `perspective(1000px) rotateX(15deg) translateZ(${isHighlighted ? 10 : 0}px)`
+              : "none"
+          }}
+          initial={{ 
+            scale: 0.8,
+            opacity: 0.7,
+            y: 20
+          }}
+          animate={{ 
+            scale: isHighlighted ? 1.15 : 1,
+            opacity: 1,
+            y: 0,
+            boxShadow: isHighlighted 
+              ? "0 0 15px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.4)" 
+              : "0 2px 8px rgba(0, 0, 0, 0.1)",
+            zIndex: isHighlighted ? 10 : 1
+          }}
+          transition={{ 
+            type: "spring", 
+            stiffness: 300, 
+            damping: 20,
+            duration: state.animationSpeedMs / 1000
+          }}
+          whileHover={{
+            scale: 1.05,
+            boxShadow: "0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.5)",
+            zIndex: 20,
+            y: -5
           }}
         >
-          <span className="bar-value" style={{ fontSize: fontSize ?? undefined }}>{val}</span>
-        </div>
+          <motion.span 
+            className="bar-value"
+            style={{ fontSize: fontSize ?? undefined }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.1 }}
+          >
+            {val}
+          </motion.span>
+        </motion.div>
       );
     });
-  }, [displayArray, visualOnly, controlled, state.steps, state.currentStep, colorArray, state.barMotion, state.animationSpeedMs, fontSize, requiresSpecialHandling, state.isAnimating, state.isPaused]);
+  }, [displayArray, visualOnly, controlled, state.steps, state.currentStep, colorArray, state.barMotion, state.animationSpeedMs, fontSize, requiresSpecialHandling, state.isAnimating, state.isPaused, computedBarWidth, state.perspective3D]);
 
   return (
     <div className="unified-visualizer">
       {!hideTitle && (
-        <h2 className="text-xl font-bold mb-2 text-center text-white">
+        <motion.h2 
+          className="text-xl font-bold mb-2 text-center text-white"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           {algorithmName ?? "Visualizer"}
-        </h2>
+        </motion.h2>
       )}
       {!visualOnly && !controlled && (
-        <div className="visualization-controls">
+        <motion.div 
+          className="visualization-controls"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
           <button 
             onClick={generateArray}
             aria-label="Generate new array"
@@ -480,31 +534,65 @@ useLayoutEffect(() => {
             />
             Smooth animation
           </label>
-        </div>
+          <label>
+            <input
+              type="checkbox"
+              checked={state.perspective3D}
+              onChange={togglePerspective3D}
+              aria-label="Toggle 3D perspective"
+            />
+            3D Perspective
+          </label>
+        </motion.div>
       )}
 
       {algoType === "searching" && state.target && (
-        <p className="target-display">Target: {state.target}</p>
+        <motion.p 
+          className="target-display"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          Target: {state.target}
+        </motion.p>
       )}
       <div
-        className="visualization-container" ref={containerRef}
-        style={{ gap: barGap ? barGap : undefined }}
+        className="visualization-container" 
+        ref={containerRef}
+        style={{ 
+          gap: barGap ? barGap : undefined,
+          perspective: state.perspective3D ? "1000px" : "none"
+        }}
       >
-        {renderBars}
+        <AnimatePresence>
+          {renderBars}
+        </AnimatePresence>
       </div>
       
       {showPerformanceAnalysis && !visualOnly && !controlled && (
-        <ComplexityAnalyzer 
-          algorithm={performanceAlgorithms[algorithmName] || null} 
-          algorithmName={algorithmName}
-          // ✅ Pass algorithm complexity information
-          complexity={AlgorithmUtils.getTimeComplexity(algorithmName)}
-        />
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <ComplexityAnalyzer 
+            algorithm={performanceAlgorithms[algorithmName] || null} 
+            algorithmName={algorithmName}
+            // ✅ Pass algorithm complexity information
+            complexity={AlgorithmUtils.getTimeComplexity(algorithmName)}
+          />
+        </motion.div>
       )}
       {error && (
-        <div className="error-message">
+        <motion.div 
+          className="error-message"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3 }}
+        >
           Error: {error}
-        </div>
+        </motion.div>
       )}
     </div>
   );

@@ -1,3 +1,5 @@
+import { COLOR } from "../utils/sortingHelpers";
+
 export const ternarySearch = async (array, target, setColorArray, delay) => {
     let left = 0;
     let right = array.length - 1;
@@ -10,8 +12,8 @@ export const ternarySearch = async (array, target, setColorArray, delay) => {
         // Highlight mid1 and mid2
         setColorArray(prevColors => {
             const newColors = [...prevColors];
-            newColors[mid1] = 'yellow'; // Highlight first mid
-            newColors[mid2] = 'yellow'; // Highlight second mid
+            newColors[mid1] = COLOR.comparing; // Highlight first mid
+            newColors[mid2] = COLOR.comparing; // Highlight second mid
             return newColors;
         });
 
@@ -20,7 +22,7 @@ export const ternarySearch = async (array, target, setColorArray, delay) => {
         if (array[mid1] === target) {
             setColorArray(prevColors => {
                 const newColors = [...prevColors];
-                newColors[mid1] = 'green'; // Found at mid1
+                newColors[mid1] = COLOR.sorted; // Found at mid1
                 return newColors;
             });
             return mid1;
@@ -28,7 +30,7 @@ export const ternarySearch = async (array, target, setColorArray, delay) => {
         if (array[mid2] === target) {
             setColorArray(prevColors => {
                 const newColors = [...prevColors];
-                newColors[mid2] = 'green'; // Found at mid2
+                newColors[mid2] = COLOR.sorted; // Found at mid2
                 return newColors;
             });
             return mid2;
@@ -38,8 +40,8 @@ export const ternarySearch = async (array, target, setColorArray, delay) => {
             // Target is in the first third
             setColorArray(prevColors => {
                 const newColors = [...prevColors];
-                newColors[mid1] = 'lightgrey';
-                newColors[mid2] = 'lightgrey';
+                newColors[mid1] = COLOR.base;
+                newColors[mid2] = COLOR.base;
                 return newColors;
             });
             right = mid1 - 1;
@@ -47,8 +49,8 @@ export const ternarySearch = async (array, target, setColorArray, delay) => {
             // Target is in the third third
             setColorArray(prevColors => {
                 const newColors = [...prevColors];
-                newColors[mid1] = 'lightgrey';
-                newColors[mid2] = 'lightgrey';
+                newColors[mid1] = COLOR.base;
+                newColors[mid2] = COLOR.base;
                 return newColors;
             });
             left = mid2 + 1;
@@ -56,8 +58,8 @@ export const ternarySearch = async (array, target, setColorArray, delay) => {
             // Target is in the middle third
             setColorArray(prevColors => {
                 const newColors = [...prevColors];
-                newColors[mid1] = 'lightgrey';
-                newColors[mid2] = 'lightgrey';
+                newColors[mid1] = COLOR.base;
+                newColors[mid2] = COLOR.base;
                 return newColors;
             });
             left = mid1 + 1;

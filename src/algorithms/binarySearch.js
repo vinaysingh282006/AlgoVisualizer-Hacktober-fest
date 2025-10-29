@@ -46,7 +46,7 @@ export const binarySearch = async (array, target, setColorArray, delay) => {
 
     setColorArray(prevColors => {
       const newColors = [...prevColors];
-      newColors[mid] = 'yellow'; // Highlight the middle element
+      newColors[mid] = COLOR.comparing; // Highlight the middle element
       return newColors;
     });
 
@@ -55,21 +55,21 @@ export const binarySearch = async (array, target, setColorArray, delay) => {
     if (array[mid] === target) {
       setColorArray(prevColors => {
         const newColors = [...prevColors];
-        newColors[mid] = 'green'; // Target found
+        newColors[mid] = COLOR.sorted; // Target found
         return newColors;
       });
       return mid;
     } else if (array[mid] < target) {
       setColorArray(prevColors => {
         const newColors = [...prevColors];
-        newColors[mid] = 'lightgrey'; // Reset color if not found
+        newColors[mid] = COLOR.base; // Reset color if not found
         return newColors;
       });
       left = mid + 1;
     } else {
       setColorArray(prevColors => {
         const newColors = [...prevColors];
-        newColors[mid] = 'lightgrey'; // Reset color if not found
+        newColors[mid] = COLOR.base; // Reset color if not found
         return newColors;
       });
       right = mid - 1;

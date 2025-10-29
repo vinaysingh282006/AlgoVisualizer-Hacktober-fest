@@ -33,7 +33,7 @@ export const linearSearch = async (array, target, setColorArray, delay) => {
   for (let i = 0; i < array.length; i++) {
     setColorArray(prevColors => {
       const newColors = [...prevColors];
-      newColors[i] = 'yellow'; // Highlight the current element being checked
+      newColors[i] = COLOR.comparing; // Highlight the current element being checked
       return newColors;
     });
 
@@ -42,7 +42,7 @@ export const linearSearch = async (array, target, setColorArray, delay) => {
     if (array[i] === target) {
       setColorArray(prevColors => {
         const newColors = [...prevColors];
-        newColors[i] = 'green'; // Highlight the found element
+        newColors[i] = COLOR.sorted; // Highlight the found element
         return newColors;
       });
       return i; // Return the index of the found element
@@ -50,7 +50,7 @@ export const linearSearch = async (array, target, setColorArray, delay) => {
 
     setColorArray(prevColors => {
       const newColors = [...prevColors];
-      newColors[i] = 'lightgrey'; // Reset color if not found
+      newColors[i] = COLOR.base; // Reset color if not found
       return newColors;
     });
   }

@@ -1,4 +1,5 @@
 // exponentialSearch.js
+import { COLOR } from "../utils/sortingHelpers";
 import { binarySearch } from "./binarySearch"; // (kept in case you still need it elsewhere)
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -8,10 +9,10 @@ export const exponentialSearch = async (array, target, setColorArray, delay) => 
   if (n === 0) return -1;
 
   // Quick check index 0
-  setColorArray(Array.from({ length: n }, (_, idx) => (idx === 0 ? "yellow" : "lightgrey")));
+  setColorArray(Array.from({ length: n }, (_, idx) => (idx === 0 ? COLOR.comparing : COLOR.base)));
   await sleep(delay);
   if (array[0] === target) {
-    setColorArray(Array.from({ length: n }, (_, idx) => (idx === 0 ? "green" : "lightgrey")));
+    setColorArray(Array.from({ length: n }, (_, idx) => (idx === 0 ? COLOR.sorted : COLOR.base)));
     return 0;
   }
 
@@ -19,7 +20,7 @@ export const exponentialSearch = async (array, target, setColorArray, delay) => 
   let i = 1;
   while (i < n && array[i] <= target) {
     // highlight the probe index i
-    setColorArray(Array.from({ length: n }, (_, idx) => (idx === i ? "yellow" : "lightgrey")));
+    setColorArray(Array.from({ length: n }, (_, idx) => (idx === i ? COLOR.comparing : COLOR.base)));
     await sleep(delay);
     i *= 2;
   }
@@ -31,7 +32,7 @@ export const exponentialSearch = async (array, target, setColorArray, delay) => 
   // Shade the window
   setColorArray(
     Array.from({ length: n }, (_, idx) =>
-      idx >= left && idx <= right ? "#66ccff" : "#2b3a4b"
+      idx >= left && idx <= right ? COLOR.comparing : COLOR.base
     )
   );
   await sleep(delay);
@@ -45,15 +46,15 @@ export const exponentialSearch = async (array, target, setColorArray, delay) => 
     // highlight current mid inside the window
     setColorArray(
       Array.from({ length: n }, (_, idx) => {
-        if (idx < left || idx > right) return "#2b3a4b";
-        if (idx === mid) return "red";
-        return "#66ccff";
+        if (idx < left || idx > right) return COLOR.base;
+        if (idx === mid) return COLOR.comparing;
+        return COLOR.scanned;
       })
     );
     await sleep(delay);
 
     if (array[mid] === target) {
-      setColorArray(Array.from({ length: n }, (_, idx) => (idx === mid ? "green" : "lightgrey")));
+      setColorArray(Array.from({ length: n }, (_, idx) => (idx === mid ? COLOR.sorted : COLOR.base)));
       await sleep(delay);
       return mid; // ✅ return absolute index
     }
@@ -62,7 +63,7 @@ export const exponentialSearch = async (array, target, setColorArray, delay) => 
   }
 
   // Not found
-  setColorArray(Array.from({ length: n }, () => "lightgrey"));
+  setColorArray(Array.from({ length: n }, () => COLOR.base));
   await sleep(delay);
   return -1;
 };
