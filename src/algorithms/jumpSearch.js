@@ -1,3 +1,5 @@
+import { COLOR, createBaseColors } from "../utils/sortingHelpers";
+
 /* eslint-disable no-loop-func */
 export const jumpSearch = async (array, target, setColorArray, delay) => {
     const n = array.length;
@@ -9,7 +11,7 @@ export const jumpSearch = async (array, target, setColorArray, delay) => {
         setColorArray(prevColors => {
             const newColors = [...prevColors];
             for (let i = prev; i < Math.min(currentStep, n); i++) {
-                newColors[i] = 'lightgrey'; // Color the checked block
+                newColors[i] = COLOR.base; // Color the checked block
             }
             return newColors;
         });
@@ -27,7 +29,7 @@ export const jumpSearch = async (array, target, setColorArray, delay) => {
     while (array[prev] < target) {
         setColorArray(prevColors => {
             const newColors = [...prevColors];
-            newColors[prev] = 'yellow'; // Highlight current element
+            newColors[prev] = COLOR.comparing; // Highlight current element
             return newColors;
         });
 
@@ -43,7 +45,7 @@ export const jumpSearch = async (array, target, setColorArray, delay) => {
     if (array[prev] === target) {
         setColorArray(prevColors => {
             const newColors = [...prevColors];
-            newColors[prev] = 'green'; // Highlight found element
+            newColors[prev] = COLOR.sorted; // Highlight found element
             return newColors;
         });
         return prev; // Return index of found element
