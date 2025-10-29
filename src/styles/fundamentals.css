@@ -16,7 +16,8 @@
   color: #ffffff !important;
 }
 .card {
-  background: var(--card-bg, #ffffff);
+  /* background: var(--card-bg, #ffffff); */
+  background:#b3cdf8;
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(16, 24, 40, 0.04);
   border: 1px solid rgba(15, 23, 42, 0.03);
@@ -33,6 +34,7 @@
 h2 {
   margin-bottom: 1rem;
   font-weight: 700;
+  font-size: 1.2em;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -46,6 +48,10 @@ h3 {
 /* p{  
     color: var(--code-text, #374151);;
 } */
+
+p{
+  font-size: 1.2em;
+}
 .code-container {
   position: relative;
   margin: 1.5rem 0;
