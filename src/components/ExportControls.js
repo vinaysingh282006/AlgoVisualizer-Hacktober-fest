@@ -100,6 +100,8 @@ const ExportControls = ({
                 className="export-toggle-btn"
                 onClick={() => setShowExportPanel(!showExportPanel)}
                 title="Export Visualization"
+                aria-label={showExportPanel ? "Close export panel" : "Open export panel"}
+                aria-expanded={showExportPanel}
             >
                 📹 Export
             </button>
@@ -116,6 +118,7 @@ const ExportControls = ({
                                 value={exportFormat} 
                                 onChange={(e) => setExportFormat(e.target.value)}
                                 disabled={isRecording}
+                                aria-label="Select export format"
                             >
                                 <option value="gif">GIF (Animated)</option>
                                 <option value="mp4">MP4 (Video)</option>
@@ -129,6 +132,7 @@ const ExportControls = ({
                                 value={frameRate} 
                                 onChange={(e) => setFrameRate(Number(e.target.value))}
                                 disabled={isRecording}
+                                aria-label="Select frame rate for recording"
                             >
                                 <option value={1}>1 FPS (Slow)</option>
                                 <option value={2}>2 FPS (Normal)</option>
@@ -145,12 +149,15 @@ const ExportControls = ({
                                     className="start-recording-btn"
                                     onClick={handleStartRecording}
                                     disabled={isVisualizationRunning}
+                                    aria-label="Start recording visualization"
+                                    aria-disabled={isVisualizationRunning}
                                 >
                                     🔴 Start Recording
                                 </button>
                                 <button 
                                     className="snapshot-btn"
                                     onClick={handleDownloadSnapshot}
+                                    aria-label="Take snapshot of current visualization"
                                 >
                                     📸 Take Snapshot
                                 </button>
@@ -160,12 +167,14 @@ const ExportControls = ({
                                 <button 
                                     className="stop-recording-btn"
                                     onClick={handleStopRecording}
+                                    aria-label="Stop recording and save visualization"
                                 >
                                     ⏹️ Stop Recording
                                 </button>
                                 <button 
                                     className="capture-frame-btn"
                                     onClick={handleCaptureFrame}
+                                    aria-label="Capture current frame during recording"
                                 >
                                     📷 Capture Frame
                                 </button>
@@ -174,9 +183,9 @@ const ExportControls = ({
                     </div>
                     
                     {isRecording && (
-                        <div className="recording-status">
+                        <div className="recording-status" role="status" aria-live="polite">
                             <div className="recording-indicator">
-                                <span className="recording-dot"></span>
+                                <span className="recording-dot" aria-hidden="true"></span>
                                 Recording... {recordingStatus.frameCount} frames captured
                             </div>
                             <div className="recording-duration">
