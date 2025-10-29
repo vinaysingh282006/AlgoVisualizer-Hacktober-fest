@@ -208,7 +208,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div
-            className="footer-column links-column"
+            className="footer-column links-column footer-box"
             data-aos="fade-up"
             data-aos-duration="1000"
             data-aos-delay="400"
@@ -225,7 +225,7 @@ const Footer = () => {
 
           {/* Resources */}
           <div
-            className="footer-column resources-column"
+            className="footer-column resources-column footer-box"
             data-aos="fade-up"
             data-aos-duration="1000"
             data-aos-delay="600"
@@ -242,7 +242,7 @@ const Footer = () => {
 
           {/* Newsletter */}
           <div
-            className="footer-column newsletter-column"
+           className="footer-column newsletter-column footer-box"
             data-aos="fade-up"
             data-aos-duration="1000"
             data-aos-delay="800"

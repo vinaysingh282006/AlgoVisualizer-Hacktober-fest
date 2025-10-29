@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { 
+import {
   Home,
   BarChart3,
   Search,
@@ -20,7 +20,7 @@ import {
   Gamepad,
   TreeDeciduous,
   Menu
-} from "lucide-react"; 
+} from "lucide-react";
 import { useTheme } from "../ThemeContext";
 import { navbarNavigationItems } from "../utils/navigation";
 import UserDropdown from "./UserDropdown";
@@ -56,11 +56,11 @@ const DesktopNavItem = ({
   selectedCommunity,
   setSelectedCommunity,
   isSidebarExpanded
-}) => { 
+}) => {
   if (item.dropdown) {
     return (
-      <div 
-        className="navbar-item dropdown" 
+      <div
+        className="navbar-item dropdown"
         key={index}
         onMouseEnter={() => toggleDropdown(index)}
         onMouseLeave={() => {
@@ -93,8 +93,7 @@ const DesktopNavItem = ({
               <Link
                 key={subIndex}
                 to={sub.path}
-                className={`dropdown-item block w-full text-left px-3 py-2 hover:bg-gray-700 rounded-md transition-colors duration-150 ${
-    isActive(sub.path) ? "bg-gray-700" : ""}`}
+                className={`dropdown-item block w-full text-left px-3 py-2 hover:bg-gray-700 rounded-md transition-colors duration-150 ${isActive(sub.path) ? "bg-gray-700" : ""}`}
                 onClick={() => toggleDropdown(null)}
               >
                 {sub.label}
@@ -239,8 +238,8 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav 
-      className={`navbar sidebar-nav ${isSidebarExpanded ? 'expanded' : ''} ${theme}`} 
+    <nav
+      className={`navbar sidebar-nav ${isSidebarExpanded ? 'expanded' : ''} ${theme}`}
       ref={navbarRef}
       onMouseEnter={() => setIsSidebarExpanded(true)}
       onMouseLeave={() => {
@@ -285,12 +284,12 @@ const Navbar = () => {
           {/* Insert Notes dropdown here (moved from right) */}
           {location.pathname !== "/notes/rust" && (
             <div className="navbar-item dropdown" ref={(el) => (itemRefs.current['notes-dropdown'] = el)}
-                  onMouseEnter={() => setDesktopNotesOpen(true)}
-                  onMouseLeave={() => {
-                    setTimeout(() => setDesktopNotesOpen(false), 100);
-                  }}
-             >
-              <button 
+              onMouseEnter={() => setDesktopNotesOpen(true)}
+              onMouseLeave={() => {
+                setTimeout(() => setDesktopNotesOpen(false), 100);
+              }}
+            >
+              <button
                 className={`dropdown-toggle ${desktopNotesOpen ? "active" : ""}`}
                 onClick={() => setDesktopNotesOpen(!desktopNotesOpen)}
               >
@@ -353,9 +352,8 @@ const Navbar = () => {
                   </Link>
                   <Link
                     to="/notes/MERN/MERNFundamentals"
-                    className={`dropdown-item ${
-                      isActive("/notes/MERN/MERNFundamentals") ? "active" : ""
-                    } bg-white`}
+                    className={`dropdown-item ${isActive("/notes/MERN/MERNFundamentals") ? "active" : ""
+                      } bg-white`}
                     onClick={() => setDesktopNotesOpen(false)}
                   >
                     MERN
