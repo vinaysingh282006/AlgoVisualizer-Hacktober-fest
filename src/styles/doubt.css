@@ -47,7 +47,7 @@
   position: relative;
   overflow: hidden;
   min-height: 800px;
-  padding: 30px 20px;
+  padding: 60px 20px;
   background: var(--doubt-bg);
   isolation: isolate;
   margin: 0 auto;
@@ -61,12 +61,64 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px);
-  background-size: 28px 28px, 28px 28px;
-  opacity: 0.15;
+    linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.2;
   pointer-events: none;
   z-index: 0;
+}
+
+/* Animated gradient blobs */
+.doubt-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.blob-a {
+  width: 400px;
+  height: 400px;
+  top: 10%;
+  left: 10%;
+  background: linear-gradient(135deg, #2575fc, #6a11cb);
+  animation: blob-float-a 20s ease-in-out infinite;
+}
+
+.blob-b {
+  width: 350px;
+  height: 350px;
+  bottom: 15%;
+  right: 15%;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  animation: blob-float-b 18s ease-in-out infinite;
+}
+
+@keyframes blob-float-a {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+@keyframes blob-float-b {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(-30px, 30px) scale(1.1);
+  }
+  66% {
+    transform: translate(20px, -20px) scale(0.9);
+  }
 }
 
 /* Card (glassmorphism + gradient border) */
@@ -74,44 +126,153 @@
   position: relative;
   z-index: 1;
   width: 95%;
-  max-width: 800px;
+  max-width: 850px;
   margin: 0 auto;
-  padding: 40px 30px 35px;
-  border-radius: 20px;
+  padding: 48px 36px 40px;
+  border-radius: 24px;
   background: var(--doubt-surface);
   border: 1px solid var(--doubt-border);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-  backdrop-filter: blur(12px);
+  box-shadow: 0 24px 48px rgba(0,0,0,0.3), 0 8px 16px rgba(0,0,0,0.15);
+  backdrop-filter: blur(16px);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.doubt-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 28px 56px rgba(0,0,0,0.35), 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .doubt-card::before {
   content: "";
   position: absolute;
   inset: -1px;
-  border-radius: 20px;
+  border-radius: 24px;
   padding: 1px;
-  background: var(--doubt-border);
+  background: linear-gradient(135deg, rgba(37, 117, 252, 0.5), rgba(106, 17, 203, 0.5));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
   pointer-events: none;
   z-index: -1;
 }
 
-/* Headings */
-.doubt-title {
+/* Header with info icon */
+.doubt-header {
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.doubt-title {
   margin: 0;
   padding: 0;
-  margin-bottom: 16px;
   font-size: clamp(28px, 4vw, 36px);
   line-height: 1.2;
   font-weight: 800;
   letter-spacing: 0.2px;
   color: var(--doubt-text);
   text-align: center;
-  display: block;
+}
+
+/* Info Icon Wrapper */
+.info-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.info-icon-wrapper:hover {
+  background-color: rgba(37, 117, 252, 0.1);
+}
+
+.info-icon {
+  color: var(--doubt-border-focus);
+  transition: color 0.3s ease;
+}
+
+.info-icon-wrapper:hover .info-icon {
+  color: #2575fc;
+}
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 1000;
+  min-width: 320px;
+  max-width: 380px;
+  background: var(--doubt-surface);
+  border: 1px solid var(--doubt-border);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  padding: 0;
+  overflow: hidden;
+}
+
+.tooltip-content {
+  padding: 20px;
+}
+
+.tooltip-content h4 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--doubt-text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tooltip-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px 0;
+}
+
+.tooltip-content li {
+  padding: 6px 0;
+  font-size: 14px;
+  color: var(--doubt-subtext);
+  line-height: 1.5;
+}
+
+.tooltip-footer {
+  margin: 12px 0 0 0;
+  padding: 12px;
+  background: rgba(37, 117, 252, 0.1);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--doubt-border-focus);
+  text-align: center;
+}
+
+.tooltip-arrow {
+  position: absolute;
+  top: -6px;
+  right: 20px;
+  width: 12px;
+  height: 12px;
+  background: var(--doubt-surface);
+  border: 1px solid var(--doubt-border);
+  border-bottom: none;
+  border-right: none;
+  transform: rotate(45deg);
 }
 
 .doubt-subtitle {
@@ -191,26 +352,31 @@
   width: 100%;
   padding: 16px 16px 16px 48px;
   font-size: 16px;
-  border-radius: 12px;
-  border: 1px solid var(--doubt-border);
+  border-radius: 14px;
+  border: 2px solid var(--doubt-border);
   background: var(--doubt-input-bg);
   color: var(--doubt-input-text);
   outline: none;
-  transition: box-shadow .25s, border-color .25s, background-color .25s, transform .15s;
-  backdrop-filter: blur(6px);
+  transition: box-shadow .3s ease, border-color .3s ease, background-color .3s ease, transform .2s ease;
+  backdrop-filter: blur(8px);
   box-sizing: border-box;
+  font-family: inherit;
 }
 
 .field-input.textarea {
-  min-height: 140px;
+  min-height: 160px;
+  max-height: 320px;
   resize: vertical;
+  padding: 16px;
+  line-height: 1.6;
 }
 
 /* Focus ring + gentle lift */
 .field-input:focus {
   border-color: var(--doubt-border-focus);
-  box-shadow: var(--ring);
-  transform: translateY(-1px);
+  box-shadow: 0 0 0 4px rgba(37, 117, 252, 0.15), 0 4px 12px rgba(37, 117, 252, 0.2);
+  transform: translateY(-2px);
+  background: var(--doubt-surface);
 }
 
 /* Floating label */
@@ -258,43 +424,59 @@
   flex-shrink: 0;
 }
 
-/* Helper + counter row */
-.assist-row {
+/* Textarea specific styles */
+.field-textarea {
+  width: min(680px, 95%);
+  margin-inline: auto;
+}
+
+.textarea-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 6px;
-  margin-top: 8px;
-  width: 100%;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 0 4px;
 }
 
-/* Helper text container */
-.helper-text-container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin-top: 8px;
+.textarea-icon {
+  position: static;
+  opacity: 0.9;
 }
 
-.helper {
-  font-size: 14px;
-  color: #6c757d; 
-  text-align: left;
+.field-label-static {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--doubt-text);
   flex: 1;
 }
 
-.helper.centered {
-  text-align: center;
-}
-
 .counter {
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 600;
   color: var(--doubt-subtext);
+  padding: 4px 10px;
+  background: rgba(37, 117, 252, 0.1);
+  border-radius: 12px;
   opacity: 0.85;
+  transition: all 0.3s ease;
 }
 
 .counter.over {
   color: var(--doubt-error);
+  background: rgba(255, 107, 107, 0.15);
+}
+
+.textarea-footer {
+  margin-top: 8px;
+  min-height: 24px;
+}
+
+.helper-text {
+  font-size: 13px;
+  color: var(--doubt-subtext);
+  display: block;
+  text-align: left;
+  padding: 0 4px;
 }
 
 /* Actions layout */
@@ -309,10 +491,10 @@
 
 /* Submit button */
 .submit-btn {
-  min-width: 140px;
-  padding: 14px 24px;
+  min-width: 160px;
+  padding: 16px 32px;
   border: 0;
-  border-radius: 12px;
+  border-radius: 14px;
   font-weight: 700;
   color: #fff;
   background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
@@ -320,22 +502,44 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  box-shadow: 0 6px 16px rgba(37, 117, 252, 0.3);
-  transition: transform .15s ease, box-shadow .25s, filter .25s, background .2s ease;
+  gap: 10px;
+  box-shadow: 0 8px 20px rgba(37, 117, 252, 0.35);
+  transition: transform .2s ease, box-shadow .3s ease, filter .25s, background .3s ease;
   font-size: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.submit-btn:hover::before {
+  left: 100%;
 }
 
 .submit-btn:hover:not(:disabled) {
   background: linear-gradient(135deg, #1f63d6 0%, #5b0fb2 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(37, 117, 252, 0.45);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(37, 117, 252, 0.5);
+}
+
+.submit-btn:active:not(:disabled) {
+  transform: translateY(-1px) scale(0.98);
 }
 
 .submit-btn:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
   transform: none;
+  box-shadow: 0 4px 12px rgba(37, 117, 252, 0.2);
 }
 
 .submit-btn:focus-visible,
@@ -346,33 +550,42 @@
 
 /* Cancel button */
 .cancel-btn {
-  min-width: 120px;
-  padding: 14px 20px;
-  border-radius: 12px;
+  min-width: 140px;
+  padding: 16px 28px;
+  border-radius: 14px;
   font-weight: 600;
-  color: #333;
-  background: rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.14);
+  color: #555;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px solid rgba(0, 0, 0, 0.15);
   cursor: pointer;
-  transition: transform .15s ease, box-shadow .25s, background .2s ease, border-color .2s ease;
+  transition: transform .2s ease, box-shadow .3s ease, background .3s ease, border-color .3s ease;
   font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cancel-btn:hover {
-  background: rgba(0, 0, 0, 0.08);
-  border-color: rgba(0, 0, 0, 0.22);
+  background: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.25);
   transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.cancel-btn:active {
+  transform: translateY(0);
 }
 
 [data-theme="dark"] .cancel-btn {
-  color: #f3f3f3;
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.18);
+  color: #e0e0e0;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 [data-theme="dark"] .cancel-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.26);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.1);
 }
 
 /* Spin animation for loader */
@@ -397,17 +610,32 @@
   }
   
   .doubt-card {
-    padding: 30px 20px;
-    border-radius: 16px;
+    padding: 36px 24px;
+    border-radius: 20px;
+  }
+  
+  .doubt-header {
+    gap: 10px;
   }
   
   .doubt-title {
-    font-size: 24px;
-    margin-bottom: 12px;
+    font-size: 26px;
+    margin-bottom: 0;
+  }
+  
+  .info-icon {
+    width: 22px;
+    height: 22px;
+  }
+  
+  .tooltip {
+    min-width: 280px;
+    max-width: 320px;
+    right: -10px;
   }
   
   .doubt-subtitle {
-    font-size: 16px;
+    font-size: 15px;
     margin-bottom: 20px;
     padding: 0 10px;
   }
@@ -471,12 +699,39 @@
     min-height: 680px;
   }
   .doubt-card {
-    padding: 24px 16px;
-    border-radius: 14px;
+    padding: 28px 18px;
+    border-radius: 16px;
+  }
+  
+  .doubt-header {
+    gap: 8px;
   }
   
   .doubt-title {
     font-size: 22px;
+  }
+  
+  .info-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .tooltip {
+    min-width: 260px;
+    max-width: 290px;
+    right: -20px;
+  }
+  
+  .tooltip-content {
+    padding: 16px;
+  }
+  
+  .tooltip-content h4 {
+    font-size: 15px;
+  }
+  
+  .tooltip-content li {
+    font-size: 13px;
   }
   
   .doubt-subtitle {

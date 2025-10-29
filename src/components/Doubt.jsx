@@ -7,6 +7,7 @@ import {
   Mail,
   HelpCircle,
   User,
+  Info,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import "../styles/doubt.css";
@@ -21,6 +22,7 @@ const Doubt = () => {
   const [emailError, setEmailError] = useState("");
   const [doubtError, setDoubtError] = useState("");
   const [submitStatus, setSubmitStatus] = useState(null); // null | 'loading' | 'success' | 'error'
+  const [showTooltip, setShowTooltip] = useState(false);
 
   // Hide confirmation/error message after 3 seconds (when not loading)
   useEffect(() => {
@@ -149,9 +151,48 @@ const Doubt = () => {
       />
 
       <motion.div className="doubt-card" variants={stagger}>
-        <motion.h2 id="doubt-heading" className="doubt-title" variants={itemUp}>
-          Have a Doubt?
-        </motion.h2>
+        <motion.div className="doubt-header" variants={itemUp}>
+          <motion.h2 id="doubt-heading" className="doubt-title">
+            Have a Doubt?
+          </motion.h2>
+          
+          {/* Functional Question Mark Icon with Tooltip */}
+          <motion.div 
+            className="info-icon-wrapper"
+            onMouseEnter={() => setShowTooltip(true)}
+            onMouseLeave={() => setShowTooltip(false)}
+            onClick={() => setShowTooltip(!showTooltip)}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Info className="info-icon" size={24} aria-label="Information about doubt submission" />
+            
+            <AnimatePresence>
+              {showTooltip && (
+                <motion.div
+                  className="tooltip"
+                  initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.9 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="tooltip-content">
+                    <h4>How to Submit a Doubt</h4>
+                    <ul>
+                      <li>✓ Provide your name and valid email</li>
+                      <li>✓ Be specific about your problem</li>
+                      <li>✓ Include error messages if any</li>
+                      <li>✓ Mention the algorithm/data structure</li>
+                      <li>✓ Add input/output examples</li>
+                    </ul>
+                    <p className="tooltip-footer">We'll respond within 24-48 hours!</p>
+                  </div>
+                  <div className="tooltip-arrow"></div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        </motion.div>
 
         <motion.p className="doubt-subtitle" variants={itemUp}>
           Ask anything about algorithms or data structures. We'll help you get
@@ -295,15 +336,28 @@ const Doubt = () => {
 
           {/* Doubt */}
           <motion.div
-            className={`field ${doubtError ? "has-error" : ""}`}
+            className={`field field-textarea ${doubtError ? "has-error" : ""}`}
             variants={itemUp}
           >
-            <HelpCircle className="field-icon" aria-hidden="true" />
+            <div className="textarea-header">
+              <HelpCircle className="field-icon textarea-icon" aria-hidden="true" />
+              <label htmlFor="doubt" className="field-label-static">
+                Your Doubt
+              </label>
+              <motion.span
+                className={`counter ${doubt.length > MAX_CHARS ? "over" : ""}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.8 }}
+              >
+                {Math.min(doubt.length, MAX_CHARS)}/{MAX_CHARS}
+              </motion.span>
+            </div>
+            
             <textarea
               id="doubt"
               name="doubt"
-              placeholder=" "
-              rows="5"
+              placeholder="Describe your doubt in detail..."
+              rows="6"
               value={doubt}
               onChange={(e) => {
                 const v = e.target.value;
@@ -318,11 +372,8 @@ const Doubt = () => {
               data-filled={isFilled.doubt}
               className="field-input textarea"
             />
-            <label htmlFor="doubt" className="field-label">
-              Your Doubt
-            </label>
 
-            <div id="doubt-help" className="assist-row">
+            <div id="doubt-help" className="textarea-footer">
               <AnimatePresence>
                 {doubtError ? (
                   <motion.div
@@ -335,29 +386,18 @@ const Doubt = () => {
                     <AlertCircle size={16} className="error-icon" />
                     <span>{doubtError}</span>
                   </motion.div>
-                ) : null}
+                ) : (
+                  <motion.span
+                    className="helper-text"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.7 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    💡 Be specific. Add inputs, constraints, or the error you saw.
+                  </motion.span>
+                )}
               </AnimatePresence>
-
-              <motion.span
-                className={`counter ${doubt.length > MAX_CHARS ? "over" : ""}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.8 }}
-              >
-                {Math.min(doubt.length, MAX_CHARS)}/{MAX_CHARS}
-              </motion.span>
             </div>
-            
-            {/* Helper text moved below textarea and centered */}
-            <motion.div className="helper-text-container">
-              <motion.span
-                className="helper centered"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.8 }}
-                exit={{ opacity: 0 }}
-              >
-                Be specific. Add inputs, constraints, or the error you saw.
-              </motion.span>
-            </motion.div>
           </motion.div>
 
           {/* Actions */}
@@ -387,8 +427,10 @@ const Doubt = () => {
               type="button"
               className="cancel-btn"
               onClick={() => {
+                setName("");
                 setEmail("");
                 setDoubt("");
+                setNameError("");
                 setEmailError("");
                 setDoubtError("");
                 setSubmitStatus(null);
