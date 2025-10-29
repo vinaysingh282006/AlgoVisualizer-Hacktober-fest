@@ -120,7 +120,7 @@ const AlgorithmComparisonTable = ({ darkMode }) => {
                 }
                 className="checkboxInput"
               />
-              {algorithm}
+              <span className="algorithmName">{algorithm}</span>
             </label>
           ))}
         </div>
@@ -136,6 +136,7 @@ const AlgorithmComparisonTable = ({ darkMode }) => {
                   <button
                     onClick={() => handleAlgorithmToggle(algo)}
                     className="removeButton"
+                    aria-label={`Remove ${algo}`}
                   >
                     ×
                   </button>
@@ -157,7 +158,7 @@ const AlgorithmComparisonTable = ({ darkMode }) => {
                 <tr>
                   <th className="tableHeader propertyColumn">Property</th>
                   {selectedAlgorithms.map((algorithm) => (
-                    <th key={algorithm} className="tableHeader">
+                    <th key={algorithm} className="tableHeader algorithmColumn">
                       {algorithm}
                     </th>
                   ))}

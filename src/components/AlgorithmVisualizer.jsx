@@ -1,5 +1,6 @@
 // src/components/AlgorithmVisualizer.jsx
 import React, { useState, useEffect, useMemo, useCallback, useRef, useLayoutEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion"; // ✅ Import Framer Motion
 import algorithmsData from "../algorithms/algorithms.json";
 import "../styles/UnifiedVisualizer.css";
 import ComplexityAnalyzer from "./ComplexityAnalyzer";
@@ -34,6 +35,42 @@ const VISUALIZATION_CONFIG = {
   highlightScale: "scaleY(1.12)",
   normalScale: "scaleY(1)"
 };
+
+// ✅ Memoized bar component for better performance
+const VisualizationBar = React.memo(({ 
+  value, 
+  index, 
+  colorClass, 
+  isHighlighted, 
+  computedBarWidth, 
+  colorArray, 
+  state,
+  fontSize
+}) => {
+  return (
+    <motion.div
+      key={index}
+      className={`visualization-bar ${colorClass}`}
+      style={{
+        height: `${Math.max(value, MIN_BAR_HEIGHT) * BAR_HEIGHT_MULTIPLIER}px`,
+        width: `${computedBarWidth}px`,
+        backgroundColor: Array.isArray(colorArray) ? colorArray[index] : undefined,
+        transition: state.barMotion
+          ? VISUALIZATION_CONFIG.motionTransition.replace('{speed}', state.animationSpeedMs)
+          : "none",
+      }}
+      initial={false}
+      animate={{
+        transform: isHighlighted ? VISUALIZATION_CONFIG.highlightScale : VISUALIZATION_CONFIG.normalScale
+      }}
+      transition={{ duration: state.animationSpeedMs / 1000 }}
+    >
+      <span className="bar-value" style={{ fontSize: fontSize ?? undefined }}>{value}</span>
+    </motion.div>
+  );
+});
+
+VisualizationBar.displayName = 'VisualizationBar';
 
 export default function AlgorithmVisualizer({
   algorithmName,
@@ -345,24 +382,20 @@ useLayoutEffect(() => {
       }
 
       return (
-        <div
+        <VisualizationBar
           key={idx}
-          className={`visualization-bar ${colorClass}`}
-          style={{
-            height: `${Math.max(val, MIN_BAR_HEIGHT) * BAR_HEIGHT_MULTIPLIER}px`,
-            width: `${computedBarWidth}px`,
-            backgroundColor: Array.isArray(colorArray) ? colorArray[idx] : undefined,
-            transition: state.barMotion
-              ? VISUALIZATION_CONFIG.motionTransition.replace('{speed}', state.animationSpeedMs)
-              : "none",
-            transform: isHighlighted ? VISUALIZATION_CONFIG.highlightScale : VISUALIZATION_CONFIG.normalScale,
-          }}
-        >
-          <span className="bar-value" style={{ fontSize: fontSize ?? undefined }}>{val}</span>
-        </div>
+          value={val}
+          index={idx}
+          colorClass={colorClass}
+          isHighlighted={isHighlighted}
+          computedBarWidth={computedBarWidth}
+          colorArray={colorArray}
+          state={state}
+          fontSize={fontSize}
+        />
       );
     });
-  }, [displayArray, visualOnly, controlled, state.steps, state.currentStep, colorArray, state.barMotion, state.animationSpeedMs, fontSize, requiresSpecialHandling, state.isAnimating, state.isPaused]);
+  }, [displayArray, visualOnly, controlled, state.steps, state.currentStep, colorArray, state.barMotion, state.animationSpeedMs, fontSize, requiresSpecialHandling, state.isAnimating, state.isPaused, computedBarWidth]);
 
   return (
     <div className="unified-visualizer">
@@ -490,7 +523,9 @@ useLayoutEffect(() => {
         className="visualization-container" ref={containerRef}
         style={{ gap: barGap ? barGap : undefined }}
       >
-        {renderBars}
+        <AnimatePresence>
+          {renderBars}
+        </AnimatePresence>
       </div>
       
       {showPerformanceAnalysis && !visualOnly && !controlled && (
