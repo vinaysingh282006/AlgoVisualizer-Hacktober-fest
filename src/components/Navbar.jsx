@@ -25,6 +25,7 @@ import { useTheme } from "../ThemeContext";
 import { navbarNavigationItems } from "../utils/navigation";
 import UserDropdown from "./UserDropdown";
 import ThemeToggle from "./ThemeToggle";
+// import { backgroundClip } from "html2canvas/dist/types/css/property-descriptors/background-clip";
 
 const ICON_COMPONENTS = {
   BarChart3,
@@ -82,7 +83,7 @@ const DesktopNavItem = ({
           </span>
           {isSidebarExpanded && (
             <ChevronDown
-              size={16}
+              size={20}
               className={`dropdown-arrow ${isOpen === index ? "rotated" : ""}`}
             />
           )}

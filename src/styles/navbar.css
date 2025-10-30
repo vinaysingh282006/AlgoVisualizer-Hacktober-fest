@@ -98,6 +98,10 @@
   transform: translateX(-50%) translateY(0);
 }
 
+.dropdown-arrow{
+  color:black;
+}
+
 /* ✨ little top pointer */
 .mega-menu::before {
   content: "";
@@ -428,7 +432,6 @@
 .navbar.light .feature-desc { 
   color: #3a4253; 
 }
-
 
 @media (max-width: 768px) {
   .navbar .mega-menu {
