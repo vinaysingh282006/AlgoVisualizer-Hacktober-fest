@@ -14,6 +14,7 @@ import TreePage from "../pages/TreePage.jsx";
 import LinkedListPage from "../pages/LinkedListPage.jsx";
 import SortingDoc from "../pages/SortingDoc.jsx";
 import Quiz from "../pages/Quiz.jsx";
+import MathQuiz from "../pages/MathQuiz.jsx";
 import Contact from "../pages/contact.jsx";
 import Privacy from "../pages/privacy.jsx";
 import Terms from "../pages/terms.jsx";
@@ -37,6 +38,7 @@ const AppRoutes = () => {
         <Route path="/tree" element={<TreePage />} />
         <Route path="/linkedlist" element={<LinkedListPage />} />
         <Route path="/quiz" element={<Quiz />} />
+        <Route path="/quiz/math" element={<MathQuiz />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />

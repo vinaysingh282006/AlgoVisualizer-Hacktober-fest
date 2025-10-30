@@ -4,7 +4,14 @@ import QuizStart from './QuizStart';
 import QuestionCard from './QuestionCard';
 import ResultPage from './ResultPage';
 import quizQuestions from '../data/quizQuestions.json';
+import mathQuiz from '../data/mathQuiz.json';
 import "../styles/global-theme.css";
+
+// Merge all quiz datasets
+const ALL_QUESTIONS = [
+  ...quizQuestions,
+  ...mathQuiz,
+];
 
 // Topic definitions
 const TOPICS = [
@@ -44,9 +51,14 @@ const TOPICS = [
     description: "Test your knowledge on Git commands, concepts, and workflows."
 },
   {
+    id: 'math',
+    name: 'Math',
+    description: 'Mathematical reasoning for algorithms: modular arithmetic, number theory, combinatorics, probability.'
+  },
+  {
     id: "otherTopics",
     name: "Other Topics",
-    description: "Explore specialized areas including Hashing Algorithms, Tree Algorithms, Game Search Algorithms, and Branch & Bound."
+    description: "Explore specialized areas including Hashing Algorithms, Tree Algorithms, Game Search Algorithms, and Branch & Bound."
   },
 
 
@@ -145,6 +157,7 @@ const QuizHelpers = {
     "graph": "Graph",
     "string-algorithms": "String Algorithms",
     'git': 'Git',
+    'math': 'Math',
     'otherTopics': 'Other Topics',
     'all': 'all'
   }),
@@ -206,11 +219,11 @@ const QuizHelpers = {
   }
 };
 
-const QuizManager = () => {
+const QuizManager = ({ initialTopic = '', initialDifficulty = '' } = {}) => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(QUIZ_STEPS.START);
-  const [selectedTopic, setSelectedTopic] = useState('');
-  const [selectedDifficulty, setSelectedDifficulty] = useState('');
+  const [selectedTopic, setSelectedTopic] = useState(initialTopic || '');
+  const [selectedDifficulty, setSelectedDifficulty] = useState(initialDifficulty || '');
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState({});
@@ -259,7 +272,7 @@ const QuizManager = () => {
 
   const startQuiz = (topic, difficulty, timed = false) => {
     // Filter and shuffle questions
-    let filteredQuestions = QuizHelpers.filterAndShuffleQuestions(quizQuestions, topic, difficulty);
+    let filteredQuestions = QuizHelpers.filterAndShuffleQuestions(ALL_QUESTIONS, topic, difficulty);
 
     if (filteredQuestions.length === 0) {
       alert('No questions available for the selected criteria. Please try different options.');
