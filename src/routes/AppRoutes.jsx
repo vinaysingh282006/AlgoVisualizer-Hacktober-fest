@@ -39,6 +39,7 @@ const AppRoutes = () => {
         <Route path="/tree" element={<TreePage />} />
         <Route path="/linkedlist" element={<LinkedListPage />} />
         <Route path="/quiz" element={<Quiz />} />
+        <Route path="/quiz/math" element={<MathQuiz />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />

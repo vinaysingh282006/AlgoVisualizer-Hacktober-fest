@@ -124,6 +124,11 @@ const Sidebar = () => {
           label: "Interactive Quiz"
         },
         {
+          path: "/quiz/math",
+          icon: Brain,
+          label: "Math Quiz"
+        },
+        {
           path: "/documentation",
           icon: FileText,
           label: "Documentation"

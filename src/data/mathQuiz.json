@@ -1,0 +1,182 @@
+[
+  {
+    "id": 10001,
+    "topic": "Math",
+    "algorithm": "Asymptotic Analysis",
+    "difficulty": "Easy",
+    "question": "What is the time complexity of an algorithm that runs in log₂n steps?",
+    "options": [
+      "O(n)",
+      "O(log n)",
+      "O(n log n)",
+      "O(1)"
+    ],
+    "correctAnswer": 1,
+    "explanation": "log₂n steps imply logarithmic time complexity: O(log n)."
+  },
+  {
+    "id": 10002,
+    "topic": "Math",
+    "algorithm": "Number Theory",
+    "difficulty": "Easy",
+    "question": "What is the GCD of (36, 60)?",
+    "options": [
+      "6",
+      "12",
+      "24",
+      "18"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Prime factors: 36 = 2^2·3^2, 60 = 2^2·3·5 ⇒ GCD = 2^2·3 = 12."
+  },
+  {
+    "id": 10003,
+    "topic": "Math",
+    "algorithm": "Recursion Tree",
+    "difficulty": "Medium",
+    "question": "A recursive function calls itself twice for each call and stops after depth n. Including the initial call, how many total calls for n = 3?",
+    "options": [
+      "7",
+      "8",
+      "15",
+      "16"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Full binary tree of height n has 2^(n+1) − 1 calls. For n=3 ⇒ 15."
+  },
+  {
+    "id": 10004,
+    "topic": "Math",
+    "algorithm": "Modular Arithmetic",
+    "difficulty": "Easy",
+    "question": "A number leaves remainder 3 when divided by 5. What is the smallest positive number satisfying this?",
+    "options": [
+      "3",
+      "5",
+      "8",
+      "13"
+    ],
+    "correctAnswer": 0,
+    "explanation": "x ≡ 3 (mod 5) ⇒ smallest positive x is 3."
+  },
+  {
+    "id": 10005,
+    "topic": "Math",
+    "algorithm": "Number Theory",
+    "difficulty": "Easy",
+    "question": "What is the LCM of 12 and 18?",
+    "options": [
+      "24",
+      "30",
+      "36",
+      "48"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Prime factors: 12 = 2^2·3, 18 = 2·3^2 ⇒ LCM = 2^2·3^2 = 36."
+  },
+  {
+    "id": 10006,
+    "topic": "Math",
+    "algorithm": "Combinatorics",
+    "difficulty": "Medium",
+    "question": "How many ways to choose 2 items from 5 distinct items (order doesn't matter)?",
+    "options": [
+      "5",
+      "10",
+      "20",
+      "15"
+    ],
+    "correctAnswer": 1,
+    "explanation": "C(5,2) = 5·4/2 = 10."
+  },
+  {
+    "id": 10007,
+    "topic": "Math",
+    "algorithm": "Asymptotic Analysis",
+    "difficulty": "Medium",
+    "question": "What is the growth of the series 1 + 2 + ... + n?",
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(n^2)",
+      "O(log n)"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Sum = n(n+1)/2 ⇒ Θ(n^2)."
+  },
+  {
+    "id": 10008,
+    "topic": "Math",
+    "algorithm": "Modular Arithmetic",
+    "difficulty": "Medium",
+    "question": "What is 2^10 mod 7?",
+    "options": [
+      "0",
+      "1",
+      "2",
+      "4"
+    ],
+    "correctAnswer": 2,
+    "explanation": "2^10 = 1024; 1024 = 7·146 + 2 ⇒ remainder 2."
+  },
+  {
+    "id": 10009,
+    "topic": "Math",
+    "algorithm": "Number Theory",
+    "difficulty": "Easy",
+    "question": "How many primes are there ≤ 20?",
+    "options": [
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Primes ≤ 20: 2,3,5,7,11,13,17,19 ⇒ 8."
+  },
+  {
+    "id": 10010,
+    "topic": "Math",
+    "algorithm": "Logarithms",
+    "difficulty": "Easy",
+    "question": "Which identity is correct?",
+    "options": [
+      "log_a(b^c) = log_a(b) / c",
+      "log_a(b^c) = c · log_a(b)",
+      "log_a(b^c) = log_b(a^c)",
+      "log_a(b^c) = c / log_a(b)"
+    ],
+    "correctAnswer": 1,
+    "explanation": "log_a(b^c) = c·log_a(b)."
+  },
+  {
+    "id": 10011,
+    "topic": "Math",
+    "algorithm": "Probability",
+    "difficulty": "Easy",
+    "question": "A fair coin is tossed 3 times. Probability of at least one head?",
+    "options": [
+      "1/2",
+      "3/4",
+      "7/8",
+      "1/8"
+    ],
+    "correctAnswer": 2,
+    "explanation": "P(≥1H) = 1 − P(0H) = 1 − (1/2)^3 = 7/8."
+  },
+  {
+    "id": 10012,
+    "topic": "Math",
+    "algorithm": "Combinatorics",
+    "difficulty": "Medium",
+    "question": "How many distinct permutations of the string 'AAB'?",
+    "options": [
+      "2",
+      "3",
+      "6",
+      "9"
+    ],
+    "correctAnswer": 1,
+    "explanation": "3! / 2! = 3 distinct permutations."
+  }
+]
