@@ -16,7 +16,6 @@
   color: #ffffff !important;
 }
 .card {
-  /* background: var(--card-bg, #ffffff); */
   background:#b3cdf8;
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(16, 24, 40, 0.04);
@@ -112,3 +111,10 @@ strong {
   color: #1664e0;
 }
  
+.menu-btn{
+  background-color:cornflowerblue;
+}
+
+.sidebar{
+  background-color:#abc4ed;
+}

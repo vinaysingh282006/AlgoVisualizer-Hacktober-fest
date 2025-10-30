@@ -435,7 +435,7 @@ const Fundamentals = () => {
           textAlign: "center",
           marginBottom: "3rem",
           padding: "2rem 0",
-          background: "linear-gradient(135deg, #4f46e5, #4338ca)",
+          background:"linear-gradient(135deg, #a78bfa, #60a5fa)",
           color: "white",
           borderRadius: "12px",
           boxShadow: "0 10px 25px rgba(79, 70, 229, 0.3)",
