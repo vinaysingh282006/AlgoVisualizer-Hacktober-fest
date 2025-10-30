@@ -23,7 +23,7 @@ const PythonFundamentals = () => {
           textAlign: "center",
           marginBottom: "3rem",
           padding: "2rem 0",
-          background: "linear-gradient(135deg, #4f46e5, #4338ca)",
+          background: "linear-gradient(135deg, #a78bfa, #60a5fa)",
           color: "white",
           borderRadius: "12px",
           boxShadow: "0 10px 25px rgba(79, 70, 229, 0.3)"
@@ -44,16 +44,16 @@ const PythonFundamentals = () => {
       {/* Navigation */}
       <nav
         style={{
-          position: "sticky",
+          position: "relative",
           top: "2rem",
           background:  "var(--card-bg, #ffffff)",
           borderRadius: "12px",
           padding: "1.5rem",
           boxShadow: "0 6px 18px rgba(16,24,40,0.04)",
-          marginBottom: "2rem"
+          marginBottom: "4rem"
         }}
       >
-        <h3 style={{ marginTop: 0, color: "#0f172a" }}>
+        <h3 style={{ marginTop: 0, color: "var(--text-primary)" }}>
           <i className="fas fa-bookmark" style={{ marginRight: "0.5rem", color: "#4f46e5" }}></i>
           Contents
         </h3>
@@ -87,9 +87,9 @@ const PythonFundamentals = () => {
               key={item.id}
               onClick={() => setActiveTab(item.id)}
               style={{
-                background: activeTab === item.id ? "#4f46e5" : "transparent",
+                background: activeTab === item.id ? "#7670eeff" : "transparent",
                 color: activeTab === item.id ? "white" : "#4f46e5",
-                border: "2px solid #4f46e5",
+                border: "2px solid #817becff",
                 padding: "0.5rem 1rem",
                 borderRadius: "6px",
                 cursor: "pointer",

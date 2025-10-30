@@ -82,13 +82,15 @@
 }
 
 .learn-hero p {
-  margin: 0 0 18px;
+  margin: 0 auto 24px;
   color: var(--muted);
   font-size: 1.15rem;
   font-weight: 600;
   letter-spacing: .15px;
   font-family: 'Segoe UI', Arial, sans-serif;
   text-shadow: 0 2px 8px rgba(139, 176, 255, 0.10);
+  text-align: center;
+  max-width: 600px;
 }
 
 .learn-search {
@@ -97,13 +99,13 @@
   gap: 8px;
   border: 1.5px solid var(--accent-2);
   background: var(--card-2);
-  padding: 6px 8px;
+  padding: 10px 14px;
   /* decreased padding */
   border-radius: 10px;
   /* slightly smaller radius */
   box-shadow: 0 4px 24px rgba(99, 102, 241, 0.10), var(--shadow);
-  margin-top: 8px;
-  max-width: 320px;
+  margin: 0 auto 24px;
+  max-width: 400px;
   /* decreased width */
 }
 
@@ -113,11 +115,12 @@
   border: none;
   outline: none;
   font-size: 0.95rem;
+  padding: 16px 14px;
   /* decreased font size */
   color: var(--text);
   font-weight: 500;
   font-family: 'Segoe UI', Arial, sans-serif;
-  min-width: 0;
+  min-width: 150px;
   height: 28px;
   /* decreased height */
 }
@@ -136,6 +139,7 @@
   font-weight: 700;
   border-radius: 8px;
   padding: 7px 14px;
+  max-width: 100px;
   box-shadow: 0 2px 8px rgba(99, 102, 241, 0.12);
   transition: background .18s, box-shadow .18s;
 }
@@ -164,6 +168,27 @@
 @media (max-width: 680px) {
   .learn-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .learn-hero p {
+    font-size: 1rem;
+    max-width: 90%;
+    margin: 0 auto 20px;
+  }
+  
+  .learn-search {
+    max-width: 90%;
+    margin: 0 auto 20px;
+  }
+  
+  .category-filters {
+    margin: 12px 0 20px;
+    gap: 6px;
+  }
+  
+  .category-filter-btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
   }
 }
 
@@ -353,6 +378,41 @@
 /* Optional: ensure page background actually applies behind the layout */
 .learn-page {
   min-height: 100dvh;
+}
+
+/* =========================
+  CATEGORY FILTERS
+  ========================= */
+.category-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 24px;
+}
+
+.category-filter-btn {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--muted);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.category-filter-btn:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.category-filter-btn.active {
+  background: var(--accent-2);
+  color: white;
+  border-color: var(--accent-2);
 }
 
 /* Card animation */

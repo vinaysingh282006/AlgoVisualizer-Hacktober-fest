@@ -45,7 +45,8 @@ import {
   Wrench,
 } from "lucide-react";
 import "../styles/theme.css";
-import "../styles/Contribute.css";
+import "../styles/Contribute.css"; 
+const token = import.meta.env.VITE_GITHUB_TOKEN;
 
 const Contribute = () => {
   const navigate = useNavigate();
@@ -63,10 +64,16 @@ const Contribute = () => {
     const fetchRepoStats = async () => {
       try {
         const response = await fetch(
-          "https://api.github.com/repos/RhythmPahwa14/AlgoVisualizer"
+          "https://api.github.com/repos/RhythmPahwa14/AlgoVisualizer",{
+            headers: {
+              Accept: "application/vnd.github+json",
+              ...(token ? { Authorization: `Bearer ${token}` } : {})
+            }
+          }
         );
         if (response.ok) {
           const data = await response.json();
+          console.log(data);
           setRepoStats({
             stars: data.stargazers_count || 0,
             forks: data.forks_count || 0,
@@ -439,7 +446,7 @@ const Contribute = () => {
   return (
     <div className="theme-container contribute-page">
       {/* Back Button */}
-      <motion.button
+      {/* <motion.button
         onClick={handleBackClick}
         className="back-button"
         style={{ marginTop: "3.5rem" }}
@@ -451,7 +458,7 @@ const Contribute = () => {
       >
         <ArrowLeft size={40} />
         <span>Back</span>
-      </motion.button>
+      </motion.button> */}
 
       {/* Hero Section */}
       <motion.section
@@ -466,7 +473,7 @@ const Contribute = () => {
             Join our community of developers and help make algorithm learning
             more accessible and engaging for everyone
           </p>
-          <div className="repo-stats" data-aos="fade-up" data-aos-delay="200">
+          {/* <div className="repo-stats" data-aos="fade-up" data-aos-delay="200">
             <div className="stat-item">
               <Star className="stat-icon" size={40} />
               <span className="stat-value">{repoStats.stars}</span>
@@ -487,7 +494,7 @@ const Contribute = () => {
               <span className="stat-value">12+</span>
               <span className="stat-label">Contributors</span>
             </div>
-          </div>
+          </div> */}
         </div>
       </motion.section>
 
@@ -691,15 +698,15 @@ const Contribute = () => {
                 </a>
               </div>
             </div>
-            <div className="repo-content">
-              <p>
+            <div className="repo-content section-content border-l-0">
+              <p className="text-center">
                 AlgoVisualizer is an open-source project that helps students and
                 developers understand algorithms through interactive
                 visualizations. We welcome contributions from the community to
                 make learning algorithms more accessible and engaging.
               </p>
-              <div className="repo-stats-inline">
-                <div className="stat-inline">
+              <div className="repo-stats-inline flex items-center justify-center h-full mt-10 ">
+                <div className="stat-inline"> 
                   <span className="stat-label">Stars</span>
                   <span className="stat-value">{repoStats.stars}</span>
                 </div>

@@ -706,7 +706,7 @@ graph:
         - "Overkill for static (non-updated) data"
 
 # Added Fenwick Tree
-    - name: "Fenwick Tree (Binary Indexed Tree)"
+    - name: "Fenwick Tree"
       timeComplexity:
         best: "O(log N)"
         average: "O(log N)"
@@ -726,6 +726,760 @@ graph:
         - "Limited to operations that can be represented as prefix-based (e.g., sum)"
         - "Cannot handle complex range updates without additional logic"
         - "Harder to visualize than Segment Tree"
+
+#Topological Sort
+    - name: "Topological Sort"
+      timeComplexity:
+        best: "O(V + E)"
+        average: "O(V + E)"
+        worst: "O(V + E)"
+      spaceComplexity: "O(V)"
+      description: "Linear ordering of vertices in a directed acyclic graph (DAG) such that for every directed edge (u → v), vertex u appears before vertex v."
+      useCases:
+        - "Task scheduling with dependencies"
+        - "Build systems (resolving compilation order)"
+        - "Course prerequisite problems"
+        - "Dependency resolution in DAGs"
+      pros:
+        - "Detects cycles in directed graphs"
+        - "Efficient for DAG-based dependency problems"
+        - "Useful in many real-world scheduling systems"
+      cons:
+        - "Only works for Directed Acyclic Graphs (DAGs)"
+        - "Does not provide path or distance information"
+        - "Multiple valid orders may exist"
+
+#Bellman Ford
+    - name: "Bellman-Ford Algorithm"
+      timeComplexity:
+        best: "O(E)"
+        average: "O(V * E)"
+        worst: "O(V * E)"
+      spaceComplexity: "O(V)"
+      description: "Computes shortest paths from a single source to all vertices in a weighted graph, with negative weights edges."
+      useCases:
+        - "Shortest path in graphs with negative edges"
+        - "Detecting negative weight cycles"
+        - "Currency arbitrage or financial graph problems"
+        - "Routing algorithms in dynamic networks"
+      pros:
+        - "Handles negative edge weights"
+        - "Simple and easy to implement"
+        - "Detects negative cycles effectively"
+      cons:
+        - "Slower than Dijkstra`s for graphs without negative edges"
+        - "Not efficient for dense graphs"
+        - "Higher time complexity which is (O(V * E))"
+
+#Floyd-warshall algo
+    - name: "Floyd-Warshall Algorithm"
+      timeComplexity:
+        best: "O(V³)"
+        average: "O(V³)"
+        worst: "O(V³)"
+      spaceComplexity: "O(V²)"
+      description: "DP algorithm for graph to find the shortest paths between all pairs of vertices in a weighted graph with negative weights ( but no negative cycles)."
+      useCases:
+        - "All-pairs shortest path computation"
+        - "Routing algorithms"
+        - "Transitive closure of a graph"
+        - "Network analysis and reachability"
+      pros:
+        - "Finds shortest paths between all vertex pairs"
+        - "Works with negative weights (no negative cycles)"
+        - "Simple matrix-based implementation"
+      cons:
+        - "High time complexity (O(V³))"
+        - "Consumes large memory for dense graphs"
+        - "Not ideal for very large graphs"
+
+#Tarzen algorithm
+    - name: "Tarjan’s Algorithm"
+      timeComplexity:
+        best: "O(V + E)"
+        average: "O(V + E)"
+        worst: "O(V + E)"
+      spaceComplexity: "O(V)"
+      description: "Efficient algorithm to find all strongly connected components (SCCs) in a directed graph using a single DFS traversal and low-link values."
+      useCases:
+        - "Finding Strongly Connected Components (SCCs)"
+        - "Detecting cycles in directed graphs"
+        - "Optimizing dependency resolution"
+        - "Finding articulation points in networks"
+      pros:
+        - "Single DFS traversal — highly efficient"
+        - "No need to reverse the graph"
+        - "Linear time for SCC computation"
+      cons:
+        - "Complex to implement and debug"
+        - "Requires stack and recursion tracking"
+        - "Works only for directed graphs"
+
+#Kosaraju's algorithm
+    - name: "Kosaraju’s Algorithm"
+      timeComplexity:
+        best: "O(V + E)"
+        average: "O(V + E)"
+        worst: "O(V + E)"
+      spaceComplexity: "O(V)"
+      description: "Algorithm to find strongly connected components (SCCs) in a directed graph using two DFS passes — one on the original graph and one on its transpose."
+      useCases:
+        - "Finding Strongly Connected Components (SCCs)"
+        - "Cycle detection in directed graphs"
+        - "Topological sorting of SCCs"
+        - "Analyzing connectivity in networks"
+      pros:
+        - "Conceptually simple and easy to reason about"
+        - "Linear time complexity"
+        - "Intuitive approach using graph transposition"
+      cons:
+        - "Requires two full DFS traversals"
+        - "Needs additional memory for transpose graph"
+
+        - "Less efficient than Tarjan's in practice"
+
+#Johnsan's algo
+    - name: "Johnson`s Algorithm"
+      timeComplexity:
+        best: "O(V² log V + V * E)"
+        average: "O(V² log V + V * E)"
+        worst: "O(V² log V + V * E)"
+      spaceComplexity: "O(V²)"
+      description: "Finds shortest paths between all pairs of vertices in a weighted, directed graph, even with negative edge weights, using Bellman-Ford and Dijkstra’s algorithms together."
+      useCases:
+        - "All-pairs shortest path in sparse graphs"
+        - "Graphs with negative edge weights (no negative cycles)"
+        - "Network routing and optimization"
+        - "Graph analysis where both Bellman-Ford and Dijkstra can be combined"
+      pros:
+        - "Efficient for sparse graphs compared to Floyd-Warshall"
+        - "Handles negative weights gracefully"
+        - "Combines the power of Dijkstra and Bellman-Ford"
+      cons:
+        - "More complex to implement"
+        - "Not ideal for dense graphs"
+        - "Fails if graph contains negative cycles"
+
+#Ford-fulkerson algo
+    - name: "Ford-Fulkerson Algorithm"
+      timeComplexity:
+        best: "O(E * max_flow)"
+        average: "O(E * max_flow)"
+        worst: "O(E * max_flow)"
+      spaceComplexity: "O(V + E)"
+      description: "Computes the maximum flow in a flow network using the concept of augmenting paths and residual capacities."
+      useCases:
+        - "Maximum flow problems"
+        - "Network routing and bandwidth allocation"
+        - "Bipartite matching"
+        - "Circulation and cut problems in graphs"
+      pros:
+        - "Simple and intuitive approach"
+        - "Can handle large flow networks"
+        - "Foundation for Edmonds-Karp and Dinic's algorithms"
+      cons:
+        - "Runtime depends on the magnitude of max flow"
+        - "May not terminate for irrational capacities"
+        - "Less efficient for dense or large graphs"
+
+#Kahn's algo
+    - name: "Kahn`s Algorithm"
+      timeComplexity:
+        best: "O(V + E)"
+        average: "O(V + E)"
+        worst: "O(V + E)"
+      spaceComplexity: "O(V)"
+      description: "Performs topological sorting on a Directed Acyclic Graph (DAG) using in-degree calculation and a queue to process nodes with zero in-degree."
+      useCases:
+        - "Topological sorting of DAGs"
+        - "Task scheduling and dependency resolution"
+        - "Detecting cycles in directed graphs"
+        - "Build systems and prerequisite problems"
+      pros:
+        - "Iterative and easy to understand"
+        - "Detects cycles in directed graphs"
+        - "Efficient linear-time implementation"
+      cons:
+        - "Works only on DAGs"
+        - "Not suitable for dynamic graphs"
+        - "Requires maintenance of in-degree array"
+
+    - name: "Dinic's Algorithm"
+      timeComplexity:
+        best: "O(E * sqrt(V))"
+        average: "O(V² * E)"
+        worst: "O(V² * E)"
+      spaceComplexity: "O(V + E)"
+      description: "An optimized algorithm for computing the maximum flow in a flow network using a layered graph (level graph) and blocking flow concept."
+      useCases:
+        - "Maximum flow problems"
+        - "Bipartite matching"
+        - "Circulation with demands"
+        - "Network routing and capacity planning"
+      pros:
+        - "Much faster than Ford-Fulkerson for large graphs"
+        - "Deterministic and guaranteed to terminate"
+        - "Works well on sparse and dense graphs"
+      cons:
+        - "Complex implementation"
+        - "Not intuitive for beginners"
+        - "Less efficient for graphs with small flow values"
+
+    - name: "Edmonds-Karp Algorithm"
+      timeComplexity:
+        best: "O(V * E²)"
+        average: "O(V * E²)"
+        worst: "O(V * E²)"
+      spaceComplexity: "O(V + E)"
+      description: "A specific implementation of the Ford-Fulkerson method that uses Breadth-First Search (BFS) to find the shortest augmenting paths, guaranteeing polynomial time complexity."
+      useCases:
+        - "Maximum flow computation"
+        - "Bipartite graph matching"
+        - "Network design and traffic optimization"
+        - "Flow-based resource allocation"
+      pros:
+        - "Guaranteed to run in polynomial time"
+        - "Easier to implement than Dinic's Algorithm"
+        - "Predictable and stable performance"
+      cons:
+        - "Slower compared to Dinic's on large graphs"
+        - "Higher time complexity (O(V * E²))"
+        - "Inefficient for graphs with very high edge count"
+
+
+
+# Tree algorithms for the cheatsheet added
+trees:
+  title: "Tree Algorithms"
+  icon: "🌳"
+  color: "#8BC34A"
+  algorithms:
+    - name: "Binary Tree Traversal (Inorder)"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(h)"
+      description: "Visits left subtree, root, then right subtree recursively."
+      useCases:
+        - "BST sorted order traversal"
+        - "Expression tree evaluation"
+        - "Flatten tree to sorted array"
+      pros:
+        - "Natural sorted order for BST"
+        - "Simple recursive implementation"
+      cons:
+        - "Requires stack space"
+        - "Not suitable for non-BST ordering"
+
+    - name: "Binary Tree Traversal (Preorder)"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(h)"
+      description: "Visits root first, then left subtree, then right subtree."
+      useCases:
+        - "Tree copying/cloning"
+        - "Prefix expression generation"
+        - "Tree serialization"
+      pros:
+        - "Good for copying trees"
+        - "Root processed first"
+      cons:
+        - "Not sorted order for BST"
+        - "Stack space required"
+
+    - name: "Binary Tree Traversal (Postorder)"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(h)"
+      description: "Visits left subtree, right subtree, then root."
+      useCases:
+        - "Tree deletion"
+        - "Postfix expression evaluation"
+        - "Calculate directory sizes"
+      pros:
+        - "Children processed before parent"
+        - "Good for deletion operations"
+      cons:
+        - "Root processed last"
+        - "Requires stack space"
+
+    - name: "Level Order Traversal (BFS)"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(w)"
+      description: "Visits nodes level by level using a queue."
+      useCases:
+        - "Level-wise processing"
+        - "Find tree width"
+        - "Connect nodes at same level"
+      pros:
+        - "Natural level-by-level order"
+        - "No recursion needed"
+      cons:
+        - "Uses queue space"
+        - "Not sorted for BST"
+
+    - name: "Lowest Common Ancestor (LCA)"
+      timeComplexity:
+        best: "O(log n)"
+        average: "O(h)"
+        worst: "O(n)"
+      spaceComplexity: "O(h)"
+      description: "Finds the lowest common ancestor of two nodes in a tree."
+      useCases:
+        - "Finding distance between nodes"
+        - "Range queries in trees"
+        - "Hierarchical relationships"
+      pros:
+        - "Efficient for balanced trees"
+        - "Fundamental tree operation"
+      cons:
+        - "Can be O(n) for skewed trees"
+        - "Requires parent pointers or recursion"
+
+    - name: "Morris Traversal"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(1)"
+      description: "Traverses tree without recursion or stack by creating temporary links."
+      useCases:
+        - "Space-constrained environments"
+        - "Inorder traversal without stack"
+        - "Constant space traversal"
+      pros:
+        - "O(1) space complexity"
+        - "No recursion or stack"
+      cons:
+        - "Modifies tree temporarily"
+        - "More complex implementation"
+        - "Not intuitive"
+
+# 6 Different Advance Tree algorithm
+    - name: "Tree Diameter"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(h)"
+      description: "Finds the longest path between any two nodes in the tree."
+      useCases:
+        - "Network analysis"
+        - "Finding tree width metrics"
+        - "Graph connectivity problems"
+      pros:
+        - "Linear time solution"
+        - "Important tree metric"
+      cons:
+        - "Requires DFS traversal"
+        - "Can be tricky with edge cases"
+
+    - name: "Serialize and Deserialize Tree"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(n)"
+      description: "Converts tree to string format and reconstructs it."
+      useCases:
+        - "Save tree to disk"
+        - "Network transmission"
+        - "Tree cloning"
+      pros:
+        - "Preserves tree structure"
+        - "Enables persistence"
+      cons:
+        - "Requires string parsing"
+        - "Uses extra space"
+
+    - name: "Vertical Order Traversal"
+      timeComplexity:
+        best: "O(n log n)"
+        average: "O(n log n)"
+        worst: "O(n log n)"
+      spaceComplexity: "O(n)"
+      description: "Groups nodes by vertical columns from left to right."
+      useCases:
+        - "Tree visualization"
+        - "Column-wise processing"
+        - "Vertical views of trees"
+      pros:
+        - "Natural column grouping"
+        - "Useful for visualization"
+      cons:
+        - "Requires sorting"
+        - "Extra space for hash map"
+
+    - name: "Binary Tree to Doubly Linked List"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(h)"
+      description: "Converts BST to sorted doubly linked list in-place."
+      useCases:
+        - "Space-efficient sorting"
+        - "Tree flattening"
+        - "Converting to linear structure"
+      pros:
+        - "In-place conversion"
+        - "Maintains sorted order"
+      cons:
+        - "Destroys original tree"
+        - "Requires careful pointer manipulation"
+
+    - name: "Zigzag Level Order Traversal"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(w)"
+      description: "Traverses the tree level by level, alternating the direction of traversal on each level (left-to-right, then right-to-left)."
+      useCases:
+        - "Tree visualization"
+        - "Alternating level order patterns"
+        - "Interview traversal problems"
+      pros:
+        - "Simple BFS-based logic"
+        - "Provides clear structure visualization"
+      cons:
+        - "Requires direction toggling logic"
+        - "Extra space for queue and reversal"
+
+    - name: "Boundary Traversal of Binary Tree"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(h)"
+      description: "Traverses the boundary nodes of a binary tree in anti-clockwise order including left boundary, leaves, and right boundary."
+      useCases:
+        - "Tree visualization"
+        - "Traversal pattern problems"
+        - "Complex interview traversal variants"
+      pros:
+        - "Covers the complete outer boundary"
+        - "Combines preorder and postorder concepts"
+      cons:
+        - "Edge cases for leaf duplication"
+        - "Requires multiple traversals (left, leaf, right)"
+        - "Less efficient than Tarjan’s in practice"
+
+        
+# patterns for dsa
+patterns:
+  title: "Famous DSA Patterns"
+  icon: "🎯"
+  color: "#E91E63"
+  algorithms:
+    - name: "Two Pointers"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(1)"
+      description: "Uses two pointers moving through data structure to solve problems efficiently."
+      useCases:
+        - "Pair sum in sorted array"
+        - "Remove duplicates from sorted array"
+        - "Container with most water"
+        - "3Sum problem"
+      pros:
+        - "Space efficient O(1)"
+        - "Better than nested loops"
+        - "Simple to implement"
+      cons:
+        - "Usually requires sorted data"
+        - "Not always applicable"
+
+    - name: "Fast & Slow Pointers"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(1)"
+      description: "Two pointers moving at different speeds to detect cycles or find middle elements."
+      useCases:
+        - "Detect cycle in linked list"
+        - "Find middle of linked list"
+        - "Happy number problem"
+        - "Palindrome linked list"
+      pros:
+        - "Detects cycles efficiently"
+        - "O(1) space complexity"
+        - "Simple concept"
+      cons:
+        - "Limited to specific problems"
+        - "Can be confusing initially"
+
+    - name: "Merge Intervals"
+      timeComplexity:
+        best: "O(n log n)"
+        average: "O(n log n)"
+        worst: "O(n log n)"
+      spaceComplexity: "O(n)"
+      description: "Combines overlapping intervals by sorting and merging."
+      useCases:
+        - "Merge overlapping intervals"
+        - "Insert interval"
+        - "Meeting rooms problem"
+        - "Employee free time"
+      pros:
+        - "Handles complex interval logic"
+        - "Clear approach"
+      cons:
+        - "Requires sorting"
+        - "Edge cases can be tricky"
+
+    - name: "In-place Reversal of Linked List"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(1)"
+      description: "Reverses linked list nodes in-place by changing pointers."
+      useCases:
+        - "Reverse linked list"
+        - "Reverse sublist"
+        - "Reverse K-group"
+        - "Rotate list"
+      pros:
+        - "O(1) space"
+        - "Efficient pointer manipulation"
+      cons:
+        - "Easy to make mistakes with pointers"
+        - "Edge cases need careful handling"
+    - name: "Prefix XOR"
+      category: "Bit Manipulation"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(n)"
+      description: "Uses prefix XOR array to compute XOR over any subarray efficiently and solve problems like finding missing numbers or pairs."
+      useCases:
+        - "Subarray XOR queries"
+        - "Finding unique numbers in array"
+        - "Solving problems with XOR properties efficiently"
+      pros:
+        - "Reduces repeated XOR computation"
+        - "Enables clever bitwise solutions in O(n)"
+      cons:
+        - "Understanding XOR properties is crucial"
+        - "Edge cases like empty subarray need handling"
+
+    - name: "Two Heaps"
+      timeComplexity:
+        best: "O(log n)"
+        average: "O(log n)"
+        worst: "O(log n)"
+      spaceComplexity: "O(n)"
+      description: "Uses max heap and min heap to find median or manage two halves of data."
+      useCases:
+        - "Find median from data stream"
+        - "Sliding window median"
+        - "IPO problem"
+      pros:
+        - "Efficient median finding"
+        - "Dynamic data handling"
+      cons:
+        - "Complex implementation"
+        - "Extra space needed"
+
+    - name: "Subsets (BFS/DFS)"
+      timeComplexity:
+        best: "O(2ⁿ)"
+        average: "O(2ⁿ)"
+        worst: "O(2ⁿ)"
+      spaceComplexity: "O(2ⁿ)"
+      description: "Generates all possible subsets using backtracking or iteration."
+      useCases:
+        - "Generate all subsets"
+        - "Subsets with duplicates"
+        - "Permutations"
+        - "Letter combinations"
+      pros:
+        - "Systematic generation"
+        - "Covers all possibilities"
+      cons:
+        - "Exponential time"
+        - "High memory usage"
+
+    - name: "Modified Binary Search"
+      timeComplexity:
+        best: "O(log n)"
+        average: "O(log n)"
+        worst: "O(log n)"
+      spaceComplexity: "O(1)"
+      description: "Adapts binary search for rotated arrays, infinite arrays, or special conditions."
+      useCases:
+        - "Search in rotated sorted array"
+        - "Find minimum in rotated array"
+        - "Search in infinite array"
+        - "Peak element"
+      pros:
+        - "Logarithmic time"
+        - "Works on modified sorted data"
+      cons:
+        - "Tricky boundary conditions"
+        - "Requires sorted property"
+
+    - name: "Top K Elements"
+      timeComplexity:
+        best: "O(n log k)"
+        average: "O(n log k)"
+        worst: "O(n log k)"
+      spaceComplexity: "O(k)"
+      description: "Finds top K elements using heap or quickselect."
+      useCases:
+        - "Top K frequent elements"
+        - "Kth largest element"
+        - "K closest points"
+        - "Connect ropes with minimum cost"
+      pros:
+        - "Efficient for large datasets"
+        - "Better than sorting entire array"
+      cons:
+        - "Heap operations overhead"
+        - "Not stable ordering"
+
+    - name: "K-way Merge"
+      timeComplexity:
+        best: "O(n log k)"
+        average: "O(n log k)"
+        worst: "O(n log k)"
+      spaceComplexity: "O(k)"
+      description: "Merges K sorted arrays/lists using a min heap."
+      useCases:
+        - "Merge K sorted lists"
+        - "Kth smallest in sorted matrix"
+        - "Smallest range covering K lists"
+      pros:
+        - "Efficient merging"
+        - "Works for large K"
+      cons:
+        - "Requires heap"
+        - "Extra space for heap"
+
+    - name: "Monotonic Stack"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(n)"
+      description: "Maintains elements in monotonic order to find next greater/smaller elements."
+      useCases:
+        - "Next greater element"
+        - "Daily temperatures"
+        - "Largest rectangle in histogram"
+        - "Trapping rain water"
+      pros:
+        - "Linear time solution"
+        - "Efficient for range queries"
+      cons:
+        - "Not intuitive initially"
+        - "Extra space for stack"
+
+    - name: "Union Find (Disjoint Set)"
+      timeComplexity:
+        best: "O(α(n))"
+        average: "O(α(n))"
+        worst: "O(α(n))"
+      spaceComplexity: "O(n)"
+      description: "Tracks connected components with path compression and union by rank."
+      useCases:
+        - "Number of islands"
+        - "Graph valid tree"
+        - "Accounts merge"
+        - "Redundant connection"
+      pros:
+        - "Near constant time operations"
+        - "Efficient for connectivity"
+      cons:
+        - "Complex implementation"
+        - "Not for directed graphs"
+
+    - name: "Prefix Sum"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(n)"
+      description: "Precomputes cumulative sums for fast range sum queries."
+      useCases:
+        - "Range sum query"
+        - "Subarray sum equals K"
+        - "Continuous subarray sum"
+        - "Product of array except self"
+      pros:
+        - "O(1) range queries after preprocessing"
+        - "Simple to implement"
+      cons:
+        - "Extra space needed"
+        - "Updates require recomputation"
+    - name: "Heavy-Light Decomposition (HLD)"
+      category: "Tree / Advanced"
+      timeComplexity:
+        best: "O(log n) per query"
+        average: "O(log n)"
+        worst: "O(log n)"
+      spaceComplexity: "O(n)"
+      description: "Decomposes tree into paths to answer path or subtree queries efficiently."
+      useCases:
+        - "Path queries in trees (sum, max, min)"
+        - "Dynamic tree operations"
+      pros:
+        - "Supports complex queries efficiently"
+        - "Reduces tree problem to array/range query problem"
+      cons:
+        - "Complex to implement"
+        - "Needs segment tree/fenwick tree integration"
+
+    - name: "Sparse Table / Range Query Static DP"
+      category: "Array / DP"
+      timeComplexity:
+        best: "O(1) per query after O(n log n) preprocessing"
+        average: "O(1)"
+        worst: "O(1)"
+      spaceComplexity: "O(n log n)"
+      description: "Preprocesses array to answer range min/max/gcd queries in O(1) for static arrays."
+      useCases:
+        - "Static RMQ problems"
+        - "GCD/Min/Max queries on immutable array"
+      pros:
+        - "Extremely fast query time"
+        - "Simple and deterministic"
+      cons:
+        - "Works only on immutable arrays"
+        - "Preprocessing takes O(n log n)"
+
+    - name: "DSW Algorithm"
+      timeComplexity:
+        best: "O(n)"
+        average: "O(n)"
+        worst: "O(n)"
+      spaceComplexity: "O(1)"
+      description: "Balances a Binary Search Tree (BST) in-place by first converting it into a vine (linked list) and then performing rotations to transform it into a balanced tree."
+      useCases:
+        - "One-time rebalancing of unbalanced BSTs"
+        - "Optimizing search efficiency after bulk insertions"
+        - "Space-constrained environments where AVL/Red-Black trees are too heavy"
+      pros:
+        - "Runs in linear time"
+        - "Requires only constant extra space"
+        - "Simple, non-recursive process"
+      cons:
+       - "Not suitable for frequent insertions/deletions"
+       - "More complex than self-balancing tree insertions"
+       - "Applies only to BSTs, not general binary trees"
 
 
 advancedAlgorithms:

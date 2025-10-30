@@ -367,6 +367,7 @@ const algorithmDatabase = {
      spaceComplexity:"O(V) ",
      implemented:true,
     },
+
     {
       name:"Divide And Conquer",
       id:"divideandconquer",
@@ -376,6 +377,34 @@ const algorithmDatabase = {
       spaceComplexity:"O(n)",
       implemented:true,
     },
+    {
+      name:"0/1 Knapsack",
+      id:"knapsack",
+      description:
+      "The 0/1 Knapsack problem chooses items with maximum total value without exceeding the capacity. Each item can either be taken (1) or not (0).",
+      timeComplexity:"O(n × W)",
+      spaceComplexity:"O(n × W)",
+      implemented:true,
+    },
+    {
+      name:"prims Algorithm",
+      id:"prims",
+      description:
+      "Prim's algorithm is a greedy algorithm that finds a Minimum Spanning Tree (MST)for a weighted undirected graph. This means it connects all vertices with the minimum total edge weight, ensuring no cycles are formed.",
+      timeComplexity:"O((V+E)log V)",
+      spaceComplexity:"O(V + E)",
+      implemented:true,
+    },
+    {
+      name:"Bit Manipulation",
+      id:"bitmanipulation",
+      description:
+      "Bit Manipulation is the act of algorithmically manipulating bits or binary digits, which are the most basic form of data in computing. It allows optimization of space and time, especially in competitive programming.",
+      timeComplexity:"O(1)",
+      spaceComplexity:"O(1)",
+      implemented:true,
+    },
+
 
     ],
   },

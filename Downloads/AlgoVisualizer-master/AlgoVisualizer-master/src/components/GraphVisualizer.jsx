@@ -450,6 +450,35 @@ const GraphVisualizer = ({ defaultAlgorithm = null, autoLoadExample = false, can
     });
   }, [dijkstraStart, dijkstraEnd, nodes, getNeighbors]);
 
+  const runBellmanFord = useCallback(() => {
+  const { steps, distances, path } = GraphAlgorithms.bellmanFord({
+    nodes,
+    edges,
+    startNode: dijkstraStart,
+    endNode: dijkstraEnd,
+    setVisualState,
+    setMessage
+  });
+
+  if (!steps || steps.length === 0) {
+    setIsVisualizing(false);
+    return;
+  }
+
+  VisualizationHelpers.animateVisualization({
+    steps,
+    distances,
+    path,
+    dijkstraStart,
+    dijkstraEnd,
+    setVisualState,
+    setIsVisualizing,
+    setMessage,
+    setResult
+  });
+}, [nodes, edges, dijkstraStart, dijkstraEnd]);
+
+
   const runDFS = useCallback(() => {
     const { steps, path } = GraphAlgorithms.dfs({
       nodes,
@@ -490,7 +519,8 @@ const GraphVisualizer = ({ defaultAlgorithm = null, autoLoadExample = false, can
     if (algorithm === "Dijkstra") return runDijkstra();
     if (algorithm === "BFS") return runBFS();
     if (algorithm === "DFS") return runDFS();
-  }, [algorithm, runDijkstra, runBFS, runDFS]);
+    if (algorithm === "BellmanFord") return runBellmanFord();
+  }, [algorithm, runDijkstra, runBFS, runDFS, runBellmanFord]);
 
   const handleClear = useCallback(() => {
     setNodes([]);
@@ -516,7 +546,8 @@ const GraphVisualizer = ({ defaultAlgorithm = null, autoLoadExample = false, can
   const algorithmOptions = useMemo(() => [
     { value: "BFS", label: "BFS" },
     { value: "DFS", label: "DFS" },
-    { value: "Dijkstra", label: "Dijkstra" }
+    { value: "Dijkstra", label: "Dijkstra" },
+     { value: "BellmanFord", label: "Bellman–Ford" } 
   ], []);
 
   return (

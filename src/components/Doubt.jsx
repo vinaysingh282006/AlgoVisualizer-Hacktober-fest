@@ -6,6 +6,8 @@ import {
   Loader2,
   Mail,
   HelpCircle,
+  User,
+  Info,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import "../styles/doubt.css";
@@ -13,11 +15,14 @@ import "../styles/doubt.css";
 const MAX_CHARS = 400;
 
 const Doubt = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [doubt, setDoubt] = useState("");
+  const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [doubtError, setDoubtError] = useState("");
   const [submitStatus, setSubmitStatus] = useState(null); // null | 'loading' | 'success' | 'error'
+  const [showTooltip, setShowTooltip] = useState(false);
 
   // Hide confirmation/error message after 3 seconds (when not loading)
   useEffect(() => {
@@ -26,6 +31,15 @@ const Doubt = () => {
       return () => clearTimeout(timer);
     }
   }, [submitStatus]);
+
+  const validateName = () => {
+    if (!name) {
+      setNameError("Please enter your name.");
+      return false;
+    }
+    setNameError("");
+    return true;
+  };
 
   const validateEmail = () => {
     if (!email) {
@@ -54,16 +68,18 @@ const Doubt = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const isNameValid = validateName();
     const isEmailValid = validateEmail();
     const isDoubtValid = validateDoubt();
 
-    if (isEmailValid && isDoubtValid) {
+    if (isNameValid && isEmailValid && isDoubtValid) {
       try {
         // Simulate async submission
         setSubmitStatus("loading");
         setTimeout(() => {
           // emulate success path
           setSubmitStatus("success");
+          setName("");
           setEmail("");
           setDoubt("");
         }, 1200);
@@ -76,12 +92,13 @@ const Doubt = () => {
   };
 
   const isFilled = {
+    name: Boolean(name),
     email: Boolean(email),
     doubt: Boolean(doubt),
   };
 
   const isValidToSubmit =
-    !emailError && !doubtError && email.trim() && doubt.trim();
+    !nameError && !emailError && !doubtError && name.trim() && email.trim() && doubt.trim();
 
   const container = {
     hidden: { opacity: 0, y: 40 },
@@ -134,9 +151,48 @@ const Doubt = () => {
       />
 
       <motion.div className="doubt-card" variants={stagger}>
-        <motion.h2 id="doubt-heading" className="doubt-title" variants={itemUp}>
-          Have a Doubt?
-        </motion.h2>
+        <motion.div className="doubt-header" variants={itemUp}>
+          <motion.h2 id="doubt-heading" className="doubt-title">
+            Have a Doubt?
+          </motion.h2>
+          
+          {/* Functional Question Mark Icon with Tooltip */}
+          <motion.div 
+            className="info-icon-wrapper"
+            onMouseEnter={() => setShowTooltip(true)}
+            onMouseLeave={() => setShowTooltip(false)}
+            onClick={() => setShowTooltip(!showTooltip)}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Info className="info-icon" size={24} aria-label="Information about doubt submission" />
+            
+            <AnimatePresence>
+              {showTooltip && (
+                <motion.div
+                  className="tooltip"
+                  initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.9 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="tooltip-content">
+                    <h4>How to Submit a Doubt</h4>
+                    <ul>
+                      <li>✓ Provide your name and valid email</li>
+                      <li>✓ Be specific about your problem</li>
+                      <li>✓ Include error messages if any</li>
+                      <li>✓ Mention the algorithm/data structure</li>
+                      <li>✓ Add input/output examples</li>
+                    </ul>
+                    <p className="tooltip-footer">We'll respond within 24-48 hours!</p>
+                  </div>
+                  <div className="tooltip-arrow"></div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        </motion.div>
 
         <motion.p className="doubt-subtitle" variants={itemUp}>
           Ask anything about algorithms or data structures. We'll help you get
@@ -185,62 +241,123 @@ const Doubt = () => {
           className="doubt-form"
           variants={itemUp}
         >
-          {/* Email */}
-          <motion.div
-            className={`field ${emailError ? "has-error" : ""}`}
-            variants={itemUp}
-          >
-            <Mail className="field-icon" aria-hidden="true" />
-            <input
-              id="email"
-              type="email"
-              name="email"
-              placeholder=" "
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                if (emailError) validateEmail();
-              }}
-              onBlur={validateEmail}
-              aria-invalid={!!emailError}
-              aria-describedby={emailError ? "email-error" : undefined}
-              aria-label="Email address"
-              autoComplete="email"
-              required
-              data-filled={isFilled.email}
-              className="field-input"
-            />
-            <label htmlFor="email" className="field-label">
-              Your Email
-            </label>
+          {/* Name and Email fields in a flex container */}
+          <motion.div className="fields-row" variants={itemUp}>
+            {/* Name */}
+            <motion.div
+              className={`field ${nameError ? "has-error" : ""}`}
+              variants={itemUp}
+            >
+              <User className="field-icon" aria-hidden="true" />
+              <input
+                id="name"
+                type="text"
+                name="name"
+                placeholder=" "
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  if (nameError) validateName();
+                }}
+                onBlur={validateName}
+                aria-invalid={!!nameError}
+                aria-describedby={nameError ? "name-error" : undefined}
+                aria-label="Your name"
+                autoComplete="name"
+                required
+                data-filled={isFilled.name}
+                className="field-input"
+              />
+              <label htmlFor="name" className="field-label">
+                Your Name
+              </label>
 
-            <AnimatePresence>
-              {emailError && (
-                <motion.div
-                  id="email-error"
-                  className="error-message"
-                  initial={{ opacity: 0, y: -6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                >
-                  <AlertCircle size={16} className="error-icon" />
-                  <span>{emailError}</span>
-                </motion.div>
-              )}
-            </AnimatePresence>
+              <AnimatePresence>
+                {nameError && (
+                  <motion.div
+                    id="name-error"
+                    className="error-message"
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                  >
+                    <AlertCircle size={16} className="error-icon" />
+                    <span>{nameError}</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+
+            {/* Email */}
+            <motion.div
+              className={`field ${emailError ? "has-error" : ""}`}
+              variants={itemUp}
+            >
+              <Mail className="field-icon" aria-hidden="true" />
+              <input
+                id="email"
+                type="email"
+                name="email"
+                placeholder=" "
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (emailError) validateEmail();
+                }}
+                onBlur={validateEmail}
+                aria-invalid={!!emailError}
+                aria-describedby={emailError ? "email-error" : undefined}
+                aria-label="Email address"
+                autoComplete="email"
+                required
+                data-filled={isFilled.email}
+                className="field-input"
+              />
+              <label htmlFor="email" className="field-label">
+                Your Email
+              </label>
+
+              <AnimatePresence>
+                {emailError && (
+                  <motion.div
+                    id="email-error"
+                    className="error-message"
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                  >
+                    <AlertCircle size={16} className="error-icon" />
+                    <span>{emailError}</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
           </motion.div>
 
           {/* Doubt */}
           <motion.div
-            className={`field ${doubtError ? "has-error" : ""}`}
+            className={`field field-textarea ${doubtError ? "has-error" : ""}`}
             variants={itemUp}
           >
-            <HelpCircle className="field-icon" aria-hidden="true" />
+            <div className="textarea-header">
+              <HelpCircle className="field-icon textarea-icon" aria-hidden="true" />
+              <label htmlFor="doubt" className="field-label-static">
+                Your Doubt
+              </label>
+              <motion.span
+                className={`counter ${doubt.length > MAX_CHARS ? "over" : ""}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.8 }}
+              >
+                {Math.min(doubt.length, MAX_CHARS)}/{MAX_CHARS}
+              </motion.span>
+            </div>
+            
             <textarea
               id="doubt"
               name="doubt"
-              placeholder=" "
-              rows="5"
+              placeholder="Describe your doubt in detail..."
+              rows="6"
               value={doubt}
               onChange={(e) => {
                 const v = e.target.value;
@@ -255,11 +372,8 @@ const Doubt = () => {
               data-filled={isFilled.doubt}
               className="field-input textarea"
             />
-            <label htmlFor="doubt" className="field-label">
-              Your Doubt
-            </label>
 
-            <div id="doubt-help" className="assist-row">
+            <div id="doubt-help" className="textarea-footer">
               <AnimatePresence>
                 {doubtError ? (
                   <motion.div
@@ -274,24 +388,15 @@ const Doubt = () => {
                   </motion.div>
                 ) : (
                   <motion.span
-                    key="helper"
-                    className="helper"
+                    className="helper-text"
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: 0.8 }}
+                    animate={{ opacity: 0.7 }}
                     exit={{ opacity: 0 }}
                   >
-                    Be specific. Add inputs, constraints, or the error you saw.
+                    💡 Be specific. Add inputs, constraints, or the error you saw.
                   </motion.span>
                 )}
               </AnimatePresence>
-
-              <motion.span
-                className={`counter ${doubt.length > MAX_CHARS ? "over" : ""}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.8 }}
-              >
-                {Math.min(doubt.length, MAX_CHARS)}/{MAX_CHARS}
-              </motion.span>
             </div>
           </motion.div>
 
@@ -322,8 +427,10 @@ const Doubt = () => {
               type="button"
               className="cancel-btn"
               onClick={() => {
+                setName("");
                 setEmail("");
                 setDoubt("");
+                setNameError("");
                 setEmailError("");
                 setDoubtError("");
                 setSubmitStatus(null);

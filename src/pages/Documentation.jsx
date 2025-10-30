@@ -1,11 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import { 
-  Search, 
-  Database, 
-  BookOpen, 
-  Users, 
-  Star, 
-  GitBranch, 
+import {
+  Search,
+  Database,
+  BookOpen,
+  Users,
+  Star,
+  GitBranch,
   Code,
   ArrowDownUp,
   Zap,
@@ -29,10 +30,9 @@ import "../styles/global-theme.css";
 const algorithmDatabase = {
   sorting: {
     title: "Sorting Algorithms",
-    icon: ArrowDownUp, // Changed from 🔄
+    icon: ArrowDownUp,
     color: "#66ccff",
     algorithms: [
-      // ... all your sorting algorithms stay the same
       {
         name: "Bubble Sort",
         id: "bubbleSort",
@@ -136,12 +136,36 @@ const algorithmDatabase = {
         inPlace: true,
         adaptivity: "Not Adaptive",
         implemented: true
+      },
+      {
+        name: "Heap Sort",
+        id: "heapSort",
+        description:
+          "Builds a max heap from the input data, then repeatedly extracts the maximum element and rebuilds the heap. Performs well for large datasets but is unstable.",
+        timeComplexity: { best: "O(n log n)", average: "O(n log n)", worst: "O(n log n)" },
+        spaceComplexity: "O(1)",
+        stability: "Unstable",
+        inPlace: true,
+        adaptivity: "Not Adaptive",
+        implemented: true
+      },
+      {
+        name: "Bucket Sort",
+        id: "bucketSort",
+        description:
+          "Distributes elements into buckets, sorts each bucket individually (often using insertion sort), then concatenates them. Works best for uniformly distributed data.",
+        timeComplexity: { best: "O(n + k)", average: "O(n + k)", worst: "O(n²)" },
+        spaceComplexity: "O(n + k)",
+        stability: "Stable (depends on bucket sort used)",
+        inPlace: false,
+        adaptivity: "Adaptive (depends on data distribution)",
+        implemented: true
       }
     ]
   },
   searching: {
     title: "Search Algorithms",
-    icon: Search, // Changed from 🔍
+    icon: Search,
     color: "#4ade80",
     algorithms: [
       {
@@ -198,7 +222,7 @@ const algorithmDatabase = {
   },
   dataStructures: {
     title: "Data Structures",
-    icon: Database, // Changed from 🏗️
+    icon: Database,
     color: "#ffd93d",
     algorithms: [
       {
@@ -213,7 +237,7 @@ const algorithmDatabase = {
           access: "O(n)"
         },
         spaceComplexity: "O(n)",
-        implemented: false
+        implemented: true
       },
       {
         name: "Stack",
@@ -226,7 +250,7 @@ const algorithmDatabase = {
           search: "O(n)"
         },
         spaceComplexity: "O(n)",
-        implemented: false
+        implemented: true
       },
       {
         name: "Queue",
@@ -239,7 +263,7 @@ const algorithmDatabase = {
           search: "O(n)"
         },
         spaceComplexity: "O(n)",
-        implemented: false
+        implemented: true
       },
       {
         name: "Binary Tree",
@@ -252,13 +276,13 @@ const algorithmDatabase = {
           traversal: "O(n)"
         },
         spaceComplexity: "O(n)",
-        implemented: false
+        implemented: true
       }
     ]
   },
   graph: {
     title: "Graph Algorithms",
-    icon: Network, // Changed from 🧭
+    icon: Network,
     color: "#66ccff",
     algorithms: [
       {
@@ -282,10 +306,21 @@ const algorithmDatabase = {
         subType: "dfs"
       },
       {
+        name: "Kruskal’s Algorithm",
+        id: "kruskalMST",
+        description:
+          "A greedy algorithm that finds a Minimum Spanning Tree (MST) for a connected weighted graph by sorting edges and adding them in increasing order of weight without forming cycles.",
+        timeComplexity: { best: "O(E log E)", average: "O(E log E)", worst: "O(E log E)" },
+        spaceComplexity: "O(V)",
+        implemented: true,
+        subType: "kruskal",
+        path: "/kruskal"
+      },
+      {
         name: "Dijkstra's Algorithm",
         id: "graphDijkstra",
         description:
-          "Computes shortest path distances from a source to all vertices in a weighted graph with non‑negative weights using a priority queue.",
+          "Computes shortest path distances from a source to all vertices in a weighted graph with non-negative weights using a priority queue.",
         timeComplexity: {
           best: "O(E + V log V)",
           average: "O(E + V log V)",
@@ -299,7 +334,7 @@ const algorithmDatabase = {
   },
   backtracking: {
     title: "Backtracking Algorithms",
-    icon: Target, // Changed from 🧩
+    icon: Target,
     color: "#f9a825",
     algorithms: [
       {
@@ -356,7 +391,7 @@ const algorithmDatabase = {
   },
   dynamicProgramming: {
     title: "Dynamic Programming",
-    icon: Brain, // Changed from 📊
+    icon: Brain,
     color: "#f97316",
     algorithms: [
       {
@@ -429,7 +464,7 @@ const algorithmDatabase = {
   },
   greedy: {
     title: "Greedy Algorithms",
-    icon: Wallet, // Changed from 💰
+    icon: Wallet,
     color: "#f97316",
     algorithms: [
       {
@@ -472,7 +507,7 @@ const algorithmDatabase = {
   },
   divideAndConquer: {
     title: "Divide & Conquer",
-    icon: Split, // Changed from 🪓
+    icon: Split,
     color: "#a78bfa",
     algorithms: [
       {
@@ -511,7 +546,7 @@ const algorithmDatabase = {
   },
   hashing: {
     title: "Hashing",
-    icon: Hash, // Changed from 🔑
+    icon: Hash,
     color: "#ff6b6b",
     algorithms: [
       {
@@ -550,7 +585,7 @@ const algorithmDatabase = {
   },
   plants: {
     title: "Trees",
-    icon: TreeDeciduous, // Changed from 🌳
+    icon: TreeDeciduous,
     color: "#4ade80",
     algorithms: [
       {
@@ -588,7 +623,7 @@ const algorithmDatabase = {
 
   gameSearch: {
     title: "Game Search",
-    icon: Gamepad2, // Changed from 🎮
+    icon: Gamepad2,
     color: "#f9a825",
     algorithms: [
       {
@@ -628,7 +663,7 @@ const algorithmDatabase = {
   },
   branchAndBound: {
     title: "Branch & Bound",
-    icon: Box, // Changed from 📦
+    icon: Box,
     color: "#34d399",
     algorithms: [
       {
@@ -652,29 +687,21 @@ const algorithmDatabase = {
   }
 };
 
-const getComplexityColor = (complexity) => {
-  if (!complexity) return "#e0e6ed";
-
-  if (complexity.includes("O(1)")) return "#4ade80";
-  if (complexity.includes("O(log")) return "#66ccff";
-  if (complexity.includes("O(n²)")) return "#ff6b6b";
-  if (complexity.includes("O(n log n)")) return "#ff9500";
-  if (complexity.includes("O(n)")) return "#ffd93d";
-  if (complexity.includes("O(√n)")) return "#a78bfa";
-
-  return "#e0e6ed"; // default color
-};
-
 // ============================================================================
 // 2. SUB-COMPONENTS
 // ============================================================================
 
-function AlgorithmCard({ algorithm }) {
+function AlgorithmCard({ algorithm, onOpen }) {
   const IconComponent = algorithm.categoryIconComponent || Code;
-  
+  const isClickable = typeof onOpen === "function";
+
   return (
     <div
-      className="theme-card algorithm-card min-h-[200px] flex flex-col justify-between"
+      className={`theme-card algorithm-card ${isClickable ? "cursor-pointer" : ""}`}
+      onClick={isClickable ? onOpen : undefined}
+      role={isClickable ? "button" : undefined}
+      tabIndex={isClickable ? 0 : -1}
+      onKeyDown={isClickable ? (e) => { if (e.key === "Enter") onOpen(); } : undefined}
       title={algorithm.description}
     >
       <div>
@@ -685,14 +712,17 @@ function AlgorithmCard({ algorithm }) {
             </span>
             <h3 className="card-title">{algorithm.name}</h3>
           </div>
+
           {algorithm.implemented ? (
             <div className="status-badge implemented">Implemented</div>
           ) : (
             <div className="status-badge coming-soon">Coming Soon</div>
           )}
         </div>
+
         <p className="card-description line-clamp-3">{algorithm.description}</p>
       </div>
+
       <div className="card-category-badge mt-auto">{algorithm.categoryTitle}</div>
     </div>
   );
@@ -706,6 +736,23 @@ function AlgorithmDocumentation() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [filteredAlgorithms, setFilteredAlgorithms] = useState([]);
+  const navigate = useNavigate();
+
+  // Central handler: path-aware (handles Kruskal and future cards with `path`)
+  const handleCardClick = (algo) => {
+    if (algo.path && algo.implemented) {
+      navigate(algo.path);
+      return;
+    }
+    if (algo.category === "sorting" && algo.implemented) {
+      navigate(`/sorting/${algo.id}/docs`);
+      return;
+    }
+    if (algo.id === "linearSearch") {
+      navigate("/searching?algo=linear-search");
+      return;
+    }
+  };
 
   const getAllAlgorithms = useCallback(() => {
     const seen = new Map();
@@ -729,78 +776,18 @@ function AlgorithmDocumentation() {
     const allAlgorithms = getAllAlgorithms();
     return [
       { key: "all", label: "All", icon: BookOpen, count: allAlgorithms.length },
-      {
-        key: "sorting",
-        label: "Sorting",
-        icon: ArrowDownUp,
-        count: algorithmDatabase.sorting?.algorithms.length || 0
-      },
-      {
-        key: "searching",
-        label: "Searching",
-        icon: Search,
-        count: algorithmDatabase.searching?.algorithms.length || 0
-      },
-      {
-        key: "dataStructures",
-        label: "Data Structures",
-        icon: Database,
-        count: algorithmDatabase.dataStructures?.algorithms.length || 0
-      },
-      {
-        key: "graph",
-        label: "Graph",
-        icon: Network,
-        count: algorithmDatabase.graph?.algorithms.length || 0
-      },
-      {
-        key: "backtracking",
-        label: "Backtracking",
-        icon: Target,
-        count: algorithmDatabase.backtracking?.algorithms.length || 0
-      },
-      {
-        key: "dynamicProgramming",
-        label: "Dynamic Programming",
-        icon: Brain,
-        count: algorithmDatabase.dynamicProgramming?.algorithms.length || 0
-      },
-      {
-        key: "greedy",
-        label: "Greedy",
-        icon: Wallet,
-        count: algorithmDatabase.greedy?.algorithms.length || 0
-      },
-      {
-        key: "divideAndConquer",
-        label: "Divide & Conquer",
-        icon: Split,
-        count: algorithmDatabase.divideAndConquer?.algorithms.length || 0
-      },
-      {
-        key: "hashing",
-        label: "Hashing",
-        icon: Hash,
-        count: algorithmDatabase.hashing?.algorithms.length || 0
-      },
-      {
-        key: "plants",
-        label: "Trees",
-        icon: TreeDeciduous,
-        count: algorithmDatabase.plants?.algorithms.length || 0
-      },
-      {
-        key: "gameSearch",
-        label: "Game Search",
-        icon: Gamepad2,
-        count: algorithmDatabase.gameSearch?.algorithms.length || 0
-      },
-      {
-        key: "branchAndBound",
-        label: "Branch & Bound",
-        icon: Box,
-        count: algorithmDatabase.branchAndBound?.algorithms.length || 0
-      }
+      { key: "sorting", label: "Sorting", icon: ArrowDownUp, count: algorithmDatabase.sorting?.algorithms.length || 0 },
+      { key: "searching", label: "Searching", icon: Search, count: algorithmDatabase.searching?.algorithms.length || 0 },
+      { key: "dataStructures", label: "Data Structures", icon: Database, count: algorithmDatabase.dataStructures?.algorithms.length || 0 },
+      { key: "graph", label: "Graph", icon: Network, count: algorithmDatabase.graph?.algorithms.length || 0 },
+      { key: "backtracking", label: "Backtracking", icon: Target, count: algorithmDatabase.backtracking?.algorithms.length || 0 },
+      { key: "dynamicProgramming", label: "Dynamic Programming", icon: Brain, count: algorithmDatabase.dynamicProgramming?.algorithms.length || 0 },
+      { key: "greedy", label: "Greedy", icon: Wallet, count: algorithmDatabase.greedy?.algorithms.length || 0 },
+      { key: "divideAndConquer", label: "Divide & Conquer", icon: Split, count: algorithmDatabase.divideAndConquer?.algorithms.length || 0 },
+      { key: "hashing", label: "Hashing", icon: Hash, count: algorithmDatabase.hashing?.algorithms.length || 0 },
+      { key: "plants", label: "Trees", icon: TreeDeciduous, count: algorithmDatabase.plants?.algorithms.length || 0 },
+      { key: "gameSearch", label: "Game Search", icon: Gamepad2, count: algorithmDatabase.gameSearch?.algorithms.length || 0 },
+      { key: "branchAndBound", label: "Branch & Bound", icon: Box, count: algorithmDatabase.branchAndBound?.algorithms.length || 0 }
     ];
   }, [getAllAlgorithms]);
 
@@ -810,10 +797,11 @@ function AlgorithmDocumentation() {
       allAlgorithms = allAlgorithms.filter((algo) => algo.category === selectedCategory);
     }
     if (searchTerm) {
+      const q = searchTerm.toLowerCase();
       allAlgorithms = allAlgorithms.filter(
         (algo) =>
-          algo.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          algo.description.toLowerCase().includes(searchTerm.toLowerCase())
+          algo.name.toLowerCase().includes(q) ||
+          algo.description.toLowerCase().includes(q)
       );
     }
     setFilteredAlgorithms(allAlgorithms);
@@ -843,9 +831,7 @@ function AlgorithmDocumentation() {
               return (
                 <button
                   key={category.key}
-                  className={`btn ${
-                    isActive ? "btn-primary" : "btn-secondary"
-                  } px-4 py-2 rounded-full flex items-center justify-between min-w-[180px] transition-all duration-200 hover:scale-105 group`}
+                  className={`btn ${isActive ? "btn-primary" : "btn-secondary"} px-4 py-2 rounded-full flex items-center justify-between min-w-[180px] transition-all duration-200 hover:scale-105 group`}
                   onClick={() => setSelectedCategory(category.key)}
                 >
                   <div className="flex items-center gap-2">
@@ -853,9 +839,7 @@ function AlgorithmDocumentation() {
                     <span className="font-medium">{category.label}</span>
                   </div>
                   <div
-                    className={`relative z-10 ${
-                      isActive ? "bg-white text-[#1a1a1a]" : "bg-primary text-white"
-                    } ml-2 px-2.5 py-0.5 rounded-full text-sm font-semibold min-w-[28px] flex items-center justify-center`}
+                    className={`relative z-10 ${isActive ? "bg-white text-[#1a1a1a]" : "bg-primary text-white"} ml-2 px-2.5 py-0.5 rounded-full text-sm font-semibold min-w-[28px] flex items-center justify-center`}
                     style={{ isolation: "isolate" }}
                   >
                     {category.count}
@@ -870,9 +854,20 @@ function AlgorithmDocumentation() {
       <div className="min-h-[60vh] w-full">
         <div className="results-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
           {filteredAlgorithms.length > 0 ? (
-            filteredAlgorithms.map((algorithm) => (
-              <AlgorithmCard key={algorithm.id} algorithm={algorithm} />
-            ))
+            filteredAlgorithms.map((algorithm) => {
+              const isNavigable =
+                (algorithm.path && algorithm.implemented) ||
+                (algorithm.category === "sorting" && algorithm.implemented) ||
+                algorithm.id === "linearSearch";
+
+              return (
+                <AlgorithmCard
+                  key={algorithm.id}
+                  algorithm={algorithm}
+                  onOpen={isNavigable ? () => handleCardClick(algorithm) : undefined}
+                />
+              );
+            })
           ) : (
             <div className="no-results-card theme-card text-center p-4 col-span-full">
               <Search size={48} className="mx-auto" />

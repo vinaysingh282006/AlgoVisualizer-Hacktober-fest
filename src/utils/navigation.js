@@ -29,7 +29,8 @@ export const navbarNavigationItems = [
     icon: "Users",
     dropdown: [
       { path: "/community", label: "Community" },
-      { path: "/contributor-leaderboard", label: "Contributors" },
+      { path: "/contribute", label: "Contribute" },
+      { path: "/contributors", label: "Contributors" },
       { path: "/contributor-leaderboard", label: "Leaderboard" }
     ]
   },
@@ -41,6 +42,7 @@ export const navbarNavigationItems = [
     dropdown: [
       { path: "/performance", label: "Performance Analyzer" },
       { path: "/analytics", label: "Analytics Dashboard" },
+      { path: "/recommendations", label: "Algorithm Recommendations" },
       { path: "/performance/docs", label: "Performance Docs" },
     ],
   },
@@ -71,6 +73,12 @@ export const learnSections = [
         label: "Overview",
         category: "Data Structures",
         tags: ["overview"]
+      },
+      {
+        path:"/data-structures/array",
+        label:"Array",
+        category:"Data Structures",
+        tags:["array", "pointers"]
       },
       {
         path: "/data-structures/linked-list",
@@ -146,6 +154,7 @@ export const learnSections = [
       { path: "/graph/bfs", label: "BFS", category: "Graphs", tags: ["BFS", "graph", "queue"] },
       { path: "/graph/dfs", label: "DFS", category: "Graphs", tags: ["DFS", "graph", "recursion", "stack"] },
       { path: "/graph/dijkstra", label: "Dijkstra", category: "Graphs", tags: ["dijkstra", "shortest path", "graph"] },
+      { path: "/graph/bellman-ford", label: "Bellman-Ford", category: "Graphs", tags: ["bellman-ford", "shortest path", "graph", "negative weights"] },
       { path: "/graph/astar", label: "A*", category: "Graphs", tags: ["astar", "pathfinding", "heuristic", "grid"] },
       { path: "/graph/comparison", label: "Graph Comparison", category: "Graphs", tags: ["comparison", "graph algorithms"] },
       { path: "/graph/cycleDetection", label: "Cycle Detection", category: "Graphs", tags: ["graph", "cycle", "DFS"] },
@@ -275,6 +284,7 @@ export const learnSections = [
       { path: "/game-search", label: "Game Search Algorithms", category: "Other", tags: ["game search", "algorithms"] },
       { path: "/branchbound-overview", label: "Branch & Bound (Overview)", category: "Other", tags: ["branch and bound", "overview"] },
       { path: "/branchbound", label: "Branch & Bound", category: "Other", tags: ["branch and bound", "algorithms"] },
+      { path: "/recommendations", label: "Algorithm Recommendations", category: "Other", tags: ["recommendations", "machine learning", "ai"] },
     ],
   },
 ];
