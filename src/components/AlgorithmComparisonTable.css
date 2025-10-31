@@ -49,13 +49,14 @@
 
 /* Container & Typography */
 .container {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: all 0.3s ease;
+  box-sizing: border-box;
 }
 
 .header {
@@ -83,11 +84,13 @@
   padding: 15px;
   background: var(--bg-secondary);
   border-radius: 10px;
+  flex-wrap: wrap;
 }
 
 .categoryLabel {
   font-weight: 600;
   color: var(--text-primary);
+  flex: 1 1 150px;
 }
 
 .categorySelect {
@@ -97,6 +100,7 @@
   background: var(--bg-tertiary);
   color: var(--text-primary);
   min-width: 200px;
+  flex: 2 1 200px;
 }
 
 .categorySelect option {
@@ -118,11 +122,14 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .selectionTitle {
   color: var(--text-primary);
   margin: 0;
+  flex: 2 1 200px;
 }
 
 .clearButton {
@@ -133,6 +140,7 @@
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  flex: 1 1 120px;
 }
 
 .clearButton:hover {
@@ -168,6 +176,10 @@
 .algorithmCheckbox.disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.algorithmName {
+  flex: 1;
 }
 
 .checkboxInput {
@@ -223,6 +235,7 @@
   padding: 30px;
   box-shadow: var(--shadow);
   color: var(--text-primary);
+  overflow-x: auto;
 }
 
 .comparisonTitle {
@@ -233,6 +246,7 @@
 
 .tableWrapper {
   overflow-x: auto;
+  width: 100%;
 }
 
 .comparisonTable {
@@ -266,6 +280,11 @@
   padding-left: 20px;
 }
 
+.algorithmColumn {
+  width: auto;
+  min-width: 150px;
+}
+
 .propertyName {
   background: var(--property-bg);
   color: var(--property-text);
@@ -283,6 +302,7 @@
   color: var(--text-tertiary);
   white-space: nowrap;
   background: var(--table-bg);
+  min-width: 120px;
 }
 
 /* Force black text in table cells for readability */
@@ -326,4 +346,121 @@
 .tableWrapper::-webkit-scrollbar-thumb {
   background: var(--border-color);
   border-radius: 4px;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+  
+  .headerTitle {
+    font-size: 1.5rem;
+  }
+  
+  .headerText {
+    font-size: 1rem;
+  }
+  
+  .categoryFilter {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .categoryLabel {
+    margin-bottom: 10px;
+  }
+  
+  .categorySelect {
+    min-width: auto;
+  }
+  
+  .selectionSection {
+    padding: 15px;
+  }
+  
+  .selectionHeader {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .selectionTitle {
+    margin-bottom: 10px;
+  }
+  
+  .clearButton {
+    align-self: flex-start;
+  }
+  
+  .algorithmGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .comparisonContainer {
+    padding: 15px;
+  }
+  
+  .tableWrapper {
+    font-size: 0.9rem;
+  }
+  
+  .propertyColumn {
+    width: 120px;
+    padding-left: 10px;
+  }
+  
+  .algorithmColumn {
+    min-width: 100px;
+  }
+  
+  .tableHeader, .propertyName, .tableCell {
+    padding: 10px 8px;
+  }
+  
+  .emptyState {
+    padding: 30px 10px;
+  }
+  
+  .emptyIcon {
+    font-size: 3rem;
+  }
+  
+  .emptyText {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 5px;
+  }
+  
+  .headerTitle {
+    font-size: 1.3rem;
+  }
+  
+  .selectionSection {
+    padding: 10px;
+  }
+  
+  .comparisonContainer {
+    padding: 10px;
+  }
+  
+  .tableWrapper {
+    font-size: 0.8rem;
+  }
+  
+  .propertyColumn {
+    width: 100px;
+  }
+  
+  .tableHeader, .propertyName, .tableCell {
+    padding: 8px 5px;
+  }
+  
+  .selectedBadge {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
 }
