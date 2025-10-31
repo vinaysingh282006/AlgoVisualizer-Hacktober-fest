@@ -15,10 +15,12 @@
   display: flex;
   flex-direction: column;
   z-index: 1000;
-  overflow: hidden;
+  /* allow vertical scrolling when content exceeds viewport */
+  overflow-x: hidden;
+  overflow-y: auto;
   transition: var(--transition-normal);
-  backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
 }
 
 /* =========================
@@ -67,7 +69,9 @@
 .sidebar-content {
   flex: 1;
   padding: 0.25rem 0;
-  overflow: hidden;
+  /* let the content scroll within the sidebar area */
+  overflow-x: hidden;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -454,8 +458,8 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
   z-index: 999;
   opacity: 0;
   visibility: hidden;
