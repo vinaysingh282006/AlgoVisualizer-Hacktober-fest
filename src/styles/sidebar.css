@@ -31,6 +31,7 @@
   border-bottom: 1px solid var(--sidebar-border);
   display: flex;
   justify-content: center;
+  flex-shrink: 0; /* Prevent header from shrinking */
 }
 
 .sidebar-logo {
@@ -75,6 +76,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* Fix flexbox scrolling - allows the flex item to shrink below content size */
+  min-height: 0;
 }
 
 .sidebar-group {
@@ -192,6 +195,7 @@
   border-top: 1px solid var(--sidebar-border);
   display: flex;
   justify-content: center;
+  flex-shrink: 0; /* Prevent footer from shrinking */
 }
 
 .user-profile {
