@@ -148,7 +148,17 @@ select:focus {
   font-family: "Poppins", sans-serif;
   text-align: center;
   white-space: nowrap; 
-  position: relative;
+  position: absolute;
+
+  /* Reserve space for the longest word to prevent layout shift while typing */
+  min-width: 17ch; /* "Master Algorithms" ≈ 17 characters */
+  max-width: 100%;
+  margin-left: 30%;
+  margin-bottom: 5px;
+  margin-right: auto;
+  /* Fix the line height so the element height stays constant */
+  line-height: 1.2;
+  min-height: 1.2em;
 }
 
 .cursor {
