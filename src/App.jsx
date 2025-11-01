@@ -156,7 +156,8 @@ import AlgorithmRecommendationDemo from "./pages/AlgorithmRecommendationDemo";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "./styles/components.css";
-import "./styles/footer-improved.css";
+//import "./styles/footer-improved.css";
+import "./styles/footer.css";
 import LearnLanding from "./pages/LearnLanding";
 import DSDocumentation from "./pages/DSDocumentation";
 

@@ -171,8 +171,9 @@ const Footer = () => {
 
         <div className="footer-content">
           {/* Brand Section */}
+          
           <div
-            className="footer-column brand-column"
+            className="footer-column footer-box brand-column"
             data-aos="fade-up"
             data-aos-duration="1000"
             data-aos-delay="200"
@@ -208,7 +209,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div
-            className="footer-column links-column footer-box"
+            className="footer-column footer-box links-column"
             data-aos="fade-up"
             data-aos-duration="1000"
             data-aos-delay="400"
@@ -225,7 +226,7 @@ const Footer = () => {
 
           {/* Resources */}
           <div
-            className="footer-column resources-column footer-box"
+            className="footer-column footer-box resources-column"
             data-aos="fade-up"
             data-aos-duration="1000"
             data-aos-delay="600"
@@ -242,7 +243,7 @@ const Footer = () => {
 
           {/* Newsletter */}
           <div
-           className="footer-column newsletter-column footer-box"
+            className="footer-column footer-box newsletter-column"
             data-aos="fade-up"
             data-aos-duration="1000"
             data-aos-delay="800"
@@ -271,23 +272,19 @@ const Footer = () => {
               </div>
               <div className="footer-separator">•</div>
               <div className="footer-credits">
-                <p className="para-text">
-                  Made with <FaHeart className="heart-icon" /> by{" "}
-                  <a
-                    href="https://github.com/rhythmpahwa14"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                <p className="para-text footer-made-with">
+                  <span>Made with</span>
+                  <FaHeart className="heart-icon" />
+                  <span>
+                    by{" "}
+                    <a href="https://github.com/rhythmpahwa14" target="_blank" rel="noopener noreferrer">
                     Rhythm Pahwa
-                  </a>{" "}
-                  &{" "}
-                  <a
-                    href="https://github.com/sandeepvashishtha"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                    </a>{" "}
+                    &{" "}
+                    <a href="https://github.com/sandeepvashishtha" target="_blank" rel="noopener noreferrer">
                     Sandeep Vashishtha
-                  </a>
+                    </a>
+                  </span>
                 </p>
               </div>
             </div>
