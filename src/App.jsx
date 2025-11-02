@@ -113,7 +113,7 @@ import KadaneVisualizer from "./pages/Kadane.jsx";
 import DijkstraVisualizer from "./pages/Dijkstra.jsx";
 
 import DivideAndConquerVisualizer from "./pages/DivideAndConquer.jsx";
-import KnapsackVisualizer from "../Downloads/AlgoVisualizer-master/AlgoVisualizer-master/src/pages/Knapsack.jsx";
+import KnapsackVisualizer from "./pages/Knapsack.jsx";
 import PrimsAlgorithm from "./pages/Prims.jsx";
 import BitManipulation from "./pages/BitManipulation.jsx";
 
@@ -156,7 +156,7 @@ import AlgorithmRecommendationDemo from "./pages/AlgorithmRecommendationDemo";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "./styles/components.css";
-import "./styles/footer-improved.css";
+import "./styles/footer.css";  // Keep only this footer stylesheet
 import LearnLanding from "./pages/LearnLanding";
 import DSDocumentation from "./pages/DSDocumentation";
 
