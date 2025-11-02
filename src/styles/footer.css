@@ -407,13 +407,15 @@ footer {
   justify-content: flex-start;
   padding-left: 0;
   margin-left: 0;
+  padding: 20px;
   width: 100%;
   gap: clamp(10px, 2vw, 16px);
 }
 
 .newsletter-description {
-  color: var(--text-secondary, #9aa4b2);
+  color: var(--text-secondary, #1e2023);
   font-size: clamp(14px, 2.5vw, 16px);
+  font-weight:700;
   line-height: 1.6;
   margin: 8px 0 clamp(18px, 3vw, 22px) 0;
   text-align: left;
