@@ -354,7 +354,7 @@ const algorithmDatabase = {
           "Solve a 9×9 Sudoku puzzle by filling empty cells following Sudoku rules using backtracking.",
         timeComplexity: { best: "O(1)", average: "O(9^(N*N))", worst: "O(9^(N*N))" },
         spaceComplexity: "O(N^2)",
-        implemented: false,
+        implemented: true,
         subType: "sudoku"
       },
       {
