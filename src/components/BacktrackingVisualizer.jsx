@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/global-theme.css";
+import "./backtracking.css";
 
 const BacktrackingVisualizer = ({
   defaultAlgorithm = "NQueens",
@@ -14,6 +15,7 @@ const BacktrackingVisualizer = ({
   const [currentStep, setCurrentStep] = useState(0);
   const [isVisualizing, setIsVisualizing] = useState(false);
   const [message, setMessage] = useState("Select an algorithm and run.");
+  const [speed, setSpeed] = useState(400); // Default speed 400ms
 
   useEffect(() => {
     if (autoLoadExample) loadDefaultExample();
@@ -90,10 +92,10 @@ const BacktrackingVisualizer = ({
     return stepsArr;
   };
 
-  // 3️⃣ Sudoku Solver
-  const sudokuSolver = (size) => {
+  // 3️⃣ Sudoku Solver (accepts an initial board to visualize solving that puzzle)
+  const sudokuSolver = (initialBoard) => {
     const stepsArr = [];
-    const board = Array.from({ length: 9 }, () => Array(9).fill(0));
+    const board = initialBoard ? copyBoard(initialBoard) : Array.from({ length: 9 }, () => Array(9).fill(0));
 
     const isSafe = (r, c, n) => {
       for (let i = 0; i < 9; i++) {
@@ -114,10 +116,10 @@ const BacktrackingVisualizer = ({
             for (let n = 1; n <= 9; n++) {
               if (isSafe(r, c, n)) {
                 board[r][c] = n;
-                stepsArr.push({ board: copyBoard(board), message: `Placing ${n} at (${r},${c})` });
+                stepsArr.push({ board: copyBoard(board), message: `Placing ${n} at (${r},${c})`, type: 'place', row: r, col: c, val: n });
                 if (solve()) return true;
                 board[r][c] = 0;
-                stepsArr.push({ board: copyBoard(board), message: `Backtracking from (${r},${c})` });
+                stepsArr.push({ board: copyBoard(board), message: `Backtracking from (${r},${c})`, type: 'backtrack', row: r, col: c });
               }
             }
             return false;
@@ -202,7 +204,8 @@ const BacktrackingVisualizer = ({
         generatedSteps = ratInMaze(maze);
         break;
       case "Sudoku":
-        generatedSteps = sudokuSolver();
+        // Use current board state as the initial puzzle so Load Example / manual input solve works
+        generatedSteps = sudokuSolver(board);
         break;
       case "CombinationSum":
         generatedSteps = combinationSumVisualizer();
@@ -225,6 +228,12 @@ const BacktrackingVisualizer = ({
     setIsVisualizing(true);
   };
 
+  // Stop/abort the running visualization playback
+  const stopVisualization = () => {
+    setIsVisualizing(false);
+    setMessage("Visualization stopped.");
+  };
+
   useEffect(() => {
     if (isVisualizing && steps.length > 0) {
       if (currentStep >= steps.length) {
@@ -232,10 +241,10 @@ const BacktrackingVisualizer = ({
         setMessage("Visualization complete!");
         return;
       }
-      const timer = setTimeout(() => setCurrentStep((prev) => prev + 1), 400);
+      const timer = setTimeout(() => setCurrentStep((prev) => prev + 1), speed);
       return () => clearTimeout(timer);
     }
-  }, [currentStep, isVisualizing, steps]);
+  }, [currentStep, isVisualizing, steps, speed]);
 
   // ================= Controls =================
   const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 0));
@@ -248,15 +257,30 @@ const BacktrackingVisualizer = ({
     setMessage("Board reset. Select an algorithm and run.");
   };
   const loadDefaultExample = () => {
-    resetBoard();
-    setMessage("Default example loaded. Run N-Queens to visualize.");
+    // Load a sample Sudoku puzzle and start solving it
+    const sampleSudoku = [
+      [5,3,0,0,7,0,0,0,0],
+      [6,0,0,1,9,5,0,0,0],
+      [0,9,8,0,0,0,0,6,0],
+      [8,0,0,0,6,0,0,0,3],
+      [4,0,0,8,0,3,0,0,1],
+      [7,0,0,0,2,0,0,0,6],
+      [0,6,0,0,0,0,2,8,0],
+      [0,0,0,4,1,9,0,0,5],
+      [0,0,0,0,8,0,0,7,9]
+    ];
+    setBoard(sampleSudoku);
+    setAlgorithm("Sudoku");
+    setMessage("Sample Sudoku loaded. Solving...");
+    // small delay to ensure state updates propagate before running
+    setTimeout(() => runAlgorithm(), 50);
   };
 
   // ================= Render =================
   const renderBoard = () => {
-    if (!steps[currentStep]) return null;
-
-    const stepBoard = steps[currentStep].board;
+    // Prefer stepBoard when visualization steps exist; otherwise show current `board` state
+    const hasStep = steps && steps.length > 0 && steps[currentStep];
+    const stepBoard = hasStep ? steps[currentStep].board : board;
 
     // Combination Sum is array of numbers
     if (Array.isArray(stepBoard) && !Array.isArray(stepBoard[0])) {
@@ -269,15 +293,37 @@ const BacktrackingVisualizer = ({
       );
     }
 
+    // If we have steps, compute changed cell and whether it's a backtrack step
+    let changedCell = null;
+    let isBacktrack = false;
+    if (hasStep && currentStep > 0 && steps[currentStep - 1]) {
+      const prev = steps[currentStep - 1].board;
+      for (let r = 0; r < stepBoard.length; r++) {
+        for (let c = 0; c < stepBoard[r].length; c++) {
+          if (stepBoard[r][c] !== prev[r][c]) {
+            changedCell = [r, c];
+            break;
+          }
+        }
+        if (changedCell) break;
+      }
+      isBacktrack = (steps[currentStep].type === 'backtrack') || ((steps[currentStep].message || '').toLowerCase().includes('backtracking'));
+    }
+
     return (
       <div className="board">
         {stepBoard.map((row, i) => (
           <div key={i} className="board-row">
-            {row.map((cell, j) => (
-              <div key={j} className={`cell ${cell ? "active" : ""}`}>
-                {typeof cell === "string" ? cell : ""}
-              </div>
-            ))}
+            {row.map((cell, j) => {
+              const isActive = cell && cell !== 0;
+              const isCurrent = changedCell && changedCell[0] === i && changedCell[1] === j;
+              const extraClass = `${isCurrent ? ' current' : ''}${isBacktrack && isCurrent ? ' backtrack' : ''}`;
+              return (
+                <div key={j} className={`cell ${isActive ? 'active' : ''}${extraClass}`}>
+                  {typeof cell === 'string' ? cell : (typeof cell === 'number' && cell !== 0 ? String(cell) : '')}
+                </div>
+              );
+            })}
           </div>
         ))}
       </div>
@@ -287,25 +333,45 @@ const BacktrackingVisualizer = ({
   return (
     <div className="backtracking-visualizer">
       <h2>Backtracking Visualizer</h2>
-      <div className="controls">
-        <label>Algorithm:</label>
-        <select value={algorithm} onChange={(e) => setAlgorithm(e.target.value)} disabled={isVisualizing}>
-          <option value="NQueens">N-Queens</option>
-          <option value="RatInMaze">Rat in a Maze</option>
-          <option value="Sudoku">Sudoku</option>
-          <option value="CombinationSum">Combination Sum</option>
-          <option value="WordSearch">Word Search</option>
-        </select>
-        <button onClick={runAlgorithm} disabled={isVisualizing}>Run</button>
-        <button onClick={prevStep} disabled={isVisualizing || currentStep === 0}>Prev</button>
-        <button onClick={nextStep} disabled={isVisualizing || currentStep === steps.length - 1}>Next</button>
-        <button onClick={resetBoard} disabled={isVisualizing}>Reset</button>
-        <button onClick={loadDefaultExample} disabled={isVisualizing}>Load Example</button>
+            <div className="controls-container">
+        <div className="algorithm-controls">
+          <label>Algorithm:</label>
+          <select value={algorithm} onChange={(e) => setAlgorithm(e.target.value)} disabled={isVisualizing}>
+            <option value="NQueens">N-Queens</option>
+            <option value="RatInMaze">Rat in a Maze</option>
+            <option value="Sudoku">Sudoku</option>
+            <option value="CombinationSum">Combination Sum</option>
+            <option value="WordSearch">Word Search</option>
+          </select>
+          <button onClick={loadDefaultExample} disabled={isVisualizing}>Load Example</button>
+          <button onClick={resetBoard} disabled={isVisualizing}>Reset</button>
+        </div>
+
+        <div className="playback-controls">
+          <button onClick={runAlgorithm} disabled={isVisualizing} className="primary-button">
+            {isVisualizing ? "Running..." : "Run"}
+          </button>
+          <button onClick={stopVisualization} disabled={!isVisualizing} className="stop-button">Stop</button>
+          <button onClick={prevStep} disabled={isVisualizing || currentStep === 0}>←</button>
+          <button onClick={nextStep} disabled={isVisualizing || currentStep === steps.length - 1}>→</button>
+        </div>
+
+        <div className="speed-control">
+          <label>Speed:</label>
+          <input
+            type="range"
+            min="50"
+            max="1000"
+            value={speed}
+            onChange={(e) => setSpeed(Number(e.target.value))}
+          />
+          <span>{Math.floor(1000/speed)} steps/sec</span>
+        </div>
+
+        {renderBoard()}
+
+        <p className="message-bar">{steps[currentStep]?.message || message}</p>
       </div>
-
-      {renderBoard()}
-
-      <p className="message-bar">{steps[currentStep]?.message || message}</p>
     </div>
   );
 };
