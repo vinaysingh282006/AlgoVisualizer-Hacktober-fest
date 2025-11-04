@@ -616,7 +616,7 @@ const algorithmDatabase = {
         timeComplexity: { best: "O(n)", average: "O(n)", worst: "O(n)" },
         spaceComplexity:
           "O(h) (where h is the height of the tree, O(n) in worst case for a skewed tree)",
-        implemented: false
+        implemented: true
       }
     ]
   },
@@ -752,6 +752,11 @@ function AlgorithmDocumentation() {
       navigate("/searching?algo=linear-search");
       return;
     }
+    // Add this new condition for preorder traversal
+    if (algo.id === "preorder-traversal" && algo.implemented) {
+      navigate("/tree-overview");
+      return;
+    }
   };
 
   const getAllAlgorithms = useCallback(() => {
@@ -858,7 +863,8 @@ function AlgorithmDocumentation() {
               const isNavigable =
                 (algorithm.path && algorithm.implemented) ||
                 (algorithm.category === "sorting" && algorithm.implemented) ||
-                algorithm.id === "linearSearch";
+                algorithm.id === "linearSearch" ||
+                (algorithm.id === "preorder-traversal" && algorithm.implemented);
 
               return (
                 <AlgorithmCard
