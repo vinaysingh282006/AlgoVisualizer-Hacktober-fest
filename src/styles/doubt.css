@@ -69,57 +69,7 @@
   z-index: 0;
 }
 
-/* Animated gradient blobs */
-.doubt-blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.3;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.blob-a {
-  width: 400px;
-  height: 400px;
-  top: 10%;
-  left: 10%;
-  background: linear-gradient(135deg, #2575fc, #6a11cb);
-  animation: blob-float-a 20s ease-in-out infinite;
-}
-
-.blob-b {
-  width: 350px;
-  height: 350px;
-  bottom: 15%;
-  right: 15%;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  animation: blob-float-b 18s ease-in-out infinite;
-}
-
-@keyframes blob-float-a {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(30px, -30px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
-}
-
-@keyframes blob-float-b {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(-30px, 30px) scale(1.1);
-  }
-  66% {
-    transform: translate(20px, -20px) scale(0.9);
-  }
-}
+/* Animated gradient blobs - REMOVED */
 
 /* Card (glassmorphism + gradient border) */
 .doubt-card {
