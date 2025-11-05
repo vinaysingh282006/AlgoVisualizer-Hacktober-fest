@@ -329,6 +329,21 @@ const algorithmDatabase = {
         spaceComplexity: "O(V)",
         implemented: true,
         subType: "dijkstra"
+      },
+      {
+        name: "Prim's Minimum Spanning Tree",
+        id: "graphPrimMST",
+        description:
+          "Visualizes Prim’s algorithm to build a Minimum Spanning Tree (MST) from a weighted graph. Highlights selected edges and optionally shows priority queue updates as the MST grows greedily from a starting vertex.",
+        timeComplexity: {
+          best: "O(E log V)",
+          average: "O(E log V)",
+          worst: "O(E log V)"
+        },
+        spaceComplexity: "O(V + E)", // for adjacency list + priority queue
+        implemented: true,
+        subType: "primMST",
+        path: "/prims"
       }
     ]
   },
