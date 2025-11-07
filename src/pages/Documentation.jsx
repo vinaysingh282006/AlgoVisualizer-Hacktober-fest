@@ -355,7 +355,8 @@ const algorithmDatabase = {
         timeComplexity: { best: "O(1)", average: "O(9^(N*N))", worst: "O(9^(N*N))" },
         spaceComplexity: "O(N^2)",
         implemented: true,
-        subType: "sudoku"
+        subType: "sudoku",
+        path: "/sudoku-docs"
       },
       {
         name: "Rat in a Maze",
@@ -752,6 +753,10 @@ function AlgorithmDocumentation() {
       navigate("/searching?algo=linear-search");
       return;
     }
+    if (algo.id === "sudoku" && algo.implemented) {
+      navigate("/sudoku-docs");
+      return;
+    }
   };
 
   const getAllAlgorithms = useCallback(() => {
@@ -858,7 +863,8 @@ function AlgorithmDocumentation() {
               const isNavigable =
                 (algorithm.path && algorithm.implemented) ||
                 (algorithm.category === "sorting" && algorithm.implemented) ||
-                algorithm.id === "linearSearch";
+                algorithm.id === "linearSearch" ||
+                (algorithm.id === "sudoku" && algorithm.implemented);
 
               return (
                 <AlgorithmCard
