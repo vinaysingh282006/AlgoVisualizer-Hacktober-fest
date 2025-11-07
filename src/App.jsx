@@ -106,6 +106,7 @@ import QuickSortDocs from "./pages/QuickSortDocs.jsx";
 import MergeSortDocs from "./pages/MergeSortDocs.jsx";
 import EditDistance from "./pages/EditDistance.jsx";
 import ConvexHullDoc from "./pages/ConvexHullDoc";
+import SudokuDoc from "./pages/SudokuDoc.jsx";
 
 // Components
 import ArrayVisualizer from "./pages/Array.jsx";
@@ -331,7 +332,7 @@ const App = () => {
                       <Route path="/edit-distance" element={<EditDistance />} />
                       <Route path="/doc/closest-pair" element={<DocClosestPair />} />
                       <Route path="/convex-hull-doc" element={<ConvexHullDoc />} />
-
+                      <Route path="/sudoku-docs" element={<SudokuDoc />} />
 
 
                       {/* Data Structures Documentation */}

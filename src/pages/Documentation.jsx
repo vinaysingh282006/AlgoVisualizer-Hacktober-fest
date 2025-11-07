@@ -370,7 +370,8 @@ const algorithmDatabase = {
         timeComplexity: { best: "O(1)", average: "O(9^(N*N))", worst: "O(9^(N*N))" },
         spaceComplexity: "O(N^2)",
         implemented: true,
-        subType: "sudoku"
+        subType: "sudoku",
+        path: "/sudoku-docs"
       },
       {
         name: "Rat in a Maze",
