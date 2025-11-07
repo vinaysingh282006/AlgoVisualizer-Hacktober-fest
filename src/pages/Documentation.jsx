@@ -329,6 +329,21 @@ const algorithmDatabase = {
         spaceComplexity: "O(V)",
         implemented: true,
         subType: "dijkstra"
+      },
+      {
+        name: "Prim's Minimum Spanning Tree",
+        id: "graphPrimMST",
+        description:
+          "Visualizes Prim’s algorithm to build a Minimum Spanning Tree (MST) from a weighted graph. Highlights selected edges and optionally shows priority queue updates as the MST grows greedily from a starting vertex.",
+        timeComplexity: {
+          best: "O(E log V)",
+          average: "O(E log V)",
+          worst: "O(E log V)"
+        },
+        spaceComplexity: "O(V + E)", // for adjacency list + priority queue
+        implemented: true,
+        subType: "primMST",
+        path: "/prims"
       }
     ]
   },
@@ -617,7 +632,7 @@ const algorithmDatabase = {
         timeComplexity: { best: "O(n)", average: "O(n)", worst: "O(n)" },
         spaceComplexity:
           "O(h) (where h is the height of the tree, O(n) in worst case for a skewed tree)",
-        implemented: false
+        implemented: true
       }
     ]
   },
@@ -753,8 +768,9 @@ function AlgorithmDocumentation() {
       navigate("/searching?algo=linear-search");
       return;
     }
-    if (algo.id === "sudoku" && algo.implemented) {
-      navigate("/sudoku-docs");
+    // Add this new condition for preorder traversal
+    if (algo.id === "preorder-traversal" && algo.implemented) {
+      navigate("/tree-overview");
       return;
     }
   };
@@ -864,7 +880,7 @@ function AlgorithmDocumentation() {
                 (algorithm.path && algorithm.implemented) ||
                 (algorithm.category === "sorting" && algorithm.implemented) ||
                 algorithm.id === "linearSearch" ||
-                (algorithm.id === "sudoku" && algorithm.implemented);
+                (algorithm.id === "preorder-traversal" && algorithm.implemented);
 
               return (
                 <AlgorithmCard

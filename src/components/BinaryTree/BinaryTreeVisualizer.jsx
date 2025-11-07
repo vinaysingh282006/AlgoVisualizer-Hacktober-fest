@@ -286,8 +286,11 @@ export default function BinaryTreeVisualizer() {
      */
     function preorder(node) {
       if (!node) return;
+      // focus the current node (will add to activePath)
       sequence.push({ type: "focus", nodeId: node.id });
+      // then mark it visited (adds to visited + orderValues)
       pushVisit(node);
+      // recurse left then right
       preorder(node.left);
       preorder(node.right);
     }
@@ -356,6 +359,31 @@ export default function BinaryTreeVisualizer() {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [stepMode, value, root]);
+
+  // Ensure example is inserted only once on initial load
+  const initialExampleLoaded = useRef(false);
+
+  useEffect(() => {
+    if (initialExampleLoaded.current) return;
+    const params = new URLSearchParams(window.location.search);
+    const example = params.get("example");
+    if (example) {
+      // show example in the bulk textarea
+      setBulk(example);
+      const nums = parseNums(example);
+      if (nums.length) {
+        // build tree instantly from the example values
+        let currentRoot = root;
+        for (const num of nums) {
+          const { rootAfter } = insertBST(currentRoot, makeNode, num);
+          currentRoot = rootAfter;
+        }
+        setRoot(currentRoot);
+      }
+    }
+    initialExampleLoaded.current = true;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // run once on mount
 
   return (
     <div className="btv-wrap">

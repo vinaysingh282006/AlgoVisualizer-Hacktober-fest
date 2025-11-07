@@ -252,7 +252,6 @@ const Sorting = () => {
 
   return (
     <div className="theme-container" data-aos="fade-up" data-aos-duration="1000">
-      <h1 className="theme-title">Sorting Algorithms</h1>
       <InputPanel
         dataType="array"
         placeholder="Enter numbers separated by commas (e.g., 64, 34, 25)"
